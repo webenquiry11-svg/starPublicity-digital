@@ -110,7 +110,7 @@ const HeroSectionWithNavbar: React.FC = () => {
               <Link href="/start-project" className="w-full sm:w-auto px-8 py-3 bg-blue-600 text-white font-semibold rounded-md shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:-translate-y-0.5">
                 Start Your Project
               </Link>
-              <Link href="/learn-more" className="w-full sm:w-auto px-8 py-3 text-white font-semibold rounded-md border-2 border-white/80 hover:bg-white hover:text-blue-600 transition-colors duration-300">
+              <Link href="/learn-more" className="w-full sm:w-auto px-8 py-3 text-black font-semibold rounded-md border-2 border-gray-400 hover:bg-gray-300 hover:text-black transition-colors duration-300">
                 Learn More
               </Link>
             </div>
