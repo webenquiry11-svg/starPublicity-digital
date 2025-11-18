@@ -1,6 +1,6 @@
 import React from "react";
 import { Kanit } from 'next/font/google';
-import { Monitor, Fingerprint, Code, Database } from "lucide-react";
+import { Monitor, Palette, Code, View, Gamepad2 } from "lucide-react";
 
 // Initialize the Kanit font
 const kanit = Kanit({
@@ -70,23 +70,28 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 const servicesData = [
   {
     IconComponent: Monitor,
-    title: "IT Solutions",
-    description: "Sed ut perspiciatis unde omnis iste natus error volup",
+    title: "Digital Marketing",
+    description: "Data-driven strategies to grow your online presence and drive measurable results.",
   },
   {
-    IconComponent: Fingerprint,
-    title: "Security System",
-    description: "Sed ut perspiciatis unde omnis iste natus error volup",
+    IconComponent: Palette,
+    title: "Graphic Designing",
+    description: "Stunning visuals that tell your brand story and captivate audiences.",
   },
   {
     IconComponent: Code,
     title: "Web Development",
-    description: "Sed ut perspiciatis unde omnis iste natus error volup",
+    description: "Fast, secure, scalable websites built to drive conversions and growth.",
   },
   {
-    IconComponent: Database,
-    title: "Database Security",
-    description: "Sed ut perspiciatis unde omnis iste natus error volup",
+    IconComponent: View,
+    title: "AR/VR Development",
+    description: "Immersive experiences that engage customers and transform brand interactions.",
+  },
+  {
+    IconComponent: Gamepad2,
+    title: "Game Development",
+    description: "Engaging games that entertain users and achieve your business objectives.",
   },
 ];
 
@@ -100,9 +105,9 @@ export default function ServicesSection() {
           <p className="text-blue-600 text-lg font-semibold uppercase tracking-wider mb-2">
             SERVICES
           </p>
-          <h2 className="text-[48px] font-medium text-[rgb(30,55,90)] leading-[58px]">What We Do</h2>
+          <h2 className="text-[48px] font-medium text-[rgb(30,55,90)] leading-[58px]">What We Deliver</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {servicesData.map((service, index) => (
             <ServiceCard
               key={index}

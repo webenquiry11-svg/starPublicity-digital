@@ -63,7 +63,7 @@ const HeroSectionWithNavbar: React.FC = () => {
           {/* Navigation Links (Desktop) */}
           <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link, index) => (
-              <Link key={index} href={link.href} className="text-gray-700 font-medium hover:text-blue-600 transition-colors duration-200 text-base">
+              <Link key={index} href={link.href} className="text-gray-700 font-medium hover:text-blue-600 transition-colors duration-200 uppercase text-sm tracking-wider">
                 {link.name}
               </Link>
             ))}
@@ -91,22 +91,21 @@ const HeroSectionWithNavbar: React.FC = () => {
       <div className="relative z-20 flex-grow flex items-center">
         <div className="container mx-auto px-6">
           <div className="w-full lg:w-1/2 max-w-xl lg:ml-[10%]">
-            <h1 className="text-[48px] font-medium text-[rgb(30,55,90)] leading-[58px] mb-6">
-              Automate Software Build and Testing
+            <h1 className="text-5xl md:text-6xl font-bold text-[rgb(30,55,90)] leading-tight mb-6">
+              Drive Growth Through Innovative Digital Strategies
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
-              Drone is a self-service Continuous Integration
-              platform for busy development teams.
+              We help ambitious brands scale their digital presence and dominate their markets.
             </p>
 
-            {/* 4. Corrected Buttons */}
+            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center gap-4">
-              <button className="w-full sm:w-auto px-8 py-3 bg-cyan-500 text-white font-medium rounded shadow-md hover:bg-cyan-600 transition-colors duration-200">
-                GET STARTED
-              </button>
-              <button className="w-full sm:w-auto px-8 py-3 text-gray-800 font-bold rounded hover:bg-gray-100 transition-colors duration-200">
-                DOCUMENTATION
-              </button>
+              <Link href="/start-project" className="w-full sm:w-auto px-8 py-3 bg-blue-600 text-white font-semibold rounded-md shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:-translate-y-0.5">
+                Start Your Project
+              </Link>
+              <Link href="/learn-more" className="w-full sm:w-auto px-8 py-3 text-white font-semibold rounded-md border-2 border-white/80 hover:bg-white hover:text-blue-600 transition-colors duration-300">
+                Learn More
+              </Link>
             </div>
           </div>
           {/* Right side is intentionally empty for the illustration */}

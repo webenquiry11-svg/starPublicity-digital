@@ -2,8 +2,10 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Kanit } from 'next/font/google';
 import { 
+  Mail,
   Layers,
   MessageSquare,
   LifeBuoy,
@@ -12,6 +14,7 @@ import {
   ChevronRight,
   ArrowUp
 } from 'lucide-react';
+import logo from '../../public/Star Digital Website Images/logo.png';
 
 // Initialize the Roboto font
 const kanit = Kanit({
@@ -38,32 +41,32 @@ const pageLinks = [
 // Data for the "Contact" section
 const contactData = [
   {
-    icon: MessageSquare,
-    title: "Chat to sales",
-    description: "Speak to our friendly team.",
-    linkText: "sales@starpublicity.com",
-    href: "mailto:sales@starpublicity.com",
+    icon: Phone,
+    title: "📞 Call Our Team",
+    description: "Reach us for immediate support or business inquiries.",
+    linkText: "0161-4668602",
+    href: "tel:01614668602",
   },
   {
-    icon: LifeBuoy,
-    title: "Chat to support",
-    description: "We're here to help.",
-    linkText: "support@starpublicity.com",
-    href: "mailto:support@starpublicity.com",
+    icon: MessageSquare,
+    title: "✉️ Email Us",
+    description: "Share your requirements or ask anything.",
+    linkText: "info@starpublicity.co.in",
+    href: "mailto:info@starpublicity.co.in",
+  },
+  {
+    icon: LifeBuoy, // Using LifeBuoy for WhatsApp support
+    title: "📱 WhatsApp Support",
+    description: "Instant messaging for quick replies and project discussions.",
+    linkText: "+91 7403434074",
+    href: "https://wa.me/917403434074",
   },
   {
     icon: MapPin,
-    title: "Visit us",
-    description: "Visit our office HQ.",
-    linkText: "View on Google Maps",
-    href: "#", // Add your Google Maps link here
-  },
-  {
-    icon: Phone,
-    title: "Call us",
-    description: "Mon-Fri from 8am to 5pm.",
-    linkText: "+91 12345 67890",
-    href: "tel:+911234567890",
+    title: "🏢 Visit Our Office",
+    description: "Meet us in person at our head office.",
+    linkText: "SCO-137, Feroze Gandhi market, Ludhiana, Punjab, 141001",
+    href: "https://www.google.com/maps/search/?api=1&query=SCO-137,+Feroze+Gandhi+market,+Ludhiana,+Punjab,+141001",
   },
 ];
 
@@ -111,10 +114,10 @@ const ContactSection: React.FC = () => {
               <Layers className="w-6 h-6 text-blue-600" />
             </div>
             <h2 className="text-[48px] font-medium text-[rgb(30,55,90)] leading-[58px] mb-6">
-              Contact our friendly team
+              Let’s Connect With Star Publicity
             </h2>
             <p className="text-xl text-gray-500 max-w-2xl mx-auto">
-              Let us know how we can help.
+              We’re here to answer your questions and help your brand grow.
             </p>
           </div>
         </div>
@@ -171,7 +174,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className={`bg-blue-950 text-white pt-16 pb-6 relative overflow-hidden ${kanit.className}`}>
+    <footer className={`bg-blue-950 text-white pt-16 pb-6 relative overflow-hidden font-['Helvetica_Neue',_Helvetica,_Arial,_sans-serif]`}>
       
       {/* --- BACKGROUND SPHERES (TWEAK THESE FOR EXACT POSITIONING) --- */}
       {/* You can adjust the 'w-h', 'opacity', and position ('-bottom-20', 'top-10', etc.) */}
@@ -190,15 +193,15 @@ const Footer: React.FC = () => {
  
           {/* Column 1: OmniVus. Description (Wider) */}
           <div className="lg:col-span-4 lg:col-start-2">
-            {/* Note: "OmniVus." is text. If it's a logo, replace with <Image /> */}
-            <h3 className="text-3xl font-bold mb-6">OmniVus.</h3>
-            <p className="text-blue-300 text-sm mb-4 leading-relaxed ">
-              The web has changed a lot since Vitaly posted his first article book in 2006. The team at Smashing
-              has changed too, as have the things that we bring to our community onferences, books, and our
-              membership added to the online magazine.
-            </p>
+            <Image 
+              src={logo}
+              alt="Star Publicity Logo"
+              width={180}
+              height={42}
+              className="mb-6"
+            />
             <p className="text-blue-300 text-sm leading-relaxed">
-              One thing that hasn't changed is that we're a small team – with most of us not working
+              Star Publicity is a full-service digital agency dedicated to helping ambitious brands scale their online presence. We blend creative excellence with data-driven strategies to deliver results that matter.
             </p>
           </div>
 
@@ -207,36 +210,37 @@ const Footer: React.FC = () => {
             <h4 className="text-xl font-bold mb-6">Pages</h4>
             <div className="grid grid-cols-2 gap-4">
               {pageLinks.map((link, index) => (
-                <Link key={index} href={link.href} className="flex items-center text-blue-300 hover:text-white transition-colors duration-200 group">
-                  <ChevronRight className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform" />
+                <Link key={index} href={link.href} className="font-normal text-[12px] text-blue-300 leading-loose hover:text-white hover:underline uppercase tracking-wider">
                   {link.name}
                 </Link>
               ))}
             </div>
           </div>
 
-          {/* Column 3: Working Hours */}
+          {/* Column 3: Get in Touch */}
           <div className="lg:col-span-3">
-            <h4 className="text-xl font-bold mb-6">Working Hours</h4>
-            <p className="text-blue-300 mb-2">Monday - Friday: 7:00 - 17:00</p>
-            <p className="text-blue-300 mb-6">Saturday: 7:00 - 12:00</p>
-            <p className="text-blue-300 mb-6">Sunday and holidays: 8:00 - 10:00</p>
-            
-            <p className="text-sm font-medium text-blue-100 mb-4 leading-relaxed">
-              For more than 30 years, IT Service has been a reliable
-              partner in the field of logistics and cargo forwarding.
-            </p>
-            <a href="#" className="inline-flex items-center text-white bg-blue-600/50 hover:bg-blue-600/80 transition-colors duration-300 px-4 py-2 rounded-md text-sm font-medium">
-              Discover More
-              <ChevronRight className="w-4 h-4 ml-2" />
-            </a>
+            <h4 className="text-xl font-bold mb-6">Get in Touch</h4>
+            <div className="space-y-4 text-blue-300 text-sm">
+              <a href="mailto:info@starpublicity.co.in" className="flex items-center hover:text-white transition-colors">
+                <Mail className="w-4 h-4 mr-3 flex-shrink-0" />
+                <span>info@starpublicity.co.in</span>
+              </a>
+              <a href="tel:01614668602" className="flex items-center hover:text-white transition-colors">
+                <Phone className="w-4 h-4 mr-3 flex-shrink-0" />
+                <span>0161-4668602</span>
+              </a>
+              <div className="flex items-start">
+                <MapPin className="w-4 h-4 mr-3 flex-shrink-0 mt-1" />
+                <span>SCO-137, Feroze Gandhi market, Ludhiana, Punjab, 141001</span>
+              </div>
+            </div>
           </div>
 
         </div>
 
         {/* Copyright and Scroll to Top */}
         <div className="flex flex-col sm:flex-row items-center justify-between pt-6 text-blue-400 text-sm">
-          <p>Copyright © {new Date().getFullYear()} WebTend. All Rights Reserved.</p>
+          <p>Copyright © {new Date().getFullYear()} Star Publicity. All Rights Reserved.</p>
           <button 
             onClick={scrollToTop} 
             className="mt-4 sm:mt-0 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center 
