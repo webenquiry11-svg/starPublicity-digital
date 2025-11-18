@@ -16,11 +16,10 @@ const kanit = Kanit({
 
 // Navigation Links
 const navLinks = [
-  { name: 'CLOUD', href: '#' },
-  { name: 'ENTERPRISE', href: '#' },
-  { name: 'MARKETPLACE', href: '#' },
-  { name: 'DOCUMENTATION', href: '#' },
-  { name: 'BLOG', href: '#' },
+  { name: 'Our Services', href: '/services' },
+  { name: 'About', href: '/about' },
+  { name: 'FAQs', href: '/faq' },
+  { name: 'Contact Us', href: '/contact' },
 ];
 
 const HeroSectionWithNavbar: React.FC = () => {
@@ -60,22 +59,22 @@ const HeroSectionWithNavbar: React.FC = () => {
           {/* Navigation Links (Desktop) */}
           <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link, index) => (
-              <Link key={index} href={link.href} className="text-gray-700 font-medium hover:text-blue-600 transition-colors duration-200 uppercase text-sm tracking-wider">
+              <Link key={index} href={link.href} className="text-white font-medium hover:text-gray-200 transition-colors duration-200 text-base">
                 {link.name}
               </Link>
             ))}
           </div>
 
-          {/* 3. Corrected Login Button */}
+          {/* CTA Button: "Get a Free Quote" */}
           <div className="hidden lg:block">
-            <button className="px-6 py-2 border border-gray-400 rounded text-gray-700 font-medium hover:bg-gray-50 transition-colors duration-200 text-sm uppercase">
-              LOGIN
-            </button>
+            <Link href="/get-a-quote" className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition-all duration-300 ease-out text-sm">
+              Get a Free Quote
+            </Link>
           </div>
 
           {/* Mobile Menu Icon (Placeholder) */}
           <div className="lg:hidden">
-            <button className="text-gray-700 focus:outline-none">
+            <button className="text-white focus:outline-none">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
               </svg>
