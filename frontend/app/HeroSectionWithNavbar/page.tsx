@@ -1,9 +1,13 @@
+"use client"; // Required for the Lottie component
+
 import React from 'react';
 import Link from 'next/link';
-// Use the 'Kanit' font as requested
+import Image from 'next/image';
 import { Kanit } from 'next/font/google';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import herobg from '../../public/Star Digital Website Images/herobg.png';
+import logo from '../../public/Star Digital Website Images/logo.png';
 
-// 1. Initialize the correct font
 const kanit = Kanit({
   weight: ['400', '500', '700', '800'], // Include weights used in the component
   subsets: ['latin'],
@@ -21,28 +25,35 @@ const navLinks = [
 
 const HeroSectionWithNavbar: React.FC = () => {
   return (
-    // 2. Apply the 'inter' font class to the root section
-    <section className={`relative min-h-[750px] md:min-h-screen bg-gradient-to-br from-blue-50 to-white overflow-hidden flex flex-col ${kanit.className}`}>
-      
-      {/* --- Background Illustrations (Exact Assets) --- */}
-      <img src="https://assets-global.website-files.com/602928ac00d23f7216a04a37/60334888127393d2576b5c2a_background.svg" alt="Background Pattern" className="absolute inset-0 w-full h-full object-cover opacity-60 z-0" />
-      <img src="https://assets-global.website-files.com/602928ac00d23f7216a04a37/60334887eb23533475d400e9_BG%20Image.svg" alt="Left background element" className="absolute w-[150px] h-auto bottom-10 left-4 z-10 opacity-70" />
-      <img src="https://assets-global.website-files.com/602928ac00d23f7216a04a37/603348872b4f0b2f15ac13d7_BG%20Image%203.svg" alt="Mid background element" className="absolute w-[120px] h-auto bottom-1/2 left-[45%] z-10 opacity-70" />
-      <img src="https://assets-global.website-files.com/602928ac00d23f7216a04a37/6033488783e74033b092289f_BG%20Image%202.svg" alt="Right background element" className="absolute w-[150px] h-auto bottom-8 right-8 z-10 opacity-70" />
-      
-      {/* --- Main Drone Illustration (Exact Asset) --- */}
-      <img src="https://assets-global.website-files.com/602928ac00d23f7216a04a37/603348873528b7e71f55a1d5_Illustration.svg" alt="Hero Illustration" 
-           className="absolute w-[70%] lg:w-[45%] h-auto bottom-0 right-0 max-w-[800px] z-10" />
+    <section className={`relative min-h-[750px] md:min-h-screen overflow-hidden flex flex-col ${kanit.className}`}>
+      <Image
+        src={herobg}
+        alt="Abstract background"
+        fill
+        priority
+        className="object-cover -z-10"
+      />
+      <div className="absolute inset-0 bg-black/20 -z-10" /> {/* Optional: Adds a dark overlay for better text readability */}
+
+      {/* --- Lottie Animation --- */}
+      <div className="absolute w-[70%] lg:w-[45%] h-auto bottom-24 right-0 max-w-[800px] z-10">
+        <DotLottieReact
+          src="https://lottie.host/f271b9db-0428-4d88-8e82-25d477b70f5c/DjqC6KkSpS.lottie"
+          loop
+          autoplay
+        />
+      </div>
 
       {/* --- Navbar --- */}
       <nav className="relative z-30 w-full py-6 md:py-8">
         <div className="container mx-auto px-6 lg:px-8 xl:px-20 flex items-center justify-between">
           {/* Logo */}
           <Link href="/">
-            <img 
-              src="https://assets-global.website-files.com/602928ac00d23f7216a04a37/602928ac00d23f707aa04a50_logo.svg" 
-              alt="DRONE by harness Logo" 
-              className="h-7 w-auto" // Using <img> tag for SVG is fine
+            <Image 
+              src={logo} // Assumes logo.png is in the /public folder
+              alt="Star Publicity Logo" 
+              width={150} // Adjust width as needed
+              height={35} // Adjust height as needed
             />
           </Link>
 

@@ -2,6 +2,11 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Kanit } from 'next/font/google';
+import Image from 'next/image';
+import about from '../../public/Star Digital Website Images/about.png';
+import whyChoose from "../../public/Star Digital Website Images/why choose.png";
+import whyChoose1 from "../../public/Star Digital Website Images/why choose1.png";
+
 import { 
   PlayCircle, 
   CheckCircle, 
@@ -130,11 +135,12 @@ const AboutSection: React.FC = () => {
             
             {/* Left Side: Image */}
             <div className="w-full lg:w-5/12 flex justify-center">
-              <div className="w-[300px] h-[450px] md:w-[350px] md:h-[525px] rounded-lg shadow-xl overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop"
-                  alt="Man in a business setting"
-                  className="w-full h-full object-cover object-center"
+              <div className="relative w-[350px] h-[525px] md:w-[400px] md:h-[600px] rounded-lg shadow-xl overflow-hidden">
+                <Image 
+                  src={about}
+                  alt="Star Publicity team working"
+                  fill
+                  className="object-cover object-center"
                 />
               </div>
             </div>
@@ -214,18 +220,20 @@ const AboutSection: React.FC = () => {
             <div className="w-full lg:w-1/2 h-[450px] relative">
               {/* Image 1 */}
               <div className="absolute w-[75%] h-[85%] top-0 left-[-10%] rounded-lg shadow-xl overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop"
+                <Image
+                  src={whyChoose}
                   alt="Team working together 1"
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
                 />
               </div>
               {/* Image 2 */}
               <div className="absolute w-[75%] h-[85%] top-[34%] left-[20%] rounded-lg shadow-xl overflow-hidden">
-                <img
-                  src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop"
+                <Image
+                  src={whyChoose1}
                   alt="Team presentation on whiteboard"
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
                 />
               </div>
             </div>
