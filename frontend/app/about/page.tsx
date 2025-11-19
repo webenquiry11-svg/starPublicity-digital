@@ -139,7 +139,7 @@ const AboutSection: React.FC = () => {
 
             {/* Right Side: Text Content and Buttons */}
             <div className="w-full lg:w-7/12 text-center lg:text-left">
-              <p className="text-[#4cb0de] text-base font-bold uppercase tracking-wider mb-3">CORE FEATURES</p>
+              <p className="text-[#3590ba] text-base font-bold uppercase tracking-wider mb-3">CORE FEATURES</p>
               <h2 className="text-[48px] font-medium text-[rgb(30,55,90)] leading-[58px] mb-6">
                 Get Results That Matter
               </h2>
@@ -157,9 +157,9 @@ const AboutSection: React.FC = () => {
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
                 <button 
                   className="
-                    bg-[#4cb0de] text-white font-medium py-3 px-8 rounded-md 
+                    bg-[#3590ba] text-white font-medium py-3 px-8 rounded-md 
                     transition-all duration-300 ease-out
-                    hover:bg-[#3a8cae] hover:shadow-lg hover:-translate-y-0.5"
+                    hover:bg-[#2a739a] hover:shadow-lg hover:-translate-y-0.5"
                 >
                   Learn More
                 </button>
@@ -170,7 +170,7 @@ const AboutSection: React.FC = () => {
                     transition-all duration-300 ease-out
                     hover:bg-gray-100 hover:shadow-md hover:-translate-y-0.5"
                 >
-                  <PlayCircle className="w-5 h-5 text-[#4cb0de]" />
+                  <PlayCircle className="w-5 h-5 text-[#3590ba]" />
                   Intro Video
                 </button>
               </div>
@@ -187,7 +187,7 @@ const AboutSection: React.FC = () => {
             
             {/* Left Side: Text Content and List of Reasons */}
             <div className="w-full lg:w-1/2 lg:pr-12 text-center lg:text-left">
-              <p className="text-[#4cb0de] text-base font-bold uppercase tracking-wider mb-3">WHO WE ARE</p>
+              <p className="text-[#3590ba] text-base font-bold uppercase tracking-wider mb-3">WHO WE ARE</p>
               <h2 className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-10">
                 Why Brands Trust Us
               </h2>
@@ -197,7 +197,7 @@ const AboutSection: React.FC = () => {
                 {reasons.map((reason, index) => (
                   <div key={index} className="flex items-start text-left gap-4">
                     <div className="flex-shrink-0">
-                      <CheckCircle className="w-8 h-8 text-[#4cb0de]" />
+                      <CheckCircle className="w-8 h-8 text-[#3590ba]" />
                     </div>
                     <div>
                       <h3 className="text-xl font-semibold text-gray-900 mb-1">{reason.title}</h3>
@@ -257,7 +257,7 @@ const AboutSection: React.FC = () => {
               {/* Custom Play Button */}
               <div className="relative flex items-center justify-center">
                 <div className="absolute w-24 h-24 md:w-32 md:h-32 rounded-full bg-white opacity-20 animate-ping"></div>
-                <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#4cb0de] shadow-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:bg-[#3a8cae]">
+                <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#3590ba] shadow-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:bg-[#2a739a]">
                   <Play className="w-10 h-10 md:w-12 md:h-12 text-white fill-white ml-2" />
                 </div>
               </div>
@@ -270,7 +270,7 @@ const AboutSection: React.FC = () => {
       {/* Wrapper section for spacing */}
       <section className={`bg-gray-50`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div ref={statsRef} className="py-12 bg-[#4cb0de] rounded-lg">
+          <div ref={statsRef} className="py-12 bg-[#3590ba] rounded-lg">
             {/* Stats Wrapper */}
             <div className="flex flex-col sm:flex-row flex-wrap justify-around items-center gap-8 text-white">
               
