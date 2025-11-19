@@ -25,9 +25,12 @@ const services = [
   "Other"
 ];
 
-const HeroSectionWithNavbar: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+interface HeroProps {
+  isModalOpen: boolean;
+  setIsModalOpen: (isOpen: boolean) => void;
+}
 
+const HeroSectionWithNavbar: React.FC<HeroProps> = ({ isModalOpen, setIsModalOpen }) => {
   return (
     <section className={`relative min-h-[750px] md:min-h-screen overflow-hidden flex flex-col`}>
       <Image
@@ -63,7 +66,7 @@ const HeroSectionWithNavbar: React.FC = () => {
           {/* Navigation Links (Desktop) */}
           <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link, index) => (
-              <Link key={index} href={link.href} className="text-gray-700 font-medium hover:text-[#3590ba] transition-colors duration-200 uppercase text-sm tracking-wider">
+              <Link key={index} href={link.href} className="text-gray-700 font-medium hover:text-[#256482] transition-colors duration-200 uppercase text-sm tracking-wider">
                 {link.name}
               </Link>
             ))}
@@ -71,7 +74,7 @@ const HeroSectionWithNavbar: React.FC = () => {
 
           {/* CTA Button: "Get a Free Quote" */}
           <div className="hidden lg:block">
-            <button onClick={() => setIsModalOpen(true)} className="px-6 py-3 bg-[#3590ba] text-white font-semibold rounded-md shadow-md hover:bg-[#2a739a] transition-all duration-300 ease-out text-sm">
+            <button onClick={() => setIsModalOpen(true)} className="px-6 py-3 bg-[#2a7394] text-white font-semibold rounded-md shadow-md hover:bg-[#225d7a] transition-all duration-300 ease-out text-sm">
               Get a Free Quote
             </button>
           </div>
@@ -100,11 +103,11 @@ const HeroSectionWithNavbar: React.FC = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center gap-4">
-              <Link href="/start-project" className="w-full sm:w-auto px-8 py-3 bg-[#3590ba] text-white font-semibold rounded-md shadow-lg hover:bg-[#2a739a] transition-all duration-300 transform hover:-translate-y-0.5">
+              <Link href="/start-project" className="w-full sm:w-auto px-8 py-3 bg-[#2a7394] text-white font-semibold rounded-md shadow-lg hover:bg-[#225d7a] transition-all duration-300 transform hover:-translate-y-0.5">
                 Start Your Project
               </Link>
               <Link href="/learn-more" className="group w-full sm:w-auto px-8 py-3 text-gray-700 font-semibold rounded-md transition-colors duration-300 inline-flex items-center gap-2">
-                <span className="relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-[#3590ba] after:transition-all after:duration-300 group-hover:after:w-full">Learn More</span>
+                <span className="relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-[#256482] after:transition-all after:duration-300 group-hover:after:w-full">Learn More</span>
                 <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
@@ -137,24 +140,24 @@ const HeroSectionWithNavbar: React.FC = () => {
                   <div className="relative">
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 mt-3" />
-                    <input type="text" id="name" name="name" placeholder="John Doe" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3590ba] focus:border-[#3590ba] transition-shadow" />
+                    <input type="text" id="name" name="name" placeholder="John Doe" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#256482] focus:border-[#256482] transition-shadow" />
                   </div>
                   <div className="relative">
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                     <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 mt-3" />
-                    <input type="email" id="email" name="email" placeholder="you@example.com" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3590ba] focus:border-[#3590ba] transition-shadow" />
+                    <input type="email" id="email" name="email" placeholder="you@example.com" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#256482] focus:border-[#256482] transition-shadow" />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="relative">
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
                     <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 mt-3" />
-                    <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3590ba] focus:border-[#3590ba] transition-shadow" />
+                    <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#256482] focus:border-[#256482] transition-shadow" />
                   </div>
                   <div className="relative">
                     <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-1">I'm interested in...</label>
                     <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 mt-3" />
-                    <select id="service" name="service" defaultValue="" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3590ba] focus:border-[#3590ba] transition-shadow appearance-none">
+                    <select id="service" name="service" defaultValue="" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#256482] focus:border-[#256482] transition-shadow appearance-none">
                       <option value="" disabled>Select a service</option>
                       {services.map(s => <option key={s} value={s}>{s}</option>)}
                     </select>
@@ -163,11 +166,11 @@ const HeroSectionWithNavbar: React.FC = () => {
                 <div className="relative">
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
                   <MessageSquare className="absolute left-3 top-5 h-5 w-5 text-gray-400" />
-                  <textarea id="message" name="message" rows={4} placeholder="Tell us a little about your project..." className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3590ba] focus:border-[#3590ba] transition-shadow resize-none"></textarea>
+                  <textarea id="message" name="message" rows={4} placeholder="Tell us a little about your project..." className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#256482] focus:border-[#256482] transition-shadow resize-none"></textarea>
                 </div>
               </div>
               <div className="mt-8">
-                <button type="submit" className="w-full py-3 px-4 bg-[#3590ba] text-white font-bold rounded-lg shadow-lg hover:bg-[#2a739a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#3590ba] transition-all duration-300 transform hover:-translate-y-0.5">
+                <button type="submit" className="w-full py-3 px-4 bg-[#2a7394] text-white font-bold rounded-lg shadow-lg hover:bg-[#225d7a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2a7394] transition-all duration-300 transform hover:-translate-y-0.5">
                   Send Quote Request
                 </button>
               </div>
