@@ -86,7 +86,7 @@ const ContactSection: React.FC = () => {
     >
       {/* Decorative Background Shape */}
       <div className="absolute top-0 left-0 -translate-x-1/3 -translate-y-1/3">
-        <div className="w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-[#4cb0de]/20 to-purple-500/10 filter blur-3xl"></div>
+        <div className="w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-[#3590ba]/20 to-purple-500/10 filter blur-3xl"></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"> {/* Ensure content is above pattern */}
@@ -94,11 +94,11 @@ const ContactSection: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto">
           <div className="relative inline-block">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white shadow-md mb-6">
-              <Layers className="w-6 h-6 text-[#4cb0de]" />
+              <Layers className="w-6 h-6 text-[#3590ba]" />
             </div>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Let’s Connect With <span className="text-[#4cb0de]">Star Publicity</span>
+            Let’s Connect With <span className="text-[#3590ba]">Star Publicity</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             We’re here to answer your questions and help your brand grow.
@@ -125,18 +125,18 @@ const ContactSection: React.FC = () => {
                   group-hover:opacity-100
                 "
                 style={{
-                  background: `radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(76, 176, 222, 0.15), transparent 40%)`
+                  background: `radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(53, 144, 186, 0.15), transparent 40%)`
                 }}
               />
               <div className="relative z-10 flex flex-col h-full"> {/* Content wrapper */}
-              <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#4cb0de]/20 mb-4 transition-transform duration-300 group-hover:scale-110">
-                <contact.icon className="w-5 h-5 text-[#4cb0de] " />
+              <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#3590ba]/20 mb-4 transition-transform duration-300 group-hover:scale-110">
+                <contact.icon className="w-5 h-5 text-[#3590ba] " />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">{contact.title}</h3>
               <p className="text-gray-600 mb-4 flex-grow">{contact.description}</p>
               <Link
                 href={contact.href} 
-                className="font-medium text-[#4cb0de] hover:text-[#3a8cae] mt-auto inline-flex items-center group/link"
+                className="font-medium text-[#3590ba] hover:text-[#2a739a] mt-auto inline-flex items-center group/link"
               >
                 {contact.linkText}
                 <ArrowUp className="w-4 h-4 ml-1 transition-transform duration-300 -rotate-45 group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
@@ -157,13 +157,13 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className={`bg-blue-950 text-white pt-16 pb-6 relative overflow-hidden`}>
+    <footer className={`bg-[#3590ba] text-slate-800 pt-16 pb-6 relative overflow-hidden`}>
       
       {/* --- BACKGROUND SPHERES (TWEAK THESE FOR EXACT POSITIONING) --- */}
       {/* You can adjust the 'w-h', 'opacity', and position ('-bottom-20', 'top-10', etc.) */}
-      <div className="absolute w-60 h-60 rounded-full bg-[#4cb0de] opacity-20 -bottom-20 -left-20 z-0"></div>
-      <div className="absolute w-40 h-40 rounded-full bg-cyan-400 opacity-30 top-10 right-40 z-0"></div>
-      <div className="absolute w-80 h-80 rounded-full bg-[#4cb0de] opacity-20 -bottom-40 -right-40 z-0"></div>
+      <div className="absolute w-60 h-60 rounded-full bg-white/20 -bottom-20 -left-20 z-0"></div>
+      <div className="absolute w-40 h-40 rounded-full bg-white/30 top-10 right-40 z-0"></div>
+      <div className="absolute w-80 h-80 rounded-full bg-white/20 -bottom-40 -right-40 z-0"></div>
 
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -172,7 +172,7 @@ const Footer: React.FC = () => {
           - Pages: 3 columns (lg:col-span-3)
           - Working Hours: 4 columns (lg:col-span-4)
         */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-12 border-b border-blue-800">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-12 border-b border-white/30">
  
           {/* Column 1: OmniVus. Description (Wider) */}
           <div className="lg:col-span-4 lg:col-start-2">
@@ -183,7 +183,7 @@ const Footer: React.FC = () => {
               height={42}
               className="mb-6"
             />
-            <p className="text-slate-300 text-sm leading-relaxed">
+            <p className="text-slate-700 text-sm leading-relaxed">
               Star Publicity is a full-service digital agency dedicated to helping ambitious brands scale their online presence. We blend creative excellence with data-driven strategies to deliver results that matter.
             </p>
           </div>
@@ -193,7 +193,7 @@ const Footer: React.FC = () => {
             <h4 className={`text-xl font-bold mb-6`}>Pages</h4>
             <div className="grid grid-cols-2 gap-4">
               {pageLinks.map((link, index) => (
-                <Link key={index} href={link.href} className="text-sm text-slate-300 hover:text-white hover:underline transition-colors duration-200">
+                <Link key={index} href={link.href} className="text-sm text-slate-700 hover:text-black hover:underline transition-colors duration-200">
                   {link.name}
                 </Link>
               ))}
@@ -203,13 +203,13 @@ const Footer: React.FC = () => {
           {/* Column 3: Get in Touch */}
           <div className="lg:col-span-3">
             <h4 className={`text-xl font-bold mb-6`}>Get in Touch</h4>
-            <div className="space-y-4 text-slate-300 text-sm">
-              <a href="mailto:info@starpublicity.co.in" className="flex items-center hover:text-white transition-colors">
+            <div className="space-y-4 text-slate-700 text-sm">
+              <a href="mailto:info@starpublicity.co.in" className="flex items-center hover:text-black transition-colors">
                 <Mail className="w-4 h-4 mr-3 flex-shrink-0" />
                 <span>info@starpublicity.co.in</span>
               </a>
-              <a href="tel:01614668602" className="flex items-center hover:text-white transition-colors">
-                <Phone className="w-4 h-4 mr-3 flex-shrink-0 text-[#4cb0de]" />
+              <a href="tel:01614668602" className="flex items-center hover:text-black transition-colors">
+                <Phone className="w-4 h-4 mr-3 flex-shrink-0 text-slate-800" />
                 <span>0161-4668602</span>
               </a>
               <div className="flex items-start">
@@ -222,15 +222,15 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Copyright and Scroll to Top */}
-        <div className="flex flex-col sm:flex-row items-center justify-between pt-6 text-slate-400 text-sm">
+        <div className="flex flex-col sm:flex-row items-center justify-between pt-6 text-slate-600 text-sm">
           <p>Copyright © {new Date().getFullYear()} Star Publicity. All Rights Reserved.</p>
           <button 
             onClick={scrollToTop} 
-            className="mt-4 sm:mt-0 w-10 h-10 bg-[#4cb0de] rounded-full flex items-center justify-center 
-                       hover:bg-[#3a8cae] transition-colors duration-300"
+            className="mt-4 sm:mt-0 w-10 h-10 bg-white/50 rounded-full flex items-center justify-center 
+                       hover:bg-white/80 transition-colors duration-300"
             aria-label="Scroll to top"
           >
-            <ArrowUp className="w-5 h-5 text-white" />
+            <ArrowUp className="w-5 h-5 text-slate-800" />
           </button>
         </div>
       </div>
