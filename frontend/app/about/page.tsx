@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Kanit } from 'next/font/google';
 import Image from 'next/image';
 import about from '../../public/Star Digital Website Images/about.png';
 import whyChoose from "../../public/Star Digital Website Images/why choose.png";
@@ -15,13 +14,6 @@ import {
   Award, 
   Briefcase
 } from 'lucide-react';
-
-// 1. Initialize the Roboto font
-const kanit = Kanit({
-  weight: ['400', '500', '700', '800', '900'],
-  subsets: ['latin'],
-  display: 'swap',
-});
 
 // Data for the "Why Choose Us" section
 const reasons = [
@@ -129,7 +121,7 @@ const AboutSection: React.FC = () => {
   return (
     <>
       {/* === SECTION 1: CORE FEATURES === */}
-      <section className={`py-16 md:py-24 bg-white ${kanit.className}`}>
+      <section className={`py-16 md:py-24 bg-white`}>
         <div className="container mx-auto px-32">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
             
@@ -147,7 +139,7 @@ const AboutSection: React.FC = () => {
 
             {/* Right Side: Text Content and Buttons */}
             <div className="w-full lg:w-7/12 text-center lg:text-left">
-              <p className="text-blue-600 text-base font-bold uppercase tracking-wider mb-3">CORE FEATURES</p>
+              <p className="text-[#4cb0de] text-base font-bold uppercase tracking-wider mb-3">CORE FEATURES</p>
               <h2 className="text-[48px] font-medium text-[rgb(30,55,90)] leading-[58px] mb-6">
                 Get Results That Matter
               </h2>
@@ -165,9 +157,9 @@ const AboutSection: React.FC = () => {
               <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
                 <button 
                   className="
-                    bg-blue-600 text-white font-medium py-3 px-8 rounded-md 
+                    bg-[#4cb0de] text-white font-medium py-3 px-8 rounded-md 
                     transition-all duration-300 ease-out
-                    hover:bg-blue-700 hover:shadow-lg hover:-translate-y-0.5"
+                    hover:bg-[#3a8cae] hover:shadow-lg hover:-translate-y-0.5"
                 >
                   Learn More
                 </button>
@@ -178,7 +170,7 @@ const AboutSection: React.FC = () => {
                     transition-all duration-300 ease-out
                     hover:bg-gray-100 hover:shadow-md hover:-translate-y-0.5"
                 >
-                  <PlayCircle className="w-5 h-5 text-blue-600" />
+                  <PlayCircle className="w-5 h-5 text-[#4cb0de]" />
                   Intro Video
                 </button>
               </div>
@@ -189,13 +181,13 @@ const AboutSection: React.FC = () => {
 
       {/* === SECTION 2: WHY CHOOSE US (Updated with <img> tags) === */}
       {/* Added relative and overflow-hidden for the decorative shape */}
-      <section className={`relative isolate overflow-hidden py-16 md:py-24 bg-gray-50 ${kanit.className}`}>
+      <section className={`relative isolate overflow-hidden py-16 md:py-24 bg-gray-50`}>
         <div className="container mx-auto px-32">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
             
             {/* Left Side: Text Content and List of Reasons */}
             <div className="w-full lg:w-1/2 lg:pr-12 text-center lg:text-left">
-              <p className="text-blue-600 text-base font-bold uppercase tracking-wider mb-3">WHO WE ARE</p>
+              <p className="text-[#4cb0de] text-base font-bold uppercase tracking-wider mb-3">WHO WE ARE</p>
               <h2 className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-10">
                 Why Brands Trust Us
               </h2>
@@ -205,7 +197,7 @@ const AboutSection: React.FC = () => {
                 {reasons.map((reason, index) => (
                   <div key={index} className="flex items-start text-left gap-4">
                     <div className="flex-shrink-0">
-                      <CheckCircle className="w-8 h-8 text-blue-600" />
+                      <CheckCircle className="w-8 h-8 text-[#4cb0de]" />
                     </div>
                     <div>
                       <h3 className="text-xl font-semibold text-gray-900 mb-1">{reason.title}</h3>
@@ -244,14 +236,14 @@ const AboutSection: React.FC = () => {
         {/* Decorative Tilted Triangle Shape */}
         <div 
           className="absolute bottom-0 right-32 -z-10 w-48 h-48 md:w-64 md:h-64 bg-blue-800"
-          style={{
+          style={{ // Using inline style for clip-path, but bg color can be changed
             clipPath: 'polygon(100% 0, 0 100%, 100% 100%)'
           }}>
         </div>
       </section>
 
       {/* === SECTION 3: VIDEO (New) === */}
-      <section className={`py-16 md:py-24 bg-white ${kanit.className}`}>
+      <section className={`py-16 md:py-24 bg-white`}>
         <div className="container mx-auto px-40">
           {/* Video Thumbnail Area */}
           <div className="relative w-full aspect-video rounded-lg shadow-xl overflow-hidden group cursor-pointer">
@@ -265,7 +257,7 @@ const AboutSection: React.FC = () => {
               {/* Custom Play Button */}
               <div className="relative flex items-center justify-center">
                 <div className="absolute w-24 h-24 md:w-32 md:h-32 rounded-full bg-white opacity-20 animate-ping"></div>
-                <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-blue-600 shadow-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:bg-blue-500">
+                <div className="relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#4cb0de] shadow-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:bg-[#3a8cae]">
                   <Play className="w-10 h-10 md:w-12 md:h-12 text-white fill-white ml-2" />
                 </div>
               </div>
@@ -276,9 +268,9 @@ const AboutSection: React.FC = () => {
 
       {/* === SECTION 4: STATS BAR (New) === */}
       {/* Wrapper section for spacing */}
-      <section className={`py-16 md:py-24 bg-gray-50 ${kanit.className}`}>
+      <section className={`py-16 md:py-24 bg-gray-50`}>
         <div className="container mx-auto px-32">
-          <div ref={statsRef} className="py-12 bg-blue-600 rounded-lg">
+          <div ref={statsRef} className="py-12 bg-[#4cb0de] rounded-lg">
             {/* Stats Wrapper */}
             <div className="flex flex-col sm:flex-row flex-wrap justify-around items-center gap-8 text-white">
               
@@ -292,7 +284,7 @@ const AboutSection: React.FC = () => {
                       {isStatsVisible ? <AnimatedNumber target={stat.number} /> : 0}
                       {stat.suffix}
                     </span>
-                    <p className="text-sm font-medium text-blue-200">{stat.text}</p>
+                    <p className="text-sm font-medium text-white/70">{stat.text}</p>
                   </div>
                 </div>
               ))}

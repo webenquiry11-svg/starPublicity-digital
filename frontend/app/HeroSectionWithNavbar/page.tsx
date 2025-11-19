@@ -3,17 +3,10 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Kanit } from 'next/font/google';
-import { X, Mail, User, Phone, Briefcase, MessageSquare } from 'lucide-react';
+import { X, Mail, User, Phone, Briefcase, MessageSquare, ArrowRight } from 'lucide-react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import herobg from '../../public/Star Digital Website Images/herobg.png';
 import logo from '../../public/Star Digital Website Images/logo.png';
-
-const kanit = Kanit({
-  weight: ['400', '500', '700', '800'], // Include weights used in the component
-  subsets: ['latin'],
-  display: 'swap',
-});
 
 // Navigation Links
 const navLinks = [
@@ -36,7 +29,7 @@ const HeroSectionWithNavbar: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <section className={`relative min-h-[750px] md:min-h-screen overflow-hidden flex flex-col ${kanit.className}`}>
+    <section className={`relative min-h-[750px] md:min-h-screen overflow-hidden flex flex-col`}>
       <Image
         src={herobg}
         alt="Abstract background"
@@ -70,7 +63,7 @@ const HeroSectionWithNavbar: React.FC = () => {
           {/* Navigation Links (Desktop) */}
           <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link, index) => (
-              <Link key={index} href={link.href} className="text-gray-700 font-medium hover:text-blue-600 transition-colors duration-200 uppercase text-sm tracking-wider">
+              <Link key={index} href={link.href} className="text-gray-700 font-medium hover:text-[#4cb0de] transition-colors duration-200 uppercase text-sm tracking-wider">
                 {link.name}
               </Link>
             ))}
@@ -78,7 +71,7 @@ const HeroSectionWithNavbar: React.FC = () => {
 
           {/* CTA Button: "Get a Free Quote" */}
           <div className="hidden lg:block">
-            <button onClick={() => setIsModalOpen(true)} className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition-all duration-300 ease-out text-sm">
+            <button onClick={() => setIsModalOpen(true)} className="px-6 py-3 bg-[#4cb0de] text-white font-semibold rounded-md shadow-md hover:bg-[#3a8cae] transition-all duration-300 ease-out text-sm">
               Get a Free Quote
             </button>
           </div>
@@ -107,11 +100,12 @@ const HeroSectionWithNavbar: React.FC = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center gap-4">
-              <Link href="/start-project" className="w-full sm:w-auto px-8 py-3 bg-blue-600 text-white font-semibold rounded-md shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:-translate-y-0.5">
+              <Link href="/start-project" className="w-full sm:w-auto px-8 py-3 bg-[#4cb0de] text-white font-semibold rounded-md shadow-lg hover:bg-[#3a8cae] transition-all duration-300 transform hover:-translate-y-0.5">
                 Start Your Project
               </Link>
-              <Link href="/learn-more" className="w-full sm:w-auto px-8 py-3 text-black font-semibold rounded-md border-2 border-gray-400 hover:bg-gray-300 hover:text-black transition-colors duration-300">
-                Learn More
+              <Link href="/learn-more" className="group w-full sm:w-auto px-8 py-3 text-gray-700 font-semibold rounded-md transition-colors duration-300 inline-flex items-center gap-2">
+                <span className="relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-[#4cb0de] after:transition-all after:duration-300 group-hover:after:w-full">Learn More</span>
+                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
           </div>
@@ -143,24 +137,24 @@ const HeroSectionWithNavbar: React.FC = () => {
                   <div className="relative">
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 mt-3" />
-                    <input type="text" id="name" name="name" placeholder="John Doe" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow" />
+                    <input type="text" id="name" name="name" placeholder="John Doe" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4cb0de] focus:border-[#4cb0de] transition-shadow" />
                   </div>
                   <div className="relative">
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
                     <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 mt-3" />
-                    <input type="email" id="email" name="email" placeholder="you@example.com" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow" />
+                    <input type="email" id="email" name="email" placeholder="you@example.com" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4cb0de] focus:border-[#4cb0de] transition-shadow" />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="relative">
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
                     <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 mt-3" />
-                    <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow" />
+                    <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4cb0de] focus:border-[#4cb0de] transition-shadow" />
                   </div>
                   <div className="relative">
                     <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-1">I'm interested in...</label>
                     <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 mt-3" />
-                    <select id="service" name="service" defaultValue="" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow appearance-none">
+                    <select id="service" name="service" defaultValue="" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4cb0de] focus:border-[#4cb0de] transition-shadow appearance-none">
                       <option value="" disabled>Select a service</option>
                       {services.map(s => <option key={s} value={s}>{s}</option>)}
                     </select>
@@ -169,11 +163,11 @@ const HeroSectionWithNavbar: React.FC = () => {
                 <div className="relative">
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
                   <MessageSquare className="absolute left-3 top-5 h-5 w-5 text-gray-400" />
-                  <textarea id="message" name="message" rows={4} placeholder="Tell us a little about your project..." className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-shadow resize-none"></textarea>
+                  <textarea id="message" name="message" rows={4} placeholder="Tell us a little about your project..." className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#4cb0de] focus:border-[#4cb0de] transition-shadow resize-none"></textarea>
                 </div>
               </div>
               <div className="mt-8">
-                <button type="submit" className="w-full py-3 px-4 bg-blue-600 text-white font-bold rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 transform hover:-translate-y-0.5">
+                <button type="submit" className="w-full py-3 px-4 bg-[#4cb0de] text-white font-bold rounded-lg shadow-lg hover:bg-[#3a8cae] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#4cb0de] transition-all duration-300 transform hover:-translate-y-0.5">
                   Send Quote Request
                 </button>
               </div>

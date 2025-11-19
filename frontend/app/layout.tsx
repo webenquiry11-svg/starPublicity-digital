@@ -1,22 +1,26 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css'; // <-- MAKE SURE THIS LINE IS HERE
+import type { Metadata } from "next";
+import { Jost } from "next/font/google";
+import "./globals.css";
 
-const inter = Inter({ subsets: ['latin'] });
+const jost = Jost({
+  subsets: ["latin"],
+  weight: ['400', '500', '700', '800', '900'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: 'Star Publicity Digital', // You can change this
-  description: 'Your website description', // You can change this
+  title: "Star Publicity",
+  description: "Drive Growth Through Innovative Digital Strategies",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={jost.className}>{children}</body>
     </html>
   );
 }
