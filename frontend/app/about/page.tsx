@@ -122,7 +122,7 @@ const AboutSection: React.FC = () => {
     <>
       {/* === SECTION 1: CORE FEATURES === */}
       <section className={`py-16 md:py-24 bg-white`}>
-        <div className="container mx-auto px-32">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
             
             {/* Left Side: Image */}
@@ -182,7 +182,7 @@ const AboutSection: React.FC = () => {
       {/* === SECTION 2: WHY CHOOSE US (Updated with <img> tags) === */}
       {/* Added relative and overflow-hidden for the decorative shape */}
       <section className={`relative isolate overflow-hidden py-16 md:py-24 bg-gray-50`}>
-        <div className="container mx-auto px-32">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
             
             {/* Left Side: Text Content and List of Reasons */}
@@ -235,7 +235,7 @@ const AboutSection: React.FC = () => {
 
         {/* Decorative Tilted Triangle Shape */}
         <div 
-          className="absolute bottom-0 right-32 -z-10 w-48 h-48 md:w-64 md:h-64 bg-blue-800"
+          className="absolute bottom-0 right-14 -z-10 w-48 h-48 md:w-64 md:h-64 bg-blue-800"
           style={{ // Using inline style for clip-path, but bg color can be changed
             clipPath: 'polygon(100% 0, 0 100%, 100% 100%)'
           }}>
@@ -244,7 +244,7 @@ const AboutSection: React.FC = () => {
 
       {/* === SECTION 3: VIDEO (New) === */}
       <section className={`py-16 md:py-24 bg-white`}>
-        <div className="container mx-auto px-40">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Video Thumbnail Area */}
           <div className="relative w-full aspect-video rounded-lg shadow-xl overflow-hidden group cursor-pointer">
             <img
@@ -268,8 +268,8 @@ const AboutSection: React.FC = () => {
 
       {/* === SECTION 4: STATS BAR (New) === */}
       {/* Wrapper section for spacing */}
-      <section className={`py-16 md:py-24 bg-gray-50`}>
-        <div className="container mx-auto px-32">
+      <section className={`bg-gray-50`}>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div ref={statsRef} className="py-12 bg-[#4cb0de] rounded-lg">
             {/* Stats Wrapper */}
             <div className="flex flex-col sm:flex-row flex-wrap justify-around items-center gap-8 text-white">

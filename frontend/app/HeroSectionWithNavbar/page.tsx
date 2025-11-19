@@ -89,7 +89,7 @@ const HeroSectionWithNavbar: React.FC = () => {
 
       {/* --- Hero Content --- */}
       <div className="relative z-20 flex-grow flex items-center">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-6 lg:px-8 xl:px-20">
           <div className="w-full lg:w-1/2 max-w-xl lg:ml-[10%]">
             <h1 className="text-5xl md:text-6xl font-bold text-[rgb(30,55,90)] leading-tight mb-6">
               Drive Growth Through Innovative Digital Strategies

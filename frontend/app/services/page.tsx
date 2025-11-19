@@ -89,7 +89,7 @@ const servicesData = [
 export default function ServicesSection() {
   return (
     <section className={`py-16 bg-gray-50`}>
-      <div className="container mx-auto px-24">
+      <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         <div className="text-center mb-12">
           <p className="text-[#4cb0de] text-lg font-semibold uppercase tracking-wider mb-2">
             SERVICES

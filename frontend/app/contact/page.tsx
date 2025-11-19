@@ -84,34 +84,25 @@ const ContactSection: React.FC = () => {
     <section 
       className={`py-16 md:py-24 bg-slate-50 relative overflow-hidden`}
     >
+      {/* Decorative Background Shape */}
+      <div className="absolute top-0 left-0 -translate-x-1/3 -translate-y-1/3">
+        <div className="w-[800px] h-[800px] rounded-full bg-gradient-to-tr from-[#4cb0de]/20 to-purple-500/10 filter blur-3xl"></div>
+      </div>
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10"> {/* Ensure content is above pattern */}
         {/* Header */}
-        <div 
-          className="relative text-center max-w-3xl mx-auto py-12 px-6 rounded-2xl overflow-hidden bg-white"
-        >
-          {/* Background Gradient and Pattern */}
-          <div 
-            className="absolute inset-0 -z-10"
-          >
-            {/* Subtle Mesh Gradient Background */}
-            <div className="absolute inset-0 bg-white"></div>
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#4cb0de]/40 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-blob"></div>
-            <div className="absolute top-0 right-1/4 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-blob animation-delay-2000"></div>
-            <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-blob animation-delay-4000"></div>
-          </div>
-
-
-          <div className="relative">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-sm mb-4">
+        <div className="text-center max-w-3xl mx-auto">
+          <div className="relative inline-block">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white shadow-md mb-6">
               <Layers className="w-6 h-6 text-[#4cb0de]" />
             </div>
-            <h2 className="text-[48px] font-medium text-[rgb(30,55,90)] leading-[58px] mb-6">
-              Let’s Connect With Star Publicity
-            </h2>
-            <p className="text-xl text-gray-500 max-w-2xl mx-auto">
-              We’re here to answer your questions and help your brand grow.
-            </p>
           </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Let’s Connect With <span className="text-[#4cb0de]">Star Publicity</span>
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            We’re here to answer your questions and help your brand grow.
+          </p>
         </div>
 
         {/* Contact Cards Grid */}
@@ -175,7 +166,7 @@ const Footer: React.FC = () => {
       <div className="absolute w-80 h-80 rounded-full bg-[#4cb0de] opacity-20 -bottom-40 -right-40 z-0"></div>
 
 
-      <div className="container mx-auto px-6 md:px-12 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Using a 12-column grid for precise proportions:
           - OmniVus: 5 columns (lg:col-span-5)
           - Pages: 3 columns (lg:col-span-3)
