@@ -1,18 +1,21 @@
-import React from 'react';
-import ServicesSection from '../app/services/page'; 
-import AboutSection from '../app/about/page'; 
-import ContactSection from '../app/contact/page'; // 1. Import the new component
-import HeroSectionWithNavbar from './HeroSectionWithNavbar/page';
+import HeroSectionWithNavbar from "./HeroSectionWithNavbar/page";
+import ServicesSection from "./services/page";
+import AboutSection from "./about/page";
+import ContactPage from "./contact/page";
 
-const HomePage = () => {
+export default function HomePage() {
   return (
     <main>
       <HeroSectionWithNavbar />
-      <ServicesSection /> 
-      <AboutSection /> 
-      <ContactSection /> {/* 2. Place it here */}
+      <div id="services">
+        <ServicesSection />
+      </div>
+      <div id="about">
+        <AboutSection />
+      </div>
+      <div id="contact">
+        <ContactPage />
+      </div>
     </main>
   );
 }
-
-export default HomePage;

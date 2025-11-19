@@ -10,10 +10,10 @@ import logo from '../../public/Star Digital Website Images/logo.png';
 
 // Navigation Links
 const navLinks = [
-  { name: 'Our Services', href: '/services' },
-  { name: 'About', href: '/about' },
+  { name: 'Our Services', href: '#services' },
+  { name: 'About', href: '#about' },
   { name: 'FAQs', href: '/faq' },
-  { name: 'Contact Us', href: '/contact' },
+  { name: 'Contact Us', href: '#contact' },
 ];
 
 const services = [
