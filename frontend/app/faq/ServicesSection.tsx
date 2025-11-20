@@ -100,9 +100,11 @@ export default function ServicesSection() {
 
   return (
     <section 
-      id="services" 
-      className="py-16 md:py-20 bg-slate-50 overflow-hidden"
+      id="services"
+      className="py-16 md:py-20 overflow-hidden relative bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/ourservices.jpeg')" }}
     >
+      {/* Content container */}
       <div className="container mx-auto px-6 md:px-12">
         {/* Section Header */}
         <div className="text-center mb-12 max-w-2xl mx-auto">
