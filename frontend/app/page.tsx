@@ -20,10 +20,18 @@ export default function HomePage() {
   return (
     <main className="relative">
       <HeroSectionWithNavbar />
-      <ServicesSection />
-      <AboutSection />
-      <AwardsSection />
-      <ContactSection />
+      <div id="services">
+        <ServicesSection />
+      </div>
+      <div id="about">
+        <AboutSection />
+      </div>
+      <div id="awards">
+        <AwardsSection />
+      </div>
+      <div id="contact">
+        <ContactSection />
+      </div>
       <Footer />
     </main>
   );
