@@ -74,7 +74,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ isModalOpen, setIsModalOpe
 
           {/* CTA Button: "Get a Free Quote" */}
           <div className="hidden lg:block">
-            <button onClick={() => setIsModalOpen(true)} className="px-6 py-3 bg-[#2a7394] text-white font-semibold rounded-md shadow-md hover:bg-[#225d7a] transition-all duration-300 ease-out text-sm">
+            <button onMouseEnter={() => setIsModalOpen(true)} className="px-6 py-3 bg-[#2a7394] text-white font-semibold rounded-md shadow-md hover:bg-[#225d7a] transition-all duration-300 ease-out text-sm">
               Get a Free Quote
             </button>
           </div>

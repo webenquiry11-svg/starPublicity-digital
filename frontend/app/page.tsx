@@ -4,7 +4,7 @@ import { useState } from "react";
 import HeroSectionWithNavbar from "./HeroSectionWithNavbar/page";
 import ServicesSection from "./services/page";
 import AboutSection from "./about/page";
-import ContactPage from "./contact/page";
+import { ContactSection, Footer } from "./contact/page";
 
 export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,8 +19,9 @@ export default function HomePage() {
         <AboutSection />
       </div>
       <div id="contact">
-        <ContactPage setIsModalOpen={setIsModalOpen} />
+        <ContactSection />
       </div>
+      <Footer />
     </main>
   );
 }

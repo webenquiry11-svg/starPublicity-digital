@@ -83,11 +83,6 @@ export default function ServicesSection() {
       <div className="container mx-auto px-4">
         
         {/* Section Header */}
-        <div className="text-center mb-12 relative z-10">
-          <h2 className="text-4xl md:text-5xl font-medium text-[rgb(30,55,90)]">
-            Our Services
-          </h2>
-        </div>
 
         {/* --- MOBILE/TABLET VIEW (Grid) --- */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 lg:hidden">
@@ -102,8 +97,9 @@ export default function ServicesSection() {
           {/* Center Hub: DESIGN */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
             <div className="w-48 h-48 bg-white rounded-full shadow-[0_0_40px_rgba(0,0,0,0.1)] flex flex-col items-center justify-center relative z-20">
-              <div className="w-40 h-40 rounded-full border-4 border-gray-100 flex flex-col items-center justify-center">
-                <span className="text-4xl font-bold text-gray-800 tracking-wider">DESIGN</span>
+              <div className="w-40 h-40 rounded-full border-4 border-gray-100 flex flex-col items-center justify-center text-center">
+                <span className="text-3xl font-bold text-gray-800 tracking-wider leading-tight">Our</span>
+                <span className="text-3xl font-bold text-gray-800 tracking-wider leading-tight">Services</span>
               </div>
             </div>
             {/* Center decorative ring */}

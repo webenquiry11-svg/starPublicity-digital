@@ -235,15 +235,15 @@ const AboutSection: React.FC = () => {
             
             {/* === SECTION 1B: BOTTOM AI IMPACT TIMELINE === */}
             <section className={`py-20 md:py-32 bg-gray-50`}>
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex flex-col items-center">
+                <div className="container mx-auto px-6 sm:px-12 lg:px-20">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
                         
-                        {/* Centered Headline and CTA */}
-                        <div className="w-full max-w-3xl text-center mb-16">
-                            <h2 className="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-gray-900">
+                        {/* Left Column: Headline and CTA */}
+                        <div className="w-full lg:w-4/5 text-left">
+                            <h2 className="text-6xl md:text-7xl font-extrabold leading-tight mb-6 text-gray-900">
                                 Turn AI into <span className="text-[#256482]">impact</span> in weeks, not months
                             </h2>
-                            <p className="text-lg text-gray-600 leading-relaxed mb-10 mx-auto">
+                            <p className="text-xl text-gray-600 leading-relaxed mb-10">
                                 Our team of AI automation experts will help you
                                 plan, deploy, and achieve results this quarter
                                 instead of next.
@@ -252,7 +252,7 @@ const AboutSection: React.FC = () => {
                             {/* Button */}
                             <Link 
                                 href="#"
-                                className="group inline-flex items-center bg-[#2a7394] text-white font-semibold py-4 px-8 rounded-lg 
+                                className="group inline-flex items-center bg-[#2a7394] text-white font-semibold py-4 px-10 rounded-lg text-lg 
                                 transition-all duration-300 ease-out hover:bg-[#225d7a] hover:-translate-y-0.5 hover:shadow-lg"
                             >
                                 <Calendar className="w-5 h-5 mr-3 transition-transform duration-300 group-hover:scale-110" />
@@ -261,7 +261,7 @@ const AboutSection: React.FC = () => {
                         </div>
                         
                         {/* Right Column: Timeline Steps */}
-                        <div ref={timelineRef} className="w-full max-w-3xl relative">
+                        <div ref={timelineRef} className="w-full relative space-y-6">
                             <div className="absolute left-4 top-4 bottom-4 w-0.5 border-l-2 border-dashed border-gray-300 hidden md:block" />
                             
                             {/* Moving Progress Dot */}
@@ -276,7 +276,7 @@ const AboutSection: React.FC = () => {
                             {timelineSteps.map((step, index) => (
                                 <div 
                                     key={index} 
-                                    className="group relative pl-12 pb-16 last:pb-0"
+                                    className="group relative pl-12"
                                 >
                                     
                                     {/* Timeline Marker (small dot on the line) */}
@@ -285,7 +285,7 @@ const AboutSection: React.FC = () => {
                                     </div>
 
                                     <div 
-                                        className="relative bg-white p-8 rounded-xl border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-gray-300 hover:-translate-y-1 overflow-hidden"
+                                        className="relative bg-white p-6 rounded-xl border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-gray-300 hover:-translate-y-1 overflow-hidden"
                                     >
                                         <div className="absolute -right-4 -top-4 text-8xl font-extrabold text-gray-100/80 select-none z-0">
                                             0{index + 1}
