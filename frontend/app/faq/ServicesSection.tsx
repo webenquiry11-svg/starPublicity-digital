@@ -101,19 +101,23 @@ export default function ServicesSection() {
   return (
     <section 
       id="services"
-      className="py-16 md:py-20 overflow-hidden relative bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/ourservices.jpeg')" }}
+      className="py-12 md:py-16 overflow-hidden"
+      style={{
+        background: 'linear-gradient(to bottom right, #f0f9ff, #dbeafe, #1e40af)',
+      }}
     >
       {/* Content container */}
       <div className="container mx-auto px-6 md:px-12">
         {/* Section Header */}
-        <div className="text-center mb-12 max-w-2xl mx-auto">
-          <p className="text-[#256482] text-lg font-semibold uppercase tracking-wider mb-2">
+        <div className="text-center mb-10 max-w-2xl mx-auto">
+          <p className="text-sky-200 text-lg font-semibold uppercase tracking-wider mb-2">
             Our Services
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 relative inline-block">
+          <h2 className="text-4xl md:text-5xl font-bold text-white relative inline-block">
             What We Deliver
-            <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-2/3 h-1 bg-[#256482]/20 rounded-full"></span>
+            <span
+              className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-2/3 h-1 bg-sky-200/30 rounded-full"
+            ></span>
           </h2>
         </div>
 

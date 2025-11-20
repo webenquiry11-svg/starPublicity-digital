@@ -87,18 +87,13 @@ export default function ServicesSection() {
 
   return (
     <section 
-      id="services" 
-      className="py-16 overflow-hidden relative bg-[#f8fafc]"
-      onMouseMove={handleMouseMove}
+      id="services"
+      className="py-16 overflow-hidden"
+      style={{
+        background: 'linear-gradient(to bottom right, #f0f9ff, #dbeafe)',
+      }}
     >
-      {/* Interactive Spotlight Grid Background */}
-      <div className="absolute inset-0 z-0" style={{
-        backgroundImage: 'radial-gradient(circle, #e2e8f0 1px, transparent 1px)',
-        backgroundSize: '1.5rem 1.5rem',
-        maskImage: 'radial-gradient(circle 300px at var(--mouse-x) var(--mouse-y), black, transparent)',
-      }}></div>
-
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4">
         
         {/* Section Header */}
 
@@ -115,9 +110,9 @@ export default function ServicesSection() {
           {/* Center Hub: DESIGN */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
             <div className="w-48 h-48 bg-white rounded-full shadow-[0_0_40px_rgba(0,0,0,0.1)] flex flex-col items-center justify-center relative z-20">
-              <div className="w-40 h-40 rounded-full border-4 border-gray-100 flex flex-col items-center justify-center text-center">
-                <span className="text-3xl font-bold text-gray-800 tracking-wider leading-tight">Our</span>
-                <span className="text-3xl font-bold text-gray-800 tracking-wider leading-tight">Services</span>
+              <div className="w-40 h-40 rounded-full border-4 border-gray-100 flex flex-col items-center justify-center text-center bg-white/50">
+                <span className="text-3xl font-bold text-gray-900 tracking-wider leading-tight">Our</span>
+                <span className="text-3xl font-bold text-gray-900 tracking-wider leading-tight">Services</span>
               </div>
             </div>
             {/* Center decorative ring */}
