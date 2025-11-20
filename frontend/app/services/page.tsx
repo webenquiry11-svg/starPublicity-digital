@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Monitor, Palette, Code, View, Gamepad2, Ruler, Diamond, Send } from "lucide-react";
 
 // --- Services Data ---
@@ -78,9 +79,26 @@ export default function ServicesSection() {
   const radius = 300; // Distance from center
   const iconDiameter = 96; // 6rem * 16px/rem = 96px (w-24 h-24)
   
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+  };
+
   return (
-    <section className="py-16 bg-white overflow-hidden">
-      <div className="container mx-auto px-4">
+    <section 
+      id="services" 
+      className="py-16 overflow-hidden relative bg-[#f8fafc]"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Interactive Spotlight Grid Background */}
+      <div className="absolute inset-0 z-0" style={{
+        backgroundImage: 'radial-gradient(circle, #e2e8f0 1px, transparent 1px)',
+        backgroundSize: '1.5rem 1.5rem',
+        maskImage: 'radial-gradient(circle 300px at var(--mouse-x) var(--mouse-y), black, transparent)',
+      }}></div>
+
+      <div className="container mx-auto px-4 relative z-10">
         
         {/* Section Header */}
 

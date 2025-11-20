@@ -292,7 +292,6 @@ const AboutSection: React.FC = () => {
                                         </div>
                                         <div className="relative z-10">
                                             <span className="inline-block text-xs font-semibold px-2 py-1 rounded-full mb-3 bg-[#256482]/10 text-[#256482]">{step.step}</span>
-                                            <h3 className="text-2xl font-bold mb-4 text-gray-800">{step.title}</h3>
                                             
                                             <ul className="list-none space-y-3 mb-5">
                                                 {step.points.map((point, pIndex) => (

@@ -1,4 +1,4 @@
-"use client"; // Required for the Lottie component
+"use client";
 
 import React, { useState } from 'react';
 import Link from 'next/link';
