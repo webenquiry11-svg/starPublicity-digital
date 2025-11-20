@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { X, Mail, User, Phone, Briefcase, MessageSquare, ArrowRight } from 'lucide-react';
+import { Mail, User, Phone, Briefcase, MessageSquare, ArrowRight, Send } from 'lucide-react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import herobg from '../../public/Star Digital Website Images/herobg.png';
 import logo from '../../public/Star Digital Website Images/logo.png';
@@ -25,12 +25,7 @@ const services = [
   "Other"
 ];
 
-interface HeroProps {
-  isModalOpen: boolean;
-  setIsModalOpen: (isOpen: boolean) => void;
-}
-
-const HeroSectionWithNavbar: React.FC<HeroProps> = ({ isModalOpen, setIsModalOpen }) => {
+const HeroSectionWithNavbar: React.FC = () => {
   return (
     <section className={`relative min-h-[750px] md:min-h-screen overflow-hidden flex flex-col`}>
       <Image
@@ -73,10 +68,34 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ isModalOpen, setIsModalOpe
           </div>
 
           {/* CTA Button: "Get a Free Quote" */}
-          <div className="hidden lg:block">
-            <button onMouseEnter={() => setIsModalOpen(true)} className="px-6 py-3 bg-[#2a7394] text-white font-semibold rounded-md shadow-md hover:bg-[#225d7a] transition-all duration-300 ease-out text-sm">
+          <div className="hidden lg:block relative group">
+            <button className="px-6 py-3 bg-[#2a7394] text-white font-semibold rounded-md shadow-md hover:bg-[#225d7a] transition-all duration-300 ease-out text-sm">
               Get a Free Quote
             </button>
+
+            {/* Hover Popup Form */}
+            <div 
+              className={`absolute top-full right-0 mt-2 w-[350px] p-6 bg-white rounded-xl shadow-2xl border border-gray-100 
+                         opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:scale-100 scale-95
+                         transition-all duration-300 ease-out z-40 origin-top-right`}
+            >
+              <h4 className="font-bold text-lg mb-1 text-gray-900">Quick Enquiry</h4>
+              <p className="text-sm text-gray-600 mb-4">Let us know what you're looking for.</p>
+              <form onSubmit={(e) => e.preventDefault()} className="space-y-3">
+                <div>
+                  <input type="email" placeholder="Your Email" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" />
+                </div>
+                <div>
+                  <textarea placeholder="Your Message" rows={3} className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md resize-none focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]"></textarea>
+                </div>
+                <button 
+                  type="submit" 
+                  className="w-full flex items-center justify-center gap-2 text-sm text-white font-semibold py-2 px-4 rounded-md transition-colors bg-[#2a7394] hover:bg-[#225d7a]"
+                >
+                  Send Enquiry <Send size={16} />
+                </button>
+              </form>
+            </div>
           </div>
 
           {/* Mobile Menu Icon (Placeholder) */}
@@ -119,67 +138,6 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ isModalOpen, setIsModalOpe
         </div>
       </div>
 
-      {/* Login Form Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-opacity duration-300" onClick={() => setIsModalOpen(false)}>
-          <div className="bg-white/80 backdrop-blur-lg border border-white/20 rounded-2xl shadow-2xl shadow-black/20 p-8 w-full max-w-lg relative animate-fade-in-up" onClick={(e) => e.stopPropagation()}>
-            <button 
-              onClick={() => setIsModalOpen(false)} 
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition-colors"
-              aria-label="Close modal"
-            >
-              <X className="w-6 h-6" />
-            </button>
-            
-            <h2 className="text-3xl font-bold text-center text-gray-900 mb-2">Get a Free Quote</h2>
-            <p className="text-center text-gray-600 mb-8">Tell us about your project, and we'll get back to you.</p>
-            
-            <form onSubmit={(e) => e.preventDefault()}>
-              <div className="space-y-5">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div className="relative">
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                    <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 mt-3" />
-                    <input type="text" id="name" name="name" placeholder="John Doe" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#256482] focus:border-[#256482] transition-shadow" />
-                  </div>
-                  <div className="relative">
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 mt-3" />
-                    <input type="email" id="email" name="email" placeholder="you@example.com" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#256482] focus:border-[#256482] transition-shadow" />
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div className="relative">
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 mt-3" />
-                    <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#256482] focus:border-[#256482] transition-shadow" />
-                  </div>
-                  <div className="relative">
-                    <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-1">I'm interested in...</label>
-                    <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 mt-3" />
-                    <select id="service" name="service" defaultValue="" className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#256482] focus:border-[#256482] transition-shadow appearance-none">
-                      <option value="" disabled>Select a service</option>
-                      {services.map(s => <option key={s} value={s}>{s}</option>)}
-                    </select>
-                  </div>
-                </div>
-                <div className="relative">
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
-                  <MessageSquare className="absolute left-3 top-5 h-5 w-5 text-gray-400" />
-                  <textarea id="message" name="message" rows={4} placeholder="Tell us a little about your project..." className="w-full pl-10 pr-4 py-3 bg-white/50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#256482] focus:border-[#256482] transition-shadow resize-none"></textarea>
-                </div>
-              </div>
-              <div className="mt-8">
-                <button type="submit" className="w-full py-3 px-4 bg-[#2a7394] text-white font-bold rounded-lg shadow-lg hover:bg-[#225d7a] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2a7394] transition-all duration-300 transform hover:-translate-y-0.5">
-                  Send Quote Request
-                </button>
-              </div>
-            </form>
-
-          </div>
-        </div>
-      )}
-      
     </section>
   );
 };
