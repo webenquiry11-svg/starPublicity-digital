@@ -52,7 +52,7 @@ export const ContactSection: React.FC = () => {
 
   return (
     <section 
-      className={`py-16 md:py-24 bg-gradient-to-br from-[#2a7394] to-[#225d7a] relative overflow-hidden rounded-tl-2xl rounded-tr-2xl`}
+      className={`py-12 md:py-16 bg-gradient-to-br from-[#2a7394] to-[#225d7a] relative overflow-hidden rounded-tl-2xl rounded-tr-2xl`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center text-white max-w-6xl mx-auto">
@@ -69,22 +69,22 @@ export const ContactSection: React.FC = () => {
           
           {/* Right Side: Button and Divider */}
           <div className="w-full lg:col-span-5">
-            <form onSubmit={(e) => e.preventDefault()} className="bg-white p-8 rounded-xl shadow-lg border border-gray-100 space-y-4">
+            <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
               <div>
                 <label htmlFor="cta-name" className="sr-only">Name</label>
-                <input type="text" id="cta-name" placeholder="Your Name" className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#2a7394] focus:border-[#2a7394] transition-shadow placeholder:text-gray-500" />
+                <input type="text" id="cta-name" placeholder="Your Name" className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors" />
               </div>
               <div>
                 <label htmlFor="cta-email" className="sr-only">Email</label>
-                <input type="email" id="cta-email" placeholder="Your Email" className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#2a7394] focus:border-[#2a7394] transition-shadow placeholder:text-gray-500" />
+                <input type="email" id="cta-email" placeholder="Your Email" className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors" />
               </div>
               <div>
                 <label htmlFor="cta-message" className="sr-only">Message</label>
-                <textarea id="cta-message" placeholder="Your Message" rows={3} className="w-full px-4 py-2 border border-gray-300 rounded-md resize-none focus:ring-2 focus:ring-[#2a7394] focus:border-[#2a7394] transition-shadow placeholder:text-gray-500"></textarea>
+                <textarea id="cta-message" placeholder="Your Message" rows={2} className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors resize-none"></textarea>
               </div>
               <button 
                 type="submit"
-                className={`w-full group inline-flex items-center justify-center py-3 px-6 rounded-full bg-[${GREEN_ACCENT}] text-gray-900 font-bold text-lg border-2 border-transparent transition-all duration-300 ease-out hover:bg-white hover:text-[${GREEN_ACCENT}] hover:border-[${GREEN_ACCENT}] hover:scale-105`}
+                className={`w-full group inline-flex items-center justify-center py-3 px-6 rounded-full bg-white text-[#2a7394] font-bold text-lg transition-all duration-300 ease-out hover:bg-white/90 hover:scale-105`}
               >
                 LET'S TALK
                 <ChevronRight className="w-6 h-6 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
