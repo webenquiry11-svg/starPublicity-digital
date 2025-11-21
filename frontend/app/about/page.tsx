@@ -234,7 +234,7 @@ const AboutSection: React.FC = () => {
             <hr className="border-gray-100" />
             
             {/* === SECTION 1B: BOTTOM AI IMPACT TIMELINE === */}
-            <section className={`py-20 md:py-32 bg-[#2a7394]`}>
+            <section className={`py-20 md:py-32 bg-[#2a7394] rounded-tl-2xl rounded-tr-2xl`}>
                 <div className="container mx-auto px-6 sm:px-12 lg:px-20">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
                         
