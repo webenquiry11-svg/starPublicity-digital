@@ -92,11 +92,11 @@ const AwardsSection = () => {
           {awardCards.map((card) => (
             <div 
               key={card.id}
-              className={`absolute top-1/2 left-1/2 w-64 h-64 p-6 bg-white text-gray-900 shadow-lg border border-gray-100 flex flex-col justify-between rounded-md cursor-pointer`}
+              className={`absolute top-1/2 left-1/2 w-80 h-80 p-8 bg-white text-gray-900 shadow-lg border border-gray-100 flex flex-col justify-between rounded-lg cursor-pointer`}
               style={{ 
                 // Interpolate transform properties based on scrollProgress
                 transform: `
-                  translateX(calc(-50% + ${scrollProgress * (card.id * 320 - 800)}px)) 
+                  translateX(calc(-50% + ${scrollProgress * (card.id * 380 - 950)}px)) 
                   translateY(-50%) 
                   rotate(${(scrollProgress * card.rotation) + (1 - scrollProgress) * (card.id * 2 - 5)}deg) 
                   scale(${0.8 + scrollProgress * 0.2})
@@ -104,12 +104,6 @@ const AwardsSection = () => {
                 opacity: 0.5 + scrollProgress * 0.5,
               }}
             >
-                {/* --- The Hanging String (Visual Effect) --- */}
-                <div 
-                    className={`absolute top-[-30px] w-0.5 h-8 bg-gray-300 left-1/2 transform -translate-x-1/2 transition-opacity duration-500`}
-                    style={{ opacity: scrollProgress }}
-                />
-
                 {/* --- Internal Pattern/Noise --- */}
                 <div 
                     className="absolute inset-0 opacity-50"

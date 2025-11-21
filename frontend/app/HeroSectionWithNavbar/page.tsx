@@ -61,7 +61,7 @@ const HeroSectionWithNavbar: React.FC = () => {
           {/* Navigation Links (Desktop) */}
           <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link, index) => (
-              <Link key={index} href={link.href} className="text-gray-700 font-medium hover:text-[#256482] transition-colors duration-200 uppercase text-sm tracking-wider">
+              <Link key={index} href={link.href} className="text-gray-700 font-medium hover:text-[#256482] transition-colors duration-200 uppercase text-base tracking-wider">
                 {link.name}
               </Link>
             ))}
