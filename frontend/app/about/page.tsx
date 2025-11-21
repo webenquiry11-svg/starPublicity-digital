@@ -328,9 +328,13 @@ const AboutSection: React.FC = () => {
         {/* === 2. TEAM INTRODUCTION (Top Half of Image - Replaces old "Why Brands Trust Us" Intro) === */}
         <section className={`py-24 md:py-32 relative overflow-hidden`}>
           
-          {/* Background Glows */}
-          <div className="absolute top-0 left-0 w-72 h-72 bg-blue-200 rounded-full opacity-30 blur-2xl -z-10"></div>
-          <div className="absolute bottom-0 right-0 w-72 h-72 bg-yellow-200 rounded-full opacity-30 blur-2xl -z-10"></div>
+          {/* Visible Glowing Blobs (matching the other section) */}
+          <div className="absolute top-0 left-0 w-48 h-48 bg-yellow-400 rounded-full opacity-20 blur-xl -z-0"></div>
+          <div className="absolute bottom-0 right-0 w-32 h-32 bg-[#FF6B50] rounded-full opacity-20 blur-xl -z-0"></div>
+
+          {/* Blobs for the bottom-right image */}
+          <div className="absolute bottom-0 right-0 w-48 h-48 bg-yellow-400 rounded-full opacity-20 blur-xl -z-0"></div>
+          <div className="absolute bottom-10 right-10 w-32 h-32 bg-[#FF6B50] rounded-full opacity-20 blur-xl -z-0"></div>
 
           {/* Image 1: Top Left */}
           <div className="hidden lg:block absolute top-16 left-16 w-64 h-40 rounded-lg overflow-hidden shadow-2xl transform -rotate-6">
