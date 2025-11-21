@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
+import ourservice from '../../public/Star Digital Website Images/ourservice.png';
 import { Monitor, Palette, Code, View, Gamepad2, Ruler, Diamond, Send } from "lucide-react";
 
 // --- Services Data ---
@@ -104,39 +105,18 @@ export default function ServicesSection() {
   };
   
   return (
-      <section 
-        id="services"
-        ref={sectionRef} // Attach the ref
-        className="py-16 overflow-hidden relative text-gray-900" // Ensure text is dark for light BG
-        onMouseMove={handleMouseMove} // Keep the mouse event for interaction
-        style={{
-          backgroundColor: '#f8fafc', // Light gray base (Tailwind's slate-50)
-          // Define the custom property for the mouse follower
-          '--mouse-x': '50%', 
-          '--mouse-y': '50%',
-          '--bg-x': '0px',
-          '--bg-y': '0px',
-        } as React.CSSProperties} // Cast to use CSS properties like '--mouse-x'
-      >
-        {/* --- NEW "PLEXUS NETWORK" BACKGROUND --- */}
-
-        {/* 1. Animated Plexus SVG Pattern */}
-        <div 
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='p' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Cg fill='%23bfdbfe' fill-opacity='0.4'%3E%3Ccircle cx='50' cy='50' r='1.5'/%3E%3Ccircle cx='10' cy='10' r='1.5'/%3E%3Ccircle cx='90' cy='90' r='1.5'/%3E%3Ccircle cx='10' cy='90' r='1.5'/%3E%3Ccircle cx='90' cy='10' r='1.5'/%3E%3C/g%3E%3Cg stroke='%23bfdbfe' stroke-width='0.5' stroke-opacity='0.4'%3E%3Cpath d='M50 50 L10 10 M50 50 L90 90 M50 50 L10 90 M50 50 L90 10'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23p)'/%3E%3C/svg%3E")`,
-            backgroundSize: '150px 150px',
-            backgroundPosition: 'calc(50% + var(--bg-x)) calc(50% + var(--bg-y))',
-            transition: 'background-position 0.1s ease-out',
-          }}
-        />
-
-        {/* 2. Interactive Spotlight */}
-        <div 
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: `radial-gradient(circle 300px at var(--mouse-x) var(--mouse-y), #bfdbfe55, transparent)`,
-          }}
+    <section 
+      id="services"
+      ref={sectionRef}
+      className="py-16 overflow-hidden relative text-gray-900"
+    >
+        {/* Background Image */}
+        <Image
+          src={ourservice}
+          alt="Our Services Background"
+          fill
+          priority
+          className="object-cover -z-10"
         />
 
         <div className="container mx-auto px-4 relative z-10">
