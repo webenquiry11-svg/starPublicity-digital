@@ -239,7 +239,7 @@ const AboutSection: React.FC = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
                         
                         {/* Left Column: Headline and CTA */}
-                        <div className="w-full lg:w-4/5 text-left">
+                        <div className="w-full lg:w-4/5 text-left lg:mt-24">
                             <h2 className="text-6xl md:text-7xl font-extrabold leading-tight mb-6 text-gray-900">
                                 Turn AI into <span className="text-[#256482]">impact</span> in weeks, not months
                             </h2>
