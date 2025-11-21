@@ -13,6 +13,7 @@ const awardCards = [
     title: "DNA",
     icon: Triangle,
     text: "Best Design Studio.",
+    explanation: "This prestigious award recognizes our commitment to creative excellence and groundbreaking design solutions across all digital platforms.",
     source: "DNA Paris",
     color: "#6b21a8", // Dark Purple
     rotation: -5, // Slight tilt left
@@ -22,6 +23,7 @@ const awardCards = [
     title: "Elephant", // Placeholder for the Elephant logo
     icon: null,
     text: "Best Design Project.",
+    explanation: "Awarded for a standout project that demonstrated exceptional creativity, user-centric design, and a significant impact on our client's business goals.",
     source: "Kyooiitus",
     color: "#1e40af", // Deep Blue
     rotation: 5, // Slight tilt right
@@ -31,6 +33,7 @@ const awardCards = [
     title: "INDIGO",
     icon: Triangle,
     text: "Gold Winner in UX, Interface & Navigation",
+    explanation: "Our focus on creating seamless and intuitive user experiences was honored with a Gold award, highlighting our expertise in world-class UI/UX design.",
     source: "IndigoAward.com",
     color: "#14b8a6", // Mint Green/Teal
     rotation: -3, // Slight tilt left
@@ -40,6 +43,7 @@ const awardCards = [
     title: "C", // Placeholder for the "C" logo
     icon: CheckCircle,
     text: "4.9 ★ Top Rated On Clutch",
+    explanation: "Consistently rated as a top agency by our clients on Clutch, reflecting our dedication to delivering exceptional results and outstanding service.",
     source: "Clutch",
     color: "#ca8a04", // Golden Yellow
     rotation: 6, // Slight tilt right
@@ -91,10 +95,9 @@ const AwardsSection = () => {
         <div className="relative h-72">
           {awardCards.map((card) => (
             <div 
-              key={card.id}
-              className={`absolute top-1/2 left-1/2 w-80 h-80 p-8 bg-white text-gray-900 shadow-lg border border-gray-100 flex flex-col justify-between rounded-lg cursor-pointer`}
+              key={card.id} // This is the main animated container
+              className={`absolute top-1/2 left-1/2 w-80 h-80 group`}
               style={{ 
-                // Interpolate transform properties based on scrollProgress
                 transform: `
                   translateX(calc(-50% + ${scrollProgress * (card.id * 380 - 950)}px)) 
                   translateY(-50%) 
@@ -104,25 +107,28 @@ const AwardsSection = () => {
                 opacity: 0.5 + scrollProgress * 0.5,
               }}
             >
-                {/* --- Internal Pattern/Noise --- */}
+                {/* New "Glassmorphism" Card Design */}
                 <div 
-                    className="absolute inset-0 opacity-50"
-                    style={cardPatternStyle} 
-                />
-                
-                {/* --- Top Content (Logo/Title) --- */}
-                <div className="relative z-10 mb-4">
-                    <div className="text-3xl font-extrabold uppercase mb-2 leading-none" style={{ color: card.color }}>
-                        {card.icon && <card.icon size={36} className="mb-2 transition-transform duration-300 group-hover:scale-110" strokeWidth={2.5} />}
-                        {!card.icon && card.title === "Elephant" && <div className="text-5xl mb-2">🐘</div>}
-                        {card.title !== "Elephant" && card.title !== "C" ? card.title : null}
-                    </div>
-                </div>
+                    className="relative w-full h-full p-6 bg-white/50 backdrop-blur-md rounded-2xl border border-white/30 flex flex-col justify-between cursor-pointer transition-all duration-300 group-hover:shadow-2xl group-hover:border-white/50"
+                    style={{ boxShadow: `0 0 20px ${card.color}20, inset 0 0 0 1px ${card.color}00` }}
+                >
+                    {/* Glowing border effect on hover */}
+                    <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: `0 0 25px ${card.color}80, inset 0 0 0 1px ${card.color}80` }}></div>
 
-                {/* --- Bottom Content (Text & Source) --- */}
-                <div className="relative z-10 mt-auto text-left">
-                    <p className="text-xl font-semibold text-gray-800 mb-3 leading-snug">{card.text}</p>
-                    <p className="text-xs font-medium text-gray-500">{card.source}</p>
+                    {/* --- Top Content (Logo/Title) --- */}
+                    <div className="relative z-10">
+                        <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ backgroundColor: card.color }}>
+                            {card.icon && <card.icon size={28} className="text-white" strokeWidth={2.5} />}
+                            {!card.icon && card.title === "Elephant" && <div className="text-3xl">🐘</div>}
+                        </div>
+                    </div>
+
+                    {/* --- Bottom Content (Text & Source) --- */}
+                    <div className="relative z-10 mt-auto text-left">
+                        <p className="text-lg font-bold text-slate-800 mb-2 leading-tight">{card.text}</p>
+                        <p className="text-xs text-slate-600 mb-3 leading-relaxed">{card.explanation}</p>
+                        <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mt-auto">{card.source}</p>
+                    </div>
                 </div>
             </div>
           ))}
