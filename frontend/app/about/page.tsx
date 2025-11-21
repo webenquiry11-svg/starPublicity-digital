@@ -285,23 +285,23 @@ const AboutSection: React.FC = () => {
                                     </div>
 
                                     <div 
-                                        className="relative bg-blue-900/30 backdrop-blur-sm p-6 rounded-xl border border-blue-400/20 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-blue-400/50 hover:-translate-y-1 overflow-hidden"
+                                        className="relative bg-white p-6 rounded-xl border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-gray-300 hover:-translate-y-1 overflow-hidden"
                                     >
-                                        <div className="absolute -right-4 -top-4 text-8xl font-extrabold text-white/10 select-none z-0">
+                                        <div className="absolute -right-4 -top-4 text-8xl font-extrabold text-gray-100/80 select-none z-0">
                                             0{index + 1}
                                         </div>
                                         <div className="relative z-10">
-                                            <span className="inline-block text-xs font-semibold px-2 py-1 rounded-full mb-3 bg-cyan-300/10 text-cyan-300">{step.step}</span>
+                                            <span className="inline-block text-xs font-semibold px-2 py-1 rounded-full mb-3 bg-[#256482]/10 text-[#256482]">{step.step}</span>
                                             
                                             <ul className="list-none space-y-3 mb-5">
                                                 {step.points.map((point, pIndex) => (
-                                                    <li key={pIndex} className="text-blue-100 flex items-center gap-3">
-                                                        <Check className="w-5 h-5 text-cyan-300 flex-shrink-0" />
+                                                    <li key={pIndex} className="text-gray-600 flex items-center gap-3">
+                                                        <Check className="w-5 h-5 text-[#256482] flex-shrink-0" />
                                                         <span>{point}</span>
                                                     </li>
                                                 ))}
                                             </ul>
-                                            <div className="text-sm text-blue-200 p-4 bg-blue-900/20 rounded-lg border border-blue-400/20">
+                                            <div className="text-sm text-gray-500 p-4 bg-gray-50 rounded-lg border border-gray-200">
                                                 "{step.example}"
                                             </div>
                                         </div>
