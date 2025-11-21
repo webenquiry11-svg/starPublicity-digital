@@ -85,8 +85,22 @@ export default function ServicesSection() {
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
       const rect = sectionRef.current?.getBoundingClientRect();
       if (!rect) return;
-      e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-      e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      // For the spotlight
+      e.currentTarget.style.setProperty('--mouse-x', `${mouseX}px`);
+      e.currentTarget.style.setProperty('--mouse-y', `${mouseY}px`);
+
+      // For the interactive parallax background
+      // Calculate position from -1 to 1
+      const xPercent = (mouseX / rect.width - 0.5) * 2;
+      const yPercent = (mouseY / rect.height - 0.5) * 2;
+      const parallaxIntensity = 15; // Adjust for more or less movement
+
+      e.currentTarget.style.setProperty('--bg-x', `${-xPercent * parallaxIntensity}px`);
+      e.currentTarget.style.setProperty('--bg-y', `${-yPercent * parallaxIntensity}px`);
   };
   
   return (
@@ -100,6 +114,8 @@ export default function ServicesSection() {
           // Define the custom property for the mouse follower
           '--mouse-x': '50%', 
           '--mouse-y': '50%',
+          '--bg-x': '0px',
+          '--bg-y': '0px',
         } as React.CSSProperties} // Cast to use CSS properties like '--mouse-x'
       >
         {/* --- NEW "PLEXUS NETWORK" BACKGROUND --- */}
@@ -110,7 +126,8 @@ export default function ServicesSection() {
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='p' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Cg fill='%23bfdbfe' fill-opacity='0.4'%3E%3Ccircle cx='50' cy='50' r='1.5'/%3E%3Ccircle cx='10' cy='10' r='1.5'/%3E%3Ccircle cx='90' cy='90' r='1.5'/%3E%3Ccircle cx='10' cy='90' r='1.5'/%3E%3Ccircle cx='90' cy='10' r='1.5'/%3E%3C/g%3E%3Cg stroke='%23bfdbfe' stroke-width='0.5' stroke-opacity='0.4'%3E%3Cpath d='M50 50 L10 10 M50 50 L90 90 M50 50 L10 90 M50 50 L90 10'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23p)'/%3E%3C/svg%3E")`,
             backgroundSize: '150px 150px',
-            animation: 'plexus-flow 90s linear infinite',
+            backgroundPosition: 'calc(50% + var(--bg-x)) calc(50% + var(--bg-y))',
+            transition: 'background-position 0.1s ease-out',
           }}
         />
 
@@ -121,13 +138,6 @@ export default function ServicesSection() {
             background: `radial-gradient(circle 300px at var(--mouse-x) var(--mouse-y), #bfdbfe55, transparent)`,
           }}
         />
-        
-        <style jsx global>{`
-          @keyframes plexus-flow {
-            from { background-position: 0 0; }
-            to { background-position: -300px -300px; }
-          }
-        `}</style>
 
         <div className="container mx-auto px-4 relative z-10">
           {/* ... Content of the Services Section ... */}
