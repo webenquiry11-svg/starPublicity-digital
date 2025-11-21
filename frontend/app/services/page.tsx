@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import { Monitor, Palette, Code, View, Gamepad2, Ruler, Diamond, Send } from "lucide-react";
 
@@ -79,21 +79,58 @@ export default function ServicesSection() {
   const radius = 300; // Distance from center
   const iconDiameter = 96; // 6rem * 16px/rem = 96px (w-24 h-24)
   
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-    e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-  };
+  // Ensure sectionRef and handleMouseMove are defined here if you keep the mouse follow effect
+  const sectionRef = useRef<HTMLElement>(null);
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+      const rect = sectionRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+      e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+  };
+  
   return (
-    <section 
-      id="services"
-      className="py-16 overflow-hidden"
-      style={{
-        background: 'linear-gradient(to bottom right, #f0f9ff, #dbeafe)',
-      }}
-    >
-      <div className="container mx-auto px-4">
+      <section 
+        id="services"
+        ref={sectionRef} // Attach the ref
+        className="py-16 overflow-hidden relative text-gray-900" // Ensure text is dark for light BG
+        onMouseMove={handleMouseMove} // Keep the mouse event for interaction
+        style={{
+          backgroundColor: '#f8fafc', // Light gray base (Tailwind's slate-50)
+          // Define the custom property for the mouse follower
+          '--mouse-x': '50%', 
+          '--mouse-y': '50%',
+        } as React.CSSProperties} // Cast to use CSS properties like '--mouse-x'
+      >
+        {/* --- NEW "PLEXUS NETWORK" BACKGROUND --- */}
+
+        {/* 1. Animated Plexus SVG Pattern */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='p' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Cg fill='%23bfdbfe' fill-opacity='0.4'%3E%3Ccircle cx='50' cy='50' r='1.5'/%3E%3Ccircle cx='10' cy='10' r='1.5'/%3E%3Ccircle cx='90' cy='90' r='1.5'/%3E%3Ccircle cx='10' cy='90' r='1.5'/%3E%3Ccircle cx='90' cy='10' r='1.5'/%3E%3C/g%3E%3Cg stroke='%23bfdbfe' stroke-width='0.5' stroke-opacity='0.4'%3E%3Cpath d='M50 50 L10 10 M50 50 L90 90 M50 50 L10 90 M50 50 L90 10'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23p)'/%3E%3C/svg%3E")`,
+            backgroundSize: '150px 150px',
+            animation: 'plexus-flow 90s linear infinite',
+          }}
+        />
+
+        {/* 2. Interactive Spotlight */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `radial-gradient(circle 300px at var(--mouse-x) var(--mouse-y), #bfdbfe55, transparent)`,
+          }}
+        />
+        
+        <style jsx global>{`
+          @keyframes plexus-flow {
+            from { background-position: 0 0; }
+            to { background-position: -300px -300px; }
+          }
+        `}</style>
+
+        <div className="container mx-auto px-4 relative z-10">
+          {/* ... Content of the Services Section ... */}
         
         {/* Section Header */}
 
@@ -110,9 +147,9 @@ export default function ServicesSection() {
           {/* Center Hub: DESIGN */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
             <div className="w-48 h-48 bg-white rounded-full shadow-[0_0_40px_rgba(0,0,0,0.1)] flex flex-col items-center justify-center relative z-20">
-              <div className="w-40 h-40 rounded-full border-4 border-gray-100 flex flex-col items-center justify-center text-center bg-white/50">
-                <span className="text-3xl font-bold text-gray-900 tracking-wider leading-tight">Our</span>
-                <span className="text-3xl font-bold text-gray-900 tracking-wider leading-tight">Services</span>
+              <div className="w-40 h-40 rounded-full border-4 border-gray-100 flex flex-col items-center justify-center text-center">
+                <span className="text-3xl font-bold text-gray-800 tracking-wider leading-tight">Our</span>
+                <span className="text-3xl font-bold text-gray-800 tracking-wider leading-tight">Services</span>
               </div>
             </div>
             {/* Center decorative ring */}
