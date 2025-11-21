@@ -234,16 +234,16 @@ const AboutSection: React.FC = () => {
             <hr className="border-gray-100" />
             
             {/* === SECTION 1B: BOTTOM AI IMPACT TIMELINE === */}
-            <section className={`py-20 md:py-32 bg-gray-50`}>
+            <section className={`py-20 md:py-32 bg-[#2a7394]`}>
                 <div className="container mx-auto px-6 sm:px-12 lg:px-20">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
                         
                         {/* Left Column: Headline and CTA */}
                         <div className="w-full lg:w-4/5 text-left lg:mt-24">
-                            <h2 className="text-6xl md:text-7xl font-extrabold leading-tight mb-6 text-gray-900">
-                                Turn AI into <span className="text-[#256482]">impact</span> in weeks, not months
+                            <h2 className="text-6xl md:text-7xl font-extrabold leading-tight mb-6 text-white">
+                                Turn AI into <span className="text-cyan-300">impact</span> in weeks, not months
                             </h2>
-                            <p className="text-xl text-gray-600 leading-relaxed mb-10">
+                            <p className="text-xl text-blue-100 leading-relaxed mb-10">
                                 Our team of AI automation experts will help you
                                 plan, deploy, and achieve results this quarter
                                 instead of next.
@@ -252,8 +252,8 @@ const AboutSection: React.FC = () => {
                             {/* Button */}
                             <Link 
                                 href="#"
-                                className="group inline-flex items-center bg-[#2a7394] text-white font-semibold py-4 px-10 rounded-lg text-lg 
-                                transition-all duration-300 ease-out hover:bg-[#225d7a] hover:-translate-y-0.5 hover:shadow-lg"
+                                className="group inline-flex items-center bg-white text-[#2a7394] font-semibold py-4 px-10 rounded-lg text-lg 
+                                transition-all duration-300 ease-out hover:bg-gray-200 hover:-translate-y-0.5 hover:shadow-lg"
                             >
                                 <Calendar className="w-5 h-5 mr-3 transition-transform duration-300 group-hover:scale-110" />
                                 <span>Schedule time with our team</span>
@@ -262,10 +262,10 @@ const AboutSection: React.FC = () => {
                         
                         {/* Right Column: Timeline Steps */}
                         <div ref={timelineRef} className="w-full relative space-y-6">
-                            <div className="absolute left-4 top-4 bottom-4 w-0.5 border-l-2 border-dashed border-gray-300 hidden md:block" />
+                            <div className="absolute left-4 top-4 bottom-4 w-0.5 border-l-2 border-dashed border-blue-400/50 hidden md:block" />
                             
                             {/* Moving Progress Dot */}
-                            <div className="absolute left-[5px] top-4 w-6 h-6 bg-[#3590ba] rounded-full shadow-md hidden md:block"
+                            <div className="absolute left-[5px] top-4 w-6 h-6 bg-cyan-300 rounded-full shadow-md hidden md:block"
                                  style={{
                                      // Use calc to move the dot along the height of the timeline container
                                      // The 'top-4' and '- 1.5rem' accounts for the padding/offset of the timeline line
@@ -280,28 +280,28 @@ const AboutSection: React.FC = () => {
                                 >
                                     
                                     {/* Timeline Marker (small dot on the line) */}
-                                    <div className="absolute left-0 top-0 w-8 h-8 bg-white rounded-full flex items-center justify-center z-10">
-                                        <div className="w-4 h-4 bg-[#256482] rounded-full transition-transform duration-300 group-hover:scale-125" />
+                                    <div className="absolute left-0 top-0 w-8 h-8 bg-[#2a7394] rounded-full flex items-center justify-center z-10">
+                                        <div className="w-4 h-4 bg-cyan-300 rounded-full transition-transform duration-300 group-hover:scale-125" />
                                     </div>
 
                                     <div 
-                                        className="relative bg-white p-6 rounded-xl border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-gray-300 hover:-translate-y-1 overflow-hidden"
+                                        className="relative bg-blue-900/30 backdrop-blur-sm p-6 rounded-xl border border-blue-400/20 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-blue-400/50 hover:-translate-y-1 overflow-hidden"
                                     >
-                                        <div className="absolute -right-4 -top-4 text-8xl font-extrabold text-gray-100/80 select-none z-0">
+                                        <div className="absolute -right-4 -top-4 text-8xl font-extrabold text-white/10 select-none z-0">
                                             0{index + 1}
                                         </div>
                                         <div className="relative z-10">
-                                            <span className="inline-block text-xs font-semibold px-2 py-1 rounded-full mb-3 bg-[#256482]/10 text-[#256482]">{step.step}</span>
+                                            <span className="inline-block text-xs font-semibold px-2 py-1 rounded-full mb-3 bg-cyan-300/10 text-cyan-300">{step.step}</span>
                                             
                                             <ul className="list-none space-y-3 mb-5">
                                                 {step.points.map((point, pIndex) => (
-                                                    <li key={pIndex} className="text-gray-600 flex items-center gap-3">
-                                                        <Check className="w-5 h-5 text-[#256482] flex-shrink-0" />
+                                                    <li key={pIndex} className="text-blue-100 flex items-center gap-3">
+                                                        <Check className="w-5 h-5 text-cyan-300 flex-shrink-0" />
                                                         <span>{point}</span>
                                                     </li>
                                                 ))}
                                             </ul>
-                                            <div className="text-sm text-gray-500 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                            <div className="text-sm text-blue-200 p-4 bg-blue-900/20 rounded-lg border border-blue-400/20">
                                                 "{step.example}"
                                             </div>
                                         </div>
@@ -328,6 +328,10 @@ const AboutSection: React.FC = () => {
         {/* === 2. TEAM INTRODUCTION (Top Half of Image - Replaces old "Why Brands Trust Us" Intro) === */}
         <section className={`py-24 md:py-32 relative overflow-hidden`}>
           
+          {/* Background Glows */}
+          <div className="absolute top-0 left-0 w-72 h-72 bg-blue-200 rounded-full opacity-30 blur-2xl -z-10"></div>
+          <div className="absolute bottom-0 right-0 w-72 h-72 bg-yellow-200 rounded-full opacity-30 blur-2xl -z-10"></div>
+
           {/* Image 1: Top Left */}
           <div className="hidden lg:block absolute top-16 left-16 w-64 h-40 rounded-lg overflow-hidden shadow-2xl transform -rotate-6">
             <Image 
