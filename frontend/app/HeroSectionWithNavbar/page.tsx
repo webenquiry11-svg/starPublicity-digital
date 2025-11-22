@@ -69,56 +69,49 @@ const HeroSectionWithNavbar: React.FC = () => {
 
           {/* CTA Button: "Get a Free Quote" */}
           <div className="hidden lg:block">
-            <div className="relative group">              
-              <button 
-                className="relative px-6 py-3 bg-[#3a7a96] text-white font-semibold rounded-md shadow-lg transition-all duration-300 ease-out text-base w-full overflow-hidden hover:shadow-xl hover:scale-[1.02]"
-                // Note: Using the accent color for better visual integration
+            <div className="relative group">
+              <button
+                className="group relative inline-flex items-center justify-center px-7 py-3 bg-gradient-to-r from-[#2a7394] to-[#3590ba] text-white font-bold rounded-lg shadow-lg transition-all duration-300 ease-out text-sm tracking-wider overflow-hidden hover:shadow-xl hover:-translate-y-0.5"
               >
-                {/* Animated Outline Element */}
-                <span 
-                  className="absolute inset-0 rounded-md pointer-events-none"
-                  style={{
-                    // The animated border is slightly larger than the button
-                    margin: '-3px',
-                    // The animation applies the pulsating glow effect
-                    animation: 'pulse-glow 2s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                    boxShadow: '0 0 0 3px rgba(58, 122, 150, 0)', // Base shadow for transition
-                  }}
-                />
+                {/* Shimmer Effect */}
+                <span className="absolute -left-full top-0 h-full w-1/2 transform -skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-all duration-700 ease-out group-hover:left-full"></span>
                 
-                {/* Button Text */}
-                Get a Free Quote
+                {/* Button Content */}
+                <span className="relative flex items-center">
+                  <Mail className="w-4 h-4 mr-2 transition-transform duration-300 ease-out group-hover:translate-x-1" />
+                  Get a Free Quote
+                </span>
               </button>
-            </div>
 
-            {/* Hover Popup Form */}
-            <div 
-              className={`absolute top-full right-0 mt-2 w-[350px] p-6 bg-white rounded-xl shadow-2xl border border-gray-100 
-                         opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:scale-100 scale-95
-                         transition-all duration-300 ease-out z-40 origin-top-right`}
-            >
-              <h4 className="font-bold text-lg mb-1 text-gray-900">Quick Enquiry</h4>
-              <p className="text-sm text-gray-600 mb-4">Let us know what you're looking for.</p>
-              <form onSubmit={(e) => e.preventDefault()} className="space-y-3">
-                <div>
-                  <input type="text" placeholder="Your Name" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" />
-                </div>
-                <div>
-                  <input type="tel" placeholder="Your Phone Number" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" />
-                </div>
-                <div>
-                  <input type="email" placeholder="Your Email" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" />
-                </div>
-                <div>
-                  <textarea placeholder="Your Message" rows={3} className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md resize-none focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]"></textarea>
-                </div>
-                <button 
-                  type="submit" 
-                  className="w-full flex items-center justify-center gap-2 text-sm text-white font-semibold py-2 px-4 rounded-md transition-colors bg-[#2a7394] hover:bg-[#225d7a]"
-                >
-                  Send Enquiry <Send size={16} />
-                </button>
-              </form>
+              {/* Hover Popup Form */}
+              <div 
+                className={`absolute top-full right-0 mt-2 w-[350px] p-6 bg-white rounded-xl shadow-2xl border border-gray-100 
+                           opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:scale-100 scale-95
+                           transition-all duration-300 ease-out z-40 origin-top-right`}
+              >
+                <h4 className="font-bold text-lg mb-1 text-gray-900">Quick Enquiry</h4>
+                <p className="text-sm text-gray-600 mb-4">Let us know what you're looking for.</p>
+                <form onSubmit={(e) => e.preventDefault()} className="space-y-3">
+                  <div>
+                    <input type="text" placeholder="Your Name" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" />
+                  </div>
+                  <div>
+                    <input type="tel" placeholder="Your Phone Number" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" />
+                  </div>
+                  <div>
+                    <input type="email" placeholder="Your Email" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" />
+                  </div>
+                  <div>
+                    <textarea placeholder="Your Message" rows={3} className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md resize-none focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]"></textarea>
+                  </div>
+                  <button 
+                    type="submit" 
+                    className="w-full flex items-center justify-center gap-2 text-sm text-white font-semibold py-2 px-4 rounded-md transition-colors bg-[#2a7394] hover:bg-[#225d7a]"
+                  >
+                    Send Enquiry <Send size={16} />
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
 
@@ -132,21 +125,6 @@ const HeroSectionWithNavbar: React.FC = () => {
           </div>
         </div>
       </nav>
-
-      {/* Keyframes for the button glow animation */}
-      <style jsx global>{`
-        @keyframes pulse-glow {
-          0% {
-            box-shadow: 0 0 0 0 rgba(58, 122, 150, 0.4); /* Start wide and slightly visible */
-          }
-          50% {
-            box-shadow: 0 0 0 8px rgba(58, 122, 150, 0.8), 0 0 15px 1px rgba(58, 122, 150, 0.6); /* Peak size and brightness */
-          }
-          100% {
-            box-shadow: 0 0 0 0 rgba(58, 122, 150, 0.4); /* Return to start state */
-          }
-        }
-      `}</style>
 
       {/* --- Hero Content --- */}
       <div className="relative z-20 flex-grow flex items-center">
