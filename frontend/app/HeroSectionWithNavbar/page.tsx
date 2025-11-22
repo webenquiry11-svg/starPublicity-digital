@@ -83,6 +83,12 @@ const HeroSectionWithNavbar: React.FC = () => {
               <p className="text-sm text-gray-600 mb-4">Let us know what you're looking for.</p>
               <form onSubmit={(e) => e.preventDefault()} className="space-y-3">
                 <div>
+                  <input type="text" placeholder="Your Name" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" />
+                </div>
+                <div>
+                  <input type="tel" placeholder="Your Phone Number" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" />
+                </div>
+                <div>
                   <input type="email" placeholder="Your Email" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" />
                 </div>
                 <div>
@@ -122,12 +128,8 @@ const HeroSectionWithNavbar: React.FC = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center gap-4">
-              <Link href="/start-project" className="w-full sm:w-auto px-8 py-3 bg-[#2a7394] text-white font-semibold rounded-md shadow-lg hover:bg-[#225d7a] transition-all duration-300 transform hover:-translate-y-0.5">
+              <Link href="#contact" className="w-full sm:w-auto px-8 py-3 bg-[#2a7394] text-white font-semibold rounded-md shadow-lg hover:bg-[#225d7a] transition-all duration-300 transform hover:-translate-y-0.5">
                 Start Your Project
-              </Link>
-              <Link href="/learn-more" className="group w-full sm:w-auto px-8 py-3 text-gray-700 font-semibold rounded-md transition-colors duration-300 inline-flex items-center gap-2">
-                <span className="relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-[#256482] after:transition-all after:duration-300 group-hover:after:w-full">Learn More</span>
-                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </div>
           </div>
