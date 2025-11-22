@@ -192,14 +192,10 @@ const AboutSection: React.FC = () => {
                                 infrastructure instead of ungoverned experiments.
                             </p>
                             
-                            {/* Button */}
-                            <Link 
-                                href="#"
-                                className="inline-flex items-center bg-[#2a7394] text-white font-medium py-3 px-8 rounded-md 
-                                transition-all duration-300 ease-out hover:bg-[#225d7a] hover:-translate-y-0.5"
-                            >
-                                Learn more about Enterprise security →
-                            </Link>
+                            {/* New Quote */}
+                            <p className="text-2xl font-semibold text-[#256482] italic mt-8">
+                                "Where creativity sparks your story"
+                            </p>
                         </div>
                         
                         {/* Right Column: Imagery (Placeholder) */}

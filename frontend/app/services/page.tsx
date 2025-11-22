@@ -1,258 +1,188 @@
 "use client";
 
-import React, { useRef } from "react";
-import Image from "next/image";
-import ourservice from '../../public/Star Digital Website Images/ourservice.png';
-import { Monitor, Palette, Code, View, Gamepad2, Ruler, Diamond, Send } from "lucide-react";
+import React from 'react';
+import { Send, BarChart3, ShoppingCart } from 'lucide-react';
 
-// --- Services Data ---
-const servicesData = [
-  {
-    // Corresponds to CORPORATE IDENTITY (Top Left/Mid)
-    IconComponent: Ruler, 
-    title: "CORPORATE IDENTITY",
-    description: "Crafting unique brand identities that resonate with your audience and stand out in the market.",
-    color: "#FF6B6B", 
-  },
-  {
-    // Corresponds to CMS THEMES (Top Right/Mid)
-    IconComponent: Palette,
-    title: "CMS THEMES",
-    description: "Custom and responsive themes for popular CMS platforms, tailored to your brand and needs.",
-    color: "#A855F7", 
-  },
-  {
-    // Corresponds to INFOGRAPHICS (Mid Right)
-    IconComponent: Code,
-    title: "INFOGRAPHICS",
-    description: "Transforming complex data into beautiful, easy-to-understand visual stories.",
-    color: "#EC4899", 
-  },
-  {
-    // Corresponds to WEBSITE DESIGN (Bottom Right)
-    IconComponent: Monitor,
-    title: "WEBSITE DESIGN",
-    description: "Creating stunning, user-friendly websites that drive engagement and conversions.",
-    color: "#F59E0B", 
-  },
-  {
-    // Corresponds to BRANDING (Bottom Left)
-    IconComponent: Diamond,
-    title: "BRANDING",
-    description: "Comprehensive branding solutions, from logo design to complete brand guidelines.",
-    color: "#A855F7", 
-  },
-  {
-    // Corresponds to PRODUCT DESIGN (Mid Left)
-    IconComponent: Gamepad2, 
-    title: "PRODUCT DESIGN",
-    description: "Intuitive and beautiful UI/UX design for digital products that users love.",
-    color: "#FF6B6B", 
-  },
-];
+// --- 1. Reusable Components ---
 
-// --- Specific Angles from your Image (Degrees) ---
-// These angles are used to manually place the 6 items for maximum accuracy.
-const imageAngles = [
-  -140, // CORPORATE IDENTITY
-  -40,  // CMS THEMES
-  0,    // INFOGRAPHICS (Mid Right)
-  40,   // WEBSITE DESIGN
-  140,  // BRANDING
-  180,  // PRODUCT DESIGN (Mid Left)
-];
+// The Accent Panel (Text content)
+const FeaturedAccentPanel: React.FC<{ service: ServiceData }> = ({ service }) => {
+    return (
+        <div
+            className="w-full lg:w-96 p-8 md:p-10 text-white flex flex-col justify-center min-h-[400px] lg:min-h-[600px] relative z-20 bg-slate-700 transition-colors duration-300 ease-in-out group-hover:bg-[var(--accent-color)]"
+            style={{ 
+                '--accent-color': service.accentColor,
+            } as React.CSSProperties}
+        >
+            {/* Top Tag */}
+            <p className="text-sm font-semibold tracking-widest uppercase opacity-80 mb-4 flex items-center relative z-10">
+                <span className="text-xl mr-2 leading-none animate-spin" style={{ color: '#FFD700', animationDuration: '3s' }}>*</span> 
+                {service.tag}
+            </p>
 
-// --- Helper for Mobile Card (Standard Grid Layout) ---
-const MobileServiceCard = ({ IconComponent, title, color }: any) => (
-  <div className="flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all">
-    <div 
-      className="w-16 h-16 rounded-full flex items-center justify-center mb-4"
-      style={{ backgroundColor: `${color}20`, color: color }}
-    >
-      <IconComponent size={32} strokeWidth={2} />
+            {/* Main Headline */}
+            <h3 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6 relative z-10">
+                {service.title}
+            </h3>
+
+            {/* Description */}
+            <p className="text-base font-medium opacity-90 mb-10 relative z-10">
+                {service.description}
+            </p>
+
+            {/* Explore Button */}
+            <a 
+                href="#"
+                className="inline-flex items-center text-base font-bold uppercase tracking-wider group mt-auto relative z-10"
+            >
+                <span className="opacity-0 transform -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">
+                    Explore
+                </span>
+                <span className="w-8 h-8 rounded-full bg-white/20 ml-3 flex items-center justify-center transition-all duration-300 ease-out group-hover:bg-white/40 group-hover:translate-x-1 group-hover:scale-110">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                </span>
+            </a>
+        </div>
+    );
+};
+
+// --- Visual Components for each service ---
+
+// Original Tote Bag Visual
+const ToteBagVisual = () => (
+    <div className="relative w-full max-w-2xl h-full flex items-end justify-between p-4" style={{ minHeight: '550px' }}>
+        <div className="w-[30%] h-[70%] bg-blue-700 rounded-lg relative flex flex-col items-center justify-center p-2 text-white shadow-xl">
+            <p className="text-6xl font-extrabold" style={{ fontFamily: 'serif' }}>TOTE</p>
+            <p className="text-6xl font-extrabold" style={{ fontFamily: 'serif' }}>BAG</p>
+        </div>
+        <div className="w-[30%] h-[80%] bg-gray-100 rounded-lg relative flex flex-col items-center justify-center p-2 text-blue-700 shadow-xl">
+            <p className="text-6xl font-extrabold" style={{ fontFamily: 'serif' }}>TOTE</p>
+            <p className="text-6xl font-extrabold" style={{ fontFamily: 'serif' }}>BAG</p>
+        </div>
+        <div className="w-[30%] h-[65%] bg-red-500 rounded-lg relative flex flex-col items-center justify-center p-2 text-white shadow-xl overflow-hidden">
+             <p className="text-6xl font-extrabold transform scale-y-90" style={{ fontFamily: 'serif' }}>TOTE</p>
+             <p className="text-6xl font-extrabold transform scale-y-90" style={{ fontFamily: 'serif' }}>BAG</p>
+             <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-red-800 opacity-20 transform skewY(10deg)" />
+        </div>
     </div>
-    <h3 className="text-xl font-bold text-gray-800 uppercase">{title}</h3>
-  </div>
 );
 
-// --- MAIN REUSABLE COMPONENT ---
-export default function ServicesSection() {
-  const radius = 300; // Distance from center
-  const iconDiameter = 96; // 6rem * 16px/rem = 96px (w-24 h-24)
-  
-  // Ensure sectionRef and handleMouseMove are defined here if you keep the mouse follow effect
-  const sectionRef = useRef<HTMLElement>(null);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-      const rect = sectionRef.current?.getBoundingClientRect();
-      if (!rect) return;
-
-      const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top;
-
-      // For the spotlight
-      e.currentTarget.style.setProperty('--mouse-x', `${mouseX}px`);
-      e.currentTarget.style.setProperty('--mouse-y', `${mouseY}px`);
-
-      // For the interactive parallax background
-      // Calculate position from -1 to 1
-      const xPercent = (mouseX / rect.width - 0.5) * 2;
-      const yPercent = (mouseY / rect.height - 0.5) * 2;
-      const parallaxIntensity = 15; // Adjust for more or less movement
-
-      e.currentTarget.style.setProperty('--bg-x', `${-xPercent * parallaxIntensity}px`);
-      e.currentTarget.style.setProperty('--bg-y', `${-yPercent * parallaxIntensity}px`);
-  };
-  
-  return (
-    <section 
-      id="services"
-      ref={sectionRef}
-      className="py-16 overflow-hidden relative text-gray-900"
-    >
-        {/* Background Image */}
-        <Image
-          src={ourservice}
-          alt="Our Services Background"
-          fill
-          priority
-          className="object-cover -z-10"
-        />
-
-        <div className="container mx-auto px-4 relative z-10">
-          {/* ... Content of the Services Section ... */}
-        
-        {/* Section Header */}
-
-        {/* --- MOBILE/TABLET VIEW (Grid) --- */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 lg:hidden">
-          {servicesData.map((service, index) => (
-            <MobileServiceCard key={index} {...service} />
-          ))}
-        </div>
-
-        {/* --- DESKTOP VIEW (Radial/Circular Layout) --- */}
-        <div className="hidden lg:block relative w-full h-[600px] mx-auto">
-          
-          {/* Center Hub: DESIGN */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
-            <div className="w-48 h-48 bg-white rounded-full shadow-[0_0_40px_rgba(0,0,0,0.1)] flex flex-col items-center justify-center relative z-20">
-              <div className="w-40 h-40 rounded-full border-4 border-gray-100 flex flex-col items-center justify-center text-center">
-                <span className="text-3xl font-bold text-gray-800 tracking-wider leading-tight">Our</span>
-                <span className="text-3xl font-bold text-gray-800 tracking-wider leading-tight">Services</span>
-              </div>
+// New E-commerce Visual
+const EcommerceVisual = () => (
+    <div className="relative w-full max-w-2xl h-full flex items-center justify-center p-4" style={{ minHeight: '550px' }}>
+        <div className="w-full h-80 bg-white rounded-xl shadow-2xl p-4 flex gap-4">
+            <div className="w-1/3 bg-slate-100 rounded-lg"></div>
+            <div className="w-2/3 flex flex-col gap-4">
+                <div className="w-full h-1/2 bg-slate-100 rounded-lg flex items-center justify-center">
+                    <ShoppingCart className="w-16 h-16 text-slate-300" />
+                </div>
+                <div className="w-full h-1/2 bg-slate-100 rounded-lg"></div>
             </div>
-            {/* Center decorative ring */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] border border-gray-100 rounded-full -z-10 opacity-50" />
-          </div>
-
-          {/* Satellite Items */}
-          {servicesData.map((service, index) => {
-            const angleDeg = imageAngles[index];
-            const angleRad = (angleDeg * Math.PI) / 180;
-            
-            // Positioning of the Icon Ring Center
-            const x = Math.cos(angleRad) * radius;
-            const y = Math.sin(angleRad) * radius;
-
-            // Determines if the item is on the left half (for text alignment)
-            const isLeftSide = angleDeg > 90 || angleDeg < -90; 
-
-            // Calculate adjustment needed to align text/icon exactly on the circle
-            // 48px is half the icon width. 200px is the text width. 16px is the gap.
-            const totalWidth = 200 + 16 + 48; 
-
-            return (
-              <div
-                key={index}
-                className="absolute top-1/2 left-1/2 group transition-all duration-300 hover:z-30"
-                style={{
-                  // Position the item's center at (x, y) relative to the container center (top-1/2 left-1/2)
-                  transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
-                }}
-              >
-                {/* The Content Container */}
-                <div
-                  className={`flex items-center gap-4 min-w-[300px] ${isLeftSide ? 'flex-row-reverse' : 'flex-row'}`}
-                >
-                  
-                  {/* Icon Circle Wrapper */}
-                  <div className="relative">
-                    {/* Dashed Border Ring */}
-                    <div 
-                      className="w-24 h-24 rounded-full border-[3px] border-dashed flex items-center justify-center bg-white relative z-10 transition-transform duration-300 group-hover:scale-110 shadow-sm"
-                      style={{ borderColor: service.color }}
-                    >
-                      {/* Inner Icon */}
-                      <service.IconComponent 
-                        size={32} 
-                        style={{ color: service.color }}
-                        strokeWidth={1.5}
-                      />
-                    </div>
-
-                    {/* Colored Arrow pointing to center (attached to the ring) */}
-                    <div
-                      className="absolute top-1/2 w-6 h-6 bg-transparent z-0 origin-center"
-                      style={{
-                        // Position relative to the icon ring
-                        left: isLeftSide ? 'auto' : '100%',
-                        right: isLeftSide ? '100%' : 'auto',
-                        transform: 'translateY(-50%)',
-                      }}
-                    >
-                        <div 
-                          className={`w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent ${isLeftSide ? 'border-l-[12px]' : 'border-r-[12px]'}`}
-                          style={{
-                              // Logic for triangle direction and color
-                              [isLeftSide ? 'borderLeftColor' : 'borderRightColor']: service.color,
-                          }}
-                        />
-                    </div>
-                  </div>
-
-                  {/* Text Label */}
-                  <div className={`flex flex-col flex-grow min-w-[150px] max-w-[200px] ${isLeftSide ? 'items-end text-right' : 'items-start text-left'}`}>
-                    <h3 className="text-lg font-bold text-gray-800 uppercase tracking-wide">
-                        {service.title}
-                    </h3>
-                  </div>
-                </div>
-
-                {/* Enquiry Popup */}
-                <div 
-                  className={`absolute top-1/2 w-[320px] p-6 bg-white rounded-xl shadow-2xl border border-gray-100 
-                             opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:scale-100 scale-95
-                             transition-all duration-300 ease-out z-40`}
-                  style={{
-                    transform: `translateY(-50%)`,
-                    left: isLeftSide ? 'auto' : 'calc(100% + 20px)',
-                    right: isLeftSide ? 'calc(100% + 20px)' : 'auto',
-                  }}
-                >
-                  <h4 className="font-bold text-lg mb-2" style={{ color: service.color }}>{service.title}</h4>
-                  <p className="text-sm text-gray-600 mb-4">{service.description}</p>
-                  <form onSubmit={(e) => e.preventDefault()} className="space-y-3">
-                    <div>
-                      <input type="email" placeholder="Your Email" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1" style={{'--tw-ring-color': service.color} as React.CSSProperties} />
-                    </div>
-                    <div>
-                      <textarea placeholder="Your Message" rows={2} className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md resize-none focus:ring-2 focus:ring-offset-1" style={{'--tw-ring-color': service.color} as React.CSSProperties}></textarea>
-                    </div>
-                    <button 
-                      type="submit" 
-                      className="w-full flex items-center justify-center gap-2 text-sm text-white font-semibold py-2 px-4 rounded-md transition-colors"
-                      style={{ backgroundColor: service.color }}
-                    >
-                      Send Enquiry <Send size={16} />
-                    </button>
-                  </form>
-                </div>
-              </div>
-            );
-          })}
         </div>
-      </div>
-    </section>
-  );
+    </div>
+);
+
+// New SEO Visual
+const SeoVisual = () => (
+    <div className="relative w-full max-w-2xl h-full flex items-center justify-center p-4" style={{ minHeight: '550px' }}>
+        <div className="w-full h-80 bg-white rounded-xl shadow-2xl p-4 flex items-center justify-center">
+            <BarChart3 className="w-48 h-48 text-green-300" strokeWidth={1} />
+        </div>
+    </div>
+);
+
+// The Main Visual Area (accepts a visual component as a prop)
+const MainVisualArea: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    return (
+        <div 
+            className="w-full lg:flex-grow relative flex items-center justify-center p-8 md:p-12"
+            style={{ 
+                backgroundColor: '#eeeeee',
+            }}
+        >
+            <div className="absolute inset-0" style={{ boxShadow: 'inset 0 0 50px rgba(0, 0, 0, 0.1)' }} />
+            {children}
+        </div>
+    );
+};
+
+// --- 2. Data for Services ---
+
+interface ServiceData {
+    tag: string;
+    title: React.ReactNode;
+    description: string;
+    accentColor: string;
+    VisualComponent: React.FC;
+    layout: 'left' | 'right';
+}
+
+const servicesData: ServiceData[] = [
+    {
+        tag: "BRAND IDENTITY",
+        title: <><span className="text-yellow-300">Content</span> Marketing <br /> Specialist</>,
+        description: "We optimize visibility, drive organic traffic, and deliver targeted content that connects with your audience.",
+        accentColor: '#3a7a96',
+        VisualComponent: ToteBagVisual,
+        layout: 'left',
+    },
+    {
+        tag: "WEB DEVELOPMENT",
+        title: <>E-commerce <br /> Solutions</>,
+        description: "Building robust, scalable, and secure online stores that provide a seamless shopping experience and drive conversions.",
+        accentColor: '#6d28d9', // Violet
+        VisualComponent: EcommerceVisual,
+        layout: 'right',
+    },
+    {
+        tag: "DIGITAL MARKETING",
+        title: <>SEO & Campaign <br /> Strategy</>,
+        description: "Driving organic growth with data-driven SEO and creating targeted campaigns that boost your online presence and ROI.",
+        accentColor: '#059669', // Emerald Green
+        VisualComponent: SeoVisual,
+        layout: 'left',
+    },
+];
+
+// --- 3. Main Showcase Item Component ---
+
+const ServiceShowcaseItem: React.FC<{ service: ServiceData }> = ({ service }) => {
+    const isVisualLeft = service.layout === 'left';
+    
+    return (
+        <div 
+            className="group flex flex-col lg:flex-row relative shadow-2xl overflow-hidden h-full w-full"
+            style={{ 
+                borderRadius: isVisualLeft ? '0 1.5rem 1.5rem 0' : '1.5rem 0 0 1.5rem'
+            }}
+        >
+            {isVisualLeft ? (
+                <>
+                    <MainVisualArea><service.VisualComponent /></MainVisualArea>
+                    <FeaturedAccentPanel service={service} />
+                </>
+            ) : (
+                <>
+                    <FeaturedAccentPanel service={service} />
+                    <MainVisualArea><service.VisualComponent /></MainVisualArea>
+                </>
+            )}
+        </div>
+    );
+};
+
+// --- 4. Main Exported Section ---
+
+export default function ServicesPage() {
+    return (
+        <section className="py-12 md:py-20 bg-slate-100 overflow-hidden">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+                {servicesData.map((service, index) => (
+                    <ServiceShowcaseItem key={index} service={service} />
+                ))}
+            </div>
+        </section>
+    );
 }
