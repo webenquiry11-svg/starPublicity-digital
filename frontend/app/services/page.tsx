@@ -153,10 +153,7 @@ const ServiceShowcaseItem: React.FC<{ service: ServiceData }> = ({ service }) =>
     
     return (
         <div 
-            className="group flex flex-col lg:flex-row relative shadow-2xl overflow-hidden h-full w-full"
-            style={{ 
-                borderRadius: isVisualLeft ? '0 1.5rem 1.5rem 0' : '1.5rem 0 0 1.5rem'
-            }}
+            className="group flex flex-col lg:flex-row relative shadow-2xl overflow-hidden h-full w-full gap-8 rounded-2xl"
         >
             {isVisualLeft ? (
                 <>

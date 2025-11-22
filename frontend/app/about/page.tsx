@@ -244,16 +244,6 @@ const AboutSection: React.FC = () => {
                                 plan, deploy, and achieve results this quarter
                                 instead of next.
                             </p>
-                            
-                            {/* Button */}
-                            <Link 
-                                href="#"
-                                className="group inline-flex items-center bg-white text-[#2a7394] font-semibold py-4 px-10 rounded-lg text-lg 
-                                transition-all duration-300 ease-out hover:bg-gray-200 hover:-translate-y-0.5 hover:shadow-lg"
-                            >
-                                <Calendar className="w-5 h-5 mr-3 transition-transform duration-300 group-hover:scale-110" />
-                                <span>Schedule time with our team</span>
-                            </Link>
                         </div>
                         
                         {/* Right Column: Timeline Steps */}
@@ -363,26 +353,6 @@ const AboutSection: React.FC = () => {
                 creative excellence, and advanced technology to deliver integrated
                 solutions that drive measurable results.
               </p>
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                  <button 
-                    className="
-                      bg-[#2a7394] text-white font-medium py-3 px-8 rounded-md 
-                      transition-all duration-300 ease-out
-                      hover:bg-[#225d7a] hover:shadow-lg hover:-translate-y-0.5"
-                  >
-                    Learn More
-                  </button>
-                  <button 
-                    className="
-                      flex items-center justify-center gap-2 border border-gray-300 text-gray-800 
-                      font-medium py-3 px-8 rounded-md 
-                      transition-all duration-300 ease-out
-                      hover:bg-gray-100 hover:shadow-md hover:-translate-y-0.5"
-                  >
-                    <PlayCircle className="w-5 h-5 text-[#256482]" />
-                    Intro Video
-                  </button>
-                </div>
             </div>
           </div>
         </section>

@@ -68,10 +68,28 @@ const HeroSectionWithNavbar: React.FC = () => {
           </div>
 
           {/* CTA Button: "Get a Free Quote" */}
-          <div className="hidden lg:block relative group">
-            <button className="px-6 py-3 bg-[#2a7394] text-white font-semibold rounded-md shadow-md hover:bg-[#225d7a] transition-all duration-300 ease-out text-sm">
-              Get a Free Quote
-            </button>
+          <div className="hidden lg:block">
+            <div className="relative group">              
+              <button 
+                className="relative px-6 py-3 bg-[#3a7a96] text-white font-semibold rounded-md shadow-lg transition-all duration-300 ease-out text-base w-full overflow-hidden hover:shadow-xl hover:scale-[1.02]"
+                // Note: Using the accent color for better visual integration
+              >
+                {/* Animated Outline Element */}
+                <span 
+                  className="absolute inset-0 rounded-md pointer-events-none"
+                  style={{
+                    // The animated border is slightly larger than the button
+                    margin: '-3px',
+                    // The animation applies the pulsating glow effect
+                    animation: 'pulse-glow 2s infinite cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    boxShadow: '0 0 0 3px rgba(58, 122, 150, 0)', // Base shadow for transition
+                  }}
+                />
+                
+                {/* Button Text */}
+                Get a Free Quote
+              </button>
+            </div>
 
             {/* Hover Popup Form */}
             <div 
@@ -114,6 +132,21 @@ const HeroSectionWithNavbar: React.FC = () => {
           </div>
         </div>
       </nav>
+
+      {/* Keyframes for the button glow animation */}
+      <style jsx global>{`
+        @keyframes pulse-glow {
+          0% {
+            box-shadow: 0 0 0 0 rgba(58, 122, 150, 0.4); /* Start wide and slightly visible */
+          }
+          50% {
+            box-shadow: 0 0 0 8px rgba(58, 122, 150, 0.8), 0 0 15px 1px rgba(58, 122, 150, 0.6); /* Peak size and brightness */
+          }
+          100% {
+            box-shadow: 0 0 0 0 rgba(58, 122, 150, 0.4); /* Return to start state */
+          }
+        }
+      `}</style>
 
       {/* --- Hero Content --- */}
       <div className="relative z-20 flex-grow flex items-center">
