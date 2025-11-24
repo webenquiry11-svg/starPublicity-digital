@@ -18,9 +18,6 @@ import game from '../../public/Star Digital Website Images/service/game.png';
 import digital from '../../public/Star Digital Website Images/service/digital.png';
 import arvr from '../../public/Star Digital Website Images/service/arvr.png';
 
-// --- Import the Contact Section ---
-import { ContactSection } from '../contact/page';
-
 // --- 1. Reusable Components ---
 
 // The Accent Panel (Text content)
@@ -221,18 +218,14 @@ export default function ServicesPage() {
     }, []);
 
     return (
-        <>
-            <section ref={sectionRef} className="bg-slate-100 overflow-hidden">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
-                    {servicesData.map((service, index) => (
-                        <div key={index} className="service-card group h-screen sticky top-0 flex items-center">
-                            <ServiceShowcaseItem service={service} />
-                        </div>
-                    ))}
-                </div>
-            </section>
-            {/* Add the Contact Section with an ID for navigation */}
-            <div id="lets-talk"><ContactSection /></div>
-        </>
+        <section ref={sectionRef} className="bg-slate-100 overflow-hidden">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                {servicesData.map((service, index) => (
+                    <div key={index} className="service-card group h-screen sticky top-0 flex items-center">
+                        <ServiceShowcaseItem service={service} />
+                    </div>
+                ))}
+            </div>
+        </section>
     );
 }
