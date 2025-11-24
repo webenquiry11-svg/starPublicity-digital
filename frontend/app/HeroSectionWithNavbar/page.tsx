@@ -149,10 +149,10 @@ const HeroSectionWithNavbar: React.FC = () => {
       <div className="relative z-20 flex-grow flex items-center">
         <div className="container mx-auto px-6 lg:px-8 xl:px-20">
           <div className="w-full lg:w-1/2 max-w-xl lg:ml-[10%]">
-            <h1 className="text-5xl md:text-6xl font-bold text-[rgb(30,55,90)] leading-tight mb-6">
+            <h1 className="text-5xl md:text-6xl font-bold text-[#256482] leading-tight mb-6">
               Drive Growth Through Innovative Digital Strategies
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
               We help ambitious brands scale their digital presence and dominate their markets.
             </p>
 

@@ -1,50 +1,61 @@
 "use client";
 
+import { Playfair_Display } from 'next/font/google';
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Triangle, // Used as a placeholder icon for the DNA/INDIGO logos
-  CheckCircle 
+  CheckCircle,
+  Heart,
+  Award,
+  TrendingUp,
+  ShieldCheck
 } from 'lucide-react';
+
+// --- Font for the "Story by Numbers" heading ---
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  style: ['normal', 'italic'],
+});
 
 // --- Data for the Award Cards ---
 const awardCards = [
   {
     id: 1,
-    title: "DNA",
-    icon: Triangle,
-    text: "Best Design Studio.",
-    explanation: "This prestigious award recognizes our commitment to creative excellence and groundbreaking design solutions across all digital platforms.",
-    source: "DNA Paris",
+    title: "Authenticity",
+    icon: ShieldCheck,
+    text: "Authenticity",
+    explanation: "Clear communication and open collaboration ensure you understand what suits your brand best.",
+    source: "Our Commitment",
     color: "#6b21a8", // Dark Purple
     rotation: -5, // Slight tilt left
   },
   {
     id: 2,
-    title: "Elephant", // Placeholder for the Elephant logo
-    icon: null,
-    text: "Best Design Project.",
-    explanation: "Awarded for a standout project that demonstrated exceptional creativity, user-centric design, and a significant impact on our client's business goals.",
-    source: "Kyooiitus",
+    title: "Leadership",
+    icon: TrendingUp,
+    text: "Leadership",
+    explanation: "Innovative strategies create trends, inspire action, and help your brand stay ahead of the competition.",
+    source: "Our Strategy",
     color: "#1e40af", // Deep Blue
     rotation: 5, // Slight tilt right
   },
   {
     id: 3,
-    title: "INDIGO",
-    icon: Triangle,
-    text: "Gold Winner in UX, Interface & Navigation",
-    explanation: "Our focus on creating seamless and intuitive user experiences was honored with a Gold award, highlighting our expertise in world-class UI/UX design.",
-    source: "IndigoAward.com",
+    title: "Satisfaction",
+    icon: Heart,
+    text: "Satisfaction",
+    explanation: "We are dedicated to exceeding your expectations and building trusted relationships through tailored solutions.",
+    source: "Our Promise",
     color: "#14b8a6", // Mint Green/Teal
     rotation: -3, // Slight tilt left
   },
   {
     id: 4,
-    title: "C", // Placeholder for the "C" logo
-    icon: CheckCircle,
-    text: "4.9 ★ Top Rated On Clutch",
-    explanation: "Consistently rated as a top agency by our clients on Clutch, reflecting our dedication to delivering exceptional results and outstanding service.",
-    source: "Clutch",
+    title: "Accountability",
+    icon: Award,
+    text: "Accountability",
+    explanation: "We consistently uphold our commitments, providing measurable and reliable results every single time.",
+    source: "Our Guarantee",
     color: "#ca8a04", // Golden Yellow
     rotation: 6, // Slight tilt right
   },
@@ -118,8 +129,7 @@ const AwardsSection = () => {
                     {/* --- Top Content (Logo/Title) --- */}
                     <div className="relative z-10">
                         <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ backgroundColor: card.color }}>
-                            {card.icon && <card.icon size={28} className="text-white" strokeWidth={2.5} />}
-                            {!card.icon && card.title === "Elephant" && <div className="text-3xl">🐘</div>}
+                            {card.icon && <card.icon size={28} className="text-white" strokeWidth={2} />}
                         </div>
                     </div>
 
@@ -176,11 +186,11 @@ const AnimatedNumber: React.FC<{ target: number }> = ({ target }) => {
 
 const StoryByNumbersSection = () => {
   const stats = [
-    { number: "80", label: "Team" },
-    { number: "230", label: "Projects" },
-    { number: "09", label: "Years" },
-    { number: "25", label: "Industries" },
-    { number: "10", label: "Awards" },
+    { number: "65", label: "Experts" },
+    { number: "300", label: "Campaigns" },
+    { number: "13", label: "Years" },
+    { number: "14", label: "Honors" },
+    { number: "24", label: "Industries" },
   ];
 
   return (
@@ -192,8 +202,8 @@ const StoryByNumbersSection = () => {
       }}
     >
       <div className="container mx-auto px-8 sm:px-16 lg:px-24">
-        <h2 className="text-4xl sm:text-5xl font-light text-gray-900 mb-12">
-          <span className="italic font-serif font-normal">Our</span> STORY, BY NUMBERS
+        <h2 className={`text-4xl sm:text-5xl font-normal text-gray-800 mb-12 text-center ${playfair.className}`}>
+          <span className="italic">Numbers</span> That Define Us
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {stats.map((stat, index) => (

@@ -3,12 +3,20 @@
 import React, { useLayoutEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Send, BarChart3, ShoppingCart, Image as ImageIcon } from 'lucide-react';
+import { Playfair_Display } from 'next/font/google';
 
 // --- GSAP Imports ---
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// --- Font for Attractive Heading ---
+const playfair = Playfair_Display({
+    subsets: ['latin'],
+    weight: ['800'],
+    display: 'swap',
+});
 
 // --- Image Imports ---
 import web from '../../public/Star Digital Website Images/service/web.png';
@@ -105,7 +113,7 @@ const servicesData: ServiceData[] = [
     {
         tag: "WEB DEVELOPMENT",
         title: <>Website <br /> Design</>,
-        description: "We build stunning, responsive websites that captivate your audience and drive business growth with modern technology.",
+        description: "Websites that are fast and secure, designed to drive conversions and promote growth.",
         accentColor: '#2563eb', // Blue
         VisualComponent: () => <ServiceImageVisual src={web} alt="Web Development" />,
         layout: 'left',
@@ -113,7 +121,7 @@ const servicesData: ServiceData[] = [
     {
         tag: "SEARCH ENGINE OPTIMIZATION",
         title: <>SEO <br /> Strategy</>,
-        description: "Boost your online visibility and rank higher on search engines with our data-driven SEO strategies and techniques.",
+        description: "Boost your website's visibility with strategies that drive traffic and real results.",
         accentColor: '#16a34a', // Green
         VisualComponent: () => <ServiceImageVisual src={seo} alt="SEO Strategy" />,
         layout: 'left',
@@ -121,7 +129,7 @@ const servicesData: ServiceData[] = [
     {
         tag: "CREATIVE DESIGN",
         title: <>Graphic <br /> Design</>,
-        description: "From logos to marketing materials, our creative designs make your brand stand out and leave a lasting impression.",
+        description: "Visually striking graphics that effectively convey your brand story and captivate your audience.",
         accentColor: '#db2777', // Pink
         VisualComponent: () => <ServiceImageVisual src={graphic} alt="Graphic Design" />,
         layout: 'left',
@@ -129,7 +137,7 @@ const servicesData: ServiceData[] = [
     {
         tag: "INTERACTIVE ENTERTAINMENT",
         title: <>Game <br /> Development</>,
-        description: "We create immersive and engaging games for various platforms, bringing your creative visions to life with cutting-edge tech.",
+        description: "Engaging games that entertain users and achieve your business objectives.",
         accentColor: '#7c3aed', // Violet
         VisualComponent: () => <ServiceImageVisual src={game} alt="Game Development" />,
         layout: 'left',
@@ -137,7 +145,7 @@ const servicesData: ServiceData[] = [
     {
         tag: "ONLINE PRESENCE",
         title: <>Digital <br /> Marketing</>,
-        description: "Our comprehensive digital marketing services help you connect with your audience and achieve your business objectives.",
+        description: "Data-driven strategies to grow your online presence and drive measurable results.",
         accentColor: '#ea580c', // Orange
         VisualComponent: () => <ServiceImageVisual src={digital} alt="Digital Marketing" />,
         layout: 'left',
@@ -145,7 +153,7 @@ const servicesData: ServiceData[] = [
     {
         tag: "IMMERSIVE EXPERIENCES",
         title: <>AR/VR <br /> Development</>,
-        description: "Step into the future with our AR/VR solutions, creating unforgettable interactive experiences for your brand and customers.",
+        description: "Immersive experiences that engage customers and transform brand interactions.",
         accentColor: '#0891b2', // Cyan
         VisualComponent: () => <ServiceImageVisual src={arvr} alt="AR/VR Development" />,
         layout: 'left',
@@ -217,8 +225,8 @@ export default function ServicesPage() {
                     {/* Decorative gradient line */}
                     <div className="inline-block w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full mb-4"></div>
 
-                    <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight">
-                        <span className="bg-gradient-to-r from-blue-600 to-cyan-500 text-transparent bg-clip-text">
+                    <h2 className={`text-4xl md:text-6xl font-extrabold tracking-tight ${playfair.className}`}>
+                        <span className="bg-[#256482] text-transparent bg-clip-text">
                             Our Services
                         </span>
                     </h2>

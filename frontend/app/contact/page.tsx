@@ -70,10 +70,10 @@ export const ContactSection: React.FC = () => {
                     {/* Left Side: Headline and Tagline */}
                     <div className="lg:col-span-7 text-center lg:text-left mb-8 lg:mb-0">
                         <p className="text-xl md:text-2xl font-medium text-gray-300 mb-4">
-                            Have a project in mind? Let's collaborate — <br className="hidden sm:inline"/>feel free to reach out and say hello!
+                            Got an idea? Connect with our team and let’s make something extraordinary together.
                         </p>
                         <h2 className="text-6xl md:text-8xl font-extrabold tracking-tight">
-                            LET'S CHAT
+                            LET’S CONNECT
                         </h2>
                     </div>
                     
