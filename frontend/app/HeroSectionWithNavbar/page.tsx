@@ -25,6 +25,22 @@ const services = [
   "Other"
 ];
 
+// Custom Tailwind classes for the NEW Button design (Sliding Border Highlight)
+const HIGHLIGHTED_BUTTON_CLASSES = `
+  // Base Container & Styling
+  group relative inline-flex items-center justify-center 
+  px-7 py-3 rounded-md text-sm tracking-wider font-extrabold text-white
+  overflow-hidden
+  
+  // Appearance
+  bg-gray-800 // Dark base for contrast
+  shadow-lg shadow-[#3590ba]/40
+  
+  // Transition effects
+  transition-all duration-300 ease-out 
+  transform hover:scale-[1.05] hover:bg-gray-700
+`;
+
 const HeroSectionWithNavbar: React.FC = () => {
   return (
     <section className={`relative min-h-[750px] md:min-h-screen overflow-hidden flex flex-col`}>
@@ -67,27 +83,30 @@ const HeroSectionWithNavbar: React.FC = () => {
             ))}
           </div>
 
-          {/* CTA Button: "Get a Free Quote" */}
+          {/* CTA Button: "Get a Free Quote" (Highlighted) */}
           <div className="hidden lg:block">
             <div className="relative group">
               <button
-                className="group relative inline-flex items-center justify-center px-7 py-3 bg-gradient-to-r from-[#2a7394] to-[#3590ba] text-white font-bold rounded-lg shadow-lg transition-all duration-300 ease-out text-sm tracking-wider overflow-hidden hover:shadow-xl hover:-translate-y-0.5"
+                className={HIGHLIGHTED_BUTTON_CLASSES} // Using the new sliding border class
               >
-                {/* Shimmer Effect */}
-                <span className="absolute -left-full top-0 h-full w-1/2 transform -skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-all duration-700 ease-out group-hover:left-full"></span>
+                {/* Sliding Top Border */}
+                <span className="absolute top-0 left-0 w-full h-[3px] bg-[#3590ba] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-20"></span>
+                
+                {/* Sliding Bottom Border */}
+                <span className="absolute bottom-0 right-0 w-full h-[3px] bg-cyan-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out delay-100 z-20"></span>
                 
                 {/* Button Content */}
-                <span className="relative flex items-center">
+                <span className="relative flex items-center z-10">
                   <Mail className="w-4 h-4 mr-2 transition-transform duration-300 ease-out group-hover:translate-x-1" />
                   Get a Free Quote
                 </span>
               </button>
 
-              {/* Hover Popup Form */}
+              {/* Hover Popup Form (Styling preserved) */}
               <div 
-                className={`absolute top-full right-0 mt-2 w-[350px] p-6 bg-white rounded-xl shadow-2xl border border-gray-100 
-                           opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:scale-100 scale-95
-                           transition-all duration-300 ease-out z-40 origin-top-right`}
+                className={`absolute top-full right-0 mt-3 w-[350px] p-6 bg-white rounded-xl shadow-2xl border border-gray-100 
+                            opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:scale-100 scale-95
+                            transition-all duration-300 ease-out z-40 origin-top-right`}
               >
                 <h4 className="font-bold text-lg mb-1 text-gray-900">Quick Enquiry</h4>
                 <p className="text-sm text-gray-600 mb-4">Let us know what you're looking for.</p>
@@ -117,7 +136,7 @@ const HeroSectionWithNavbar: React.FC = () => {
 
           {/* Mobile Menu Icon (Placeholder) */}
           <div className="lg:hidden">
-            <button className="text-white focus:outline-none">
+            <button className="text-gray-700 focus:outline-none">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
               </svg>

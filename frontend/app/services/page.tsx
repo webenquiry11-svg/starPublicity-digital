@@ -1,15 +1,34 @@
 "use client";
 
-import React from 'react';
-import { Send, BarChart3, ShoppingCart } from 'lucide-react';
+import React, { useLayoutEffect, useRef } from 'react';
+import Image from 'next/image';
+import { Send, BarChart3, ShoppingCart, Image as ImageIcon } from 'lucide-react';
+
+// --- GSAP Imports ---
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
+// --- Image Imports ---
+import web from '../../public/Star Digital Website Images/service/web.png';
+import seo from '../../public/Star Digital Website Images/service/seo.png';
+import graphic from '../../public/Star Digital Website Images/service/graphic.jpg';
+import game from '../../public/Star Digital Website Images/service/game.png';
+import digital from '../../public/Star Digital Website Images/service/digital.png';
+import arvr from '../../public/Star Digital Website Images/service/arvr.png';
+
+// --- Import the Contact Section ---
+import { ContactSection } from '../contact/page';
 
 // --- 1. Reusable Components ---
 
 // The Accent Panel (Text content)
 const FeaturedAccentPanel: React.FC<{ service: ServiceData }> = ({ service }) => {
+    
     return (
         <div
-            className="w-full lg:w-96 p-8 md:p-10 text-white flex flex-col justify-center min-h-[400px] lg:min-h-[600px] relative z-20 bg-slate-700 transition-colors duration-300 ease-in-out group-hover:bg-[var(--accent-color)]"
+            className={`w-full lg:w-1/4 p-8 md:p-10 text-white flex flex-col justify-center min-h-[400px] lg:min-h-[400px] relative z-20 bg-slate-700 transition-colors duration-300 ease-in-out group-hover:bg-[var(--accent-color)] rounded-3xl shadow-2xl`}
             style={{ 
                 '--accent-color': service.accentColor,
             } as React.CSSProperties}
@@ -32,7 +51,7 @@ const FeaturedAccentPanel: React.FC<{ service: ServiceData }> = ({ service }) =>
 
             {/* Explore Button */}
             <a 
-                href="#"
+                href="#lets-talk"
                 className="inline-flex items-center text-base font-bold uppercase tracking-wider group mt-auto relative z-10"
             >
                 <span className="opacity-0 transform -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">
@@ -48,61 +67,30 @@ const FeaturedAccentPanel: React.FC<{ service: ServiceData }> = ({ service }) =>
     );
 };
 
-// --- Visual Components for each service ---
-
-// Original Tote Bag Visual
-const ToteBagVisual = () => (
-    <div className="relative w-full max-w-2xl h-full flex items-end justify-between p-4" style={{ minHeight: '550px' }}>
-        <div className="w-[30%] h-[70%] bg-blue-700 rounded-lg relative flex flex-col items-center justify-center p-2 text-white shadow-xl">
-            <p className="text-6xl font-extrabold" style={{ fontFamily: 'serif' }}>TOTE</p>
-            <p className="text-6xl font-extrabold" style={{ fontFamily: 'serif' }}>BAG</p>
-        </div>
-        <div className="w-[30%] h-[80%] bg-gray-100 rounded-lg relative flex flex-col items-center justify-center p-2 text-blue-700 shadow-xl">
-            <p className="text-6xl font-extrabold" style={{ fontFamily: 'serif' }}>TOTE</p>
-            <p className="text-6xl font-extrabold" style={{ fontFamily: 'serif' }}>BAG</p>
-        </div>
-        <div className="w-[30%] h-[65%] bg-red-500 rounded-lg relative flex flex-col items-center justify-center p-2 text-white shadow-xl overflow-hidden">
-             <p className="text-6xl font-extrabold transform scale-y-90" style={{ fontFamily: 'serif' }}>TOTE</p>
-             <p className="text-6xl font-extrabold transform scale-y-90" style={{ fontFamily: 'serif' }}>BAG</p>
-             <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-red-800 opacity-20 transform skewY(10deg)" />
-        </div>
+// --- New Reusable Image Visual Component ---
+const ServiceImageVisual: React.FC<{ src: any; alt: string }> = ({ src, alt }) => (
+    <div className="relative w-full h-full">
+        <Image 
+            src={src}
+            alt={alt}
+            fill
+            className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 75vw"
+        />
     </div>
 );
 
-// New E-commerce Visual
-const EcommerceVisual = () => (
-    <div className="relative w-full max-w-2xl h-full flex items-center justify-center p-4" style={{ minHeight: '550px' }}>
-        <div className="w-full h-80 bg-white rounded-xl shadow-2xl p-4 flex gap-4">
-            <div className="w-1/3 bg-slate-100 rounded-lg"></div>
-            <div className="w-2/3 flex flex-col gap-4">
-                <div className="w-full h-1/2 bg-slate-100 rounded-lg flex items-center justify-center">
-                    <ShoppingCart className="w-16 h-16 text-slate-300" />
-                </div>
-                <div className="w-full h-1/2 bg-slate-100 rounded-lg"></div>
-            </div>
-        </div>
-    </div>
-);
-
-// New SEO Visual
-const SeoVisual = () => (
-    <div className="relative w-full max-w-2xl h-full flex items-center justify-center p-4" style={{ minHeight: '550px' }}>
-        <div className="w-full h-80 bg-white rounded-xl shadow-2xl p-4 flex items-center justify-center">
-            <BarChart3 className="w-48 h-48 text-green-300" strokeWidth={1} />
-        </div>
-    </div>
-);
-
-// The Main Visual Area (accepts a visual component as a prop)
-const MainVisualArea: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+// The Main Visual Area (Outer rounding remains rounded-[3rem])
+// Width changed to lg:w-3/4 (75% width)
+const MainVisualArea: React.FC<{ children: React.ReactNode, layout: 'left' | 'right' }> = ({ children, layout }) => {
+    
     return (
         <div 
-            className="w-full lg:flex-grow relative flex items-center justify-center p-8 md:p-12"
+            className={`w-full lg:w-3/4 relative flex items-center justify-center p-0 rounded-[3rem] shadow-2xl overflow-hidden`}
             style={{ 
                 backgroundColor: '#eeeeee',
             }}
         >
-            <div className="absolute inset-0" style={{ boxShadow: 'inset 0 0 50px rgba(0, 0, 0, 0.1)' }} />
             {children}
         </div>
     );
@@ -121,65 +109,130 @@ interface ServiceData {
 
 const servicesData: ServiceData[] = [
     {
-        tag: "BRAND IDENTITY",
-        title: <><span className="text-yellow-300">Content</span> Marketing <br /> Specialist</>,
-        description: "We optimize visibility, drive organic traffic, and deliver targeted content that connects with your audience.",
-        accentColor: '#3a7a96',
-        VisualComponent: ToteBagVisual,
+        tag: "WEB DEVELOPMENT",
+        title: <>Website <br /> Design</>,
+        description: "We build stunning, responsive websites that captivate your audience and drive business growth with modern technology.",
+        accentColor: '#2563eb', // Blue
+        VisualComponent: () => <ServiceImageVisual src={web} alt="Web Development" />,
         layout: 'left',
     },
     {
-        tag: "WEB DEVELOPMENT",
-        title: <>E-commerce <br /> Solutions</>,
-        description: "Building robust, scalable, and secure online stores that provide a seamless shopping experience and drive conversions.",
-        accentColor: '#6d28d9', // Violet
-        VisualComponent: EcommerceVisual,
+        tag: "SEARCH ENGINE OPTIMIZATION",
+        title: <>SEO <br /> Strategy</>,
+        description: "Boost your online visibility and rank higher on search engines with our data-driven SEO strategies and techniques.",
+        accentColor: '#16a34a', // Green
+        VisualComponent: () => <ServiceImageVisual src={seo} alt="SEO Strategy" />,
         layout: 'right',
     },
     {
-        tag: "DIGITAL MARKETING",
-        title: <>SEO & Campaign <br /> Strategy</>,
-        description: "Driving organic growth with data-driven SEO and creating targeted campaigns that boost your online presence and ROI.",
-        accentColor: '#059669', // Emerald Green
-        VisualComponent: SeoVisual,
+        tag: "CREATIVE DESIGN",
+        title: <>Graphic <br /> Design</>,
+        description: "From logos to marketing materials, our creative designs make your brand stand out and leave a lasting impression.",
+        accentColor: '#db2777', // Pink
+        VisualComponent: () => <ServiceImageVisual src={graphic} alt="Graphic Design" />,
         layout: 'left',
+    },
+    {
+        tag: "INTERACTIVE ENTERTAINMENT",
+        title: <>Game <br /> Development</>,
+        description: "We create immersive and engaging games for various platforms, bringing your creative visions to life with cutting-edge tech.",
+        accentColor: '#7c3aed', // Violet
+        VisualComponent: () => <ServiceImageVisual src={game} alt="Game Development" />,
+        layout: 'right',
+    },
+    {
+        tag: "ONLINE PRESENCE",
+        title: <>Digital <br /> Marketing</>,
+        description: "Our comprehensive digital marketing services help you connect with your audience and achieve your business objectives.",
+        accentColor: '#ea580c', // Orange
+        VisualComponent: () => <ServiceImageVisual src={digital} alt="Digital Marketing" />,
+        layout: 'left',
+    },
+    {
+        tag: "IMMERSIVE EXPERIENCES",
+        title: <>AR/VR <br /> Development</>,
+        description: "Step into the future with our AR/VR solutions, creating unforgettable interactive experiences for your brand and customers.",
+        accentColor: '#0891b2', // Cyan
+        VisualComponent: () => <ServiceImageVisual src={arvr} alt="AR/VR Development" />,
+        layout: 'right',
     },
 ];
 
-// --- 3. Main Showcase Item Component ---
+// --- 3. Main Showcase Item Component (Restored to Static Flow) ---
 
 const ServiceShowcaseItem: React.FC<{ service: ServiceData }> = ({ service }) => {
     const isVisualLeft = service.layout === 'left';
-    
+
     return (
-        <div 
-            className="group flex flex-col lg:flex-row relative shadow-2xl overflow-hidden h-full w-full gap-8 rounded-2xl"
-        >
-            {isVisualLeft ? (
-                <>
-                    <MainVisualArea><service.VisualComponent /></MainVisualArea>
-                    <FeaturedAccentPanel service={service} />
-                </>
-            ) : (
-                <>
-                    <FeaturedAccentPanel service={service} />
-                    <MainVisualArea><service.VisualComponent /></MainVisualArea>
-                </>
-            )}
+        // The 'group' class is now on the sticky container, so we can just return the flex layout
+        <div className="h-full w-full">
+            <div className="flex flex-col lg:flex-row relative lg:gap-8">
+                {isVisualLeft ? (
+                    <>
+                        <MainVisualArea layout={service.layout}><service.VisualComponent /></MainVisualArea>
+                        <FeaturedAccentPanel service={service} />
+                    </>
+                ) : (
+                    <>
+                        <FeaturedAccentPanel service={service} />
+                        <MainVisualArea layout={service.layout}><service.VisualComponent /></MainVisualArea>
+                    </>
+                )}
+            </div>
         </div>
     );
 };
 
-// --- 4. Main Exported Section ---
+// --- 4. Main Exported Section with GSAP Stacking Animation ---
 
 export default function ServicesPage() {
+    const sectionRef = useRef<HTMLElement>(null);
+
+    useLayoutEffect(() => {
+        const section = sectionRef.current;
+        if (!section) return;
+
+        // Select all the card containers
+        const cards = gsap.utils.toArray<HTMLDivElement>(".service-card");
+
+        const ctx = gsap.context(() => {
+            cards.forEach((card, i) => {
+                // We don't need to animate the last card
+                if (i === cards.length - 1) return;
+
+                ScrollTrigger.create({
+                    trigger: card,
+                    start: "top top", // When the top of the card hits the top of the viewport
+                    endTrigger: cards[i + 1], // Animation ends when the next card starts
+                    end: "top top",
+                    pin: true, // Pin the current card
+                    pinSpacing: false, // Don't add padding, we handle it with the sticky layout
+                    scrub: 0.5, // Smooth scrubbing
+                    animation: gsap.to(card, {
+                        scale: 0.95, // Subtly scale down the card
+                        opacity: 0.8, // Fade it back slightly
+                        ease: "power1.inOut",
+                    }),
+                });
+            });
+        }, section);
+
+        return () => ctx.revert(); // Cleanup GSAP context on unmount
+    }, []);
+
     return (
-        <section className="py-12 md:py-20 bg-slate-100 overflow-hidden">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
-                {servicesData.map((service, index) => (
-                    <ServiceShowcaseItem key={index} service={service} />
-                ))}
-            </div>
-        </section>
+        <>
+            <section ref={sectionRef} className="bg-slate-100 overflow-hidden">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                    {servicesData.map((service, index) => (
+                        <div key={index} className="service-card group h-screen sticky top-0 flex items-center">
+                            <ServiceShowcaseItem service={service} />
+                        </div>
+                    ))}
+                </div>
+            </section>
+            {/* Add the Contact Section with an ID for navigation */}
+            <div id="lets-talk"><ContactSection /></div>
+        </>
     );
 }
