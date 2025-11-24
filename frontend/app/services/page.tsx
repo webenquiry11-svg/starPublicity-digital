@@ -119,7 +119,7 @@ const servicesData: ServiceData[] = [
         description: "Boost your online visibility and rank higher on search engines with our data-driven SEO strategies and techniques.",
         accentColor: '#16a34a', // Green
         VisualComponent: () => <ServiceImageVisual src={seo} alt="SEO Strategy" />,
-        layout: 'right',
+        layout: 'left',
     },
     {
         tag: "CREATIVE DESIGN",
@@ -135,7 +135,7 @@ const servicesData: ServiceData[] = [
         description: "We create immersive and engaging games for various platforms, bringing your creative visions to life with cutting-edge tech.",
         accentColor: '#7c3aed', // Violet
         VisualComponent: () => <ServiceImageVisual src={game} alt="Game Development" />,
-        layout: 'right',
+        layout: 'left',
     },
     {
         tag: "ONLINE PRESENCE",
@@ -151,7 +151,7 @@ const servicesData: ServiceData[] = [
         description: "Step into the future with our AR/VR solutions, creating unforgettable interactive experiences for your brand and customers.",
         accentColor: '#0891b2', // Cyan
         VisualComponent: () => <ServiceImageVisual src={arvr} alt="AR/VR Development" />,
-        layout: 'right',
+        layout: 'left',
     },
 ];
 

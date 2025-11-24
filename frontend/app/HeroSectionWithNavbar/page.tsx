@@ -12,7 +12,7 @@ import logo from '../../public/Star Digital Website Images/logo.png';
 const navLinks = [
   { name: 'Our Services', href: '#services' },
   { name: 'About', href: '#about' },
-  { name: 'FAQs', href: '#awards' },
+  { name: 'How We Work', href: '#awards' },
   { name: 'Contact Us', href: '#contact' },
 ];
 
