@@ -3,7 +3,6 @@
 import React, { useLayoutEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Send, BarChart3, ShoppingCart, Image as ImageIcon } from 'lucide-react';
-import { Playfair_Display } from 'next/font/google';
 
 // --- GSAP Imports ---
 import { gsap } from 'gsap';
@@ -11,20 +10,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// --- Font for Attractive Heading ---
-const playfair = Playfair_Display({
-    subsets: ['latin'],
-    weight: ['800'],
-    display: 'swap',
-});
-
 // --- Image Imports ---
-import web from '../../public/Star Digital Website Images/service/web.png';
-import seo from '../../public/Star Digital Website Images/service/seo.png';
-import graphic from '../../public/Star Digital Website Images/service/graphic.jpg';
-import game from '../../public/Star Digital Website Images/service/game.png';
-import digital from '../../public/Star Digital Website Images/service/digital.png';
-import arvr from '../../public/Star Digital Website Images/service/arvr.png';
+import web from '../../public/Star Digital Website Images/service/web.svg';
+import seo from '../../public/Star Digital Website Images/service/seo.svg';
+import graphic from '../../public/Star Digital Website Images/service/graphic.svg';
+import game from '../../public/Star Digital Website Images/service/game.svg';
+import digital from '../../public/Star Digital Website Images/service/digital.svg';
+import arvr from '../../public/Star Digital Website Images/service/arvr.svg';
 
 // --- 1. Reusable Components ---
 
@@ -45,12 +37,12 @@ const FeaturedAccentPanel: React.FC<{ service: ServiceData }> = ({ service }) =>
             </p>
 
             {/* Main Headline */}
-            <h3 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6 relative z-10">
+            <h3 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6 relative z-10 font-grotesk">
                 {service.title}
             </h3>
 
             {/* Description */}
-            <p className="text-base font-medium opacity-90 mb-10 relative z-10">
+            <p className="text-base font-medium opacity-90 mb-10 relative z-10 font-sans">
                 {service.description}
             </p>
 
@@ -225,12 +217,12 @@ export default function ServicesPage() {
                     {/* Decorative gradient line */}
                     <div className="inline-block w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full mb-4"></div>
 
-                    <h2 className={`text-4xl md:text-6xl font-extrabold tracking-tight ${playfair.className}`}>
+                    <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight font-grotesk">
                         <span className="bg-[#256482] text-transparent bg-clip-text">
                             Our Services
                         </span>
                     </h2>
-                    <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+                    <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto font-sans">
                         A comprehensive suite of creative and technical solutions designed to elevate your brand.
                     </p>
                 </div>

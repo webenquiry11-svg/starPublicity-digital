@@ -170,7 +170,7 @@ const AboutSection: React.FC = () => {
 
   return (
     <>
-      {/* === 1. NEW SECTION (Replaces Core Features) === */}
+      {/* === 1. NEW SECTION (Replaces Core Features) === */} 
       <div className="bg-white text-gray-900">
         {/* === SECTION 1A: TOP SECURITY HERO & CARDS === */}
         <section
@@ -185,15 +185,15 @@ const AboutSection: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               {/* Left Column: Headline and CTA */}
               <div className="order-2 lg:order-1">
-                <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6 text-[#256482]">
+                <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6 text-[#256482] font-grotesk">
                   Redefining Results, Building Your Success
                 </h1>
-                <p className="text-xl text-gray-700 leading-relaxed mb-10">
+                <p className="text-xl text-gray-700 leading-relaxed mb-10 font-sans">
                  We understand the challenges brands face. Our team is here to help you break barriers and achieve your goals. Together, we can bring your vision to life.
                 </p>
 
                 {/* New Quote */}
-                <p className="text-2xl font-semibold text-[#256482] italic mt-8">
+                <p className="text-2xl font-semibold text-[#256482] italic mt-8 font-sans">
                   "Where creativity sparks your story"
                 </p>
               </div>
@@ -218,10 +218,10 @@ const AboutSection: React.FC = () => {
                   key={index}
                   className="bg-white p-6 md:p-8 rounded-lg border border-gray-100 shadow-md"
                 >
-                  <h3 className="text-xl font-bold mb-3 text-gray-900">
+                  <h3 className="text-xl font-bold mb-3 text-gray-900 font-grotesk">
                     {card.title}
                   </h3>
-                  <p className="text-gray-600 mb-4 ">{card.description}</p>
+                  <p className="text-gray-600 mb-4 font-sans">{card.description}</p>
                    
                 </div>
               ))}
@@ -239,10 +239,10 @@ const AboutSection: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               {/* Left Column: Headline and CTA */}
               <div className="w-full lg:w-4/5 text-left lg:mt-24">
-                <h2 className="text-6xl md:text-7xl font-extrabold leading-tight mb-6 text-white">
+                <h2 className="text-6xl md:text-7xl font-extrabold leading-tight mb-6 text-white font-grotesk">
                   Harness AI Innovation for Seamless Brand Impact
                 </h2>
-                <p className="text-xl text-blue-100 leading-relaxed mb-10">
+                <p className="text-xl text-blue-100 leading-relaxed mb-10 font-sans">
                   Our rapid-response team leverages high-end tech and strategic
                   expertise to deliver outstanding results with remarkable speed
                   and precision.
@@ -277,7 +277,7 @@ const AboutSection: React.FC = () => {
                           {step.step}
                         </span>
 
-                        <h3 className="text-xl font-bold mb-3 text-[#256482]">
+                        <h3 className="text-xl font-bold mb-3 text-[#256482] font-grotesk">
                           {step.title}
                         </h3>
 
@@ -285,10 +285,10 @@ const AboutSection: React.FC = () => {
                           {step.points.map((point, pIndex) => (
                             <li
                               key={pIndex}
-                              className="text-gray-600 flex items-start gap-3"
+                              className="text-gray-600 flex items-start gap-3 font-sans"
                             >
                               <Check className="w-5 h-5 text-[#256482] flex-shrink-0 mt-0.5" />
-                              <span>{point}</span>
+                              <span className={`${point.startsWith('“') ? 'italic' : ''}`}>{point}</span>
                             </li>
                           ))}
                         </ul>
@@ -343,10 +343,10 @@ const AboutSection: React.FC = () => {
 
           <div className="container mx-auto px-8 sm:px-16 lg:px-24 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-4xl md:text-5xl font-bold text-[#256482] leading-snug mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold text-[#256482] leading-snug mb-6 font-grotesk">
                 Get to know why brands trust Star Publicity.
               </h2>
-              <p className="text-lg text-gray-600 leading-relaxed mb-10">
+              <p className="text-lg text-gray-600 leading-relaxed mb-10 font-sans">
                 We are a dedicated team of specialists committed to helping
                 modern businesses grow. We deliver reliable results, transparent
                 service, and innovative solutions that build client trust.
@@ -365,10 +365,10 @@ const AboutSection: React.FC = () => {
             <div className="flex flex-col lg:flex-row items-start justify-between gap-12">
               {/* Left Side: Headline and CTA */}
               <div className="w-full lg:w-5/12 relative text-left">
-                <h2 className="text-5xl md:text-6xl font-bold text-[#256482] leading-tight mb-6">
+                <h2 className="text-5xl md:text-6xl font-bold text-[#256482] leading-tight mb-6 font-grotesk">
                   Where Ambitious Brands Achieve More{" "}
                 </h2>
-                <p className="text-lg text-gray-600 leading-relaxed mb-10 max-w-lg">
+                <p className="text-lg text-gray-600 leading-relaxed mb-10 max-w-lg font-sans">
                   Supercharge your brand's growth with Star Publicity. Our
                   creative strategies deliver quick, measurable results tailored
                   for your success.
@@ -397,13 +397,13 @@ const AboutSection: React.FC = () => {
                   >
                     {/* Title (Uses the large statistic font size) */}
                     <h3
-                      className={`text-3xl md:text-4xl font-extrabold ${stat.color} mb-2`}
+                      className={`text-3xl md:text-4xl font-extrabold ${stat.color} mb-2 font-grotesk`}
                     >
                       {stat.title}
                     </h3>
 
                     {/* Description (Uses the label style) */}
-                    <p className="text-lg text-gray-600">{stat.text}</p>
+                    <p className="text-lg text-gray-600 font-sans">{stat.text}</p>
                   </div>
                 ))}
               </div>

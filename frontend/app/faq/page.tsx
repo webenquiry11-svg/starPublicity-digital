@@ -1,6 +1,5 @@
 "use client";
 
-import { Playfair_Display } from 'next/font/google';
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Triangle, // Used as a placeholder icon for the DNA/INDIGO logos
@@ -10,12 +9,6 @@ import {
   TrendingUp,
   ShieldCheck
 } from 'lucide-react';
-
-// --- Font for the "Story by Numbers" heading ---
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  style: ['normal', 'italic'],
-});
 
 // --- Data for the Award Cards ---
 const awardCards = [
@@ -135,9 +128,9 @@ const AwardsSection = () => {
 
                     {/* --- Bottom Content (Text & Source) --- */}
                     <div className="relative z-10 mt-auto text-left">
-                        <p className="text-2xl font-bold text-slate-800 mb-2 leading-tight">{card.text}</p>
-                        <p className="text-base text-slate-600 mb-3 leading-relaxed">{card.explanation}</p>
-                        <p className="text-sm font-semibold uppercase tracking-wider text-slate-500 mt-auto">{card.source}</p>
+                        <p className="text-2xl font-bold text-slate-800 mb-2 leading-tight font-grotesk">{card.text}</p>
+                        <p className="text-base text-slate-600 mb-3 leading-relaxed font-sans">{card.explanation}</p>
+                        <p className="text-sm font-semibold uppercase tracking-wider text-slate-500 mt-auto font-sans">{card.source}</p>
                     </div>
                 </div>
             </div>
@@ -202,8 +195,8 @@ const StoryByNumbersSection = () => {
       }}
     >
       <div className="container mx-auto px-8 sm:px-16 lg:px-24">
-        <h2 className={`text-4xl sm:text-5xl font-normal text-gray-800 mb-12 text-center ${playfair.className}`}>
-          <span className="italic">Numbers</span> That Define Us
+        <h2 className="text-4xl sm:text-5xl font-bold text-gray-800 mb-12 text-center font-grotesk">
+          Numbers That Define Us
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {stats.map((stat, index) => (
@@ -214,7 +207,7 @@ const StoryByNumbersSection = () => {
                   +
                 </span>
               </div>
-              <p className="text-lg text-gray-700 mt-2">{stat.label}</p>
+              <p className="text-lg text-gray-700 mt-2 font-sans">{stat.label}</p>
             </div>
           ))}
         </div>

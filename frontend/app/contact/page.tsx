@@ -3,7 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Montserrat } from 'next/font/google';
 import { 
     Mail,
     Layers,
@@ -44,12 +43,6 @@ const socialLinks = [
     { icon: Linkedin, href: '#', label: 'LinkedIn' },
 ];
 
-const montserrat = Montserrat({
-    subsets: ['latin'],
-    weight: ['400', '500', '600', '700', '800'],
-    display: 'swap',
-});
-
 // --- Custom Colors ---
 const COLOR_BLUE_DARK = '#2a7394';
 const COLOR_SLATE_LIGHT = '#f8fafc'; // Matches bg-slate-50
@@ -69,10 +62,10 @@ export const ContactSection: React.FC = () => {
                     
                     {/* Left Side: Headline and Tagline */}
                     <div className="lg:col-span-7 text-center lg:text-left mb-8 lg:mb-0">
-                        <p className="text-xl md:text-2xl font-medium text-gray-300 mb-4">
+                        <p className="text-xl md:text-2xl font-medium text-gray-300 mb-4 font-sans">
                             Got an idea? Connect with our team and let’s make something extraordinary together.
                         </p>
-                        <h2 className="text-6xl md:text-8xl font-extrabold tracking-tight">
+                        <h2 className="text-6xl md:text-8xl font-extrabold tracking-tight font-grotesk">
                             LET’S CONNECT
                         </h2>
                     </div>
@@ -82,15 +75,15 @@ export const ContactSection: React.FC = () => {
                         <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
                             <div>
                                 <label htmlFor="cta-name" className="sr-only">Name</label>
-                                <input type="text" id="cta-name" placeholder="Your Name" className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors" />
+                                <input type="text" id="cta-name" placeholder="Your Name" className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors font-sans" />
                             </div>
                             <div>
                                 <label htmlFor="cta-email" className="sr-only">Email</label>
-                                <input type="email" id="cta-email" placeholder="Your Email" className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors" />
+                                <input type="email" id="cta-email" placeholder="Your Email" className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors font-sans" />
                             </div>
                             <div>
                                 <label htmlFor="cta-message" className="sr-only">Message</label>
-                                <textarea id="cta-message" placeholder="Your Message" rows={2} className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors resize-none"></textarea>
+                                <textarea id="cta-message" placeholder="Your Message" rows={2} className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors resize-none font-sans"></textarea>
                             </div>
                             <button 
                                 type="submit"
@@ -117,7 +110,7 @@ export const Footer: React.FC = () => {
     
     // Base background is slate-50
     return (
-        <footer className={`bg-slate-50 text-gray-900 pt-16 pb-8 relative overflow-hidden ${montserrat.className}`}>
+        <footer className="bg-slate-50 text-gray-900 pt-16 pb-8 relative overflow-hidden font-sans">
             
             {/* --- 1. NEW ANIMATED MULTI-LAYER WAVE DIVIDER --- */}
             <div className="absolute top-0 left-0 w-full z-0 transform -translate-y-px -scale-x-100 -scale-y-100">
@@ -182,7 +175,7 @@ export const Footer: React.FC = () => {
                             height={42}
                             className="mb-4" // Removed invert and brightness for light theme
                         />
-                        <p className="text-gray-500 text-sm leading-relaxed max-w-sm">
+                        <p className="text-gray-500 text-sm leading-relaxed max-w-sm font-sans">
                             We make success happen with bold brands, slick digital vibes, and print
                             that speaks your language!
                         </p>
@@ -190,10 +183,10 @@ export const Footer: React.FC = () => {
 
                     {/* Column 2 (lg:col-span-2): Chat With Us (Phone/Email) */}
                     <div className="lg:col-span-2">
-                        <h4 className={`text-sm font-semibold mb-4 tracking-wider text-gray-500`}>CHAT WITH US</h4>
+                        <h4 className="text-sm font-semibold mb-4 tracking-wider text-gray-500 font-grotesk">CHAT WITH US</h4>
                         <div className="space-y-2 text-sm">
-                            <p className="text-gray-900 font-semibold">0161-4668602</p>
-                            <a href="mailto:info@starpublicity.co.in" className="text-gray-600 hover:text-gray-900 transition-colors">
+                            <p className="text-gray-900 font-semibold font-sans">0161-4668602</p>
+                            <a href="mailto:info@starpublicity.co.in" className="text-gray-600 hover:text-gray-900 transition-colors font-sans">
                                 info@starpublicity.co.in
                             </a>
                         </div>
@@ -201,15 +194,15 @@ export const Footer: React.FC = () => {
 
                     {/* Column 3 (lg:col-span-3): Find Us (Address) */}
                     <div className="lg:col-span-3">
-                        <h4 className={`text-sm font-semibold mb-4 tracking-wider text-gray-500`}>FIND US</h4>
-                        <p className="text-gray-600 text-sm">
+                        <h4 className="text-sm font-semibold mb-4 tracking-wider text-gray-500 font-grotesk">FIND US</h4>
+                        <p className="text-gray-600 text-sm font-sans">
                             SCO-137, Feroze Gandhi market, Ludhiana, Punjab, 141001
                         </p>
                     </div>
 
                     {/* Column 4 (lg:col-span-3): Follow Us (Socials) */}
                     <div className="lg:col-span-3">
-                        <h4 className={`text-sm font-semibold mb-4 tracking-wider text-gray-500`}>FOLLOW US ON</h4>
+                        <h4 className="text-sm font-semibold mb-4 tracking-wider text-gray-500 font-grotesk">FOLLOW US ON</h4>
                         <div className="flex space-x-2">
                             {socialLinks.map((social, index) => (
                                 <a 
@@ -231,7 +224,7 @@ export const Footer: React.FC = () => {
                 <div className="flex flex-col lg:flex-row lg:justify-between items-center pt-4">
                     
                     {/* Service Links */}
-                    <div className="flex flex-wrap justify-center lg:justify-start space-x-4 text-sm font-medium text-gray-600">
+                    <div className="flex flex-wrap justify-center lg:justify-start space-x-4 text-sm font-medium text-gray-600 font-sans">
                         {serviceLinks.map((link, index) => (
                             <Link 
                                 key={index} 
@@ -244,7 +237,7 @@ export const Footer: React.FC = () => {
                     </div>
 
                     {/* Copyright and Scroll to Top (moved to the right side visually) */}
-                    <div className="flex items-center text-slate-500 text-xs mt-4 lg:mt-0">
+                    <div className="flex items-center text-slate-500 text-xs mt-4 lg:mt-0 font-sans">
                         <p>Copyright © {new Date().getFullYear()} Star Publicity.</p>
                     </div>
                 </div>

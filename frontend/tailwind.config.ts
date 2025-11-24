@@ -1,14 +1,21 @@
-import type { Config } from 'tailwindcss';
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        // Define 'sans' as Jost, making it the default paragraph font
+        sans: ["var(--font-jost)", "sans-serif"],
+        // Define 'grotesk' for headings
+        grotesk: ["Clash Grotesk", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };
-
 export default config;
