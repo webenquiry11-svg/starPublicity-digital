@@ -185,7 +185,7 @@ const AboutSection: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               {/* Left Column: Headline and CTA */}
               <div className="order-2 lg:order-1">
-                <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6 text-gray-900">
+                <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6 text-[#256482]">
                   Redefining Results, Building Your Success
                 </h1>
                 <p className="text-xl text-gray-700 leading-relaxed mb-10">
@@ -247,16 +247,6 @@ const AboutSection: React.FC = () => {
                   expertise to deliver outstanding results with remarkable speed
                   and precision.
                 </p>
-
-                {/* CTA Button */}
-                <Link
-                  href="#contact"
-                  className="inline-flex items-center bg-white text-[#2a7394] font-medium py-3 px-8 rounded-md 
-                    transition-all duration-300 ease-out hover:bg-gray-100 hover:shadow-lg hover:-translate-y-0.5"
-                >
-                  <Calendar className="w-5 h-5 mr-3" />
-                  Schedule a Consultation
-                </Link>
               </div>
 
               {/* Right Column: Timeline Steps (Using Core Principles Data) */}

@@ -135,9 +135,9 @@ const AwardsSection = () => {
 
                     {/* --- Bottom Content (Text & Source) --- */}
                     <div className="relative z-10 mt-auto text-left">
-                        <p className="text-lg font-bold text-slate-800 mb-2 leading-tight">{card.text}</p>
-                        <p className="text-xs text-slate-600 mb-3 leading-relaxed">{card.explanation}</p>
-                        <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mt-auto">{card.source}</p>
+                        <p className="text-2xl font-bold text-slate-800 mb-2 leading-tight">{card.text}</p>
+                        <p className="text-base text-slate-600 mb-3 leading-relaxed">{card.explanation}</p>
+                        <p className="text-sm font-semibold uppercase tracking-wider text-slate-500 mt-auto">{card.source}</p>
                     </div>
                 </div>
             </div>
