@@ -219,9 +219,11 @@ export default function ServicesPage() {
 
     return (
         <section ref={sectionRef} className="bg-slate-100 overflow-hidden">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            {/* Removed bottom padding (py-20 -> pt-20) */}
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-20">
                 {servicesData.map((service, index) => (
-                    <div key={index} className="service-card group h-screen sticky top-0 flex items-center">
+                    // Add a negative margin to the last card to pull up the content that follows
+                    <div key={index} className={`service-card group h-screen sticky top-0 flex items-center ${index === servicesData.length - 1 ? 'mb-[-100vh]' : ''}`}>
                         <ServiceShowcaseItem service={service} />
                     </div>
                 ))}
