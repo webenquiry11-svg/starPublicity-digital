@@ -206,24 +206,47 @@ export default function ServicesPage() {
 
     return (
         <section ref={sectionRef} className="bg-white py-20">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-16">
-                {/* Left Column: Scrolling Images */}
-                <div className="lg:col-span-8 space-y-16">
-                    {servicesData.map((service, index) => (
-                        <div key={index} className="service-image-wrapper">
-                            <MainVisualArea layout="left"><service.VisualComponent /></MainVisualArea>
-                        </div>
-                    ))}
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                {/* --- Attractive Section Heading --- */}
+                <div className="relative text-center mb-24">
+                    {/* Faint background text for depth */}
+                    <span className="absolute -top-1/2 left-1/2 -translate-x-1/2 text-[10rem] md:text-[14rem] font-black text-slate-100/80 -z-10 select-none">
+                        SERVICES
+                    </span>
+
+                    {/* Decorative gradient line */}
+                    <div className="inline-block w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full mb-4"></div>
+
+                    <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight">
+                        <span className="bg-gradient-to-r from-blue-600 to-cyan-500 text-transparent bg-clip-text">
+                            Our Services
+                        </span>
+                    </h2>
+                    <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">
+                        A comprehensive suite of creative and technical solutions designed to elevate your brand.
+                    </p>
                 </div>
 
-                {/* Right Column: Sticky Content */}
-                <div className="lg:col-span-4 lg:sticky top-[5vh] h-[90vh]">
-                    <div ref={contentRef} className="relative w-full h-full rounded-3xl overflow-hidden transition-colors duration-500" style={{backgroundColor: servicesData[0].accentColor}}>
+                {/* --- Main Content Grid --- */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                    {/* Left Column: Scrolling Images */}
+                    <div className="lg:col-span-8 space-y-16">
                         {servicesData.map((service, index) => (
-                            <div key={index} className="service-content-panel absolute inset-0">
-                                <FeaturedAccentPanel service={service} />
+                            <div key={index} className="service-image-wrapper">
+                                <MainVisualArea layout="left"><service.VisualComponent /></MainVisualArea>
                             </div>
                         ))}
+                    </div>
+
+                    {/* Right Column: Sticky Content */}
+                    <div className="lg:col-span-4 lg:sticky top-[5vh] h-[90vh]">
+                        <div ref={contentRef} className="relative w-full h-full rounded-3xl overflow-hidden transition-colors duration-500" style={{backgroundColor: servicesData[0].accentColor}}>
+                            {servicesData.map((service, index) => (
+                                <div key={index} className="service-content-panel absolute inset-0">
+                                    <FeaturedAccentPanel service={service} />
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
