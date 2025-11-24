@@ -21,7 +21,7 @@ import {
     Instagram,
     Twitter,
     Linkedin,
-    Youtube,
+    Link as LinkIcon, // Using a generic link icon as a fallback for Pinterest
 } from 'lucide-react';
 
 
@@ -36,11 +36,11 @@ const serviceLinks = [
 
 // Data for the 'Follow us on' section (example URLs)
 const socialLinks = [
-    { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Youtube, href: '#', label: 'YouTube' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
+    { icon: Facebook, href: 'https://www.facebook.com/starpublicity', label: 'Facebook' },
+    { icon: Instagram, href: 'https://www.instagram.com/starpublicityldh/', label: 'Instagram' },
+    { icon: Twitter, href: 'https://x.com/starpublicityld', label: 'Twitter' },
+    { icon: LinkIcon, href: 'https://in.pinterest.com/starpublicityldh/', label: 'Pinterest' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/company/m-s-star-publicity/', label: 'LinkedIn' },
 ];
 
 // --- Custom Colors ---
