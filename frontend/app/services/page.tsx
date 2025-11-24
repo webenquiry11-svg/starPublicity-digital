@@ -25,10 +25,10 @@ const FeaturedAccentPanel: React.FC<{ service: ServiceData }> = ({ service }) =>
     
     return (
         <div
-            className={`w-full lg:w-1/4 p-8 md:p-10 text-white flex flex-col justify-center min-h-[400px] lg:min-h-[400px] relative z-20 bg-slate-700 transition-colors duration-300 ease-in-out group-hover:bg-[var(--accent-color)] rounded-3xl shadow-2xl`}
+            className={`w-full p-8 md:p-10 text-white flex flex-col justify-center h-full`}
             style={{ 
                 '--accent-color': service.accentColor,
-            } as React.CSSProperties}
+            } as React.CSSProperties }
         >
             {/* Top Tag */}
             <p className="text-sm font-semibold tracking-widest uppercase opacity-80 mb-4 flex items-center relative z-10">
@@ -83,7 +83,7 @@ const MainVisualArea: React.FC<{ children: React.ReactNode, layout: 'left' | 'ri
     
     return (
         <div 
-            className={`w-full lg:w-3/4 relative flex items-center justify-center p-0 rounded-[3rem] shadow-2xl overflow-hidden`}
+            className={`w-full relative flex items-center justify-center p-0 rounded-[3rem] shadow-2xl overflow-hidden h-[90vh]`}
             style={{ 
                 backgroundColor: '#eeeeee',
             }}
@@ -155,62 +155,52 @@ const servicesData: ServiceData[] = [
     },
 ];
 
-// --- 3. Main Showcase Item Component (Restored to Static Flow) ---
-
-const ServiceShowcaseItem: React.FC<{ service: ServiceData }> = ({ service }) => {
-    const isVisualLeft = service.layout === 'left';
-
-    return (
-        // The 'group' class is now on the sticky container, so we can just return the flex layout
-        <div className="h-full w-full">
-            <div className="flex flex-col lg:flex-row relative lg:gap-8">
-                {isVisualLeft ? (
-                    <>
-                        <MainVisualArea layout={service.layout}><service.VisualComponent /></MainVisualArea>
-                        <FeaturedAccentPanel service={service} />
-                    </>
-                ) : (
-                    <>
-                        <FeaturedAccentPanel service={service} />
-                        <MainVisualArea layout={service.layout}><service.VisualComponent /></MainVisualArea>
-                    </>
-                )}
-            </div>
-        </div>
-    );
-};
-
-// --- 4. Main Exported Section with GSAP Stacking Animation ---
+// --- 4. Main Exported Section with Scrollytelling Animation ---
 
 export default function ServicesPage() {
     const sectionRef = useRef<HTMLElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
 
     useLayoutEffect(() => {
         const section = sectionRef.current;
         if (!section) return;
 
-        // Select all the card containers
-        const cards = gsap.utils.toArray<HTMLDivElement>(".service-card");
+        const imageWrappers = gsap.utils.toArray<HTMLDivElement>('.service-image-wrapper');
+        const contentPanels = gsap.utils.toArray<HTMLDivElement>('.service-content-panel');
+
+        // Set initial state: hide all content panels except the first one
+        gsap.set(contentPanels.slice(1), { autoAlpha: 0 });
 
         const ctx = gsap.context(() => {
-            cards.forEach((card, i) => {
-                // We don't need to animate the last card
-                if (i === cards.length - 1) return;
+            // --- The Definitive Fix: A Single Observer ---
+            // This single ScrollTrigger observes the entire section and updates on every scroll frame.
+            ScrollTrigger.create({
+                trigger: section,
+                start: "top top",
+                end: "bottom bottom",
+                // On every scroll update, check which image is active
+                onUpdate: self => {
+                    let activeIndex = -1;
+                    // Find which image is currently in the "active" zone (center of the screen)
+                    imageWrappers.forEach((image, i) => {
+                        const rect = image.getBoundingClientRect();
+                        // Check if the vertical center of the viewport is between the top and bottom of the image
+                        if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                            activeIndex = i;
+                        }
+                    });
 
-                ScrollTrigger.create({
-                    trigger: card,
-                    start: "top top", // When the top of the card hits the top of the viewport
-                    endTrigger: cards[i + 1], // Animation ends when the next card starts
-                    end: "top top",
-                    pin: true, // Pin the current card
-                    pinSpacing: false, // Don't add padding, we handle it with the sticky layout
-                    scrub: 0.5, // Smooth scrubbing
-                    animation: gsap.to(card, {
-                        scale: 0.95, // Subtly scale down the card
-                        opacity: 0.8, // Fade it back slightly
-                        ease: "power1.inOut",
-                    }),
-                });
+                    if (activeIndex !== -1) {
+                        // Animate background color to match the active service
+                        gsap.to(contentRef.current, { backgroundColor: servicesData[activeIndex].accentColor, duration: 0.5, ease: 'power2.inOut' });
+                        
+                        // Animate the content panels
+                        contentPanels.forEach((panel, i) => {
+                            // Fade in the active panel, fade out all others.
+                            gsap.to(panel, { autoAlpha: i === activeIndex ? 1 : 0, duration: 0.3 });
+                        });
+                    }
+                }
             });
         }, section);
 
@@ -218,13 +208,27 @@ export default function ServicesPage() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="bg-slate-100 overflow-hidden">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
-                {servicesData.map((service, index) => (
-                    <div key={index} className="service-card group h-screen sticky top-0 flex items-center">
-                        <ServiceShowcaseItem service={service} />
+        <section ref={sectionRef} className="bg-slate-100 py-20">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-16">
+                {/* Left Column: Scrolling Images */}
+                <div className="lg:col-span-8 space-y-16">
+                    {servicesData.map((service, index) => (
+                        <div key={index} className="service-image-wrapper">
+                            <MainVisualArea layout="left"><service.VisualComponent /></MainVisualArea>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Right Column: Sticky Content */}
+                <div className="lg:col-span-4 lg:sticky top-[5vh] h-[90vh]">
+                    <div ref={contentRef} className="relative w-full h-full rounded-3xl overflow-hidden transition-colors duration-500" style={{backgroundColor: servicesData[0].accentColor}}>
+                        {servicesData.map((service, index) => (
+                            <div key={index} className="service-content-panel absolute inset-0">
+                                <FeaturedAccentPanel service={service} />
+                            </div>
+                        ))}
                     </div>
-                ))}
+                </div>
             </div>
         </section>
     );
