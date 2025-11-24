@@ -83,12 +83,9 @@ const MainVisualArea: React.FC<{ children: React.ReactNode, layout: 'left' | 'ri
     
     return (
         <div 
-            className={`w-full relative flex items-center justify-center p-0 rounded-[3rem] shadow-2xl overflow-hidden h-[90vh]`}
-            style={{ 
-                backgroundColor: '#eeeeee',
-            }}
+            className={`w-full relative flex items-center justify-center p-0 h-[90vh]`}
         >
-            {children}
+            <div className="w-full h-full relative rounded-3xl overflow-hidden">{children}</div>
         </div>
     );
 };
@@ -208,7 +205,7 @@ export default function ServicesPage() {
     }, []);
 
     return (
-        <section ref={sectionRef} className="bg-slate-100 py-20">
+        <section ref={sectionRef} className="bg-white py-20">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-16">
                 {/* Left Column: Scrolling Images */}
                 <div className="lg:col-span-8 space-y-16">
