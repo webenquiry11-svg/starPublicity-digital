@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Jost } from "next/font/google";
 import "./globals.css";
+import icon from "../public/Star Digital Website Images/service/fevicon.png";
 
 // Import Jost from Google Fonts
 const jost = Jost({
@@ -12,6 +13,7 @@ const jost = Jost({
 export const metadata: Metadata = {
   title: "Star Publicity",
   description: "Redefining Results, Building Your Success",
+  icons: icon.src, // Path to your favicon in the app directory
 };
 
 export default function RootLayout({
