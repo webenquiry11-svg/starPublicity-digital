@@ -66,12 +66,12 @@ const FeaturedAccentPanel: React.FC<{ service: ServiceData }> = ({ service }) =>
 
 // --- New Reusable Image Visual Component ---
 const ServiceImageVisual: React.FC<{ src: any; alt: string }> = ({ src, alt }) => (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full p-8">
         <Image 
             src={src}
             alt={alt}
             fill
-            className="object-cover"
+            className="object-contain"
             sizes="(max-width: 1024px) 100vw, 75vw"
         />
     </div>
