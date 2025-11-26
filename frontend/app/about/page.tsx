@@ -1,37 +1,34 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import Link from "next/link";
+import React, { useRef } from "react";
 import Image from "next/image";
 // Assuming you have these image paths defined correctly
 import whyChoose from "../../public/Star Digital Website Images/why choose.png";
 import whyChoose1 from "../../public/Star Digital Website Images/why choose1.png";
 
-import { PlayCircle, Play, Check, Calendar } from "lucide-react";
+import { Check } from "lucide-react";
+import { motion, useScroll, useSpring } from "framer-motion";
 
-// Data for the new "Stats Bar" section (for the dark theme section)
+// --- Data Definitions ---
+
 const statsData = [
   {
-    // Integrated Digital Expertise
     title: "Integrated Digital Expertise",
     text: "We integrate innovative strategies to provide solutions that work in perfect harmony.",
     color: "text-[#256482]",
   },
   {
-    // Results-Driven Approach
     title: "Results-Driven Approach",
     text: "Our data-driven methodology ensures ROI and accountability at every step of your digital journey.",
     color: "text-[#256482]",
   },
   {
-    // Full-Service Convenience
     title: "Full-Service Convenience",
     text: "From concept to launch, we provide everything your business needs for digital success.",
     color: "text-[#256482]",
   },
 ];
 
-// Data for the Top Security Cards
 const securityCards = [
   {
     title: "Our Mission: Elevate Ambition",
@@ -45,7 +42,6 @@ const securityCards = [
   },
 ];
 
-// --- CORE PRINCIPLES (NEW DATA - Kept separate as they are used in the Timeline) ---
 const corePrinciples = [
   {
     step: "STEP 1",
@@ -75,226 +71,208 @@ const corePrinciples = [
       "Scale results as your needs grow",
       "“Our proficiency ensures your growth journey never stops advancing.”",
     ],
-    icon: "💡", // Kept this icon as it fits well
+    icon: "💡",
   },
 ];
 
-// --- Animated Number Component (Kept, although not used in this section now) ---
-interface AnimatedNumberProps {
-  target: number;
-  duration?: number;
-}
+// --- Animation Variants ---
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1,
+    transition: { 
+      staggerChildren: 0.2, 
+      delayChildren: 0.1 
+    }
+  }
+};
 
-const AnimatedNumber: React.FC<AnimatedNumberProps> = ({
-  target,
-  duration = 2000,
-}) => {
-  const [currentNumber, setCurrentNumber] = useState(0);
-  const isFloat = target % 1 !== 0;
-
-  useEffect(() => {
-    let start = 0;
-    const end = target;
-    const increment = end / (duration / 16); // ~60fps
-
-    const updateNumber = () => {
-      start += increment;
-      if (start < end) {
-        setCurrentNumber(
-          isFloat ? parseFloat(start.toFixed(1)) : Math.ceil(start)
-        );
-        requestAnimationFrame(updateNumber);
-      } else {
-        setCurrentNumber(end);
-      }
-    };
-
-    const animationFrame = requestAnimationFrame(updateNumber);
-
-    return () => cancelAnimationFrame(animationFrame);
-  }, [target, duration, isFloat]);
-
-  return <>{currentNumber}</>;
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.6, ease: "easeOut" } 
+  }
 };
 
 const AboutSection: React.FC = () => {
-  const [isStatsVisible, setStatsVisible] = useState(false);
-  const statsRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setStatsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.5 } // Trigger when 50% of the element is visible
-    );
-
-    if (statsRef.current) {
-      observer.observe(statsRef.current);
-    }
-
-    return () => {
-      if (statsRef.current) {
-        observer.unobserve(statsRef.current);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    const timelineNode = timelineRef.current;
-    if (!timelineNode) return;
-
-    const handleScroll = () => {
-      const rect = timelineNode.getBoundingClientRect();
-      const timelineHeight = timelineNode.offsetHeight;
-
-      // Calculate how far the user has scrolled into the timeline section
-      // Start when the top of the timeline is at 80% of the viewport height
-      const scrollStart = rect.top - window.innerHeight * 0.8;
-      // The total scrollable distance within the component
-      const scrollDistance = timelineHeight;
-
-      let progress = -scrollStart / scrollDistance;
-      progress = Math.max(0, Math.min(1, progress)); // Clamp between 0 and 1
-      setScrollProgress(progress);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  
+  // Scroll Progress Logic for Timeline
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start end", "end start"]
+  });
+  
+  // Smooth out the scroll progress
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   return (
     <>
-      {/* === 1. NEW SECTION (Replaces Core Features) === */} 
-      <div className="bg-white text-gray-900">
-        {/* === SECTION 1A: TOP SECURITY HERO & CARDS === */}
-        <section
-          className={`pt-20 md:pt-32 pb-16 md:pb-24 bg-white relative overflow-hidden`}
+      {/* Import New Fonts: Fraunces (Headings) & DM Sans (Body) */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;400;500;700&family=Fraunces:opsz,wght@9..144,300;600;700;900&display=swap');
+      `}} />
+
+      {/* === 1. HERO & MISSION SECTION === */} 
+      <div className="bg-white text-gray-900 overflow-hidden font-sans">
+        
+        <motion.section
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={containerVariants}
+          className={`pt-20 md:pt-32 pb-16 md:pb-24 bg-white relative`}
         >
           <div className="container mx-auto px-8 sm:px-16 lg:px-24">
             {/* Top Marker */}
-            <p className="text-sm font-bold uppercase tracking-wider mb-2 text-[#256482]">
-              — SAFE BY DESIGN
-            </p>
+            <motion.p variants={itemVariants} className="text-sm font-bold uppercase tracking-[0.2em] mb-3 text-[#256482]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+              — Safe By Design
+            </motion.p>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               {/* Left Column: Headline and CTA */}
               <div className="order-2 lg:order-1 text-center lg:text-left">
-                <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-tight mb-6 text-[#256482] font-grotesk">
-                  Redefining Results, Building Your Success
-                </h1>
-                <p className="text-xl text-gray-700 leading-relaxed mb-10 font-sans">
-                 We understand the challenges brands face. Our team is here to help you break barriers and achieve your goals. Together, we can bring your vision to life.
-                </p>
+                <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-7xl font-black leading-[1.1] mb-6 text-[#256482] tracking-tight" style={{ fontFamily: "'Fraunces', serif" }}>
+                  Redefining Results, <br/> Building Your Success.
+                </motion.h1>
+                <motion.p variants={itemVariants} className="text-xl text-gray-700 leading-relaxed mb-10 font-medium" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                  We understand the challenges brands face. Our team is here to help you break barriers and achieve your goals. Together, we can bring your vision to life.
+                </motion.p>
 
                 {/* New Quote */}
-                <p className="text-xl sm:text-2xl font-semibold text-[#256482] italic mt-8 font-sans">
+                <motion.p variants={itemVariants} className="text-2xl sm:text-3xl font-semibold text-[#256482] italic mt-8" style={{ fontFamily: "'Fraunces', serif" }}>
                   "Where creativity sparks your story"
-                </p>
+                </motion.p>
               </div>
 
-              {/* Right Column: Imagery (Placeholder) */}
-              <div className="order-1 lg:order-2 relative h-72 sm:h-96 w-full flex justify-center lg:justify-end">
-                <div className="w-[80%] h-full rounded-lg shadow-xl relative overflow-hidden">
+              {/* Right Column: Imagery */}
+              <motion.div 
+                variants={itemVariants} 
+                className="order-1 lg:order-2 relative h-72 sm:h-96 w-full flex justify-center lg:justify-end"
+              >
+                <div className="w-[85%] h-full rounded-[2rem] shadow-2xl relative overflow-hidden group">
+                    {/* Hover Effect on Image */}
+                    <div className="absolute inset-0 bg-[#256482]/10 z-10 transition-opacity duration-500 opacity-0 group-hover:opacity-100"></div>
                   <Image
                     src={whyChoose}
                     alt="Team collaborating on a project"
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                 </div>
-              </div>
+                {/* Decorative Elements behind image */}
+                <motion.div 
+                    animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute -top-6 -right-6 w-32 h-32 bg-cyan-100/80 rounded-full blur-xl -z-10"
+                ></motion.div>
+              </motion.div>
             </div>
 
             {/* Security Cards (Below Hero) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
+            <motion.div 
+                variants={containerVariants}
+                className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20"
+            >
               {securityCards.map((card, index) => (
-                <div
+                <motion.div
                   key={index}
-                  className="bg-white p-6 md:p-8 rounded-lg border border-gray-100 shadow-md"
+                  variants={itemVariants}
+                  whileHover={{ y: -8 }}
+                  className="bg-gray-50 p-8 rounded-2xl border border-gray-100 hover:shadow-xl hover:bg-white transition-all duration-300 group"
                 >
-                  <h3 className="text-xl font-bold mb-3 text-gray-900 font-grotesk">
+                  <h3 className="text-2xl font-bold mb-3 text-slate-800 group-hover:text-[#256482] transition-colors" style={{ fontFamily: "'Fraunces', serif" }}>
                     {card.title}
                   </h3>
-                  <p className="text-gray-600 mb-4 font-sans">{card.description}</p>
-                   
-                </div>
+                  <p className="text-gray-600 mb-0 leading-relaxed text-lg" style={{ fontFamily: "'DM Sans', sans-serif" }}>{card.description}</p>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         <hr className="border-gray-100" />
 
-        {/* === SECTION 1B: BOTTOM CORE PRINCIPLES TIMELINE === */}
+        {/* === 2. TIMELINE SECTION === */}
         <section
-          className={`py-20 md:py-32 bg-[#2a7394] rounded-tl-2xl rounded-tr-2xl`}
+          ref={timelineRef}
+          className={`py-20 md:py-32 bg-[#2a7394] rounded-tl-[3.5rem] rounded-tr-[3.5rem] relative overflow-hidden`}
         >
-          <div className="container mx-auto px-8 sm:px-16 lg:px-24">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          {/* Subtle pattern overlay */}
+          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle, #fff 2px, transparent 2px)", backgroundSize: "40px 40px" }}></div>
+
+          <div className="container mx-auto px-8 sm:px-16 lg:px-24 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
               {/* Left Column: Headline and CTA */}
-              <div className="w-full lg:w-4/5 text-center lg:text-left lg:mt-24">
-                <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-tight mb-6 text-white font-grotesk">
-                  Lead Growth With Precision And Expertise...
+              <motion.div 
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                className="w-full lg:w-4/5 text-center lg:text-left lg:mt-24 sticky top-32"
+              >
+                <h2 className="text-4xl sm:text-6xl md:text-8xl font-bold leading-[1.05] mb-8 text-white tracking-tight" style={{ fontFamily: "'Fraunces', serif" }}>
+                  Lead Growth With Precision And Expertise.
                 </h2>
-                <p className="text-xl text-blue-100 leading-relaxed mb-10 font-sans">
+                <p className="text-xl text-blue-50/90 leading-relaxed mb-10 font-normal" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                   Our rapid-response team leverages high-end tech and strategic
                   expertise to deliver outstanding results with remarkable speed
                   and precision.
                 </p>
-              </div>
+              </motion.div>
 
-              {/* Right Column: Timeline Steps (Using Core Principles Data) */}
-              <div ref={timelineRef} className="w-full relative space-y-6">
-                <div className="absolute left-4 top-4 bottom-4 w-0.5 border-l-2 border-dashed border-blue-400/50 hidden md:block" />
-
-                {/* Moving Progress Dot */}
-                <div
-                  className="absolute left-[5px] top-4 w-6 h-6 bg-cyan-300 rounded-full shadow-md hidden md:block"
-                  style={{
-                    // Use calc to move the dot along the height of the timeline container
-                    top: `calc(${
-                      scrollProgress * 100
-                    }% - 1.5rem * ${scrollProgress})`,
-                  }}
+              {/* Right Column: Timeline Steps */}
+              <div className="w-full relative space-y-8">
+                {/* Timeline Line */}
+                <div className="absolute left-6 top-4 bottom-4 w-px bg-blue-300/30 hidden md:block" />
+                
+                {/* Progress Line Overlay */}
+                <motion.div 
+                    className="absolute left-6 top-4 w-0.5 bg-white hidden md:block origin-top shadow-[0_0_10px_rgba(255,255,255,0.8)]"
+                    style={{ height: "100%", scaleY: smoothProgress }} 
                 />
 
                 {corePrinciples.map((step, index) => (
-                  <div key={index} className="group relative pl-12">
-                    {/* Timeline Marker (small dot on the line) */}
-                    <div className="absolute left-0 top-0 w-8 h-8 bg-[#2a7394] rounded-full flex items-center justify-center z-10">
-                      <span className="text-xl">{step.icon}</span>
+                  <motion.div 
+                    key={index} 
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, delay: index * 0.2 }}
+                    className="group relative pl-16 md:pl-20"
+                  >
+                    {/* Timeline Marker icon */}
+                    <div className="absolute left-2 md:left-2 top-0 w-8 h-8 md:w-10 md:h-10 bg-[#2a7394] border border-white/40 rounded-full flex items-center justify-center z-10 shadow-lg group-hover:bg-white group-hover:text-[#256482] transition-colors duration-300">
+                      <span className="text-lg md:text-xl">{step.icon}</span>
                     </div>
 
-                    <div className="relative bg-white p-6 rounded-xl border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-gray-300 hover:-translate-y-1 overflow-hidden">
+                    <div className="relative bg-white/5 backdrop-blur-md p-6 rounded-3xl border border-white/10 shadow-lg transition-all duration-300 hover:bg-white hover:border-transparent hover:shadow-2xl hover:-translate-y-2">
                       <div className="relative z-10">
-                        <span className="inline-block text-xs font-semibold px-2 py-1 rounded-full mb-3 bg-[#256482]/10 text-[#256482]">
+                        <span className="inline-block text-xs font-bold px-3 py-1 rounded-full mb-3 bg-white/20 text-white group-hover:bg-[#256482]/10 group-hover:text-[#256482] transition-colors" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                           {step.step}
                         </span>
 
-                        <h3 className="text-xl font-bold mb-3 text-[#256482] font-grotesk">
+                        <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-[#256482] transition-colors" style={{ fontFamily: "'Fraunces', serif" }}>
                           {step.title}
                         </h3>
 
-                        <ul className="list-none space-y-3 mb-5">
+                        <ul className="list-none space-y-3 mb-2">
                           {step.points.map((point, pIndex) => (
                             <li
                               key={pIndex}
-                              className="text-gray-600 flex items-start gap-3 font-sans"
+                              className="text-blue-50/80 group-hover:text-gray-600 flex items-start gap-3 text-lg transition-colors"
+                              style={{ fontFamily: "'DM Sans', sans-serif" }}
                             >
-                              <Check className="w-5 h-5 text-[#256482] flex-shrink-0 mt-0.5" />
-                              <span className={`${point.startsWith('“') ? 'italic' : ''}`}>{point}</span>
+                              <Check className="w-5 h-5 text-cyan-300 group-hover:text-[#256482] flex-shrink-0 mt-1 transition-colors" />
+                              <span className={`${point.startsWith('“') ? 'italic font-medium text-white group-hover:text-gray-800' : ''}`}>{point}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -302,56 +280,79 @@ const AboutSection: React.FC = () => {
         </section>
       </div>
 
-      {/* --- START OF RESTORED SECTION 2 (Team Introduction) --- */}
+      {/* === 3. TEAM INTRO SECTION === */}
       <div
-        className="text-gray-900"
+        className="text-gray-900 relative"
         style={{
-          backgroundColor: "#f9fafb", // This is tailwind's gray-50
-          backgroundImage: `radial-gradient(#e5e7eb 1px, transparent 1px)`,
-          backgroundSize: `24px 24px`,
+          backgroundColor: "#f9fafb",
+          backgroundImage: `radial-gradient(#d1d5db 1px, transparent 1px)`,
+          backgroundSize: `30px 30px`,
         }}
       >
-        {/* === 2. TEAM INTRODUCTION (Restored Section 2) === */}
         <section className={`py-24 md:py-32 relative overflow-hidden`}>
-          {/* Visible Glowing Blobs (matching the other section) */}
-          <div className="absolute top-0 left-0 w-48 h-48 bg-yellow-400 rounded-full opacity-20 blur-xl -z-0"></div>
-          <div className="absolute bottom-0 right-0 w-32 h-32 bg-[#FF6B50] rounded-full opacity-20 blur-xl -z-0"></div>
+          {/* Animated Blobs */}
+          <motion.div 
+            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
+            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            className="absolute top-0 left-0 w-80 h-80 bg-blue-200/40 rounded-full blur-[80px] -z-0"
+          ></motion.div>
+          <motion.div 
+            animate={{ scale: [1, 1.3, 1], x: [0, 50, 0] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-200/40 rounded-full blur-[80px] -z-0"
+          ></motion.div>
 
-          {/* Blobs for the bottom-right image */}
-          <div className="absolute bottom-0 right-0 w-48 h-48 bg-yellow-400 rounded-full opacity-20 blur-xl -z-0"></div>
-          <div className="absolute bottom-10 right-10 w-32 h-32 bg-[#FF6B50] rounded-full opacity-20 blur-xl -z-0"></div>
 
-          {/* Image 1: Top Left */}
-          <div className="hidden lg:block absolute top-16 left-16 w-64 h-40 rounded-lg overflow-hidden shadow-2xl transform -rotate-6">
+          {/* Floating Images */}
+          <motion.div 
+            initial={{ opacity: 0, x: -50, rotate: -3 }}
+            whileInView={{ opacity: 1, x: 0, rotate: -3 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            whileHover={{ scale: 1.05, rotate: 0, zIndex: 25 }}
+            className="hidden lg:block absolute top-16 left-16 w-80 h-56 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] border-4 border-white z-20"
+          >
             <Image
               src={whyChoose}
               alt="Team working together"
               fill
               className="object-cover"
             />
-          </div>
+          </motion.div>
 
-          {/* Image 2: Bottom Right */}
-          <div className="hidden lg:block absolute bottom-16 right-16 w-64 h-40 rounded-lg overflow-hidden shadow-2xl transform rotate-6">
+          <motion.div 
+             initial={{ opacity: 0, x: 50, rotate: 3 }}
+             whileInView={{ opacity: 1, x: 0, rotate: 3 }}
+             viewport={{ once: true }}
+             transition={{ duration: 1, delay: 0.2 }}
+             whileHover={{ scale: 1.05, rotate: 0, zIndex: 25 }}
+            className="hidden lg:block absolute bottom-16 right-16 w-80 h-56 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] border-4 border-white z-20"
+          >
             <Image
               src={whyChoose1}
               alt="Team in a meeting"
               fill
               className="object-cover"
             />
-          </div>
+          </motion.div>
 
-          <div className="container mx-auto px-8 sm:px-16 lg:px-24 relative z-10">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#256482] leading-snug mb-6 font-grotesk">
-                Get to know why brands trust Star Publicity.
+          <div className="container mx-auto px-8 sm:px-16 lg:px-24 relative">
+            <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="max-w-4xl mx-auto text-center bg-white/70 backdrop-blur-md p-10 rounded-[2.5rem] border border-white shadow-xl"
+            >
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#256482] leading-[1.1] mb-6 tracking-tight" style={{ fontFamily: "'Fraunces', serif" }}>
+                Get to know why brands trust <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Star Publicity.</span>
               </h2>
-              <p className="text-lg text-gray-600 leading-relaxed mb-10 font-sans">
+              <p className="text-xl text-gray-600 leading-relaxed mb-0 max-w-2xl mx-auto" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                 We are a dedicated team of specialists committed to helping
                 modern businesses grow. We deliver reliable results, transparent
                 service, and innovative solutions that build client trust.
               </p>
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -359,16 +360,22 @@ const AboutSection: React.FC = () => {
           <hr className="border-gray-200" />
         </div>
 
-        {/* === 3. STATS/METRICS (Replaced with Core Principles) === */}
-        <section ref={statsRef} className={`py-16 md:py-24`}>
+        {/* === 4. STATS SECTION === */}
+        <section className={`py-16 md:py-24`}>
           <div className="container mx-auto px-8 sm:px-16 lg:px-24">
             <div className="flex flex-col lg:flex-row items-start justify-between gap-12">
               {/* Left Side: Headline and CTA */}
-              <div className="w-full lg:w-5/12 relative text-left">
-                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#256482] leading-tight mb-6 font-grotesk">
-                  Where Ambitious Brands Achieve More{" "}
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="w-full lg:w-5/12 relative text-left"
+              >
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#256482] leading-none mb-8" style={{ fontFamily: "'Fraunces', serif" }}>
+                  Where Ambitious Brands Achieve More.
                 </h2>
-                <p className="text-lg text-gray-600 leading-relaxed mb-10 max-w-lg font-sans">
+                <p className="text-xl text-gray-600 leading-relaxed mb-10 max-w-lg" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                   Supercharge your brand's growth with Star Publicity. Our
                   creative strategies deliver quick, measurable results tailored
                   for your success.
@@ -376,42 +383,41 @@ const AboutSection: React.FC = () => {
 
                 <button
                   className="
-                    bg-[#2a7394] text-white font-medium py-3 px-8 rounded-md 
+                    bg-[#256482] text-white font-bold py-4 px-10 rounded-full text-lg
                     transition-all duration-300 ease-out
-                    hover:bg-[#225d7a] hover:shadow-lg hover:-translate-y-0.5"
+                    hover:bg-[#1e5068] hover:shadow-xl hover:-translate-y-1"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
                   Learn More
                 </button>
+              </motion.div>
 
-                {/* Decorative Shapes (mimicking the yellow/red blobs) */}
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#FF6B50] rounded-full opacity-20 blur-xl -z-0"></div>
-                <div className="absolute bottom-10 left-10 w-48 h-48 bg-yellow-400 rounded-full opacity-20 blur-xl -z-0"></div>
-              </div>
-
-              {/* Right Side: Principles (Replaces Animated Stats) */}
-              <div className="w-full lg:w-7/12 space-y-10">
+              {/* Right Side: Principles */}
+              <div className="w-full lg:w-7/12 space-y-12">
                 {statsData.map((stat, index) => (
-                  <div
+                  <motion.div
                     key={index}
-                    className="flex flex-col pb-8 border-b border-gray-200 last:border-b-0"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileHover={{ x: 10 }}
+                    className="flex flex-col pb-10 border-b border-gray-200 last:border-b-0 cursor-default group"
                   >
-                    {/* Title (Uses the large statistic font size) */}
                     <h3
-                      className={`text-3xl md:text-4xl font-extrabold ${stat.color} mb-2 font-grotesk`}
+                      className={`text-3xl md:text-4xl font-bold ${stat.color} mb-4 group-hover:text-cyan-600 transition-colors`}
+                      style={{ fontFamily: "'Fraunces', serif" }}
                     >
                       {stat.title}
                     </h3>
-
-                    {/* Description (Uses the label style) */}
-                    <p className="text-lg text-gray-600 font-sans">{stat.text}</p>
-                  </div>
+                    <p className="text-xl text-gray-600" style={{ fontFamily: "'DM Sans', sans-serif" }}>{stat.text}</p>
+                  </motion.div>
                 ))}
               </div>
             </div>
           </div>
         </section>
       </div>
-      {/* --- END OF NEW DARK-THEMED SECTION --- */}
     </>
   );
 };
