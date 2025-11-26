@@ -46,20 +46,7 @@ const FeaturedAccentPanel: React.FC<{ service: ServiceData }> = ({ service }) =>
                 {service.description}
             </p>
 
-            {/* Explore Button */}
-            <a 
-                href="#lets-talk"
-                className="inline-flex items-center text-base font-bold uppercase tracking-wider group mt-auto relative z-10"
-            >
-                <span className="opacity-0 transform -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">
-                    Explore
-                </span>
-                <span className="w-8 h-8 rounded-full bg-white/20 ml-3 flex items-center justify-center transition-all duration-300 ease-out group-hover:bg-white/40 group-hover:translate-x-1 group-hover:scale-110">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
-                </span>
-            </a>
+            {/* Explore button removed as requested */}
         </div>
     );
 };
@@ -239,7 +226,7 @@ export default function ServicesPage() {
                     </div>
 
                     {/* Right Column: Sticky Content */}
-                    <div className="lg:col-span-4 lg:sticky top-[5vh] h-[90vh]">
+                    <div className="lg:col-span-4 lg:sticky top-[15vh] h-[70vh]">
                         <div ref={contentRef} className="relative w-full h-full rounded-3xl overflow-hidden transition-colors duration-500" style={{backgroundColor: servicesData[0].accentColor}}>
                             {servicesData.map((service, index) => (
                                 <div key={index} className="service-content-panel absolute inset-0">
