@@ -11,7 +11,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 // --- Image Imports ---
-import web from './_images/web1.jpeg';
+import web from './_images/web1.png';
 import seo from './_images/seo.svg';
 import graphic from './_images/graphic1.jpeg';
 import game from './_images/game.svg';

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Jost } from "next/font/google";
 import "./globals.css";
-import icon from "../public/Star Digital Website Images/service/fevicon.png";
+import icon from "../app/services/_images/fevicon.png";
 
 // Import Jost from Google Fonts
 const jost = Jost({
