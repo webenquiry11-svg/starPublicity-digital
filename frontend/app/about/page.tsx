@@ -211,12 +211,12 @@ const AboutSection: React.FC = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="w-full lg:w-4/5 text-center lg:text-left lg:mt-24 sticky top-32"
+                className="w-full lg:w-4/5 text-center lg:text-left lg:mt-24 lg:sticky top-32"
               >
-                <h2 className="text-4xl sm:text-6xl md:text-8xl font-bold leading-[1.05] mb-8 text-white tracking-tight" style={{ fontFamily: "'Fraunces', serif" }}>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold leading-[1.05] mb-8 text-white tracking-tight" style={{ fontFamily: "'Fraunces', serif" }}>
                   Lead Growth With Precision And Expertise.
                 </h2>
-                <p className="text-xl text-blue-50/90 leading-relaxed mb-10 font-normal" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                <p className="text-lg sm:text-xl text-blue-50/90 leading-relaxed mb-10 font-normal" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                   Our rapid-response team leverages high-end tech and strategic
                   expertise to deliver outstanding results with remarkable speed
                   and precision.
@@ -241,7 +241,7 @@ const AboutSection: React.FC = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6, delay: index * 0.2 }}
-                    className="group relative pl-16 md:pl-20"
+                    className="group relative pl-14 md:pl-20"
                   >
                     {/* Timeline Marker icon */}
                     <div className="absolute left-2 md:left-2 top-0 w-8 h-8 md:w-10 md:h-10 bg-[#2a7394] border border-white/40 rounded-full flex items-center justify-center z-10 shadow-lg group-hover:bg-white group-hover:text-[#256482] transition-colors duration-300">
