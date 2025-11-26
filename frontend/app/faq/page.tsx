@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Triangle, // Used as a placeholder icon for the DNA/INDIGO logos
-  CheckCircle,
   Heart,
   Award,
   TrendingUp,
@@ -65,13 +63,11 @@ const AwardsSection = () => {
 
         const handleScroll = () => {
             const rect = sectionNode.getBoundingClientRect();
-            // The animation will happen as the section scrolls through the middle of the viewport
             const scrollStart = rect.top - window.innerHeight;
             const scrollDistance = window.innerHeight;
 
-            // Calculate progress from 0 to 1
             let progress = -scrollStart / scrollDistance;
-            progress = Math.max(0, Math.min(1, progress)); // Clamp between 0 and 1
+            progress = Math.max(0, Math.min(1, progress));
 
             setScrollProgress(progress);
         };
@@ -83,12 +79,6 @@ const AwardsSection = () => {
         };
     }, []);
     
-    // Pattern to mimic the faint circles behind the cards
-    const cardPatternStyle = {
-        backgroundImage: `radial-gradient(circle, rgba(0, 0, 0, 0.03) 10%, transparent 11%)`,
-        backgroundSize: '40px 40px',
-    };
-
   return (
     <section 
       ref={sectionRef}
@@ -96,10 +86,35 @@ const AwardsSection = () => {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         
+        {/* --- UPDATED ATTRACTIVE HEADING START --- */}
+        <div className="text-center mb-24 relative">
+             {/* Small decorative Badge - Using Purple to match the section theme */}
+            <span className="inline-block py-1 px-3 rounded-full bg-purple-50 text-purple-600 text-xs font-bold tracking-widest border border-purple-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                Our Values
+            </span>
+
+            {/* Main Title with Gradient and Font */}
+            <h2 
+                className="text-5xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 drop-shadow-sm tracking-tight"
+                style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+                Our Core Commitment
+            </h2>
+            
+            {/* Decorative Underline Bar */}
+            <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-purple-500 to-blue-500 opacity-80 mb-6"></div>
+
+            {/* Subtitle */}
+            <p className="text-lg text-slate-500 max-w-2xl mx-auto font-sans">
+                Excellence in Every Partnership
+            </p>
+        </div>
+        {/* --- UPDATED ATTRACTIVE HEADING END --- */}
+
         <div className="relative h-72">
           {awardCards.map((card) => (
             <div 
-              key={card.id} // This is the main animated container
+              key={card.id} 
               className={`absolute top-1/2 left-1/2 w-80 h-80 group`}
               style={{ 
                 transform: `
@@ -111,24 +126,21 @@ const AwardsSection = () => {
                 opacity: 0.5 + scrollProgress * 0.5,
               }}
             >
-                {/* New "Glassmorphism" Card Design */}
+                {/* Glassmorphism Card */}
                 <div 
                     className="relative w-full h-full p-6 bg-white/50 backdrop-blur-md rounded-2xl border border-white/30 flex flex-col justify-between cursor-pointer transition-all duration-300 group-hover:shadow-2xl group-hover:border-white/50"
                     style={{ boxShadow: `0 0 20px ${card.color}20, inset 0 0 0 1px ${card.color}00` }}
                 >
-                    {/* Glowing border effect on hover */}
                     <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: `0 0 25px ${card.color}80, inset 0 0 0 1px ${card.color}80` }}></div>
 
-                    {/* --- Top Content (Logo/Title) --- */}
                     <div className="relative z-10">
                         <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ backgroundColor: card.color }}>
                             {card.icon && <card.icon size={28} className="text-white" strokeWidth={2} />}
                         </div>
                     </div>
 
-                    {/* --- Bottom Content (Text & Source) --- */}
                     <div className="relative z-10 mt-auto text-left">
-                        <p className="text-2xl font-bold text-slate-800 mb-2 leading-tight font-grotesk">{card.text}</p>
+                        <p className="text-2xl font-bold text-slate-800 mb-2 leading-tight" style={{ fontFamily: "'Outfit', sans-serif" }}>{card.text}</p>
                         <p className="text-base text-slate-600 mb-3 leading-relaxed font-sans">{card.explanation}</p>
                         <p className="text-sm font-semibold uppercase tracking-wider text-slate-500 mt-auto font-sans">{card.source}</p>
                     </div>
@@ -188,26 +200,43 @@ const StoryByNumbersSection = () => {
 
   return (
     <section
-      className="py-12 bg-gray-50/50"
+      className="py-16 md:py-24 bg-gray-50/50"
       style={{
         backgroundImage:
           "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40' width='40' height='40'%3E%3Ccircle cx='20' cy='20' r='1' fill='rgba(0, 0, 0, 0.03)'/%3E%3C/svg%3E\")",
       }}
     >
       <div className="container mx-auto px-8 sm:px-16 lg:px-24">
-        <h2 className="text-4xl sm:text-5xl font-bold text-gray-800 mb-12 text-center font-grotesk">
-          Numbers That Define Us
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        
+        {/* --- NUMBERS SECTION HEADING --- */}
+        <div className="text-center mb-16 relative">
+             {/* Small decorative Badge */}
+            <span className="inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-600 text-xs font-bold tracking-widest border border-blue-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                Our Impact
+            </span>
+
+            {/* Main Title with Gradient and Font */}
+            <h2 
+                className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 drop-shadow-sm"
+                style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              Numbers That Define Us
+            </h2>
+            
+            {/* Decorative Underline Bar */}
+            <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-blue-500 to-teal-400 opacity-80"></div>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-4">
           {stats.map((stat, index) => (
-            <div key={index} className="flex flex-col p-4 border-gray-200 border-r [&:nth-child(2n)]:border-r-0 md:[&:nth-child(2n)]:border-r md:[&:nth-child(5n)]:border-r-0">
-              <div className="flex items-start text-6xl sm:text-7xl font-light text-gray-900 leading-none">
+            <div key={index} className="flex flex-col items-center md:items-start p-4 md:border-r border-gray-200 last:border-r-0 hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300 rounded-xl group">
+              <div className="flex items-start text-5xl sm:text-6xl xl:text-7xl font-light text-slate-800 leading-none group-hover:text-blue-700 transition-colors duration-300" style={{ fontFamily: "'Outfit', sans-serif" }}>
                 <AnimatedNumber target={parseInt(stat.number)} />
-                <span className="text-[#256482] font-bold text-2xl ml-1 mt-1 flex-shrink-0">
+                <span className="text-teal-500 font-bold text-2xl ml-1 mt-2 flex-shrink-0 group-hover:text-teal-400">
                   +
                 </span>
               </div>
-              <p className="text-lg text-gray-700 mt-2 font-sans">{stat.label}</p>
+              <p className="text-lg text-gray-500 mt-3 font-medium tracking-wide uppercase font-sans group-hover:text-gray-800 transition-colors">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -219,6 +248,11 @@ const StoryByNumbersSection = () => {
 export default function FaqPage() {
   return (
     <>
+      {/* Import fonts from Google Fonts */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap');
+      `}} />
+      
       <AwardsSection />
       <StoryByNumbersSection />
     </>

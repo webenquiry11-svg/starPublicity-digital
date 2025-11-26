@@ -240,7 +240,7 @@ const AboutSection: React.FC = () => {
               {/* Left Column: Headline and CTA */}
               <div className="w-full lg:w-4/5 text-left lg:mt-24">
                 <h2 className="text-6xl md:text-7xl font-extrabold leading-tight mb-6 text-white font-grotesk">
-                  Harness AI Innovation for Seamless Brand Impact
+                  Lead Growth With Precision And Expertise...
                 </h2>
                 <p className="text-xl text-blue-100 leading-relaxed mb-10 font-sans">
                   Our rapid-response team leverages high-end tech and strategic
