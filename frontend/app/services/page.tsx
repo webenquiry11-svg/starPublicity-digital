@@ -83,7 +83,7 @@ const MainVisualArea: React.FC<{ children: React.ReactNode, layout: 'left' | 'ri
     
     return (
         <div 
-            className={`w-full relative flex items-center justify-center p-0 h-[90vh]`}
+            className={`w-full relative flex items-center justify-center p-0 h-[70vh]`}
         >
             <div className="w-full h-full relative rounded-3xl overflow-hidden">{children}</div>
         </div>
