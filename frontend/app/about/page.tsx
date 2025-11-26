@@ -184,8 +184,8 @@ const AboutSection: React.FC = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               {/* Left Column: Headline and CTA */}
-              <div className="order-2 lg:order-1">
-                <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6 text-[#256482] font-grotesk">
+              <div className="order-2 lg:order-1 text-center lg:text-left">
+                <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-tight mb-6 text-[#256482] font-grotesk">
                   Redefining Results, Building Your Success
                 </h1>
                 <p className="text-xl text-gray-700 leading-relaxed mb-10 font-sans">
@@ -193,13 +193,13 @@ const AboutSection: React.FC = () => {
                 </p>
 
                 {/* New Quote */}
-                <p className="text-2xl font-semibold text-[#256482] italic mt-8 font-sans">
+                <p className="text-xl sm:text-2xl font-semibold text-[#256482] italic mt-8 font-sans">
                   "Where creativity sparks your story"
                 </p>
               </div>
 
               {/* Right Column: Imagery (Placeholder) */}
-              <div className="order-1 lg:order-2 relative h-96 w-full flex justify-center lg:justify-end">
+              <div className="order-1 lg:order-2 relative h-72 sm:h-96 w-full flex justify-center lg:justify-end">
                 <div className="w-[80%] h-full rounded-lg shadow-xl relative overflow-hidden">
                   <Image
                     src={whyChoose}
@@ -238,8 +238,8 @@ const AboutSection: React.FC = () => {
           <div className="container mx-auto px-8 sm:px-16 lg:px-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
               {/* Left Column: Headline and CTA */}
-              <div className="w-full lg:w-4/5 text-left lg:mt-24">
-                <h2 className="text-6xl md:text-7xl font-extrabold leading-tight mb-6 text-white font-grotesk">
+              <div className="w-full lg:w-4/5 text-center lg:text-left lg:mt-24">
+                <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-tight mb-6 text-white font-grotesk">
                   Lead Growth With Precision And Expertise...
                 </h2>
                 <p className="text-xl text-blue-100 leading-relaxed mb-10 font-sans">
@@ -343,7 +343,7 @@ const AboutSection: React.FC = () => {
 
           <div className="container mx-auto px-8 sm:px-16 lg:px-24 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-4xl md:text-5xl font-bold text-[#256482] leading-snug mb-6 font-grotesk">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#256482] leading-snug mb-6 font-grotesk">
                 Get to know why brands trust Star Publicity.
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed mb-10 font-sans">
@@ -365,7 +365,7 @@ const AboutSection: React.FC = () => {
             <div className="flex flex-col lg:flex-row items-start justify-between gap-12">
               {/* Left Side: Headline and CTA */}
               <div className="w-full lg:w-5/12 relative text-left">
-                <h2 className="text-5xl md:text-6xl font-bold text-[#256482] leading-tight mb-6 font-grotesk">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#256482] leading-tight mb-6 font-grotesk">
                   Where Ambitious Brands Achieve More{" "}
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-10 max-w-lg font-sans">

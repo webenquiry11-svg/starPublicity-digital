@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useLayoutEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { Check } from "lucide-react";
 import { gsap } from "gsap";
@@ -82,7 +82,7 @@ const SectionHeading = ({
       </div>
 
       <h2
-        className="text-5xl md:text-7xl font-bold text-slate-900 mb-6 tracking-tight leading-[1.1]"
+        className="text-4xl sm:text-5xl md:text-7xl font-bold text-slate-900 mb-6 tracking-tight leading-[1.1]"
         style={{ fontFamily: "'Playfair Display', serif" }}
       >
         {titleNormal}{" "}
@@ -182,8 +182,8 @@ const MainVisualArea: React.FC<{
   layout: "left" | "right";
 }> = ({ children, layout }) => {
     return (
-        <div 
-            className={`w-full relative flex items-center justify-center p-0 h-[70vh]`}
+        <div
+            className={`w-full relative flex items-center justify-center p-0 h-[50vh] md:h-[70vh]`}
         >
             <div className="w-full h-full relative rounded-3xl overflow-hidden">{children}</div>
         </div>
@@ -318,6 +318,7 @@ const servicesData: ServiceData[] = [
 export default function ServicesPage() {
     const sectionRef = useRef<HTMLElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+    const [isMobile, setIsMobile] = useState(false);
 
     useLayoutEffect(() => {
         const section = sectionRef.current;
@@ -358,7 +359,59 @@ export default function ServicesPage() {
         }, section);
 
         return () => ctx.revert();
+    }, [isMobile]);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
     }, []);
+
+    if (isMobile) {
+        return (
+            <section className="bg-white py-20">
+                <style
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&display=swap');
+                `,
+                    }}
+                />
+
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <SectionHeading
+                        badge="What We Do"
+                        titleNormal="Our Premium"
+                        titleItalic="Services"
+                        subtext="A comprehensive suite of creative and technical solutions designed to elevate your brand."
+                        color="teal"
+                    />
+
+                    <div className="space-y-12">
+                        {servicesData.map((service, index) => (
+                            <div key={index} className="rounded-3xl overflow-hidden shadow-lg border border-gray-100">
+                                {/* Image Area */}
+                                <div className="w-full relative flex items-center justify-center p-0 h-[40vh] bg-gray-50">
+                                    <div className="w-full h-full relative">
+                                        <service.VisualComponent />
+                                    </div>
+                                </div>
+                                
+                                {/* Content Area */}
+                                <div
+                                    className="relative"
+                                    style={{ backgroundColor: service.accentColor }}
+                                >
+                                    <FeaturedAccentPanel service={service} />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        );
+    }
 
     return (
         <section ref={sectionRef} className="bg-white py-20">
@@ -395,7 +448,7 @@ export default function ServicesPage() {
                     </div>
 
                     {/* Right Column: Sticky Content */}
-                    <div className="lg:col-span-4 lg:sticky top-[15vh] h-[70vh]">
+                    <div className="lg:col-span-4 lg:sticky top-[15vh] h-[50vh] md:h-[70vh]">
                         <div ref={contentRef} className="relative w-full h-full rounded-3xl overflow-hidden transition-colors duration-500" style={{backgroundColor: servicesData[0].accentColor}}>
                             {servicesData.map((service, index) => (
                                 <div key={index} className="service-content-panel absolute inset-0">

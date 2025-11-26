@@ -65,13 +65,15 @@ export const ContactSection: React.FC = () => {
                         <p className="text-xl md:text-2xl font-medium text-gray-300 mb-4 font-sans">
                             Got an idea? Connect with our team and let’s make something extraordinary together.
                         </p>
-                        <h2 className="text-6xl md:text-8xl font-extrabold tracking-tight font-grotesk">
+                        <h2 className="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tight font-grotesk">
                             LET’S CONNECT
                         </h2>
                     </div>
                     
                     {/* Right Side: Form */}
-                    <div className="w-full lg:col-span-5">
+                    <div 
+                        className="w-full lg:col-span-5 bg-white/10 lg:bg-transparent p-8 lg:p-0 rounded-2xl lg:rounded-none border border-white/20 lg:border-none shadow-lg lg:shadow-none backdrop-blur-sm lg:backdrop-blur-none"
+                    >
                         <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
                             <div>
                                 <label htmlFor="cta-name" className="sr-only">Name</label>

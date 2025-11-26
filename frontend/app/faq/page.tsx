@@ -56,6 +56,7 @@ const awardCards = [
 const AwardsSection = () => {
     const [scrollProgress, setScrollProgress] = useState(0);
     const sectionRef = useRef<HTMLDivElement>(null);
+    const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
         const sectionNode = sectionRef.current;
@@ -77,7 +78,64 @@ const AwardsSection = () => {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
+    }, [isMobile]);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
     }, []);
+
+    if (isMobile) {
+        // Render a static grid for mobile
+        return (
+            <section className="py-20 md:py-32 bg-gray-50">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16 relative">
+                        <span className="inline-block py-1 px-3 rounded-full bg-purple-50 text-purple-600 text-xs font-bold tracking-widest border border-purple-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                            Our Values
+                        </span>
+                        <h2 
+                            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 drop-shadow-sm tracking-tight"
+                            style={{ fontFamily: "'Playfair Display', serif" }}
+                        >
+                            Our Core Commitment
+                        </h2>
+                        <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-purple-500 to-blue-500 opacity-80 mb-6"></div>
+                        <p className="text-lg text-slate-500 max-w-2xl mx-auto font-sans">
+                            Excellence in Every Partnership
+                        </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        {awardCards.map((card) => (
+                            <div key={card.id} className="w-full h-full group">
+                                <div 
+                                    className="relative w-full h-full p-6 bg-white/50 backdrop-blur-md rounded-2xl border border-white/30 flex flex-col justify-between cursor-pointer transition-all duration-300 group-hover:shadow-2xl group-hover:border-white/50"
+                                    style={{ boxShadow: `0 0 20px ${card.color}20, inset 0 0 0 1px ${card.color}00` }}
+                                >
+                                    <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: `0 0 25px ${card.color}80, inset 0 0 0 1px ${card.color}80` }}></div>
+
+                                    <div className="relative z-10">
+                                        <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ backgroundColor: card.color }}>
+                                            {card.icon && <card.icon size={28} className="text-white" strokeWidth={2} />}
+                                        </div>
+                                    </div>
+
+                                    <div className="relative z-10 mt-auto text-left">
+                                        <p className="text-2xl font-bold text-slate-800 mb-2 leading-tight" style={{ fontFamily: "'Outfit', sans-serif" }}>{card.text}</p>
+                                        <p className="text-base text-slate-600 mb-3 leading-relaxed font-sans">{card.explanation}</p>
+                                        <p className="text-sm font-semibold uppercase tracking-wider text-slate-500 mt-auto font-sans">{card.source}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        );
+    }
     
   return (
     <section 
@@ -95,7 +153,7 @@ const AwardsSection = () => {
 
             {/* Main Title with Gradient and Font */}
             <h2 
-                className="text-5xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 drop-shadow-sm tracking-tight"
+                className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 drop-shadow-sm tracking-tight"
                 style={{ fontFamily: "'Playfair Display', serif" }}
             >
                 Our Core Commitment
@@ -111,16 +169,18 @@ const AwardsSection = () => {
         </div>
         {/* --- UPDATED ATTRACTIVE HEADING END --- */}
 
-        <div className="relative h-72">
+        <div className="relative h-72 w-full">
           {awardCards.map((card) => (
             <div 
               key={card.id} 
-              className={`absolute top-1/2 left-1/2 w-80 h-80 group`}
+              className={`absolute top-1/2 left-1/2 w-72 sm:w-80 h-72 sm:h-80 group`}
               style={{ 
-                transform: `
-                  translateX(calc(-50% + ${scrollProgress * (card.id * 380 - 950)}px)) 
+                transform: ` 
+                  translateX(calc(-50% + ${scrollProgress * (card.id * 380 - 950)}px))
                   translateY(-50%) 
-                  rotate(${(scrollProgress * card.rotation) + (1 - scrollProgress) * (card.id * 2 - 5)}deg) 
+                  rotate(${
+                    (scrollProgress * card.rotation) + (1 - scrollProgress) * (card.id * 2 - 5)
+                  }deg)
                   scale(${0.8 + scrollProgress * 0.2})
                 `,
                 opacity: 0.5 + scrollProgress * 0.5,
@@ -217,7 +277,7 @@ const StoryByNumbersSection = () => {
 
             {/* Main Title with Gradient and Font */}
             <h2 
-                className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 drop-shadow-sm"
+                className="text-3xl sm:text-5xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 drop-shadow-sm"
                 style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Numbers That Define Us
