@@ -11,12 +11,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 // --- Image Imports ---
-import web from '../../public/Star Digital Website Images/service/web1.jpeg';
-import seo from '../../public/Star Digital Website Images/service/seo.svg';
-import graphic from '../../public/Star Digital Website Images/service/graphic1.jpeg';
-import game from '../../public/Star Digital Website Images/service/game.svg';
-import digital from '../../public/Star Digital Website Images/service/digital1.png';
-import arvr from '../../public/Star Digital Website Images/service/arvr.svg';
+import web from './_images/web1.jpeg';
+import seo from './_images/seo.svg';
+import graphic from './_images/graphic1.jpeg';
+import game from './_images/game.svg';
+import digital from './_images/digital1.png';
+import arvr from './_images/arvr.svg';
 
 // --- 1. Reusable Components ---
 
