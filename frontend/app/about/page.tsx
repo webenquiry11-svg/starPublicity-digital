@@ -7,7 +7,7 @@ import whyChoose from "../../public/Star Digital Website Images/why choose.png";
 import whyChoose1 from "../../public/Star Digital Website Images/why choose1.png";
 
 import { Check } from "lucide-react";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring, Variants } from "framer-motion";
 
 // --- Data Definitions ---
 
@@ -76,7 +76,7 @@ const corePrinciples = [
 ];
 
 // --- Animation Variants ---
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { 
     opacity: 1,
@@ -87,7 +87,7 @@ const containerVariants = {
   }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { 
     opacity: 1, 
