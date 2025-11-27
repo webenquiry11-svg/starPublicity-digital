@@ -241,10 +241,10 @@ const AboutSection: React.FC = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6, delay: index * 0.2 }}
-                    className="group relative pl-14 md:pl-20"
+                    className="group relative md:pl-20"
                   >
                     {/* Timeline Marker icon */}
-                    <div className="absolute left-2 md:left-2 top-0 w-8 h-8 md:w-10 md:h-10 bg-[#2a7394] border border-white/40 rounded-full flex items-center justify-center z-10 shadow-lg group-hover:bg-white group-hover:text-[#256482] transition-colors duration-300">
+                    <div className="absolute left-2 md:left-2 top-0 w-8 h-8 md:w-10 md:h-10 bg-[#2a7394] border border-white/40 rounded-full items-center justify-center z-10 shadow-lg group-hover:bg-white group-hover:text-[#256482] transition-colors duration-300 hidden md:flex">
                       <span className="text-lg md:text-xl">{step.icon}</span>
                     </div>
 
