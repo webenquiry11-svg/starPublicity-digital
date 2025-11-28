@@ -345,7 +345,7 @@ const AboutSection: React.FC = () => {
                 className="max-w-4xl mx-auto text-center bg-white/70 backdrop-blur-md p-10 rounded-[2.5rem] border border-white shadow-xl"
             >
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#256482] leading-[1.1] mb-6 tracking-tight" style={{ fontFamily: "'Fraunces', serif" }}>
-                Get to know why brands trust <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Star Publicity.</span>
+                Get to know why brands trust <span className="text-[#256482]">Star Publicity.</span>
               </h2>
               <p className="text-xl text-gray-600 leading-relaxed mb-0 max-w-2xl mx-auto" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                 We are a dedicated team of specialists committed to helping

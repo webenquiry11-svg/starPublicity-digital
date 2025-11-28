@@ -65,7 +65,7 @@ export const ContactSection: React.FC = () => {
                         <p className="text-xl md:text-2xl font-medium text-gray-300 mb-4 font-sans">
                             Got an idea? Connect with our team and let’s make something extraordinary together.
                         </p>
-                        <h2 className="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tight font-grotesk">
+                        <h2 className="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tight font-grotesk text-transparent bg-clip-text bg-gradient-to-b from-cyan-300 to-white">
                             LET’S CONNECT
                         </h2>
                     </div>

@@ -93,16 +93,16 @@ const AwardsSection = () => {
             <section className="py-20 md:py-32 bg-gray-50">
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16 relative">
-                        <span className="inline-block py-1 px-3 rounded-full bg-purple-50 text-purple-600 text-xs font-bold tracking-widest border border-purple-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                        <span className="inline-block py-1 px-3 rounded-full bg-teal-50 text-teal-600 text-xs font-bold tracking-widest border border-teal-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif" }}>
                             Our Values
                         </span>
                         <h2 
-                            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 drop-shadow-sm tracking-tight"
+                            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-slate-900 drop-shadow-sm tracking-tight"
                             style={{ fontFamily: "'Playfair Display', serif" }}
                         >
                             Our Core Commitment
                         </h2>
-                        <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-purple-500 to-blue-500 opacity-80 mb-6"></div>
+                        <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-teal-500 to-blue-500 opacity-80 mb-6"></div>
                         <p className="text-lg text-slate-500 max-w-2xl mx-auto font-sans">
                             Excellence in Every Partnership
                         </p>
@@ -146,21 +146,21 @@ const AwardsSection = () => {
         
         {/* --- UPDATED ATTRACTIVE HEADING START --- */}
         <div className="text-center mb-24 relative">
-             {/* Small decorative Badge - Using Purple to match the section theme */}
-            <span className="inline-block py-1 px-3 rounded-full bg-purple-50 text-purple-600 text-xs font-bold tracking-widest border border-purple-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif" }}>
+             {/* Small decorative Badge - Using Teal to match the brand theme */}
+            <span className="inline-block py-1 px-3 rounded-full bg-teal-50 text-teal-600 text-xs font-bold tracking-widest border border-teal-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif" }}>
                 Our Values
             </span>
 
             {/* Main Title with Gradient and Font */}
             <h2 
-                className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 drop-shadow-sm tracking-tight"
+                className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-slate-900 drop-shadow-sm tracking-tight"
                 style={{ fontFamily: "'Playfair Display', serif" }}
             >
                 Our Core Commitment
             </h2>
             
             {/* Decorative Underline Bar */}
-            <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-purple-500 to-blue-500 opacity-80 mb-6"></div>
+            <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-teal-500 to-blue-500 opacity-80 mb-6"></div>
 
             {/* Subtitle */}
             <p className="text-lg text-slate-500 max-w-2xl mx-auto font-sans">
@@ -270,21 +270,21 @@ const StoryByNumbersSection = () => {
         
         {/* --- NUMBERS SECTION HEADING --- */}
         <div className="text-center mb-16 relative">
-             {/* Small decorative Badge */}
-            <span className="inline-block py-1 px-3 rounded-full bg-blue-50 text-blue-600 text-xs font-bold tracking-widest border border-blue-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif" }}>
+             {/* Small decorative Badge - Updated to Teal */}
+            <span className="inline-block py-1 px-3 rounded-full bg-teal-50 text-teal-600 text-xs font-bold tracking-widest border border-teal-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif" }}>
                 Our Impact
             </span>
 
             {/* Main Title with Gradient and Font */}
             <h2 
-                className="text-3xl sm:text-5xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 drop-shadow-sm"
+                className="text-3xl sm:text-5xl md:text-6xl font-bold mb-6 text-slate-900 drop-shadow-sm tracking-tight"
                 style={{ fontFamily: "'Playfair Display', serif" }}
             >
               Numbers That Define Us
             </h2>
             
             {/* Decorative Underline Bar */}
-            <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-blue-500 to-teal-400 opacity-80"></div>
+            <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-teal-500 to-blue-500 opacity-80"></div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-4">
