@@ -216,8 +216,8 @@ export const Footer: React.FC = () => {
                         <h4 className="text-sm font-semibold mb-4 tracking-wider text-gray-500 font-grotesk">CHAT WITH US</h4>
                         <div className="space-y-2 text-sm">
                             <p className="text-gray-900 font-semibold font-sans">0161-4668602</p>
-                            <a href="mailto:info@starpublicity.co.in" className="text-gray-600 hover:text-gray-900 transition-colors font-sans">
-                                info@starpublicity.co.in
+                            <a href="mailto:sales@starpublicity.org" className="text-gray-600 hover:text-gray-900 transition-colors font-sans">
+                                sales@starpublicity.org
                             </a>
                         </div>
                     </div>
