@@ -47,6 +47,35 @@ const HIGHLIGHTED_BUTTON_CLASSES = `
 
 const HeroSectionWithNavbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '', message: '' });
+  const [status, setStatus] = useState({ message: '', error: false, submitting: false });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+      setStatus({ message: 'Sending...', error: false, submitting: true });
+
+      try {
+          const response = await fetch('/api/contact', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(formData),
+          });
+
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.message || 'Something went wrong.');
+
+          setStatus({ message: result.message, error: false, submitting: false });
+          setFormData({ name: '', phone: '', email: '', message: '' }); // Clear form
+
+      } catch (error: any) {
+          setStatus({ message: error.message, error: true, submitting: false });
+      }
+  };
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -197,15 +226,20 @@ const HeroSectionWithNavbar: React.FC = () => {
               <div className={`absolute top-full right-0 mt-3 w-[350px] p-6 bg-white rounded-xl shadow-2xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:scale-100 scale-95 transition-all duration-300 ease-out z-40 origin-top-right`}>
                 <h4 className="font-bold text-lg mb-1 text-gray-900">Quick Enquiry</h4>
                 <p className="text-sm text-gray-600 mb-4">Let us know what you're looking for.</p>
-                <form onSubmit={(e) => e.preventDefault()} className="space-y-3">
-                  <div><input type="text" placeholder="Your Name" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" /></div>
-                  <div><input type="tel" placeholder="Your Phone Number" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" /></div>
-                  <div><input type="email" placeholder="Your Email" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" /></div>
-                  <div><textarea placeholder="Your Message" rows={3} className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md resize-none focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]"></textarea></div>
-                  <button type="submit" className="w-full flex items-center justify-center gap-2 text-sm text-white font-semibold py-2 px-4 rounded-md transition-colors bg-[#2a7394] hover:bg-[#225d7a]">
-                    Send Enquiry <Send size={16} />
+                <form onSubmit={handleSubmit} className="space-y-3">
+                  <div><input type="text" name="name" placeholder="Your Name" value={formData.name} onChange={handleInputChange} required className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" /></div>
+                  <div><input type="tel" name="phone" placeholder="Your Phone Number" value={formData.phone} onChange={handleInputChange} className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" /></div>
+                  <div><input type="email" name="email" placeholder="Your Email" value={formData.email} onChange={handleInputChange} required className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" /></div>
+                  <div><textarea name="message" placeholder="Your Message" value={formData.message} onChange={handleInputChange} required rows={3} className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md resize-none focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]"></textarea></div>
+                  <button type="submit" disabled={status.submitting} className="w-full flex items-center justify-center gap-2 text-sm text-white font-semibold py-2 px-4 rounded-md transition-colors bg-[#2a7394] hover:bg-[#225d7a] disabled:bg-gray-400 disabled:cursor-not-allowed">
+                    {status.submitting ? 'Sending...' : 'Send Enquiry'} <Send size={16} />
                   </button>
                 </form>
+                {status.message && (
+                  <p className={`text-sm mt-3 text-center ${status.error ? 'text-red-600' : 'text-green-600'}`}>
+                    {status.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>
