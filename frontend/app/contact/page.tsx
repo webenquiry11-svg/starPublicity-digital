@@ -30,7 +30,7 @@ const serviceLinks = [
     { name: 'Digital Marketing', href: '/services/digital' },
     { name: 'Website Design', href: '/services/webdesign' },
     { name: 'Branding', href: '/services/branding' },
-    { name: 'Social Media', href: '/services/social' },
+    { name: 'Immersive Technology', href: '/services/social' },
     { name: 'SEO', href: '/services/seo' },
 ];
 

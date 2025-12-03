@@ -37,7 +37,7 @@ const awardCards = [
     text: "Satisfaction",
     explanation: "We are dedicated to exceeding your expectations and building trusted relationships through tailored solutions.",
     source: "Our Promise",
-    color: "#14b8a6", // Mint Green/Teal
+    color: "#2a7394",
     rotation: -3, // Slight tilt left
   },
   {
@@ -146,23 +146,23 @@ const AwardsSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* --- UPDATED ATTRACTIVE HEADING START --- */}
-        <div className="text-center mb-24 relative">
+        <div className="text-center mb-24 relative">          
              {/* Small decorative Badge - Using Teal to match the brand theme */}
-            <span className="inline-block py-1 px-3 rounded-full bg-teal-50 text-teal-600 text-xs font-bold tracking-widest border border-teal-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif" }}>
+            <span className="inline-block py-1 px-3 rounded-full bg-blue-50 text-xs font-bold tracking-widest border border-blue-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif", color: '#2a7394' }}>
                 Our Values
-            </span>
+            </span>            
 
             {/* Main Title with Gradient and Font */}
             <h2 
                 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 drop-shadow-sm tracking-tight"
                 style={{ fontFamily: "'Playfair Display', serif" }}
             >
-                <span className="text-slate-900">Our Core </span>
-                <span className="text-teal-600">Commitment</span>
+                <span className="text-slate-900">Our Core </span>                
+                <span style={{ color: '#2a7394' }}>Commitment</span>
             </h2>
             
             {/* Decorative Underline Bar */}
-            <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-teal-500 to-teal-700 opacity-80 mb-6"></div>
+            <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-[#2a7394] to-blue-500 opacity-80 mb-6"></div>
 
             {/* Subtitle */}
             <p className="text-lg text-slate-500 max-w-2xl mx-auto font-sans">
@@ -270,24 +270,24 @@ const StoryByNumbersSection = () => {
     >
       <div className="container mx-auto px-8 sm:px-16 lg:px-24">
         
-        {/* --- NUMBERS SECTION HEADING --- */}
-        <div className="text-center mb-16 relative">
+        {/* --- NUMBERS SECTION HEADING --- */}        
+        <div className="text-center mb-16 relative">          
              {/* Small decorative Badge - Updated to Teal */}
-            <span className="inline-block py-1 px-3 rounded-full bg-teal-50 text-teal-600 text-xs font-bold tracking-widest border border-teal-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif" }}>
+            <span className="inline-block py-1 px-3 rounded-full bg-blue-50 text-xs font-bold tracking-widest border border-blue-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif", color: '#2a7394' }}>
                 Our Impact
-            </span>
+            </span>            
 
             {/* Main Title with Gradient and Font */}
             <h2 
                 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-6 drop-shadow-sm tracking-tight"
                 style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              <span className="text-slate-900">Numbers That </span>
-              <span className="text-teal-600">Define Us</span>
+              <span className="text-slate-900">Numbers That </span>              
+              <span style={{ color: '#2a7394' }}>Define Us</span>
             </h2>
             
             {/* Decorative Underline Bar */}
-            <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-teal-500 to-blue-500 opacity-80"></div>
+            <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-[#2a7394] to-blue-500 opacity-80"></div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-4">
@@ -295,7 +295,7 @@ const StoryByNumbersSection = () => {
             <div key={index} className="flex flex-col items-center md:items-start p-4 md:border-r border-gray-200 last:border-r-0 hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300 rounded-xl group">
               <div className="flex items-start text-5xl sm:text-6xl xl:text-7xl font-light text-slate-800 leading-none group-hover:text-blue-700 transition-colors duration-300" style={{ fontFamily: "'Outfit', sans-serif" }}>
                 <AnimatedNumber target={parseInt(stat.number)} />
-                <span className="text-teal-500 font-bold text-2xl ml-1 mt-2 flex-shrink-0 group-hover:text-teal-400">
+                <span className="font-bold text-2xl ml-1 mt-2 flex-shrink-0 group-hover:text-blue-400" style={{ color: '#2a7394' }}>
                   +
                 </span>
               </div>
