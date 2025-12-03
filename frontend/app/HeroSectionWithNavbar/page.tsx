@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-// Added icons for the new menu
 import { 
   Mail, 
   User, 
@@ -17,7 +16,12 @@ import {
   MapPin, 
   Instagram, 
   Linkedin, 
-  Twitter 
+  Twitter,
+  // NEW ICONS ADDED FOR ANIMATION
+  TrendingUp,
+  CheckCircle,
+  Zap,
+  Users
 } from 'lucide-react';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import herobg from '../../public/Star Digital Website Images/herobg.png';
@@ -31,28 +35,12 @@ const navLinks = [
   { name: 'Contact Us', href: '#contact' },
 ];
 
-const services = [
-  "Digital Marketing",
-  "Graphic Designing",
-  "Web Development",
-  "AR/VR Development",
-  "Game Development",
-  "Other"
-];
-
-// Custom Tailwind classes for the NEW Button design (Sliding Border Highlight)
-// KEPT EXACTLY AS YOU HAD IT
 const HIGHLIGHTED_BUTTON_CLASSES = `
-  // Base Container & Styling
   group relative inline-flex items-center justify-center 
   px-7 py-3 rounded-md text-sm tracking-wider font-extrabold text-white
   overflow-hidden
-  
-  // Appearance
-  bg-gray-800 // Dark base for contrast
+  bg-gray-800 
   shadow-lg shadow-[#3590ba]/40
-  
-  // Transition effects
   transition-all duration-300 ease-out 
   transform hover:scale-[1.05] hover:bg-gray-700
 `;
@@ -60,7 +48,6 @@ const HIGHLIGHTED_BUTTON_CLASSES = `
 const HeroSectionWithNavbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Prevent scrolling on body when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -71,9 +58,26 @@ const HeroSectionWithNavbar: React.FC = () => {
 
   return (
     <section className={`relative min-h-[750px] md:min-h-screen overflow-hidden flex flex-col`}>
-      {/* Loading fonts ONLY for the mobile menu aesthetics */}
+      
+      {/* Styles for Animations & Fonts */}
       <style dangerouslySetInnerHTML={{__html: `
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+        
+        @keyframes float-slow {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        @keyframes float-medium {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-15px); }
+        }
+        @keyframes float-fast {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+        .animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+        .animate-float-medium { animation: float-medium 5s ease-in-out infinite; }
+        .animate-float-fast { animation: float-fast 4s ease-in-out infinite; }
       `}} />
 
       <Image
@@ -84,13 +88,71 @@ const HeroSectionWithNavbar: React.FC = () => {
         className="object-cover -z-10"
       />
 
-      {/* --- Lottie Animation (KEPT AS IS) --- */}
-      <div className="absolute w-[70%] lg:w-[45%] h-auto bottom-24 right-0 max-w-[800px] z-10 hidden lg:block">
-        <DotLottieReact
-          src="https://lottie.host/f271b9db-0428-4d88-8e82-25d477b70f5c/DjqC6KkSpS.lottie"
-          loop
-          autoplay
-        />
+      {/* --- IMPROVED RIGHT SIDE COMPOSITION --- */}
+      <div className="absolute w-[70%] lg:w-[50%] h-auto bottom-10 right-0 max-w-[900px] z-10 hidden lg:block pointer-events-none">
+        <div className="relative w-full h-[600px] flex items-center justify-center">
+          
+          {/* 1. Ambient Glow (Backdrop) */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#3590ba]/20 rounded-full blur-[80px]"></div>
+
+          {/* 2. Main Lottie Animation */}
+          <div className="relative z-10 scale-110">
+            <DotLottieReact
+              src="https://lottie.host/bb8b224e-280e-4f31-85b1-180ab1f0aa3e/HltEmErHf6.lottie"
+              loop
+              autoplay
+            />
+          </div>
+
+          {/* 3. Floating Glass Card: Growth */}
+          <div className="absolute top-20 left-20 z-20 animate-float-slow">
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl shadow-xl flex items-center gap-3 w-48">
+              <div className="bg-green-500/20 p-2 rounded-lg">
+                <TrendingUp size={24} className="text-green-600" />
+              </div>
+              <div>
+                <p className="text-xs text-gray-500 font-semibold uppercase">Revenue</p>
+                <p className="text-lg font-bold text-gray-800">+127%</p>
+              </div>
+            </div>
+          </div>
+
+          {/* 4. Floating Glass Card: Success */}
+          <div className="absolute bottom-32 left-10 z-20 animate-float-medium" style={{ animationDelay: '1s' }}>
+             <div className="bg-white/80 backdrop-blur-md border border-white/40 px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
+                <CheckCircle size={18} className="text-[#3590ba]" />
+                <span className="text-sm font-bold text-slate-700">98% Success Rate</span>
+             </div>
+          </div>
+
+          {/* 5. Floating Glass Card: Efficiency */}
+          <div className="absolute top-40 right-20 z-20 animate-float-fast" style={{ animationDelay: '2s' }}>
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 p-3 rounded-xl shadow-xl flex flex-col items-center gap-1 w-24">
+               <div className="bg-yellow-400/20 p-2 rounded-full mb-1">
+                 <Zap size={20} className="text-yellow-600" />
+               </div>
+               <span className="text-xs font-bold text-slate-600">Fast AI</span>
+            </div>
+          </div>
+
+          {/* 6. Floating Glass Card: Happy Clients (NEW) */}
+          <div className="absolute bottom-24 right-10 z-20 animate-float-slow" style={{ animationDelay: '0.5s' }}>
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl shadow-xl flex items-center gap-3 w-48">
+              <div className="bg-purple-500/20 p-2 rounded-lg">
+                <Users size={24} className="text-purple-600" />
+              </div>
+              <div>
+                <p className="text-xs text-gray-500 font-semibold uppercase">Happy Clients</p>
+                <p className="text-lg font-bold text-gray-800">500+</p>
+              </div>
+            </div>
+          </div>
+
+          {/* 6. Decorative Particles */}
+          <div className="absolute top-10 right-1/2 w-3 h-3 bg-cyan-400 rounded-full animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-2 h-2 bg-blue-600 rounded-full animate-pulse delay-700"></div>
+
+        </div>
       </div>
 
       {/* --- Navbar --- */}
@@ -106,7 +168,7 @@ const HeroSectionWithNavbar: React.FC = () => {
             />
           </Link>
 
-          {/* Navigation Links (Desktop - KEPT AS IS) */}
+          {/* Navigation Links */}
           <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link, index) => (
               <Link key={index} href={link.href} className="text-gray-700 font-medium hover:text-[#256482] transition-colors duration-200 uppercase text-base tracking-wider">
@@ -115,50 +177,28 @@ const HeroSectionWithNavbar: React.FC = () => {
             ))}
           </div>
 
-          {/* CTA Button: "Get a Free Quote" (Highlighted - KEPT AS IS) */}
+          {/* CTA Button */}
           <div className="hidden lg:block">
             <div className="relative group">
-              <button
-                className={HIGHLIGHTED_BUTTON_CLASSES}
-              >
-                {/* Sliding Top Border */}
+              <button className={HIGHLIGHTED_BUTTON_CLASSES}>
                 <span className="absolute top-0 left-0 w-full h-[3px] bg-[#3590ba] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-20"></span>
-                
-                {/* Sliding Bottom Border */}
                 <span className="absolute bottom-0 right-0 w-full h-[3px] bg-cyan-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out delay-100 z-20"></span>
-                
-                {/* Button Content */}
                 <span className="relative flex items-center z-10">
                   <Mail className="w-4 h-4 mr-2 transition-transform duration-300 ease-out group-hover:translate-x-1" />
                   Get a Free Quote
                 </span>
               </button>
 
-              {/* Hover Popup Form (Styling preserved) */}
-              <div 
-                className={`absolute top-full right-0 mt-3 w-[350px] p-6 bg-white rounded-xl shadow-2xl border border-gray-100 
-                            opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:scale-100 scale-95
-                            transition-all duration-300 ease-out z-40 origin-top-right`}
-              >
+              {/* Hover Popup Form */}
+              <div className={`absolute top-full right-0 mt-3 w-[350px] p-6 bg-white rounded-xl shadow-2xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:scale-100 scale-95 transition-all duration-300 ease-out z-40 origin-top-right`}>
                 <h4 className="font-bold text-lg mb-1 text-gray-900">Quick Enquiry</h4>
                 <p className="text-sm text-gray-600 mb-4">Let us know what you're looking for.</p>
                 <form onSubmit={(e) => e.preventDefault()} className="space-y-3">
-                  <div>
-                    <input type="text" placeholder="Your Name" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" />
-                  </div>
-                  <div>
-                    <input type="tel" placeholder="Your Phone Number" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" />
-                  </div>
-                  <div>
-                    <input type="email" placeholder="Your Email" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" />
-                  </div>
-                  <div>
-                    <textarea placeholder="Your Message" rows={3} className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md resize-none focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]"></textarea>
-                  </div>
-                  <button 
-                    type="submit" 
-                    className="w-full flex items-center justify-center gap-2 text-sm text-white font-semibold py-2 px-4 rounded-md transition-colors bg-[#2a7394] hover:bg-[#225d7a]"
-                  >
+                  <div><input type="text" placeholder="Your Name" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" /></div>
+                  <div><input type="tel" placeholder="Your Phone Number" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" /></div>
+                  <div><input type="email" placeholder="Your Email" className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" /></div>
+                  <div><textarea placeholder="Your Message" rows={3} className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md resize-none focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]"></textarea></div>
+                  <button type="submit" className="w-full flex items-center justify-center gap-2 text-sm text-white font-semibold py-2 px-4 rounded-md transition-colors bg-[#2a7394] hover:bg-[#225d7a]">
                     Send Enquiry <Send size={16} />
                   </button>
                 </form>
@@ -166,93 +206,45 @@ const HeroSectionWithNavbar: React.FC = () => {
             </div>
           </div>
 
-          {/* --- NEW Mobile Menu Button --- */}
+          {/* Mobile Menu Button */}
           <div className="lg:hidden z-50">
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 text-gray-800 focus:outline-none transition-transform duration-300 hover:scale-110"
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? (
-                 <div className="p-2 bg-white rounded-full shadow-md"><X size={24} /></div>
-              ) : (
-                 <Menu size={28} />
-              )}
+              {isMobileMenuOpen ? <div className="p-2 bg-white rounded-full shadow-md"><X size={24} /></div> : <Menu size={28} />}
             </button>
           </div>
         </div>
 
-        {/* --- NEW ATTRACTIVE MOBILE MENU PANEL --- */}
-        {/* Backdrop */}
-        <div 
-          className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity duration-300 lg:hidden ${
-            isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-          }`}
-          onClick={() => setIsMobileMenuOpen(false)}
-        ></div>
+        {/* Mobile Menu Panel */}
+        <div className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity duration-300 lg:hidden ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setIsMobileMenuOpen(false)}></div>
 
-        {/* Side Panel */}
-        <div 
-          className={`fixed top-0 right-0 w-[85%] sm:w-[400px] h-full bg-white shadow-2xl z-40 transform transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) lg:hidden flex flex-col ${
-            isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-        >
-            {/* Decorative Top Gradient */}
+        <div className={`fixed top-0 right-0 w-[85%] sm:w-[400px] h-full bg-white shadow-2xl z-40 transform transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) lg:hidden flex flex-col ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
             <div className="h-1.5 w-full bg-gradient-to-r from-[#256482] to-cyan-400"></div>
-
             <div className="flex-1 flex flex-col p-8 overflow-y-auto">
-                {/* Menu Header */}
                 <div className="mb-10 mt-4">
-                     <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-sans" style={{ fontFamily: "'Outfit', sans-serif" }}>Menu</p>
-                     <h2 className="text-3xl font-bold text-slate-800 italic" style={{ fontFamily: "'Playfair Display', serif" }}>
-                        Navigate
-                     </h2>
+                      <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-sans" style={{ fontFamily: "'Outfit', sans-serif" }}>Menu</p>
+                      <h2 className="text-3xl font-bold text-slate-800 italic" style={{ fontFamily: "'Playfair Display', serif" }}>Navigate</h2>
                 </div>
-
-                {/* Links */}
                 <div className="space-y-6">
                     {navLinks.map((link, index) => (
-                    <Link 
-                        key={index} 
-                        href={link.href} 
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className={`group flex items-center justify-between text-2xl font-medium text-slate-700 hover:text-[#256482] transition-all duration-300 border-b border-gray-100 pb-4
-                        ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
-                        `}
-                        style={{ 
-                            fontFamily: "'Playfair Display', serif",
-                            transitionDelay: `${index * 100}ms`
-                        }}
-                    >
+                    <Link key={index} href={link.href} onClick={() => setIsMobileMenuOpen(false)} className={`group flex items-center justify-between text-2xl font-medium text-slate-700 hover:text-[#256482] transition-all duration-300 border-b border-gray-100 pb-4 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ fontFamily: "'Playfair Display', serif", transitionDelay: `${index * 100}ms` }}>
                         <span>{link.name}</span>
                         <ArrowRight className="w-5 h-5 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#256482]" />
                     </Link>
                     ))}
                 </div>
-
-                {/* Bottom CTA Card */}
                 <div className="mt-auto pt-10">
                     <div className="bg-slate-900 rounded-2xl p-6 text-white relative overflow-hidden group">
-                        {/* Decorative blob */}
                         <div className="absolute top-0 right-0 w-32 h-32 bg-[#3590ba] rounded-full blur-[50px] opacity-20 group-hover:opacity-30 transition-opacity"></div>
-                        
                         <h3 className="text-xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>Get in Touch</h3>
                         <div className="space-y-3 text-sm text-slate-300" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                            <div className="flex items-center gap-3">
-                                <Mail size={16} className="text-[#3590ba]" />
-                                <a href="mailto:info@starpublicity.co.in" className="hover:text-white">info@starpublicity.co.in</a>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <Phone size={16} className="text-[#3590ba]" />
-                                <span>0161-4668602</span>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <MapPin size={16} className="text-[#3590ba]" />
-                                <span>Ludhiana, Punjab</span>
-                            </div>
+                            <div className="flex items-center gap-3"><Mail size={16} className="text-[#3590ba]" /><a href="mailto:info@starpublicity.co.in" className="hover:text-white">info@starpublicity.co.in</a></div>
+                            <div className="flex items-center gap-3"><Phone size={16} className="text-[#3590ba]" /><span>0161-4668602</span></div>
+                            <div className="flex items-center gap-3"><MapPin size={16} className="text-[#3590ba]" /><span>Ludhiana, Punjab</span></div>
                         </div>
-
-                        {/* Social Icons */}
                         <div className="flex gap-4 mt-6 pt-6 border-t border-slate-700">
                             <a href="https://www.instagram.com/starpublicityldh/" target="_blank" rel="noopener noreferrer" className="hover:text-[#3590ba] transition-colors"><Instagram size={20} /></a>
                             <a href="https://x.com/starpublicityld" target="_blank" rel="noopener noreferrer" className="hover:text-[#3590ba] transition-colors"><Twitter size={20} /></a>
@@ -264,7 +256,7 @@ const HeroSectionWithNavbar: React.FC = () => {
         </div>
       </nav>
 
-      {/* --- Hero Content (KEPT EXACTLY AS YOU HAD IT) --- */}
+      {/* --- Hero Content --- */}
       <div className="relative z-20 flex-grow flex items-center">
         <div className="container mx-auto px-6 lg:px-8 xl:px-20">
           <div className="w-full lg:w-1/2 max-w-xl lg:ml-[10%]">
@@ -274,29 +266,16 @@ const HeroSectionWithNavbar: React.FC = () => {
             <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
               We help ambitious brands scale their digital presence and dominate their markets.
             </p>
-
-            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center gap-4">
-              <Link 
-                href="#contact" 
-                className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-3 rounded-md text-white font-semibold tracking-wider overflow-hidden bg-[#2a7394] shadow-lg shadow-[#2a7394]/40 transition-all duration-300 ease-out transform hover:scale-[1.05] hover:bg-[#225d7a]"
-              >
-                {/* Sliding Top Border */}
+              <Link href="#contact" className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-3 rounded-md text-white font-semibold tracking-wider overflow-hidden bg-[#2a7394] shadow-lg shadow-[#2a7394]/40 transition-all duration-300 ease-out transform hover:scale-[1.05] hover:bg-[#225d7a]">
                 <span className="absolute top-0 left-0 w-full h-[3px] bg-cyan-300 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-20"></span>
-                
-                {/* Sliding Bottom Border */}
                 <span className="absolute bottom-0 right-0 w-full h-[3px] bg-cyan-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out delay-100 z-20"></span>
-                
-                {/* Button Content */}
-                <span className="relative flex items-center z-10">
-                  Start Your Project
-                </span>
+                <span className="relative flex items-center z-10">Start Your Project</span>
               </Link>
             </div>
           </div>
-          {/* Right side is intentionally empty for the illustration */}
           <div className="w-full lg:w-1/2">
-            {/* The main drone illustration is positioned absolutely */}
+             {/* Space reserved for absolute animation above */}
           </div>
         </div>
       </div>

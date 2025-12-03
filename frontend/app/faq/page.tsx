@@ -97,12 +97,13 @@ const AwardsSection = () => {
                             Our Values
                         </span>
                         <h2 
-                            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-slate-900 drop-shadow-sm tracking-tight"
+                            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 drop-shadow-sm tracking-tight"
                             style={{ fontFamily: "'Playfair Display', serif" }}
                         >
-                            Our Core Commitment
+                            <span className="text-slate-900">Our Core </span>
+                            <span className="text-teal-600">Commitment</span>
                         </h2>
-                        <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-teal-500 to-blue-500 opacity-80 mb-6"></div>
+                        <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-teal-500 to-teal-700 opacity-80 mb-6"></div>
                         <p className="text-lg text-slate-500 max-w-2xl mx-auto font-sans">
                             Excellence in Every Partnership
                         </p>
@@ -153,14 +154,15 @@ const AwardsSection = () => {
 
             {/* Main Title with Gradient and Font */}
             <h2 
-                className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-slate-900 drop-shadow-sm tracking-tight"
+                className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 drop-shadow-sm tracking-tight"
                 style={{ fontFamily: "'Playfair Display', serif" }}
             >
-                Our Core Commitment
+                <span className="text-slate-900">Our Core </span>
+                <span className="text-teal-600">Commitment</span>
             </h2>
             
             {/* Decorative Underline Bar */}
-            <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-teal-500 to-blue-500 opacity-80 mb-6"></div>
+            <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-teal-500 to-teal-700 opacity-80 mb-6"></div>
 
             {/* Subtitle */}
             <p className="text-lg text-slate-500 max-w-2xl mx-auto font-sans">
@@ -277,10 +279,11 @@ const StoryByNumbersSection = () => {
 
             {/* Main Title with Gradient and Font */}
             <h2 
-                className="text-3xl sm:text-5xl md:text-6xl font-bold mb-6 text-slate-900 drop-shadow-sm tracking-tight"
+                className="text-3xl sm:text-5xl md:text-6xl font-bold mb-6 drop-shadow-sm tracking-tight"
                 style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              Numbers That Define Us
+              <span className="text-slate-900">Numbers That </span>
+              <span className="text-teal-600">Define Us</span>
             </h2>
             
             {/* Decorative Underline Bar */}

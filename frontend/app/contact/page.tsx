@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
@@ -49,8 +49,38 @@ const COLOR_SLATE_LIGHT = '#f8fafc'; // Matches bg-slate-50
 
 // --- 1. Top CTA Section (Mimics 'LET\'S CHAT') ---
 export const ContactSection: React.FC = () => {
-    // Custom Green Color from the image
-    const GREEN_ACCENT = '#82CA57'; 
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+    const [status, setStatus] = useState({ message: '', error: false, submitting: false });
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setStatus({ message: 'Sending...', error: false, submitting: true });
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.message || 'Something went wrong.');
+            }
+
+            setStatus({ message: result.message, error: false, submitting: false });
+            setFormData({ name: '', email: '', message: '' }); // Clear form
+
+        } catch (error: any) {
+            setStatus({ message: error.message, error: true, submitting: false });
+        }
+    };
 
     return (
         <section 
@@ -74,27 +104,25 @@ export const ContactSection: React.FC = () => {
                     <div 
                         className="w-full lg:col-span-5 bg-white/10 lg:bg-transparent p-8 lg:p-0 rounded-2xl lg:rounded-none border border-white/20 lg:border-none shadow-lg lg:shadow-none backdrop-blur-sm lg:backdrop-blur-none"
                     >
-                        <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
+                        <form onSubmit={handleSubmit} className="space-y-6">
                             <div>
                                 <label htmlFor="cta-name" className="sr-only">Name</label>
-                                <input type="text" id="cta-name" placeholder="Your Name" className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors font-sans" />
+                                <input type="text" id="cta-name" name="name" placeholder="Your Name" value={formData.name} onChange={handleInputChange} required className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors font-sans" />
                             </div>
                             <div>
                                 <label htmlFor="cta-email" className="sr-only">Email</label>
-                                <input type="email" id="cta-email" placeholder="Your Email" className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors font-sans" />
+                                <input type="email" id="cta-email" name="email" placeholder="Your Email" value={formData.email} onChange={handleInputChange} required className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors font-sans" />
                             </div>
                             <div>
                                 <label htmlFor="cta-message" className="sr-only">Message</label>
-                                <textarea id="cta-message" placeholder="Your Message" rows={2} className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors resize-none font-sans"></textarea>
+                                <textarea id="cta-message" name="message" placeholder="Your Message" value={formData.message} onChange={handleInputChange} required rows={2} className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors resize-none font-sans"></textarea>
                             </div>
-                            <button 
-                                type="submit"
-                                className={`w-full group inline-flex items-center justify-center py-3 px-6 rounded-full bg-white text-[#2a7394] font-bold text-lg transition-all duration-300 ease-out hover:bg-white/90 hover:scale-105`}
-                            >
-                                LET'S TALK
+                            <button type="submit" disabled={status.submitting} className={`w-full group inline-flex items-center justify-center py-3 px-6 rounded-full bg-white text-[#2a7394] font-bold text-lg transition-all duration-300 ease-out hover:bg-white/90 hover:scale-105 disabled:bg-gray-300 disabled:cursor-not-allowed`}>
+                                {status.submitting ? 'SENDING...' : "LET'S TALK"}
                                 <ChevronRight className="w-6 h-6 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                             </button>
                         </form>
+                        {status.message && <p className={`text-center mt-4 ${status.error ? 'text-red-400' : 'text-green-300'}`}>{status.message}</p>}
                     </div>
                 </div>
             </div>
@@ -228,19 +256,16 @@ export const Footer: React.FC = () => {
                     {/* Service Links */}
                     <div className="flex flex-wrap justify-center lg:justify-start space-x-4 text-sm font-medium text-gray-600 font-sans">
                         {serviceLinks.map((link, index) => (
-                            <Link 
-                                key={index} 
-                                href={link.href} 
-                                className="hover:text-gray-900 transition-colors py-1"
-                            >
+                            <span key={index} className="py-1">
                                 {link.name}
-                            </Link>
+                            </span>
                         ))}
                     </div>
 
                     {/* Copyright and Scroll to Top (moved to the right side visually) */}
-                    <div className="flex items-center text-slate-500 text-xs mt-4 lg:mt-0 font-sans">
+                    <div className="flex items-center gap-4 text-slate-500 text-xs mt-4 lg:mt-0 font-sans">
                         <p>Copyright © {new Date().getFullYear()} Star Publicity.</p>
+                        <Link href="/privacy-policy" className="hover:text-gray-900 transition-colors">Privacy Policy</Link>
                     </div>
                 </div>
             </div>
