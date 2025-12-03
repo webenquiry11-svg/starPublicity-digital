@@ -106,11 +106,12 @@ const HeroSectionWithNavbar: React.FC = () => {
 
           {/* 3. Floating Glass Card: Growth */}
           <div className="absolute top-20 left-20 z-20 animate-float-slow">
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl shadow-xl flex items-center gap-3 w-48">
-              <div className="bg-green-500/20 p-2 rounded-lg">
-                <TrendingUp size={24} className="text-green-600" />
+            <div className="group relative bg-white/20 backdrop-blur-lg border border-white/30 p-4 rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-3 w-48">
+              <div className="absolute -inset-px rounded-xl bg-gradient-to-br from-green-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative bg-gradient-to-br from-green-500 to-emerald-600 p-2 rounded-lg shadow-inner shadow-black/10">
+                <TrendingUp size={24} className="text-white" />
               </div>
-              <div>
+              <div className="relative">
                 <p className="text-xs text-gray-500 font-semibold uppercase">Revenue</p>
                 <p className="text-lg font-bold text-gray-800">+127%</p>
               </div>
@@ -119,29 +120,32 @@ const HeroSectionWithNavbar: React.FC = () => {
 
           {/* 4. Floating Glass Card: Success */}
           <div className="absolute bottom-32 left-10 z-20 animate-float-medium" style={{ animationDelay: '1s' }}>
-             <div className="bg-white/80 backdrop-blur-md border border-white/40 px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
-                <CheckCircle size={18} className="text-[#3590ba]" />
+             <div className="group relative bg-white/80 backdrop-blur-lg border border-white/50 px-4 py-2 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                <div className="absolute -inset-px rounded-full bg-gradient-to-br from-cyan-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <CheckCircle size={18} className="text-[#3590ba] relative" />
                 <span className="text-sm font-bold text-slate-700">98% Success Rate</span>
              </div>
           </div>
 
           {/* 5. Floating Glass Card: Efficiency */}
           <div className="absolute top-40 right-20 z-20 animate-float-fast" style={{ animationDelay: '2s' }}>
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 p-3 rounded-xl shadow-xl flex flex-col items-center gap-1 w-24">
-               <div className="bg-yellow-400/20 p-2 rounded-full mb-1">
-                 <Zap size={20} className="text-yellow-600" />
+            <div className="group relative bg-white/20 backdrop-blur-lg border border-white/30 p-3 rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex flex-col items-center gap-1 w-24">
+               <div className="absolute -inset-px rounded-xl bg-gradient-to-br from-amber-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+               <div className="relative bg-gradient-to-br from-amber-400 to-orange-500 p-2 rounded-full mb-1 shadow-inner shadow-black/10">
+                 <Zap size={20} className="text-white" />
                </div>
-               <span className="text-xs font-bold text-slate-600">Fast AI</span>
+               <span className="relative text-xs font-bold text-slate-600">Fast AI</span>
             </div>
           </div>
 
           {/* 6. Floating Glass Card: Happy Clients (NEW) */}
           <div className="absolute bottom-24 right-10 z-20 animate-float-slow" style={{ animationDelay: '0.5s' }}>
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl shadow-xl flex items-center gap-3 w-48">
-              <div className="bg-purple-500/20 p-2 rounded-lg">
-                <Users size={24} className="text-purple-600" />
+            <div className="group relative bg-white/20 backdrop-blur-lg border border-white/30 p-4 rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-3 w-48">
+              <div className="absolute -inset-px rounded-xl bg-gradient-to-br from-purple-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative bg-gradient-to-br from-purple-500 to-fuchsia-600 p-2 rounded-lg shadow-inner shadow-black/10">
+                <Users size={24} className="text-white" />
               </div>
-              <div>
+              <div className="relative">
                 <p className="text-xs text-gray-500 font-semibold uppercase">Happy Clients</p>
                 <p className="text-lg font-bold text-gray-800">500+</p>
               </div>
