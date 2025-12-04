@@ -165,7 +165,6 @@ export default function ServicesSection() {
   
   const [currentPage, setCurrentPage] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
   const directionRef = useRef<"next" | "prev">("next");
 
   const ITEMS_PER_PAGE = 3;
@@ -239,12 +238,6 @@ export default function ServicesSection() {
     });
   }, [currentPage]);
 
-  useEffect(() => {
-    if (isPaused || isAnimating) return;
-    const interval = setInterval(() => handlePageChange("next"), 4000); 
-    return () => clearInterval(interval);
-  }, [isPaused, isAnimating, currentPage]);
-
   const visibleServices = services.slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE);
 
   return (
@@ -289,6 +282,7 @@ export default function ServicesSection() {
                 From digital strategy to immersive experiences, we provide the tools you need to grow your business.
               </p>
 
+              {/* --- NAVIGATION BUTTONS --- */}
               <div className="flex gap-4">
                 <button onClick={() => handlePageChange("prev")} disabled={isAnimating} className="w-14 h-14 rounded-full shadow-lg flex items-center justify-center bg-white text-black hover:bg-[#2a7394] hover:text-white transition-all duration-300 group cursor-pointer btn-anim">
                   <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
@@ -301,19 +295,17 @@ export default function ServicesSection() {
           </div>
 
           {/* --- RIGHT COLUMN (CARDS) --- */}
-          <div className="lg:col-span-8 w-full">
+          <div className="lg:col-span-8 w-full relative">
             <div 
               ref={cardsRef} 
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => setIsPaused(false)}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 cursor-grab active:cursor-grabbing w-full"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full"
             >
               {visibleServices.map((item, i) => (
                 <div key={item.id} className="service-card w-full">
                    <ServiceCard item={item} index={i + (currentPage * ITEMS_PER_PAGE)} />
                 </div>
               ))}
-            </div>
+            </div>            
           </div>
 
         </div>
