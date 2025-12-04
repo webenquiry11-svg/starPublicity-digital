@@ -14,7 +14,6 @@ import {
     ArrowUp
 } from 'lucide-react';
 import logo from '../../public/Star Digital Website Images/logo.png';
-import PrivacyPage from './privacy';
 
 // --- ICONS for Social Media (Lucide React) ---
 import {
