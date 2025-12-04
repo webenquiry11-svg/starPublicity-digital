@@ -14,10 +14,9 @@ import {
   Clock 
 } from 'lucide-react';
 
-// --- FONTS (Simulating your layout) ---
-// You likely have these configured in layout.tsx, but defining classes here for clarity
-const fontHeading = "font-serif"; // Maps to Playfair Display
-const fontBody = "font-sans";    // Maps to Outfit or DM Sans
+// --- FONTS ---
+const fontHeading = "font-serif"; 
+const fontBody = "font-sans";    
 
 // --- DATA STRUCTURE ---
 const policyData = [
@@ -144,7 +143,7 @@ const policyData = [
 const PrivacyPage = () => {
   const [activeSection, setActiveSection] = useState("");
 
-  // Simple scroll spy to highlight active section in sidebar
+  // Simple scroll spy
   useEffect(() => {
     const handleScroll = () => {
       const sections = policyData.map(s => document.getElementById(s.id));
@@ -176,7 +175,6 @@ const PrivacyPage = () => {
       
       {/* --- HEADER BANNER --- */}
       <div className="bg-[#256482] text-white pt-32 pb-20 relative overflow-hidden">
-        {/* Abstract Background pattern */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-400/10 rounded-full translate-y-1/2 -translate-x-1/4 blur-3xl"></div>
         
@@ -220,7 +218,6 @@ const PrivacyPage = () => {
                 ))}
               </nav>
               
-              {/* Support Widget */}
               <div className="mt-8 pt-8 border-t border-slate-100">
                 <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-3">Have questions?</p>
                 <a href="mailto:support@starpublicity.org" className="text-sm font-medium text-[#256482] hover:text-cyan-600 transition-colors flex items-center gap-2">
@@ -249,14 +246,12 @@ const PrivacyPage = () => {
                     </h2>
                   </div>
 
-                  {/* Paragraphs */}
                   {section.content.map((paragraph, i) => (
                     <p key={i} className="text-slate-600 leading-8 mb-4">
                       {paragraph}
                     </p>
                   ))}
 
-                  {/* Lists */}
                   {section.list && (
                     <ul className="mt-4 mb-6 space-y-3">
                       {section.list.map((listItem, i) => (
@@ -268,14 +263,12 @@ const PrivacyPage = () => {
                     </ul>
                   )}
 
-                  {/* Footer Text */}
                   {section.footer && (
                     <p className="text-slate-600 leading-8 italic bg-slate-50 p-4 rounded-lg border-l-4 border-cyan-400">
                       {section.footer}
                     </p>
                   )}
 
-                  {/* Special Contact Details Styling */}
                   {section.contactDetails && (
                     <div className="mt-8 grid md:grid-cols-2 gap-4">
                         <div className="p-6 bg-[#f8fafc] rounded-xl border border-slate-200 hover:border-cyan-200 transition-colors group">

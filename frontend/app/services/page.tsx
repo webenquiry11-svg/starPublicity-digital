@@ -241,7 +241,7 @@ export default function ServicesSection() {
   const visibleServices = services.slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE);
 
   return (
-    <section ref={containerRef} className="relative py-24 bg-[#f5f7fa] overflow-hidden">
+    <section ref={containerRef} className="relative py-24 bg-[#f5f7fa]">
       
       {/* Background Decor */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
