@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { 
@@ -27,7 +27,7 @@ const navLinks = [
 const HeroSectionWithNavbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', phone: '', email: '', message: '' });
-  const [status, setStatus] = useState({ message: '', error: false, submitting: false });
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -36,6 +36,13 @@ const HeroSectionWithNavbar: React.FC = () => {
       document.body.style.overflow = 'unset';
     }
   }, [isMobileMenuOpen]);
+
+  // Callback to handle seamless video looping
+  const onVideoTimeUpdate = useCallback(() => {
+    if (videoRef.current && videoRef.current.currentTime > videoRef.current.duration - 0.5) {
+      videoRef.current.currentTime = 0;
+    }
+  }, []);
 
   return (
     <section className={`relative min-h-[750px] md:min-h-screen overflow-hidden flex flex-col`}>
@@ -64,7 +71,14 @@ const HeroSectionWithNavbar: React.FC = () => {
       <div className="absolute top-0 right-0 h-full w-full lg:w-[55%] xl:w-[50%] z-0">
         <div className="relative w-full h-full">
           {/* Gradient overlay to blend video into the background */}
-          <video autoPlay loop muted playsInline className="w-full h-full object-contain z-0">
+          <video 
+            ref={videoRef}
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            onTimeUpdate={onVideoTimeUpdate}
+            className="w-full h-full object-contain z-0">
             <source src="/Star Digital Website Images/herosection.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
