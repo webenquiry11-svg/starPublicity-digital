@@ -193,7 +193,6 @@ export default function ServicesSection() {
       }
 
       tl.from(".desc-anim", { y: 20, opacity: 0, duration: 0.5 }, "-=1");
-      tl.from(".btn-anim", { scale: 0, opacity: 0, stagger: 0.1, ease: "back.out(1.7)" }, "-=0.3");
       
       tl.from(cardsRef.current?.children || [], {
         y: 60, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out"
