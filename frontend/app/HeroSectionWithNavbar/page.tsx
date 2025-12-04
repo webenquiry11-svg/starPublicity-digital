@@ -8,7 +8,7 @@ import {
   ArrowRight, 
   Send, 
   Menu, 
-  X, 
+  X, ChevronRight,
   Phone,
   MapPin, 
   Instagram, 
@@ -24,9 +24,16 @@ const navLinks = [
   { name: 'How We Work', href: '#awards' },
   { name: 'Contact Us', href: '#contact' },
 ];
-const HeroSectionWithNavbar: React.FC = () => {
+
+interface HeroProps {
+  onQuoteClick: () => void;
+}
+const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [formData, setFormData] = useState({ name: '', phone: '', email: '', message: '' });
+  const [isHoverFormVisible, setIsHoverFormVisible] = useState(false);
+  const [hoverFormData, setHoverFormData] = useState({ name: '', email: '', phone: '' });
+  const [hoverFormStatus, setHoverFormStatus] = useState({ message: '', error: false, submitting: false });
+
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -43,6 +50,44 @@ const HeroSectionWithNavbar: React.FC = () => {
       videoRef.current.currentTime = 0;
     }
   }, []);
+
+  const handleHoverFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setHoverFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleHoverFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setHoverFormStatus({ message: 'Sending...', error: false, submitting: true });
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          name: hoverFormData.name, 
+          email: hoverFormData.email,
+          phone: hoverFormData.phone,
+          message: `Quick Quote Request from Navbar. Phone: ${hoverFormData.phone || 'Not provided'}.` 
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Something went wrong.');
+      }
+
+      setHoverFormStatus({ message: result.message, error: false, submitting: false });
+      setHoverFormData({ name: '', email: '', phone: '' }); // Clear form
+      setTimeout(() => {
+        setIsHoverFormVisible(false);
+        setHoverFormStatus({ message: '', error: false, submitting: false });
+      }, 2000);
+    } catch (error: any) {
+      setHoverFormStatus({ message: error.message, error: true, submitting: false });
+    }
+  };
 
   return (
     <section className={`relative min-h-[750px] md:min-h-screen overflow-hidden flex flex-col`}>
@@ -109,15 +154,53 @@ const HeroSectionWithNavbar: React.FC = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:block">
-            <div className="relative group">
-              <button className="group relative inline-flex items-center justify-center px-7 py-3 rounded-md text-sm tracking-wider font-extrabold text-white overflow-hidden bg-gray-800 shadow-lg shadow-[#3590ba]/40 transition-all duration-300 ease-out transform hover:scale-[1.05] hover:bg-gray-700">
+            <div 
+              className="relative group"
+              onMouseEnter={() => setIsHoverFormVisible(true)}
+              onMouseLeave={() => setIsHoverFormVisible(false)}
+            >
+              <button 
+                className="group relative inline-flex items-center justify-center px-7 py-3 rounded-md text-sm tracking-wider font-extrabold text-white overflow-hidden bg-gray-800 shadow-lg shadow-[#3590ba]/40 transition-all duration-300 ease-out transform hover:scale-[1.05] hover:bg-gray-700"
+              >
                 <span className="absolute top-0 left-0 w-full h-[3px] bg-[#3590ba] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-20"></span>
                 <span className="absolute bottom-0 right-0 w-full h-[3px] bg-cyan-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out delay-100 z-20"></span>
                 <span className="relative flex items-center z-10">
-                  <Mail className="w-4 h-4 mr-2 transition-transform duration-300 ease-out group-hover:translate-x-1" />
+                  <Mail className="w-4 h-4 mr-2" />
                   Get a Free Quote
                 </span>
               </button>
+
+              {/* Hover Form */}
+              <div className={`absolute top-full right-0 mt-0 w-80 origin-top-right transition-all duration-300 ease-out ${isHoverFormVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
+                <div className="bg-gradient-to-br from-[#2a7394] to-[#225d7a] text-white rounded-xl shadow-2xl p-6 border border-white/20">
+                  <h3 className="font-bold text-lg mb-1 text-transparent bg-clip-text bg-gradient-to-b from-cyan-300 to-white">Quick Quote</h3>
+                  <p className="text-gray-300 text-xs mb-4">We'll get back to you shortly.</p>
+                  {hoverFormStatus.message ? (
+                    <div className={`text-center py-8 ${hoverFormStatus.error ? 'text-red-300' : 'text-green-300'}`}>
+                      {hoverFormStatus.message}
+                    </div>
+                  ) : (
+                    <form onSubmit={handleHoverFormSubmit} className="space-y-4">
+                      <div>
+                        <label htmlFor="hover-name" className="sr-only">Name</label>
+                        <input type="text" id="hover-name" name="name" placeholder="Your Name" value={hoverFormData.name} onChange={handleHoverFormChange} required className="w-full text-sm bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-1.5 focus:outline-none focus:border-white transition-colors font-sans" />
+                      </div>
+                      <div>
+                        <label htmlFor="hover-email" className="sr-only">Email</label>
+                        <input type="email" id="hover-email" name="email" placeholder="Your Email" value={hoverFormData.email} onChange={handleHoverFormChange} required className="w-full text-sm bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-1.5 focus:outline-none focus:border-white transition-colors font-sans" />
+                      </div>
+                      <div>
+                        <label htmlFor="hover-phone" className="sr-only">Phone Number</label>
+                        <input type="tel" id="hover-phone" name="phone" placeholder="Phone Number" value={hoverFormData.phone} onChange={handleHoverFormChange} className="w-full text-sm bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-1.5 focus:outline-none focus:border-white transition-colors font-sans" />
+                      </div>
+                      <button type="submit" disabled={hoverFormStatus.submitting} className="w-full group inline-flex items-center justify-center py-2 px-4 rounded-md bg-white text-[#2a7394] font-bold text-sm transition-all duration-300 ease-out hover:bg-white/90 hover:scale-105 disabled:bg-gray-300 disabled:cursor-not-allowed">
+                        {hoverFormStatus.submitting ? 'SENDING...' : "REQUEST QUOTE"}
+                        <ChevronRight className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
+                      </button>
+                    </form>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
 
