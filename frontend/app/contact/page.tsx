@@ -14,6 +14,7 @@ import {
     ArrowUp
 } from 'lucide-react';
 import logo from '../../public/Star Digital Website Images/logo.png';
+import PrivacyPage from './privacy';
 
 // --- ICONS for Social Media (Lucide React) ---
 import {
@@ -265,7 +266,7 @@ export const Footer: React.FC = () => {
                     {/* Copyright and Scroll to Top (moved to the right side visually) */}
                     <div className="flex items-center gap-4 text-slate-500 text-xs mt-4 lg:mt-0 font-sans">
                         <p>Copyright © {new Date().getFullYear()} Star Publicity.</p>
-                         <a href="/Star Digital Website Images/privacypolicy.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 transition-colors">Privacy Policy</a>
+                        <a href="/privacy" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 transition-colors">Privacy Policy</a>
                     </div>
                 </div>
             </div>
