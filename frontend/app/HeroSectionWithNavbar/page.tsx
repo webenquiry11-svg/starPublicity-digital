@@ -1,30 +1,20 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { 
   Mail, 
-  User, 
-  Phone, 
-  Briefcase, 
-  MessageSquare, 
   ArrowRight, 
   Send, 
   Menu, 
   X, 
+  Phone,
   MapPin, 
   Instagram, 
-  Linkedin, 
-  Twitter,
-  // NEW ICONS ADDED FOR ANIMATION
-  TrendingUp,
-  CheckCircle,
-  Zap,
-  Users
+  Linkedin,
+  Twitter
 } from 'lucide-react';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import herobg from '../../public/Star Digital Website Images/herobg.png';
 import logo from '../../public/Star Digital Website Images/logo.png';
 
 // Navigation Links
@@ -34,48 +24,10 @@ const navLinks = [
   { name: 'How We Work', href: '#awards' },
   { name: 'Contact Us', href: '#contact' },
 ];
-
-const HIGHLIGHTED_BUTTON_CLASSES = `
-  group relative inline-flex items-center justify-center 
-  px-7 py-3 rounded-md text-sm tracking-wider font-extrabold text-white
-  overflow-hidden
-  bg-gray-800 
-  shadow-lg shadow-[#3590ba]/40
-  transition-all duration-300 ease-out 
-  transform hover:scale-[1.05] hover:bg-gray-700
-`;
-
 const HeroSectionWithNavbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', phone: '', email: '', message: '' });
   const [status, setStatus] = useState({ message: '', error: false, submitting: false });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault();
-      setStatus({ message: 'Sending...', error: false, submitting: true });
-
-      try {
-          const response = await fetch('/api/contact', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(formData),
-          });
-
-          const result = await response.json();
-          if (!response.ok) throw new Error(result.message || 'Something went wrong.');
-
-          setStatus({ message: result.message, error: false, submitting: false });
-          setFormData({ name: '', phone: '', email: '', message: '' }); // Clear form
-
-      } catch (error: any) {
-          setStatus({ message: error.message, error: true, submitting: false });
-      }
-  };
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -87,7 +39,6 @@ const HeroSectionWithNavbar: React.FC = () => {
 
   return (
     <section className={`relative min-h-[750px] md:min-h-screen overflow-hidden flex flex-col`}>
-      
       {/* Styles for Animations & Fonts */}
       <style dangerouslySetInnerHTML={{__html: `
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
@@ -109,82 +60,14 @@ const HeroSectionWithNavbar: React.FC = () => {
         .animate-float-fast { animation: float-fast 4s ease-in-out infinite; }
       `}} />
 
-      <Image
-        src={herobg}
-        alt="Abstract background"
-        fill
-        priority
-        className="object-cover -z-10"
-      />
-
-      {/* --- IMPROVED RIGHT SIDE COMPOSITION --- */}
-      <div className="absolute w-[70%] lg:w-[50%] h-auto bottom-10 right-0 max-w-[900px] z-10 hidden lg:block pointer-events-none">
-        <div className="relative w-full h-[600px] flex items-center justify-center">
-          
-          {/* 1. Ambient Glow (Backdrop) */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#3590ba]/20 rounded-full blur-[80px]"></div>
-
-          {/* 2. Main Lottie Animation */}
-          <div className="relative z-10 scale-110">
-            <DotLottieReact
-              src="https://lottie.host/bb8b224e-280e-4f31-85b1-180ab1f0aa3e/HltEmErHf6.lottie"
-              loop
-              autoplay
-            />
-          </div>
-
-          {/* 3. Floating Glass Card: Growth */}
-          <div className="absolute top-20 left-20 z-20 animate-float-slow">
-            <div className="group relative bg-white/20 backdrop-blur-lg border border-white/30 p-4 rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-3 w-48">
-              <div className="absolute -inset-px rounded-xl bg-gradient-to-br from-green-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative bg-gradient-to-br from-green-500 to-emerald-600 p-2 rounded-lg shadow-inner shadow-black/10">
-                <TrendingUp size={24} className="text-white" />
-              </div>
-              <div className="relative">
-                <p className="text-xs text-gray-500 font-semibold uppercase">Revenue</p>
-                <p className="text-lg font-bold text-gray-800">+127%</p>
-              </div>
-            </div>
-          </div>
-
-          {/* 4. Floating Glass Card: Success */}
-          <div className="absolute bottom-32 left-10 z-20 animate-float-medium" style={{ animationDelay: '1s' }}>
-             <div className="group relative bg-white/80 backdrop-blur-lg border border-white/50 px-4 py-2 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-2">
-                <div className="absolute -inset-px rounded-full bg-gradient-to-br from-cyan-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <CheckCircle size={18} className="text-[#3590ba] relative" />
-                <span className="text-sm font-bold text-slate-700">98% Success Rate</span>
-             </div>
-          </div>
-
-          {/* 5. Floating Glass Card: Efficiency */}
-          <div className="absolute top-40 right-20 z-20 animate-float-fast" style={{ animationDelay: '2s' }}>
-            <div className="group relative bg-white/20 backdrop-blur-lg border border-white/30 p-3 rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex flex-col items-center gap-1 w-24">
-               <div className="absolute -inset-px rounded-xl bg-gradient-to-br from-amber-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-               <div className="relative bg-gradient-to-br from-amber-400 to-orange-500 p-2 rounded-full mb-1 shadow-inner shadow-black/10">
-                 <Zap size={20} className="text-white" />
-               </div>
-               <span className="relative text-xs font-bold text-slate-600">Fast AI</span>
-            </div>
-          </div>
-
-          {/* 6. Floating Glass Card: Happy Clients (NEW) */}
-          <div className="absolute bottom-24 right-10 z-20 animate-float-slow" style={{ animationDelay: '0.5s' }}>
-            <div className="group relative bg-white/20 backdrop-blur-lg border border-white/30 p-4 rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-3 w-48">
-              <div className="absolute -inset-px rounded-xl bg-gradient-to-br from-purple-400/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative bg-gradient-to-br from-purple-500 to-fuchsia-600 p-2 rounded-lg shadow-inner shadow-black/10">
-                <Users size={24} className="text-white" />
-              </div>
-              <div className="relative">
-                <p className="text-xs text-gray-500 font-semibold uppercase">Happy Clients</p>
-                <p className="text-lg font-bold text-gray-800">500+</p>
-              </div>
-            </div>
-          </div>
-
-          {/* 6. Decorative Particles */}
-          <div className="absolute top-10 right-1/2 w-3 h-3 bg-cyan-400 rounded-full animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-2 h-2 bg-blue-600 rounded-full animate-pulse delay-700"></div>
-
+      {/* --- RIGHT SIDE COMPOSITION (VIDEO) --- */}
+      <div className="absolute top-0 right-0 h-full w-full lg:w-[55%] xl:w-[50%] z-0">
+        <div className="relative w-full h-full">
+          {/* Gradient overlay to blend video into the background */}
+          <video autoPlay loop muted playsInline className="w-full h-full object-contain z-0">
+            <source src="/Star Digital Website Images/herosection.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
       </div>
 
@@ -192,7 +75,7 @@ const HeroSectionWithNavbar: React.FC = () => {
       <nav className="relative z-50 w-full py-6 md:py-8">
         <div className="container mx-auto px-6 lg:px-8 xl:px-20 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/">
+          <Link href="/" className="z-10">
             <Image 
               src={logo} 
               alt="Star Publicity Logo" 
@@ -213,7 +96,7 @@ const HeroSectionWithNavbar: React.FC = () => {
           {/* CTA Button */}
           <div className="hidden lg:block">
             <div className="relative group">
-              <button className={HIGHLIGHTED_BUTTON_CLASSES}>
+              <button className="group relative inline-flex items-center justify-center px-7 py-3 rounded-md text-sm tracking-wider font-extrabold text-white overflow-hidden bg-gray-800 shadow-lg shadow-[#3590ba]/40 transition-all duration-300 ease-out transform hover:scale-[1.05] hover:bg-gray-700">
                 <span className="absolute top-0 left-0 w-full h-[3px] bg-[#3590ba] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-20"></span>
                 <span className="absolute bottom-0 right-0 w-full h-[3px] bg-cyan-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out delay-100 z-20"></span>
                 <span className="relative flex items-center z-10">
@@ -221,26 +104,6 @@ const HeroSectionWithNavbar: React.FC = () => {
                   Get a Free Quote
                 </span>
               </button>
-
-              {/* Hover Popup Form */}
-              <div className={`absolute top-full right-0 mt-3 w-[350px] p-6 bg-white rounded-xl shadow-2xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:scale-100 scale-95 transition-all duration-300 ease-out z-40 origin-top-right`}>
-                <h4 className="font-bold text-lg mb-1 text-gray-900">Quick Enquiry</h4>
-                <p className="text-sm text-gray-600 mb-4">Let us know what you're looking for.</p>
-                <form onSubmit={handleSubmit} className="space-y-3">
-                  <div><input type="text" name="name" placeholder="Your Name" value={formData.name} onChange={handleInputChange} required className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" /></div>
-                  <div><input type="tel" name="phone" placeholder="Your Phone Number" value={formData.phone} onChange={handleInputChange} className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" /></div>
-                  <div><input type="email" name="email" placeholder="Your Email" value={formData.email} onChange={handleInputChange} required className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]" /></div>
-                  <div><textarea name="message" placeholder="Your Message" value={formData.message} onChange={handleInputChange} required rows={3} className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md resize-none focus:ring-2 focus:ring-offset-1 focus:ring-[#256482]"></textarea></div>
-                  <button type="submit" disabled={status.submitting} className="w-full flex items-center justify-center gap-2 text-sm text-white font-semibold py-2 px-4 rounded-md transition-colors bg-[#2a7394] hover:bg-[#225d7a] disabled:bg-gray-400 disabled:cursor-not-allowed">
-                    {status.submitting ? 'Sending...' : 'Send Enquiry'} <Send size={16} />
-                  </button>
-                </form>
-                {status.message && (
-                  <p className={`text-sm mt-3 text-center ${status.error ? 'text-red-600' : 'text-green-600'}`}>
-                    {status.message}
-                  </p>
-                )}
-              </div>
             </div>
           </div>
 
@@ -277,7 +140,7 @@ const HeroSectionWithNavbar: React.FC = () => {
                 <div className="mt-auto pt-10">
                     <div className="bg-slate-900 rounded-2xl p-6 text-white relative overflow-hidden group">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-[#3590ba] rounded-full blur-[50px] opacity-20 group-hover:opacity-30 transition-opacity"></div>
-                        <h3 className="text-xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>Get in Touch</h3>
+                        <h3 className="text-xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>Get in Touch</h3> 
                         <div className="space-y-3 text-sm text-slate-300" style={{ fontFamily: "'Outfit', sans-serif" }}>
                             <div className="flex items-center gap-3"><Mail size={16} className="text-[#3590ba]" /><a href="mailto:sales@starpublicity.org" className="hover:text-white">sales@starpublicity.org</a></div>
                             <div className="flex items-center gap-3"><Phone size={16} className="text-[#3590ba]" /><span>0161-4668602</span></div>
@@ -312,12 +175,8 @@ const HeroSectionWithNavbar: React.FC = () => {
               </Link>
             </div>
           </div>
-          <div className="w-full lg:w-1/2">
-             {/* Space reserved for absolute animation above */}
-          </div>
         </div>
       </div>
-
     </section>
   );
 };
