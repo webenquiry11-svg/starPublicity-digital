@@ -188,7 +188,7 @@ const PrivacyPage = () => {
                 We value your trust and are committed to protecting your personal information.
             </p>
             <div className="inline-block bg-[#1e536d] px-6 py-2 rounded-lg text-sm font-medium border border-white/10">
-                Last Updated: <span className="text-cyan-300">May 21, 2024</span>
+                Last Updated: <span className="text-cyan-300">Oct 1, 2025</span>
             </div>
         </div>
       </div>
