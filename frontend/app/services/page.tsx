@@ -281,21 +281,18 @@ export default function ServicesSection() {
               <p className={`text-[#767676] text-lg font-normal mb-10 leading-relaxed max-w-sm desc-anim ${dmSans.className}`}>
                 From digital strategy to immersive experiences, we provide the tools you need to grow your business.
               </p>
-
-              {/* --- NAVIGATION BUTTONS --- */}
-              <div className="flex gap-4">
-                <button onClick={() => handlePageChange("prev")} disabled={isAnimating} className="w-14 h-14 rounded-full shadow-lg flex items-center justify-center bg-white text-black hover:bg-[#2a7394] hover:text-white transition-all duration-300 group cursor-pointer btn-anim">
-                  <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                </button>
-                <button onClick={() => handlePageChange("next")} disabled={isAnimating} className="w-14 h-14 rounded-full shadow-lg flex items-center justify-center bg-white text-black hover:bg-[#2a7394] hover:text-white transition-all duration-300 group cursor-pointer btn-anim">
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
             </div>
           </div>
 
           {/* --- RIGHT COLUMN (CARDS) --- */}
           <div className="lg:col-span-8 w-full relative">
+            {/* --- SINGLE RIGHT ARROW NAVIGATION --- */}
+            <div className="absolute inset-y-0 -right-4 sm:-right-8 flex items-center z-20">
+              <button onClick={() => handlePageChange("next")} disabled={isAnimating} className="w-14 h-14 rounded-full shadow-lg flex items-center justify-center bg-white text-black hover:bg-[#2a7394] hover:text-white transition-all duration-300 group cursor-pointer btn-anim">
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+
             <div 
               ref={cardsRef} 
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full"
