@@ -302,10 +302,10 @@ export default function ServicesSection() {
             >
               {visibleServices.map((item, i) => (
                 <div key={item.id} className="service-card w-full">
-                   <ServiceCard item={item} index={i + (currentPage * ITEMS_PER_PAGE)} />
+                  <ServiceCard item={item} index={i + (currentPage * ITEMS_PER_PAGE)} />
                 </div>
               ))}
-            </div>            
+            </div>
           </div>
 
         </div>
