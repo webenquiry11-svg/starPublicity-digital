@@ -265,7 +265,7 @@ export const Footer: React.FC = () => {
                     {/* Copyright and Scroll to Top (moved to the right side visually) */}
                     <div className="flex items-center gap-4 text-slate-500 text-xs mt-4 lg:mt-0 font-sans">
                         <p>Copyright © {new Date().getFullYear()} Star Publicity.</p>
-                        <Link href="/privacy-policy" className="hover:text-gray-900 transition-colors">Privacy Policy</Link>
+                         <a href="/Star Digital Website Images/privacypolicy.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 transition-colors">Privacy Policy</a>
                     </div>
                 </div>
             </div>
