@@ -26,11 +26,14 @@ const navLinks = [
 ];
 
 interface HeroProps {
-  onQuoteClick: () => void;
+  onQuoteClick?: () => void;
 }
+
 const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isHoverFormVisible, setIsHoverFormVisible] = useState(false);
+  
+  // State for the hover form
   const [hoverFormData, setHoverFormData] = useState({ name: '', email: '', phone: '' });
   const [hoverFormStatus, setHoverFormStatus] = useState({ message: '', error: false, submitting: false });
 
@@ -56,19 +59,23 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
     setHoverFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  // --- UPDATED FORM SUBMISSION LOGIC ---
   const handleHoverFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setHoverFormStatus({ message: 'Sending...', error: false, submitting: true });
 
     try {
-      const response = await fetch('/api/contact', {
+      const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
+
+      // Send Request with proper fields
+      const response = await fetch(`${baseUrl}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           name: hoverFormData.name, 
           email: hoverFormData.email,
-          phone: hoverFormData.phone,
-          message: `Quick Quote Request from Navbar. Phone: ${hoverFormData.phone || 'Not provided'}.` 
+          phone: hoverFormData.phone, // Sending phone separately now
+          message: "Quick Quote Request from Top Navbar" // Automated message since this form has no message box
         }),
       });
 
@@ -78,14 +85,17 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
         throw new Error(result.message || 'Something went wrong.');
       }
 
-      setHoverFormStatus({ message: result.message, error: false, submitting: false });
+      setHoverFormStatus({ message: 'Request sent successfully!', error: false, submitting: false });
       setHoverFormData({ name: '', email: '', phone: '' }); // Clear form
+      
+      // Close the form popup after 2 seconds
       setTimeout(() => {
         setIsHoverFormVisible(false);
         setHoverFormStatus({ message: '', error: false, submitting: false });
       }, 2000);
+
     } catch (error: any) {
-      setHoverFormStatus({ message: error.message, error: true, submitting: false });
+      setHoverFormStatus({ message: 'Failed to send. Please try again.', error: true, submitting: false });
     }
   };
 
@@ -94,28 +104,11 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
       {/* Styles for Animations & Fonts */}
       <style dangerouslySetInnerHTML={{__html: `
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
-        
-        @keyframes float-slow {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        @keyframes float-medium {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-15px); }
-        }
-        @keyframes float-fast {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
-        .animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
-        .animate-float-medium { animation: float-medium 5s ease-in-out infinite; }
-        .animate-float-fast { animation: float-fast 4s ease-in-out infinite; }
       `}} />
 
       {/* --- RIGHT SIDE COMPOSITION (VIDEO) --- */}
       <div className="absolute top-0 right-0 h-full w-full lg:w-[45%] xl:w-[40%] z-0">
         <div className="relative w-full h-full">
-          {/* Gradient overlay to blend video into the background */}
           <video 
             ref={videoRef}
             autoPlay 
@@ -271,6 +264,9 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
                 <span className="relative flex items-center z-10">Start Your Project</span>
               </Link>
             </div>
+          </div>
+          <div className="w-full lg:w-1/2">
+            {/* Space reserved for video background */}
           </div>
         </div>
       </div>

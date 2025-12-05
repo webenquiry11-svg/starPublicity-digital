@@ -62,11 +62,17 @@ export const ContactSection: React.FC = () => {
         setStatus({ message: 'Sending...', error: false, submitting: true });
 
         try {
-            const response = await fetch('/api/contact', {
+            // --- UPDATED LOGIC START ---
+            // define the Base URL: Use the env variable, fallback to localhost for safety
+            const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
+
+            // Send request to the EXTERNAL backend (Express), not the internal Next.js API
+            const response = await fetch(`${baseUrl}/api/contact`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
+            // --- UPDATED LOGIC END ---
 
             const result = await response.json();
 
@@ -74,11 +80,11 @@ export const ContactSection: React.FC = () => {
                 throw new Error(result.message || 'Something went wrong.');
             }
 
-            setStatus({ message: result.message, error: false, submitting: false });
+            setStatus({ message: result.message || 'Enquiry submitted successfully!', error: false, submitting: false });
             setFormData({ name: '', email: '', message: '' }); // Clear form
 
         } catch (error: any) {
-            setStatus({ message: error.message, error: true, submitting: false });
+            setStatus({ message: error.message || 'Failed to connect to server.', error: true, submitting: false });
         }
     };
 
@@ -265,7 +271,7 @@ export const Footer: React.FC = () => {
                     {/* Copyright and Scroll to Top (moved to the right side visually) */}
                     <div className="flex items-center gap-4 text-slate-500 text-xs mt-4 lg:mt-0 font-sans">
                         <p>Copyright © {new Date().getFullYear()} Star Publicity.</p>
-                        <a href="/privacy" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 transition-colors">Privacy Policy</a>
+                        <Link href="/privacy" className="hover:text-gray-900 transition-colors">Privacy Policy</Link>
                     </div>
                 </div>
             </div>
