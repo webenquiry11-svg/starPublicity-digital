@@ -8,12 +8,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 
 // Import local images
-import digitalMarketingImg from "./_images/digital1.png";
+import digitalMarketingImg from "./_images/digital.svg";
 import seoImg from "./_images/seo.svg";
-import arVrImg from "./_images/game.svg";
-import webDevImg from "./_images/web1.png";
-import photographyImg from "./_images/graphic1.jpeg";
-import brandingImg from "./_images/fevicon.png";
+import arVrImg from "./_images/arvr.svg";
+import webDevImg from "./_images/web.svg";
+import photographyImg from "./_images/graphic.svg";
+import brandingImg from "./_images/graphic.svg"; // Using graphic.svg as a placeholder
 
 // Configure Fonts
 const playfair = Playfair_Display({ subsets: ["latin"], weight: ["600", "700", "800", "900"] });
