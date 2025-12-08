@@ -30,7 +30,7 @@ const CurlyArrow = React.forwardRef<SVGSVGElement>((props, ref) => (
     viewBox="0 0 100 100"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className="absolute -right-12 top-2 md:-right-8 md:-top-2 text-black rotate-[-10deg] z-10 pointer-events-none"
+    className="hidden lg:block absolute text-black z-10 pointer-events-none lg:left-auto lg:bottom-auto lg:-right-12 lg:top-2 lg:rotate-[-10deg]"
   >
     <path
       className="arrow-path"
@@ -43,7 +43,7 @@ const CurlyArrow = React.forwardRef<SVGSVGElement>((props, ref) => (
     />
     <path
       className="arrow-path"
-      d="M 85 35 L 95 40 L 92 55"
+      d="M 85 35 L 95 40 L 90 50"
       stroke="currentColor"
       strokeWidth="3"
       strokeLinecap="round"
@@ -164,6 +164,17 @@ export default function ServicesSection() {
   const textRevealRef = useRef<HTMLDivElement>(null);
   
   const [currentPage, setCurrentPage] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // md breakpoint is 768px
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const [isAnimating, setIsAnimating] = useState(false);
   const directionRef = useRef<"next" | "prev">("next");
 
@@ -237,7 +248,9 @@ export default function ServicesSection() {
     });
   }, [currentPage]);
 
-  const visibleServices = services.slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE);
+  const visibleServices = isMobile
+    ? services
+    : services.slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE);
 
   return (
     <section ref={containerRef} className="relative py-24 bg-[#f5f7fa]">
@@ -286,8 +299,8 @@ export default function ServicesSection() {
           {/* --- RIGHT COLUMN (CARDS) --- */}
           <div className="lg:col-span-8 w-full relative">
             {/* --- SINGLE RIGHT ARROW NAVIGATION --- */}
-            <div className="absolute inset-y-0 -right-4 sm:-right-8 flex items-center z-20">
-              <button onClick={() => handlePageChange("next")} disabled={isAnimating} className="w-14 h-14 rounded-full shadow-lg flex items-center justify-center bg-white text-black hover:bg-[#2a7394] hover:text-white transition-all duration-300 group cursor-pointer btn-anim">
+            <div className="absolute inset-y-0 -right-4 sm:-right-8 md:flex items-center z-20 hidden">
+              <button onClick={() => handlePageChange("next")} disabled={isAnimating} className="w-14 h-14 rounded-full shadow-lg flex items-center justify-center bg-white text-black hover:bg-[#2a7394] hover:text-white transition-all duration-300 group cursor-pointer">
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>

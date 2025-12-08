@@ -381,15 +381,6 @@ const AboutSection: React.FC = () => {
                   for your success.
                 </p>
 
-                <button
-                  className="
-                    bg-[#256482] text-white font-bold py-4 px-10 rounded-full text-lg
-                    transition-all duration-300 ease-out
-                    hover:bg-[#1e5068] hover:shadow-xl hover:-translate-y-1"
-                  style={{ fontFamily: "'DM Sans', sans-serif" }}
-                >
-                  Learn More
-                </button>
               </motion.div>
 
               {/* Right Side: Principles */}

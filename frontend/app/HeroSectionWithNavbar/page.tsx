@@ -107,7 +107,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
       `}} />
 
       {/* --- RIGHT SIDE COMPOSITION (VIDEO) --- */}
-      <div className="absolute top-0 right-0 h-full w-full lg:w-[45%] xl:w-[40%] z-0">
+      <div className="hidden lg:block absolute top-0 right-0 h-full w-full lg:w-[45%] xl:w-[40%] z-0">
         <div className="relative w-full h-full">
           <video 
             ref={videoRef}
