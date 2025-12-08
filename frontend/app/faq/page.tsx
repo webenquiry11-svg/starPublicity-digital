@@ -81,7 +81,7 @@ const AwardsSection = () => {
     }, [isDesktop]);
 
     useEffect(() => {
-        const checkScreenSize = () => setIsDesktop(window.innerWidth >= 1024); // lg breakpoint
+        const checkScreenSize = () => setIsDesktop(window.innerWidth >= 768); // md breakpoint
         checkScreenSize();
         window.addEventListener('resize', checkScreenSize);
         return () => window.removeEventListener('resize', checkScreenSize);
@@ -175,10 +175,10 @@ const AwardsSection = () => {
           {awardCards.map((card) => (
             <div 
               key={card.id} 
-              className={`absolute top-1/2 left-1/2 w-72 sm:w-80 h-72 sm:h-80 group`}
+              className={`absolute top-1/2 left-1/2 w-72 h-72 md:w-80 md:h-80 group`}
               style={{ 
                 transform: ` 
-                  translateX(calc(-50% + ${scrollProgress * (card.id * 380 - 950)}px))
+                  translateX(calc(-50% + ${scrollProgress * (card.id * 320 - 800)}px))
                   translateY(-50%) 
                   rotate(${
                     (scrollProgress * card.rotation) + (1 - scrollProgress) * (card.id * 2 - 5)
