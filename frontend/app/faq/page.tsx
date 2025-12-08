@@ -18,7 +18,7 @@ const awardCards = [
     explanation: "Clear communication and open collaboration ensure you understand what suits your brand best.",
     source: "Our Commitment",
     color: "#6b21a8", // Dark Purple
-    rotation: -5, // Slight tilt left
+    rotation: -5, 
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ const awardCards = [
     explanation: "Innovative strategies create trends, inspire action, and help your brand stay ahead of the competition.",
     source: "Our Strategy",
     color: "#1e40af", // Deep Blue
-    rotation: 5, // Slight tilt right
+    rotation: 5, 
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const awardCards = [
     explanation: "We are dedicated to exceeding your expectations and building trusted relationships through tailored solutions.",
     source: "Our Promise",
     color: "#2a7394",
-    rotation: -3, // Slight tilt left
+    rotation: -3, 
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ const awardCards = [
     explanation: "We consistently uphold our commitments, providing measurable and reliable results every single time.",
     source: "Our Guarantee",
     color: "#ca8a04", // Golden Yellow
-    rotation: 6, // Slight tilt right
+    rotation: 6, 
   },
 ];
 
@@ -56,7 +56,10 @@ const awardCards = [
 const AwardsSection = () => {
     const [scrollProgress, setScrollProgress] = useState(0);
     const sectionRef = useRef<HTMLDivElement>(null);
-    const [isDesktop, setIsDesktop] = useState(false);
+    const [isCompact, setIsCompact] = useState(false);
+    
+    // Config to adjust how wide cards spread based on screen size
+    const [spreadConfig, setSpreadConfig] = useState({ multiplier: 320, subtractor: 800 });
 
     useEffect(() => {
         const sectionNode = sectionRef.current;
@@ -74,61 +77,68 @@ const AwardsSection = () => {
         };
 
         window.addEventListener('scroll', handleScroll, { passive: true });
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [isDesktop]);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [isCompact]);
 
     useEffect(() => {
-        const checkScreenSize = () => setIsDesktop(window.innerWidth >= 768); // md breakpoint
+        const checkScreenSize = () => {
+            const width = window.innerWidth;
+            // CHANGED: We now treat anything under 1100px (including Nest Hub at 1024px)
+            // as "Compact" mode. This forces the Grid layout which guarantees visibility.
+            // The animation is reserved for screens > 1100px.
+            setIsCompact(width < 1100);
+
+            // Default config for Desktop
+            setSpreadConfig({ multiplier: 320, subtractor: 800 });
+        };
+
         checkScreenSize();
         window.addEventListener('resize', checkScreenSize);
         return () => window.removeEventListener('resize', checkScreenSize);
     }, []);
 
-    if (!isDesktop) {
-        // Render a static grid for mobile
+    // --- COMPACT VIEW (Grid Layout for Mobile & Tablet/Nest Hub) ---
+    if (isCompact) {
         return (
-            <section className="py-20 md:py-32 bg-gray-50">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center mb-16 relative">
+            <section className="py-16 md:py-20 bg-gray-50">
+                <div className="container mx-auto px-6 md:px-12">
+                    <div className="text-center mb-12 relative">
                         <span className="inline-block py-1 px-3 rounded-full bg-teal-50 text-teal-600 text-xs font-bold tracking-widest border border-teal-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif" }}>
                             Our Values
                         </span>
                         <h2 
-                            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 drop-shadow-sm tracking-tight"
+                            className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-sm tracking-tight"
                             style={{ fontFamily: "'Playfair Display', serif" }}
                         >
                             <span className="text-slate-900">Our Core </span>
                             <span className="text-teal-600">Commitment</span>
                         </h2>
-                        <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-teal-500 to-teal-700 opacity-80 mb-6"></div>
-                        <p className="text-lg text-slate-500 max-w-2xl mx-auto font-sans">
+                        <div className="w-20 h-1.5 mx-auto rounded-full bg-gradient-to-r from-teal-500 to-teal-700 opacity-80 mb-4"></div>
+                        <p className="text-base text-slate-500 max-w-xl mx-auto font-sans">
                             Excellence in Every Partnership
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    {/* GRID LOGIC FIX:
+                       - Mobile: grid-cols-1 (1 card per row)
+                       - Tablet/Nest Hub: grid-cols-2 (2 cards per row) 
+                       This ensures 4 cards fit perfectly in a 2x2 grid on a 1024px screen.
+                    */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {awardCards.map((card) => (
-                            <div key={card.id} className="w-full h-full group">
+                            <div key={card.id} className="w-full group">
                                 <div 
-                                    className="relative w-full h-full p-6 bg-white/50 backdrop-blur-md rounded-2xl border border-white/30 flex flex-col justify-between cursor-pointer transition-all duration-300 group-hover:shadow-2xl group-hover:border-white/50"
-                                    style={{ boxShadow: `0 0 20px ${card.color}20, inset 0 0 0 1px ${card.color}00` }}
+                                    className="relative w-full h-full p-6 bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                                    style={{ borderLeft: `4px solid ${card.color}` }}
                                 >
-                                    <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: `0 0 25px ${card.color}80, inset 0 0 0 1px ${card.color}80` }}></div>
-
-                                    <div className="relative z-10">
-                                        <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ backgroundColor: card.color }}>
-                                            {card.icon && <card.icon size={28} className="text-white" strokeWidth={2} />}
+                                    <div className="flex items-center gap-4 mb-4">
+                                        <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: card.color }}>
+                                            {card.icon && <card.icon size={24} className="text-white" strokeWidth={2} />}
                                         </div>
+                                        <p className="text-xl md:text-2xl font-bold text-slate-800" style={{ fontFamily: "'Outfit', sans-serif" }}>{card.text}</p>
                                     </div>
-
-                                    <div className="relative z-10 mt-auto text-left">
-                                        <p className="text-2xl font-bold text-slate-800 mb-2 leading-tight" style={{ fontFamily: "'Outfit', sans-serif" }}>{card.text}</p>
-                                        <p className="text-base text-slate-600 mb-3 leading-relaxed font-sans">{card.explanation}</p>
-                                        <p className="text-sm font-semibold uppercase tracking-wider text-slate-500 mt-auto font-sans">{card.source}</p>
-                                    </div>
+                                    <p className="text-sm md:text-base text-slate-600 mb-4 leading-relaxed font-sans">{card.explanation}</p>
+                                    <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 font-sans mt-auto">{card.source}</p>
                                 </div>
                             </div>
                         ))}
@@ -138,47 +148,43 @@ const AwardsSection = () => {
         );
     }
     
+  // --- DESKTOP VIEW (> 1100px) (Animated Spread) ---
   return (
     <section 
       ref={sectionRef}
-      className="py-20 md:py-32 relative overflow-hidden bg-gray-50 min-h-[600px]" 
+      className="py-24 relative overflow-hidden bg-gray-50 min-h-[700px]" 
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-8">
         
-        {/* --- UPDATED ATTRACTIVE HEADING START --- */}
-        <div className="text-center mb-24 relative">          
-             {/* Small decorative Badge - Using Teal to match the brand theme */}
+        {/* --- HEADING --- */}
+        <div className="text-center mb-24 relative">           
             <span className="inline-block py-1 px-3 rounded-full bg-blue-50 text-xs font-bold tracking-widest border border-blue-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif", color: '#2a7394' }}>
                 Our Values
             </span>            
 
-            {/* Main Title with Gradient and Font */}
             <h2 
-                className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 drop-shadow-sm tracking-tight"
+                className="text-6xl font-bold mb-6 drop-shadow-sm tracking-tight"
                 style={{ fontFamily: "'Playfair Display', serif" }}
             >
                 <span className="text-slate-900">Our Core </span>                
                 <span style={{ color: '#2a7394' }}>Commitment</span>
             </h2>
             
-            {/* Decorative Underline Bar */}
             <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-[#2a7394] to-blue-500 opacity-80 mb-6"></div>
 
-            {/* Subtitle */}
             <p className="text-lg text-slate-500 max-w-2xl mx-auto font-sans">
                 Excellence in Every Partnership
             </p>
         </div>
-        {/* --- UPDATED ATTRACTIVE HEADING END --- */}
 
-        <div className="relative h-72 w-full">
+        <div className="relative h-80 w-full">
           {awardCards.map((card) => (
             <div 
               key={card.id} 
-              className={`absolute top-1/2 left-1/2 w-72 h-72 md:w-80 md:h-80 group`}
+              className={`absolute top-1/2 left-1/2 w-80 h-80 group`}
               style={{ 
                 transform: ` 
-                  translateX(calc(-50% + ${scrollProgress * (card.id * 320 - 800)}px))
+                  translateX(calc(-50% + ${scrollProgress * (card.id * spreadConfig.multiplier - spreadConfig.subtractor)}px))
                   translateY(-50%) 
                   rotate(${
                     (scrollProgress * card.rotation) + (1 - scrollProgress) * (card.id * 2 - 5)
@@ -186,11 +192,12 @@ const AwardsSection = () => {
                   scale(${0.8 + scrollProgress * 0.2})
                 `,
                 opacity: 0.5 + scrollProgress * 0.5,
+                zIndex: Math.round(scrollProgress * 10) + card.id,
               }}
             >
                 {/* Glassmorphism Card */}
                 <div 
-                    className="relative w-full h-full p-6 bg-white/50 backdrop-blur-md rounded-2xl border border-white/30 flex flex-col justify-between cursor-pointer transition-all duration-300 group-hover:shadow-2xl group-hover:border-white/50"
+                    className="relative w-full h-full p-6 bg-white/70 backdrop-blur-md rounded-2xl border border-white/40 flex flex-col justify-between cursor-pointer transition-all duration-300 group-hover:shadow-2xl group-hover:border-white/60 group-hover:bg-white/90"
                     style={{ boxShadow: `0 0 20px ${card.color}20, inset 0 0 0 1px ${card.color}00` }}
                 >
                     <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: `0 0 25px ${card.color}80, inset 0 0 0 1px ${card.color}80` }}></div>
@@ -268,38 +275,36 @@ const StoryByNumbersSection = () => {
           "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40' width='40' height='40'%3E%3Ccircle cx='20' cy='20' r='1' fill='rgba(0, 0, 0, 0.03)'/%3E%3C/svg%3E\")",
       }}
     >
-      <div className="container mx-auto px-8 sm:px-16 lg:px-24">
+      <div className="container mx-auto px-6 md:px-12 lg:px-24">
         
         {/* --- NUMBERS SECTION HEADING --- */}        
-        <div className="text-center mb-16 relative">          
-             {/* Small decorative Badge - Updated to Teal */}
+        <div className="text-center mb-12 md:mb-16 relative">           
             <span className="inline-block py-1 px-3 rounded-full bg-blue-50 text-xs font-bold tracking-widest border border-blue-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif", color: '#2a7394' }}>
                 Our Impact
             </span>            
 
-            {/* Main Title with Gradient and Font */}
             <h2 
-                className="text-3xl sm:text-5xl md:text-6xl font-bold mb-6 drop-shadow-sm tracking-tight"
+                className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 md:mb-6 drop-shadow-sm tracking-tight"
                 style={{ fontFamily: "'Playfair Display', serif" }}
             >
               <span className="text-slate-900">Numbers That </span>              
               <span style={{ color: '#2a7394' }}>Define Us</span>
             </h2>
             
-            {/* Decorative Underline Bar */}
             <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-[#2a7394] to-blue-500 opacity-80"></div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-4">
+        {/* Responsive Grid: 2 cols on tablet, 3 on laptop, 5 on desktop */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-4 justify-center">
           {stats.map((stat, index) => (
-            <div key={index} className="flex flex-col items-center md:items-start p-4 md:border-r border-gray-200 last:border-r-0 hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300 rounded-xl group">
-              <div className="flex items-start text-5xl sm:text-6xl xl:text-7xl font-light text-slate-800 leading-none group-hover:text-blue-700 transition-colors duration-300" style={{ fontFamily: "'Outfit', sans-serif" }}>
+            <div key={index} className="flex flex-col items-center md:items-center lg:items-start p-4 hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300 rounded-xl group border-b md:border-b-0 border-gray-100 lg:border-r last:border-0 last:border-b-0">
+              <div className="flex items-start text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-slate-800 leading-none group-hover:text-blue-700 transition-colors duration-300" style={{ fontFamily: "'Outfit', sans-serif" }}>
                 <AnimatedNumber target={parseInt(stat.number)} />
-                <span className="font-bold text-2xl ml-1 mt-2 flex-shrink-0 group-hover:text-blue-400" style={{ color: '#2a7394' }}>
+                <span className="font-bold text-xl md:text-2xl ml-1 mt-1 md:mt-2 flex-shrink-0 group-hover:text-blue-400" style={{ color: '#2a7394' }}>
                   +
                 </span>
               </div>
-              <p className="text-lg text-gray-500 mt-3 font-medium tracking-wide uppercase font-sans group-hover:text-gray-800 transition-colors">{stat.label}</p>
+              <p className="text-sm md:text-base text-gray-500 mt-2 md:mt-3 font-medium tracking-wide uppercase font-sans group-hover:text-gray-800 transition-colors text-center lg:text-left">{stat.label}</p>
             </div>
           ))}
         </div>

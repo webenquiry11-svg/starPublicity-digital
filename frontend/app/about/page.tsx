@@ -78,35 +78,39 @@ const corePrinciples = [
 // --- Animation Variants ---
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
-  visible: { 
+  visible: {
     opacity: 1,
-    transition: { 
-      staggerChildren: 0.2, 
-      delayChildren: 0.1 
-    }
-  }
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
+  },
 };
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.6, ease: "easeOut" } 
-  }
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
 };
 
 const AboutSection: React.FC = () => {
   const timelineRef = useRef<HTMLDivElement>(null);
-  
+
   // Scroll Progress Logic for Timeline
   const { scrollYProgress } = useScroll({
     target: timelineRef,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"],
   });
-  
+
   // Smooth out the scroll progress
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   return (
     <>
@@ -115,46 +119,66 @@ const AboutSection: React.FC = () => {
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;400;500;700&family=Fraunces:opsz,wght@9..144,300;600;700;900&display=swap');
       `}} />
 
-      {/* === 1. HERO & MISSION SECTION === */} 
+      {/* === 1. HERO & MISSION SECTION === */}
       <div className="bg-white text-gray-900 overflow-hidden font-sans">
-        
         <motion.section
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={containerVariants}
-          className={`pt-20 md:pt-32 pb-16 md:pb-24 bg-white relative`}
+          // Reduced py for tablet/Nest Hub screens to prevent excessive scrolling
+          className="pt-16 md:pt-24 lg:pt-32 pb-12 md:pb-20 bg-white relative"
         >
-          <div className="container mx-auto px-6 md:px-16 lg:px-24">
+          {/* Adjusted horizontal padding: px-6 for mobile, px-10 for tablet, px-16 for desktop */}
+          <div className="container mx-auto px-6 md:px-10 lg:px-16 xl:px-24">
             {/* Top Marker */}
-            <motion.p variants={itemVariants} className="text-sm font-bold uppercase tracking-[0.2em] mb-3 text-[#256482]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+            <motion.p
+              variants={itemVariants}
+              className="text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-3 text-[#256482]"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
+            >
               — Safe By Design
             </motion.p>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
               {/* Left Column: Headline and CTA */}
               <div className="order-2 lg:order-1 text-center lg:text-left">
-                <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-7xl font-black leading-[1.1] mb-6 text-[#256482] tracking-tight" style={{ fontFamily: "'Fraunces', serif" }}>
-                  Redefining Results, <br/> Building Your Success.
+                {/* Font size adjusted: text-5xl on tablet (md), text-6xl on laptop (lg), text-7xl on desktop (xl) */}
+                <motion.h1
+                  variants={itemVariants}
+                  className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.1] mb-6 text-[#256482] tracking-tight"
+                  style={{ fontFamily: "'Fraunces', serif" }}
+                >
+                  Redefining Results, <br className="hidden lg:block" /> Building Your Success.
                 </motion.h1>
-                <motion.p variants={itemVariants} className="text-xl text-gray-700 leading-relaxed mb-10 font-medium" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                  We understand the challenges brands face. Our team is here to help you break barriers and achieve your goals. Together, we can bring your vision to life.
+                <motion.p
+                  variants={itemVariants}
+                  className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8 font-medium"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
+                >
+                  We understand the challenges brands face. Our team is here to
+                  help you break barriers and achieve your goals. Together, we can
+                  bring your vision to life.
                 </motion.p>
 
                 {/* New Quote */}
-                <motion.p variants={itemVariants} className="text-2xl sm:text-3xl font-semibold text-[#256482] italic mt-8" style={{ fontFamily: "'Fraunces', serif" }}>
+                <motion.p
+                  variants={itemVariants}
+                  className="text-xl sm:text-2xl md:text-3xl font-semibold text-[#256482] italic mt-4 md:mt-8"
+                  style={{ fontFamily: "'Fraunces', serif" }}
+                >
                   "Where creativity sparks your story"
                 </motion.p>
               </div>
 
               {/* Right Column: Imagery */}
-              <motion.div 
-                variants={itemVariants} 
-                className="order-1 lg:order-2 relative h-72 sm:h-96 w-full flex justify-center lg:justify-end"
+              <motion.div
+                variants={itemVariants}
+                className="order-1 lg:order-2 relative h-64 sm:h-80 md:h-96 w-full flex justify-center lg:justify-end"
               >
-                <div className="w-[85%] h-full rounded-[2rem] shadow-2xl relative overflow-hidden group">
-                    {/* Hover Effect on Image */}
-                    <div className="absolute inset-0 bg-[#256482]/10 z-10 transition-opacity duration-500 opacity-0 group-hover:opacity-100"></div>
+                <div className="w-full sm:w-[90%] md:w-[85%] h-full rounded-[2rem] shadow-2xl relative overflow-hidden group">
+                  {/* Hover Effect on Image */}
+                  <div className="absolute inset-0 bg-[#256482]/10 z-10 transition-opacity duration-500 opacity-0 group-hover:opacity-100"></div>
                   <Image
                     src={whyChoose}
                     alt="Team collaborating on a project"
@@ -163,30 +187,42 @@ const AboutSection: React.FC = () => {
                   />
                 </div>
                 {/* Decorative Elements behind image */}
-                <motion.div 
-                    animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute -top-6 -right-6 w-32 h-32 bg-cyan-100/80 rounded-full blur-xl -z-10"
+                <motion.div
+                  animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute -top-6 -right-6 w-24 h-24 md:w-32 md:h-32 bg-cyan-100/80 rounded-full blur-xl -z-10"
                 ></motion.div>
               </motion.div>
             </div>
 
             {/* Security Cards (Below Hero) */}
-            <motion.div 
-                variants={containerVariants}
-                className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-20"
+            <motion.div
+              variants={containerVariants}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mt-16 md:mt-20"
             >
               {securityCards.map((card, index) => (
                 <motion.div
                   key={index}
                   variants={itemVariants}
                   whileHover={{ y: -8 }}
-                  className="bg-gray-50 p-8 rounded-2xl border border-gray-100 hover:shadow-xl hover:bg-white transition-all duration-300 group"
+                  className="bg-gray-50 p-6 md:p-8 rounded-2xl border border-gray-100 hover:shadow-xl hover:bg-white transition-all duration-300 group"
                 >
-                  <h3 className="text-2xl font-bold mb-3 text-slate-800 group-hover:text-[#256482] transition-colors" style={{ fontFamily: "'Fraunces', serif" }}>
+                  <h3
+                    className="text-xl md:text-2xl font-bold mb-3 text-slate-800 group-hover:text-[#256482] transition-colors"
+                    style={{ fontFamily: "'Fraunces', serif" }}
+                  >
                     {card.title}
                   </h3>
-                  <p className="text-gray-600 mb-0 leading-relaxed text-lg" style={{ fontFamily: "'DM Sans', sans-serif" }}>{card.description}</p>
+                  <p
+                    className="text-gray-600 mb-0 leading-relaxed text-base md:text-lg"
+                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                  >
+                    {card.description}
+                  </p>
                 </motion.div>
               ))}
             </motion.div>
@@ -198,25 +234,39 @@ const AboutSection: React.FC = () => {
         {/* === 2. TIMELINE SECTION === */}
         <section
           ref={timelineRef}
-          className={`py-20 md:py-32 bg-[#2a7394] rounded-tl-[3.5rem] rounded-tr-[3.5rem] relative overflow-hidden`}
+          className="py-16 md:py-24 bg-[#2a7394] rounded-tl-[2.5rem] rounded-tr-[2.5rem] md:rounded-tl-[3.5rem] md:rounded-tr-[3.5rem] relative overflow-hidden"
         >
           {/* Subtle pattern overlay */}
-          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle, #fff 2px, transparent 2px)", backgroundSize: "40px 40px" }}></div>
+          <div
+            className="absolute inset-0 opacity-10"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle, #fff 2px, transparent 2px)",
+              backgroundSize: "40px 40px",
+            }}
+          ></div>
 
-          <div className="container mx-auto px-6 md:px-16 lg:px-24 relative z-10">
+          <div className="container mx-auto px-6 md:px-10 lg:px-16 xl:px-24 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
               {/* Left Column: Headline and CTA */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="w-full lg:w-4/5 text-center lg:text-left lg:mt-24 lg:sticky top-32"
+                // Adjusted sticky position and font sizes for tablet height
+                className="w-full lg:w-4/5 text-center lg:text-left lg:mt-12 lg:sticky top-24"
               >
-                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold leading-[1.05] mb-8 text-white tracking-tight" style={{ fontFamily: "'Fraunces', serif" }}>
+                <h2
+                  className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] mb-6 md:mb-8 text-white tracking-tight"
+                  style={{ fontFamily: "'Fraunces', serif" }}
+                >
                   Lead Growth With Precision And Expertise.
                 </h2>
-                <p className="text-lg sm:text-xl text-blue-50/90 leading-relaxed mb-10 font-normal" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                <p
+                  className="text-base sm:text-lg md:text-xl text-blue-50/90 leading-relaxed mb-8 md:mb-10 font-normal"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
+                >
                   Our rapid-response team leverages high-end tech and strategic
                   expertise to deliver outstanding results with remarkable speed
                   and precision.
@@ -226,35 +276,41 @@ const AboutSection: React.FC = () => {
               {/* Right Column: Timeline Steps */}
               <div className="w-full relative space-y-8">
                 {/* Timeline Line */}
-                <div className="absolute left-6 top-4 bottom-4 w-px bg-blue-300/30 hidden md:block" />
-                
-                {/* Progress Line Overlay */}
-                <motion.div 
-                    className="absolute left-6 top-4 w-0.5 bg-white hidden md:block origin-top shadow-[0_0_10px_rgba(255,255,255,0.8)]"
-                    style={{ height: "100%", scaleY: smoothProgress }} 
+                <div className="absolute left-4 md:left-6 top-4 bottom-4 w-px bg-blue-300/30 block" />
+
+                {/* Progress Line Overlay - Hidden on mobile, visible on tab/desk */}
+                <motion.div
+                  className="absolute left-4 md:left-6 top-4 w-0.5 bg-white block origin-top shadow-[0_0_10px_rgba(255,255,255,0.8)]"
+                  style={{ height: "100%", scaleY: smoothProgress }}
                 />
 
                 {corePrinciples.map((step, index) => (
-                  <motion.div 
-                    key={index} 
+                  <motion.div
+                    key={index}
                     initial={{ opacity: 0, x: 50 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
+                    viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.6, delay: index * 0.2 }}
-                    className="group relative md:pl-20"
+                    className="group relative pl-12 md:pl-20"
                   >
                     {/* Timeline Marker icon */}
-                    <div className="absolute left-2 md:left-2 top-0 w-8 h-8 md:w-10 md:h-10 bg-[#2a7394] border border-white/40 rounded-full items-center justify-center z-10 shadow-lg group-hover:bg-white group-hover:text-[#256482] transition-colors duration-300 hidden md:flex">
-                      <span className="text-lg md:text-xl">{step.icon}</span>
+                    <div className="absolute left-0 md:left-2 top-0 w-8 h-8 md:w-10 md:h-10 bg-[#2a7394] border border-white/40 rounded-full flex items-center justify-center z-10 shadow-lg group-hover:bg-white group-hover:text-[#256482] transition-colors duration-300">
+                      <span className="text-sm md:text-xl">{step.icon}</span>
                     </div>
 
-                    <div className="relative bg-white/5 backdrop-blur-md p-6 rounded-3xl border border-white/10 shadow-lg transition-all duration-300 hover:bg-white hover:border-transparent hover:shadow-2xl hover:-translate-y-2">
+                    <div className="relative bg-white/5 backdrop-blur-md p-5 md:p-6 rounded-3xl border border-white/10 shadow-lg transition-all duration-300 hover:bg-white hover:border-transparent hover:shadow-2xl hover:-translate-y-2">
                       <div className="relative z-10">
-                        <span className="inline-block text-xs font-bold px-3 py-1 rounded-full mb-3 bg-white/20 text-white group-hover:bg-[#256482]/10 group-hover:text-[#256482] transition-colors" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                        <span
+                          className="inline-block text-[10px] md:text-xs font-bold px-3 py-1 rounded-full mb-3 bg-white/20 text-white group-hover:bg-[#256482]/10 group-hover:text-[#256482] transition-colors"
+                          style={{ fontFamily: "'DM Sans', sans-serif" }}
+                        >
                           {step.step}
                         </span>
 
-                        <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-[#256482] transition-colors" style={{ fontFamily: "'Fraunces', serif" }}>
+                        <h3
+                          className="text-xl md:text-2xl font-bold mb-3 text-white group-hover:text-[#256482] transition-colors"
+                          style={{ fontFamily: "'Fraunces', serif" }}
+                        >
                           {step.title}
                         </h3>
 
@@ -262,11 +318,19 @@ const AboutSection: React.FC = () => {
                           {step.points.map((point, pIndex) => (
                             <li
                               key={pIndex}
-                              className="text-blue-50/80 group-hover:text-gray-600 flex items-start gap-3 text-lg transition-colors"
+                              className="text-blue-50/80 group-hover:text-gray-600 flex items-start gap-3 text-base md:text-lg transition-colors"
                               style={{ fontFamily: "'DM Sans', sans-serif" }}
                             >
                               <Check className="w-5 h-5 text-cyan-300 group-hover:text-[#256482] flex-shrink-0 mt-1 transition-colors" />
-                              <span className={`${point.startsWith('“') ? 'italic font-medium text-white group-hover:text-gray-800' : ''}`}>{point}</span>
+                              <span
+                                className={`${
+                                  point.startsWith("“")
+                                    ? "italic font-medium text-white group-hover:text-gray-800"
+                                    : ""
+                                }`}
+                              >
+                                {point}
+                              </span>
                             </li>
                           ))}
                         </ul>
@@ -289,28 +353,28 @@ const AboutSection: React.FC = () => {
           backgroundSize: `30px 30px`,
         }}
       >
-        <section className={`py-24 md:py-32 relative overflow-hidden`}>
-          {/* Animated Blobs */}
-          <motion.div 
+        <section className="py-16 md:py-24 relative overflow-hidden">
+          {/* Animated Blobs - Reduced size for tablet performance */}
+          <motion.div
             animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-            className="absolute top-0 left-0 w-80 h-80 bg-blue-200/40 rounded-full blur-[80px] -z-0"
+            className="absolute top-0 left-0 w-48 h-48 md:w-80 md:h-80 bg-blue-200/40 rounded-full blur-[60px] md:blur-[80px] -z-0"
           ></motion.div>
-          <motion.div 
+          <motion.div
             animate={{ scale: [1, 1.3, 1], x: [0, 50, 0] }}
             transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-200/40 rounded-full blur-[80px] -z-0"
+            className="absolute bottom-0 right-0 w-64 h-64 md:w-96 md:h-96 bg-cyan-200/40 rounded-full blur-[60px] md:blur-[80px] -z-0"
           ></motion.div>
 
-
-          {/* Floating Images */}
-          <motion.div 
+          {/* Floating Images - CHANGED: Hidden on md/lg, visible on xl only. 
+             This prevents images from blocking text on 1024px screens (iPad/Nest Hub) */}
+          <motion.div
             initial={{ opacity: 0, x: -50, rotate: -3 }}
             whileInView={{ opacity: 1, x: 0, rotate: -3 }}
             viewport={{ once: true }}
             transition={{ duration: 1 }}
             whileHover={{ scale: 1.05, rotate: 0, zIndex: 25 }}
-            className="hidden md:block absolute top-16 left-4 lg:left-16 w-64 h-48 lg:w-80 lg:h-56 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] border-4 border-white z-20"
+            className="hidden xl:block absolute top-16 left-16 w-80 h-56 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] border-4 border-white z-20"
           >
             <Image
               src={whyChoose}
@@ -320,13 +384,13 @@ const AboutSection: React.FC = () => {
             />
           </motion.div>
 
-          <motion.div 
-             initial={{ opacity: 0, x: 50, rotate: 3 }}
-             whileInView={{ opacity: 1, x: 0, rotate: 3 }}
-             viewport={{ once: true }}
-             transition={{ duration: 1, delay: 0.2 }}
-             whileHover={{ scale: 1.05, rotate: 0, zIndex: 25 }}
-            className="hidden md:block absolute bottom-16 right-4 lg:right-16 w-64 h-48 lg:w-80 lg:h-56 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] border-4 border-white z-20"
+          <motion.div
+            initial={{ opacity: 0, x: 50, rotate: 3 }}
+            whileInView={{ opacity: 1, x: 0, rotate: 3 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.2 }}
+            whileHover={{ scale: 1.05, rotate: 0, zIndex: 25 }}
+            className="hidden xl:block absolute bottom-16 right-16 w-80 h-56 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] border-4 border-white z-20"
           >
             <Image
               src={whyChoose1}
@@ -336,18 +400,25 @@ const AboutSection: React.FC = () => {
             />
           </motion.div>
 
-          <div className="container mx-auto px-6 md:px-16 lg:px-24 relative">
-            <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="max-w-4xl mx-auto text-center bg-white/70 backdrop-blur-md p-10 rounded-[2.5rem] border border-white shadow-xl"
+          <div className="container mx-auto px-6 md:px-10 lg:px-16 xl:px-24 relative">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="max-w-4xl mx-auto text-center bg-white/80 backdrop-blur-md p-8 md:p-10 rounded-[2rem] border border-white shadow-xl"
             >
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#256482] leading-[1.1] mb-6 tracking-tight" style={{ fontFamily: "'Fraunces', serif" }}>
-                Get to know why brands trust <span className="text-[#256482]">Star Publicity.</span>
+              <h2
+                className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#256482] leading-[1.1] mb-6 tracking-tight"
+                style={{ fontFamily: "'Fraunces', serif" }}
+              >
+                Get to know why brands trust{" "}
+                <span className="text-[#256482]">Star Publicity.</span>
               </h2>
-              <p className="text-xl text-gray-600 leading-relaxed mb-0 max-w-2xl mx-auto" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+              <p
+                className="text-lg md:text-xl text-gray-600 leading-relaxed mb-0 max-w-2xl mx-auto"
+                style={{ fontFamily: "'DM Sans', sans-serif" }}
+              >
                 We are a dedicated team of specialists committed to helping
                 modern businesses grow. We deliver reliable results, transparent
                 service, and innovative solutions that build client trust.
@@ -356,35 +427,40 @@ const AboutSection: React.FC = () => {
           </div>
         </section>
 
-        <div className="container mx-auto">
+        <div className="container mx-auto px-6">
           <hr className="border-gray-200" />
         </div>
 
         {/* === 4. STATS SECTION === */}
-        <section className={`py-16 md:py-24`}>
-          <div className="container mx-auto px-6 md:px-16 lg:px-24">
-            <div className="grid grid-cols-1 md:grid-cols-2 items-start gap-12 lg:gap-16">
+        <section className="py-16 md:py-24">
+          <div className="container mx-auto px-6 md:px-10 lg:px-16 xl:px-24">
+            <div className="grid grid-cols-1 md:grid-cols-2 items-start gap-10 md:gap-12 lg:gap-16">
               {/* Left Side: Headline and CTA */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
                 className="w-full relative text-left"
               >
-                <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#256482] leading-none mb-8" style={{ fontFamily: "'Fraunces', serif" }}>
+                <h2
+                  className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-black text-[#256482] leading-none mb-6 md:mb-8"
+                  style={{ fontFamily: "'Fraunces', serif" }}
+                >
                   Where Ambitious Brands Achieve More.
                 </h2>
-                <p className="text-xl text-gray-600 leading-relaxed mb-10 max-w-lg" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                <p
+                  className="text-lg md:text-xl text-gray-600 leading-relaxed mb-8 md:mb-10 max-w-lg"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
+                >
                   Supercharge your brand's growth with Star Publicity. Our
                   creative strategies deliver quick, measurable results tailored
                   for your success.
                 </p>
-
               </motion.div>
 
               {/* Right Side: Principles */}
-              <div className="w-full space-y-12">
+              <div className="w-full space-y-8 md:space-y-12">
                 {statsData.map((stat, index) => (
                   <motion.div
                     key={index}
@@ -393,15 +469,20 @@ const AboutSection: React.FC = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     whileHover={{ x: 10 }}
-                    className="flex flex-col pb-10 border-b border-gray-200 last:border-b-0 cursor-default group"
+                    className="flex flex-col pb-8 md:pb-10 border-b border-gray-200 last:border-b-0 cursor-default group"
                   >
                     <h3
-                      className={`text-3xl md:text-4xl font-bold ${stat.color} mb-4 group-hover:text-cyan-600 transition-colors`}
+                      className={`text-2xl md:text-3xl lg:text-4xl font-bold ${stat.color} mb-3 md:mb-4 group-hover:text-cyan-600 transition-colors`}
                       style={{ fontFamily: "'Fraunces', serif" }}
                     >
                       {stat.title}
                     </h3>
-                    <p className="text-xl text-gray-600" style={{ fontFamily: "'DM Sans', sans-serif" }}>{stat.text}</p>
+                    <p
+                      className="text-lg md:text-xl text-gray-600"
+                      style={{ fontFamily: "'DM Sans', sans-serif" }}
+                    >
+                      {stat.text}
+                    </p>
                   </motion.div>
                 ))}
               </div>
