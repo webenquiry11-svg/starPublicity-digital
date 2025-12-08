@@ -164,15 +164,15 @@ export default function ServicesSection() {
   const textRevealRef = useRef<HTMLDivElement>(null);
   
   const [currentPage, setCurrentPage] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768); // md breakpoint is 768px
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth >= 1024); // lg breakpoint is 1024px
     };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
   const [isAnimating, setIsAnimating] = useState(false);
@@ -248,9 +248,9 @@ export default function ServicesSection() {
     });
   }, [currentPage]);
 
-  const visibleServices = isMobile
-    ? services
-    : services.slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE);
+  const visibleServices = isDesktop
+    ? services.slice(currentPage * ITEMS_PER_PAGE, (currentPage + 1) * ITEMS_PER_PAGE)
+    : services;
 
   return (
     <section ref={containerRef} className="relative py-24 bg-[#f5f7fa]">
@@ -299,7 +299,7 @@ export default function ServicesSection() {
           {/* --- RIGHT COLUMN (CARDS) --- */}
           <div className="lg:col-span-8 w-full relative">
             {/* --- SINGLE RIGHT ARROW NAVIGATION --- */}
-            <div className="absolute inset-y-0 -right-4 sm:-right-8 md:flex items-center z-20 hidden">
+            <div className="absolute inset-y-0 -right-4 sm:-right-8 lg:flex items-center z-20 hidden">
               <button onClick={() => handlePageChange("next")} disabled={isAnimating} className="w-14 h-14 rounded-full shadow-lg flex items-center justify-center bg-white text-black hover:bg-[#2a7394] hover:text-white transition-all duration-300 group cursor-pointer">
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>

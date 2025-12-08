@@ -125,13 +125,13 @@ const AboutSection: React.FC = () => {
           variants={containerVariants}
           className={`pt-20 md:pt-32 pb-16 md:pb-24 bg-white relative`}
         >
-          <div className="container mx-auto px-8 sm:px-16 lg:px-24">
+          <div className="container mx-auto px-6 md:px-16 lg:px-24">
             {/* Top Marker */}
             <motion.p variants={itemVariants} className="text-sm font-bold uppercase tracking-[0.2em] mb-3 text-[#256482]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
               — Safe By Design
             </motion.p>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Left Column: Headline and CTA */}
               <div className="order-2 lg:order-1 text-center lg:text-left">
                 <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-7xl font-black leading-[1.1] mb-6 text-[#256482] tracking-tight" style={{ fontFamily: "'Fraunces', serif" }}>
@@ -203,7 +203,7 @@ const AboutSection: React.FC = () => {
           {/* Subtle pattern overlay */}
           <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle, #fff 2px, transparent 2px)", backgroundSize: "40px 40px" }}></div>
 
-          <div className="container mx-auto px-8 sm:px-16 lg:px-24 relative z-10">
+          <div className="container mx-auto px-6 md:px-16 lg:px-24 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
               {/* Left Column: Headline and CTA */}
               <motion.div 
@@ -310,7 +310,7 @@ const AboutSection: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
             whileHover={{ scale: 1.05, rotate: 0, zIndex: 25 }}
-            className="hidden lg:block absolute top-16 left-16 w-80 h-56 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] border-4 border-white z-20"
+            className="hidden md:block absolute top-16 left-4 lg:left-16 w-64 h-48 lg:w-80 lg:h-56 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] border-4 border-white z-20"
           >
             <Image
               src={whyChoose}
@@ -326,7 +326,7 @@ const AboutSection: React.FC = () => {
              viewport={{ once: true }}
              transition={{ duration: 1, delay: 0.2 }}
              whileHover={{ scale: 1.05, rotate: 0, zIndex: 25 }}
-            className="hidden lg:block absolute bottom-16 right-16 w-80 h-56 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] border-4 border-white z-20"
+            className="hidden md:block absolute bottom-16 right-4 lg:right-16 w-64 h-48 lg:w-80 lg:h-56 rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] border-4 border-white z-20"
           >
             <Image
               src={whyChoose1}
@@ -336,7 +336,7 @@ const AboutSection: React.FC = () => {
             />
           </motion.div>
 
-          <div className="container mx-auto px-8 sm:px-16 lg:px-24 relative">
+          <div className="container mx-auto px-6 md:px-16 lg:px-24 relative">
             <motion.div 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -362,15 +362,15 @@ const AboutSection: React.FC = () => {
 
         {/* === 4. STATS SECTION === */}
         <section className={`py-16 md:py-24`}>
-          <div className="container mx-auto px-8 sm:px-16 lg:px-24">
-            <div className="flex flex-col lg:flex-row items-start justify-between gap-12">
+          <div className="container mx-auto px-6 md:px-16 lg:px-24">
+            <div className="grid grid-cols-1 md:grid-cols-2 items-start gap-12 lg:gap-16">
               {/* Left Side: Headline and CTA */}
               <motion.div 
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="w-full lg:w-5/12 relative text-left"
+                className="w-full relative text-left"
               >
                 <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#256482] leading-none mb-8" style={{ fontFamily: "'Fraunces', serif" }}>
                   Where Ambitious Brands Achieve More.
@@ -384,7 +384,7 @@ const AboutSection: React.FC = () => {
               </motion.div>
 
               {/* Right Side: Principles */}
-              <div className="w-full lg:w-7/12 space-y-12">
+              <div className="w-full space-y-12">
                 {statsData.map((stat, index) => (
                   <motion.div
                     key={index}

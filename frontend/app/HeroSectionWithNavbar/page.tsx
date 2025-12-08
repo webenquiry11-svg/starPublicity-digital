@@ -250,14 +250,14 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
       {/* --- Hero Content --- */}
       <div className="relative z-20 flex-grow flex items-center">
         <div className="container mx-auto px-6 lg:px-8 xl:px-20">
-          <div className="w-full lg:w-1/2 max-w-xl lg:ml-[10%]">
+          <div className="w-full max-w-xl mx-auto text-center md:max-w-2xl lg:max-w-xl lg:mx-0 lg:ml-[10%] lg:text-left">
             <h1 className="text-5xl md:text-6xl font-bold text-[#256482] leading-tight mb-6">
               Drive Growth Through Innovative Digital Strategies
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
               We help ambitious brands scale their digital presence and dominate their markets.
             </p>
-            <div className="flex flex-col sm:flex-row items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <Link href="#contact" className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-3 rounded-md text-white font-semibold tracking-wider overflow-hidden bg-[#2a7394] shadow-lg shadow-[#2a7394]/40 transition-all duration-300 ease-out transform hover:scale-[1.05] hover:bg-[#225d7a]">
                 <span className="absolute top-0 left-0 w-full h-[3px] bg-cyan-300 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-20"></span>
                 <span className="absolute bottom-0 right-0 w-full h-[3px] bg-cyan-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out delay-100 z-20"></span>

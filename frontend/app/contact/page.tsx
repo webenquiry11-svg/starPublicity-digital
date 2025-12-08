@@ -107,7 +107,7 @@ export const ContactSection: React.FC = () => {
                     </div>
                     
                     {/* Right Side: Form */}
-                    <div 
+                    <div
                         className="w-full lg:col-span-5 bg-white/10 lg:bg-transparent p-8 lg:p-0 rounded-2xl lg:rounded-none border border-white/20 lg:border-none shadow-lg lg:shadow-none backdrop-blur-sm lg:backdrop-blur-none"
                     >
                         <form onSubmit={handleSubmit} className="space-y-6">
@@ -231,8 +231,8 @@ export const Footer: React.FC = () => {
                     {/* Column 3 (lg:col-span-3): Find Us (Address) */}
                     <div className="lg:col-span-3">
                         <h4 className="text-sm font-semibold mb-4 tracking-wider text-gray-500 font-grotesk">FIND US</h4>
-                        <p className="text-gray-600 text-sm font-sans">
-                            SCO-137, Feroze Gandhi market, Ludhiana, Punjab, 141001
+                        <p className="text-gray-600 text-sm font-sans md:text-center lg:text-left">
+                            Ludhiana, Punjab, 141001
                         </p>
                     </div>
 
@@ -259,13 +259,13 @@ export const Footer: React.FC = () => {
                 {/* --- Bottom Row: Service Links & Copyright --- */}
                 <div className="flex flex-col lg:flex-row lg:justify-between items-center pt-4">
                     
-                    {/* Service Links */}
+                    {/* Service Links - Center on smaller screens */}
                     <div className="flex flex-wrap justify-center lg:justify-start space-x-4 text-sm font-medium text-gray-600 font-sans">
                         {serviceLinks.map((link, index) => (
                             <span key={index} className="py-1">
                                 {link.name}
                             </span>
-                        ))}
+                        ))} 
                     </div>
 
                     {/* Copyright and Scroll to Top (moved to the right side visually) */}

@@ -56,7 +56,7 @@ const awardCards = [
 const AwardsSection = () => {
     const [scrollProgress, setScrollProgress] = useState(0);
     const sectionRef = useRef<HTMLDivElement>(null);
-    const [isMobile, setIsMobile] = useState(false);
+    const [isDesktop, setIsDesktop] = useState(false);
 
     useEffect(() => {
         const sectionNode = sectionRef.current;
@@ -78,16 +78,16 @@ const AwardsSection = () => {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [isMobile]);
+    }, [isDesktop]);
 
     useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth < 768);
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
+        const checkScreenSize = () => setIsDesktop(window.innerWidth >= 1024); // lg breakpoint
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
+        return () => window.removeEventListener('resize', checkScreenSize);
     }, []);
 
-    if (isMobile) {
+    if (!isDesktop) {
         // Render a static grid for mobile
         return (
             <section className="py-20 md:py-32 bg-gray-50">
@@ -290,7 +290,7 @@ const StoryByNumbersSection = () => {
             <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-[#2a7394] to-blue-500 opacity-80"></div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-4">
           {stats.map((stat, index) => (
             <div key={index} className="flex flex-col items-center md:items-start p-4 md:border-r border-gray-200 last:border-r-0 hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300 rounded-xl group">
               <div className="flex items-start text-5xl sm:text-6xl xl:text-7xl font-light text-slate-800 leading-none group-hover:text-blue-700 transition-colors duration-300" style={{ fontFamily: "'Outfit', sans-serif" }}>
