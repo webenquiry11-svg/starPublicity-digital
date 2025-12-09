@@ -34,7 +34,7 @@ interface HeroProps {
 
 const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isHoverFormVisible, setIsHoverFormVisible] = useState(false);
+  const [isQuotePanelOpen, setIsQuotePanelOpen] = useState(false);
   
   // State for the hover form
   const [hoverFormData, setHoverFormData] = useState({ name: '', email: '', phone: '' });
@@ -42,13 +42,13 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
-    if (isMobileMenuOpen) {
+  useEffect(() => { // Updated to handle both mobile menu and quote panel
+    if (isMobileMenuOpen || isQuotePanelOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
-  }, [isMobileMenuOpen]);
+  }, [isMobileMenuOpen, isQuotePanelOpen]);
 
   // Callback to handle seamless video looping (Kept for compatibility, though video is removed in this design)
   const onVideoTimeUpdate = useCallback(() => {
@@ -91,7 +91,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
       setHoverFormData({ name: '', email: '', phone: '' }); 
       
       setTimeout(() => {
-        setIsHoverFormVisible(false);
+        setIsQuotePanelOpen(false);
         setHoverFormStatus({ message: '', error: false, submitting: false });
       }, 2000);
 
@@ -145,7 +145,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript Icon" className="absolute top-[80%] left-[50%] opacity-5 animate-float delay-100 w-9 h-9" />
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript Icon" className="absolute top-[5%] right-[25%] opacity-10 animate-float delay-300 w-11 h-11" />
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular Icon" className="absolute bottom-[5%] left-[25%] opacity-5 animate-float w-[52px] h-[52px]" />
-        <img src="https://cdn.jsdelivrnet/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue.js Icon" className="absolute top-[70%] left-[30%] opacity-10 animate-float delay-200 w-10 h-10" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue.js Icon" className="absolute top-[70%] left-[30%] opacity-10 animate-float delay-200 w-10 h-10" />
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 Icon" className="absolute bottom-[40%] right-[5%] opacity-5 animate-float delay-100 w-10 h-10" />
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3 Icon" className="absolute bottom-[50%] left-[5%] opacity-5 animate-float delay-300 w-10 h-10" />
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" alt="Sass Icon" className="absolute top-[85%] right-[15%] opacity-10 animate-float w-11 h-11" />
@@ -177,54 +177,17 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
 
           {/* CTA Button (YOUR EXACT DESIGN) */}
           <div className="hidden lg:block">
-            <div 
-              className="relative group"
-              onMouseEnter={() => setIsHoverFormVisible(true)}
-              onMouseLeave={() => setIsHoverFormVisible(false)}
+            <button 
+              onClick={() => setIsQuotePanelOpen(true)}
+              className="group relative inline-flex items-center justify-center px-7 py-3 rounded-md text-sm tracking-wider font-extrabold text-white overflow-hidden bg-gray-800 shadow-lg shadow-[#3590ba]/40 transition-all duration-300 ease-out transform hover:scale-[1.05] hover:bg-gray-700"
             >
-              <button 
-                className="group relative inline-flex items-center justify-center px-7 py-3 rounded-md text-sm tracking-wider font-extrabold text-white overflow-hidden bg-gray-800 shadow-lg shadow-[#3590ba]/40 transition-all duration-300 ease-out transform hover:scale-[1.05] hover:bg-gray-700"
-              >
-                <span className="absolute top-0 left-0 w-full h-[3px] bg-[#3590ba] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-20"></span>
-                <span className="absolute bottom-0 right-0 w-full h-[3px] bg-cyan-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out delay-100 z-20"></span>
-                <span className="relative flex items-center z-10">
-                  <Mail className="w-4 h-4 mr-2" />
-                  Get a Free Quote
-                </span>
-              </button>
-
-              {/* Hover Form (YOUR EXACT DESIGN) */}
-              <div className={`absolute top-full right-0 mt-0 w-80 origin-top-right transition-all duration-300 ease-out ${isHoverFormVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
-                <div className="bg-gradient-to-br from-[#2a7394] to-[#225d7a] text-white rounded-xl shadow-2xl p-6 border border-white/20">
-                  <h3 className="font-bold text-lg mb-1 text-transparent bg-clip-text bg-gradient-to-b from-cyan-300 to-white">Quick Quote</h3>
-                  <p className="text-gray-300 text-xs mb-4">We'll get back to you shortly.</p>
-                  {hoverFormStatus.message ? (
-                    <div className={`text-center py-8 ${hoverFormStatus.error ? 'text-red-300' : 'text-green-300'}`}>
-                      {hoverFormStatus.message}
-                    </div>
-                  ) : (
-                    <form onSubmit={handleHoverFormSubmit} className="space-y-4">
-                      <div>
-                        <label htmlFor="hover-name" className="sr-only">Name</label>
-                        <input type="text" id="hover-name" name="name" placeholder="Your Name" value={hoverFormData.name} onChange={handleHoverFormChange} required className="w-full text-sm bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-1.5 focus:outline-none focus:border-white transition-colors font-sans" />
-                      </div>
-                      <div>
-                        <label htmlFor="hover-email" className="sr-only">Email</label>
-                        <input type="email" id="hover-email" name="email" placeholder="Your Email" value={hoverFormData.email} onChange={handleHoverFormChange} required className="w-full text-sm bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-1.5 focus:outline-none focus:border-white transition-colors font-sans" />
-                      </div>
-                      <div>
-                        <label htmlFor="hover-phone" className="sr-only">Phone Number</label>
-                        <input type="tel" id="hover-phone" name="phone" placeholder="Phone Number" value={hoverFormData.phone} onChange={handleHoverFormChange} className="w-full text-sm bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-1.5 focus:outline-none focus:border-white transition-colors font-sans" />
-                      </div>
-                      <button type="submit" disabled={hoverFormStatus.submitting} className="w-full group inline-flex items-center justify-center py-2 px-4 rounded-md bg-white text-[#2a7394] font-bold text-sm transition-all duration-300 ease-out hover:bg-white/90 hover:scale-105 disabled:bg-gray-300 disabled:cursor-not-allowed">
-                        {hoverFormStatus.submitting ? 'SENDING...' : "REQUEST QUOTE"}
-                        <ChevronRight className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
-                      </button>
-                    </form>
-                  )}
-                </div>
-              </div>
-            </div>
+              <span className="absolute top-0 left-0 w-full h-[3px] bg-[#3590ba] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-20"></span>
+              <span className="absolute bottom-0 right-0 w-full h-[3px] bg-cyan-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out delay-100 z-20"></span>
+              <span className="relative flex items-center z-10">
+                <Mail className="w-4 h-4 mr-2" />
+                Get a Free Quote
+              </span>
+            </button>
           </div>
 
           {/* Mobile Menu Button (Updated color to white) */}
@@ -276,6 +239,50 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
             </div>
         </div>
       </nav>
+
+      {/* --- NEW: Quote Request Side Panel --- */}
+      <div className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] transition-opacity duration-300 lg:hidden ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setIsMobileMenuOpen(false)}></div>
+      <div className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] transition-opacity duration-300 ${isQuotePanelOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setIsQuotePanelOpen(false)}></div>
+
+      <div className={`fixed top-0 right-0 w-[90%] max-w-md h-full bg-white text-slate-800 shadow-2xl z-[70] transform transition-transform duration-500 ease-in-out ${isQuotePanelOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className="h-full flex flex-col">
+          <div className="flex items-center justify-between p-6 border-b border-gray-200">
+            <div>
+              <h3 className="font-bold text-2xl text-[#256482]">Quick Quote</h3>
+              <p className="text-slate-500 text-sm">We'll get back to you shortly.</p>
+            </div>
+            <button onClick={() => setIsQuotePanelOpen(false)} className="p-2 rounded-full text-slate-500 hover:bg-gray-100 hover:text-slate-800 transition-all">
+              <X size={24} />
+            </button>
+          </div>
+          <div className="flex-1 p-6 overflow-y-auto">
+            {hoverFormStatus.message ? (
+              <div className={`text-center py-8 h-full flex flex-col items-center justify-center ${hoverFormStatus.error ? 'text-red-500' : 'text-green-500'}`}>
+                <p className="text-xl font-semibold">{hoverFormStatus.message}</p>
+              </div>
+            ) : (
+              <form onSubmit={handleHoverFormSubmit} className="space-y-5">
+                <div>
+                  <label htmlFor="hover-name" className="block text-sm font-medium text-slate-700 mb-1">Name</label>
+                  <input type="text" id="hover-name" name="name" placeholder="Your Name" value={hoverFormData.name} onChange={handleHoverFormChange} required className="w-full text-base bg-gray-50 border border-gray-300 text-slate-900 placeholder:text-slate-400 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#3590ba] focus:border-[#3590ba] transition-colors" />
+                </div>
+                <div>
+                  <label htmlFor="hover-email" className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                  <input type="email" id="hover-email" name="email" placeholder="Your Email" value={hoverFormData.email} onChange={handleHoverFormChange} required className="w-full text-base bg-gray-50 border border-gray-300 text-slate-900 placeholder:text-slate-400 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#3590ba] focus:border-[#3590ba] transition-colors" />
+                </div>
+                <div>
+                  <label htmlFor="hover-phone" className="block text-sm font-medium text-slate-700 mb-1">Phone Number</label>
+                  <input type="tel" id="hover-phone" name="phone" placeholder="Phone Number" value={hoverFormData.phone} onChange={handleHoverFormChange} className="w-full text-base bg-gray-50 border border-gray-300 text-slate-900 placeholder:text-slate-400 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#3590ba] focus:border-[#3590ba] transition-colors" />
+                </div>
+                <button type="submit" disabled={hoverFormStatus.submitting} className="w-full group inline-flex items-center justify-center py-3 px-4 rounded-md bg-[#3590ba] text-white font-bold text-base transition-all duration-300 ease-out hover:bg-[#256482] hover:scale-[1.02] disabled:bg-gray-400 disabled:cursor-not-allowed">
+                  {hoverFormStatus.submitting ? 'SENDING...' : "REQUEST QUOTE"}
+                  <ChevronRight className="w-5 h-5 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      </div>
 
       {/* --- UPDATED HERO CONTENT (Matches Pennine Image) --- */}
       <div className="relative z-20 flex-grow flex items-center justify-center py-20">
