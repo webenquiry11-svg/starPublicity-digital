@@ -13,7 +13,10 @@ import {
   MapPin, 
   Instagram, 
   Linkedin,
-  Twitter
+  Twitter,
+  // New icons for the background effect
+  Code, Smartphone, Database, Cloud, Cpu, Globe, Layers, Wifi, Monitor,
+  Server, GitBranch, Rocket // Added more icons for the background
 } from 'lucide-react';
 import logo from '../../public/Star Digital Website Images/logo.png';
 
@@ -47,7 +50,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
     }
   }, [isMobileMenuOpen]);
 
-  // Callback to handle seamless video looping
+  // Callback to handle seamless video looping (Kept for compatibility, though video is removed in this design)
   const onVideoTimeUpdate = useCallback(() => {
     if (videoRef.current && videoRef.current.currentTime > videoRef.current.duration - 0.5) {
       videoRef.current.currentTime = 0;
@@ -67,15 +70,14 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
 
-      // Send Request with proper fields
       const response = await fetch(`${baseUrl}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           name: hoverFormData.name, 
           email: hoverFormData.email,
-          phone: hoverFormData.phone, // Sending phone separately now
-          message: "Quick Quote Request from Top Navbar" // Automated message since this form has no message box
+          phone: hoverFormData.phone, 
+          message: "Quick Quote Request from Top Navbar" 
         }),
       });
 
@@ -86,9 +88,8 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
       }
 
       setHoverFormStatus({ message: 'Request sent successfully!', error: false, submitting: false });
-      setHoverFormData({ name: '', email: '', phone: '' }); // Clear form
+      setHoverFormData({ name: '', email: '', phone: '' }); 
       
-      // Close the form popup after 2 seconds
       setTimeout(() => {
         setIsHoverFormVisible(false);
         setHoverFormStatus({ message: '', error: false, submitting: false });
@@ -100,30 +101,58 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
   };
 
   return (
-    <section className={`relative min-h-[750px] md:min-h-screen overflow-hidden flex flex-col`}>
+    // UPDATED: Changed background to white
+    <section className={`relative min-h-[750px] md:min-h-screen overflow-hidden flex flex-col bg-white`}>
+      
       {/* Styles for Animations & Fonts */}
       <style dangerouslySetInnerHTML={{__html: `
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+        
+        /* Floating Animation for Background Icons */
+        @keyframes float {
+          0% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
+          50% { transform: translateY(-20px) rotate(5deg); opacity: 0.2; }
+          100% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        .delay-100 { animation-delay: 1s; }
+        .delay-200 { animation-delay: 2s; }
+        .delay-300 { animation-delay: 3s; }
       `}} />
 
-      {/* --- RIGHT SIDE COMPOSITION (VIDEO) --- */}
-      <div className="hidden lg:block absolute top-0 right-0 h-full w-full lg:w-[45%] xl:w-[40%] z-0">
-        <div className="relative w-full h-full">
-          <video 
-            ref={videoRef}
-            autoPlay 
-            loop 
-            muted 
-            playsInline 
-            onTimeUpdate={onVideoTimeUpdate}
-            className="w-full h-full object-contain z-0">
-            <source src="/Star Digital Website Images/herosection.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
+      {/* --- BACKGROUND DECORATION (New "Pennine" Style) --- */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Soft glowing orbs */}
+        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px]"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[100px]"></div>
+        
+        {/* Floating Tech Icons */}
+        {/* Using <img> tags with public URLs to ensure icons are visible. */}
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React Icon" className="absolute top-[15%] left-[5%] opacity-10 animate-float w-12 h-12" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js Icon" className="absolute top-[20%] right-[10%] opacity-10 animate-float delay-100 w-10 h-10" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python Icon" className="absolute bottom-[20%] left-[10%] opacity-10 animate-float delay-200 w-14 h-14" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS Icon" className="absolute top-[40%] left-[20%] opacity-5 animate-float delay-300 w-8 h-8" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker Icon" className="absolute bottom-[30%] right-[20%] opacity-10 animate-float w-12 h-12" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma Icon" className="absolute top-[10%] left-[40%] opacity-5 animate-float delay-200 w-8 h-8" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" alt="Swift Icon" className="absolute top-[60%] right-[5%] opacity-5 animate-float delay-100 w-16 h-16" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin Icon" className="absolute bottom-[10%] left-[40%] opacity-5 animate-float w-10 h-10" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Google Cloud Icon" className="absolute top-[30%] right-[30%] opacity-5 animate-float delay-300 w-8 h-8" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes Icon" className="absolute bottom-[15%] right-[45%] opacity-5 animate-float delay-100 w-12 h-12" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git Icon" className="absolute top-[55%] left-[15%] opacity-10 animate-float delay-200 w-10 h-10" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter Icon" className="absolute top-[75%] right-[25%] opacity-5 animate-float w-8 h-8" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript Icon" className="absolute top-[80%] left-[50%] opacity-5 animate-float delay-100 w-9 h-9" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript Icon" className="absolute top-[5%] right-[25%] opacity-10 animate-float delay-300 w-11 h-11" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular Icon" className="absolute bottom-[5%] left-[25%] opacity-5 animate-float w-[52px] h-[52px]" />
+        <img src="https://cdn.jsdelivrnet/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue.js Icon" className="absolute top-[70%] left-[30%] opacity-10 animate-float delay-200 w-10 h-10" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 Icon" className="absolute bottom-[40%] right-[5%] opacity-5 animate-float delay-100 w-10 h-10" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3 Icon" className="absolute bottom-[50%] left-[5%] opacity-5 animate-float delay-300 w-10 h-10" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" alt="Sass Icon" className="absolute top-[85%] right-[15%] opacity-10 animate-float w-11 h-11" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" alt="GraphQL Icon" className="absolute top-[50%] right-[40%] opacity-5 animate-float delay-200 w-12 h-12" />
       </div>
 
-      {/* --- Navbar --- */}
+      {/* --- NAVBAR (Kept Exactly Same Structure, just updated text color for visibility) --- */}
       <nav className="relative z-50 w-full py-6 md:py-8">
         <div className="container mx-auto px-6 lg:px-8 xl:px-20 flex items-center justify-between">
           {/* Logo */}
@@ -133,19 +162,20 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
               alt="Star Publicity Logo" 
               width={150} 
               height={35} 
+              className="" // Removed filter to show original logo colors
             />
           </Link>
 
           {/* Navigation Links */}
           <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link, index) => (
-              <Link key={index} href={link.href} className="text-gray-700 font-medium hover:text-[#256482] transition-colors duration-200 uppercase text-base tracking-wider">
+              <Link key={index} href={link.href} className="text-slate-800 font-medium hover:text-[#3590ba] transition-colors duration-200 uppercase text-base tracking-wider">
                 {link.name}
               </Link>
             ))}
           </div>
 
-          {/* CTA Button */}
+          {/* CTA Button (YOUR EXACT DESIGN) */}
           <div className="hidden lg:block">
             <div 
               className="relative group"
@@ -163,7 +193,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
                 </span>
               </button>
 
-              {/* Hover Form */}
+              {/* Hover Form (YOUR EXACT DESIGN) */}
               <div className={`absolute top-full right-0 mt-0 w-80 origin-top-right transition-all duration-300 ease-out ${isHoverFormVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}>
                 <div className="bg-gradient-to-br from-[#2a7394] to-[#225d7a] text-white rounded-xl shadow-2xl p-6 border border-white/20">
                   <h3 className="font-bold text-lg mb-1 text-transparent bg-clip-text bg-gradient-to-b from-cyan-300 to-white">Quick Quote</h3>
@@ -197,19 +227,19 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button (Updated color to white) */}
           <div className="lg:hidden z-50">
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 text-gray-800 focus:outline-none transition-transform duration-300 hover:scale-110"
+              className="p-2 text-slate-800 focus:outline-none transition-transform duration-300 hover:scale-110"
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? <div className="p-2 bg-white rounded-full shadow-md"><X size={24} /></div> : <Menu size={28} />}
+              {isMobileMenuOpen ? <div className="p-2 bg-white rounded-full shadow-md text-gray-800"><X size={24} /></div> : <Menu size={28} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu Panel */}
+        {/* Mobile Menu Panel (Unchanged Structure) */}
         <div className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity duration-300 lg:hidden ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setIsMobileMenuOpen(false)}></div>
 
         <div className={`fixed top-0 right-0 w-[85%] sm:w-[400px] h-full bg-white shadow-2xl z-40 transform transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) lg:hidden flex flex-col ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
@@ -247,27 +277,46 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
         </div>
       </nav>
 
-      {/* --- Hero Content --- */}
-      <div className="relative z-20 flex-grow flex items-center">
-        <div className="container mx-auto px-6 lg:px-8 xl:px-20">
-          <div className="w-full max-w-xl mx-auto text-center md:max-w-2xl lg:max-w-xl lg:mx-0 lg:ml-[10%] lg:text-left">
-            <h1 className="text-5xl md:text-6xl font-bold text-[#256482] leading-tight mb-6">
-              Drive Growth Through Innovative Digital Strategies
-            </h1>
-            <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
-              We help ambitious brands scale their digital presence and dominate their markets.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              <Link href="#contact" className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-3 rounded-md text-white font-semibold tracking-wider overflow-hidden bg-[#2a7394] shadow-lg shadow-[#2a7394]/40 transition-all duration-300 ease-out transform hover:scale-[1.05] hover:bg-[#225d7a]">
-                <span className="absolute top-0 left-0 w-full h-[3px] bg-cyan-300 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-20"></span>
-                <span className="absolute bottom-0 right-0 w-full h-[3px] bg-cyan-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out delay-100 z-20"></span>
-                <span className="relative flex items-center z-10">Start Your Project</span>
-              </Link>
-            </div>
+      {/* --- UPDATED HERO CONTENT (Matches Pennine Image) --- */}
+      <div className="relative z-20 flex-grow flex items-center justify-center py-20">
+        <div className="container mx-auto px-6 lg:px-8 xl:px-20 text-center">
+          
+          {/* Top Tagline */}
+          <p className="text-slate-700 text-sm md:text-base font-bold tracking-wide uppercase mb-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            Your Trusted and Experienced End-to-End Partner in
+          </p>
+
+          {/* Main Headline */}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight mb-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-100">
+            <span className="text-[#3590ba]">Web and Mobile App</span> Development
+          </h1>
+
+          {/* Sub Headline */}
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-slate-800 mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+            That Powers <span className="text-[#3590ba]">Digital Transformation</span>
+          </h2>
+
+          {/* Description Paragraph */}
+          <p className="text-base md:text-lg text-slate-600 max-w-3xl mx-auto mb-12 leading-relaxed font-light animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-300">
+            We deliver <span className="font-medium text-[#3590ba]">software solutions</span> powered by the <span className="font-medium text-[#3590ba]">latest technologies</span> to achieve your Business Goals. Your idea, our code - Our <span className="font-medium text-[#3590ba]">Digital revolution.</span>
+          </p>
+
+          {/* Center CTA Button (Outline Pill Style) */}
+          <div className="flex justify-center animate-in fade-in zoom-in duration-1000 delay-500">
+            <Link 
+              href="#contact" 
+              className="relative inline-flex items-center px-10 py-4 overflow-hidden text-lg font-medium text-slate-800 border-2 border-slate-800 rounded-full hover:text-white group hover:bg-slate-800 transition-all duration-300"
+            >
+              <span className="absolute left-0 block w-full h-0 transition-all bg-slate-800 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
+              <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
+                <ArrowRight className="w-5 h-5 text-white" />
+              </span>
+              <span className="relative text-slate-800 transition-colors duration-300 group-hover:text-white group-hover:pr-6">
+                Talk to our experts
+              </span>
+            </Link>
           </div>
-          <div className="w-full lg:w-1/2">
-            {/* Space reserved for video background */}
-          </div>
+
         </div>
       </div>
     </section>
