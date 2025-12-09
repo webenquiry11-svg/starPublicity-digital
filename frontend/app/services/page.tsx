@@ -9,10 +9,10 @@ import { Playfair_Display, DM_Sans } from "next/font/google";
 
 // Import local images
 import digitalMarketingImg from "./_images/digital.svg";
-import seoImg from "./_images/seo.svg";
-import arVrImg from "./_images/arvr.svg";
-import webDevImg from "./_images/web.svg";
-import photographyImg from "./_images/graphic.svg";
+import seoImg from "./_images/seo.png";
+import arVrImg from "./_images/arvr.png";
+import webDevImg from "./_images/web.png";
+import photographyImg from "./_images/ad shoot.png";
 import brandingImg from "./_images/graphic.svg"; // Using graphic.svg as a placeholder
 
 // Configure Fonts

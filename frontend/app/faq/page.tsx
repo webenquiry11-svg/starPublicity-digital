@@ -56,14 +56,14 @@ const awardCards = [
 const AwardsSection = () => {
     const [scrollProgress, setScrollProgress] = useState(0);
     const sectionRef = useRef<HTMLDivElement>(null);
-    const [isCompact, setIsCompact] = useState(false);
+    const [isStaticView, setIsStaticView] = useState(false);
     
-    // Config to adjust how wide cards spread based on screen size
+    // Config to adjust how wide cards spread based on screen size (Only for Desktop now)
     const [spreadConfig, setSpreadConfig] = useState({ multiplier: 320, subtractor: 800 });
 
     useEffect(() => {
         const sectionNode = sectionRef.current;
-        if (!sectionNode) return;
+        if (!sectionNode || isStaticView) return;
 
         const handleScroll = () => {
             const rect = sectionNode.getBoundingClientRect();
@@ -78,17 +78,18 @@ const AwardsSection = () => {
 
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [isCompact]);
+    }, [isStaticView]);
 
     useEffect(() => {
         const checkScreenSize = () => {
             const width = window.innerWidth;
-            // CHANGED: We now treat anything under 1100px (including Nest Hub at 1024px)
-            // as "Compact" mode. This forces the Grid layout which guarantees visibility.
-            // The animation is reserved for screens > 1100px.
-            setIsCompact(width < 1100);
+            
+            // CHANGED: We now switch to the "Simple" (Static) view for anything 
+            // smaller than a standard Desktop (1280px). 
+            // This covers Mobile (<640), Tablets (768-1024), and Small Laptops/Hubs (1024-1280).
+            setIsStaticView(width < 1280);
 
-            // Default config for Desktop
+            // Spread config is only relevant for the Desktop view now (1280px+)
             setSpreadConfig({ multiplier: 320, subtractor: 800 });
         };
 
@@ -97,17 +98,18 @@ const AwardsSection = () => {
         return () => window.removeEventListener('resize', checkScreenSize);
     }, []);
 
-    // --- COMPACT VIEW (Grid Layout for Mobile & Tablet/Nest Hub) ---
-    if (isCompact) {
+    // --- STATIC GRID VIEW (Mobile & Tablet) ---
+    // This renders for any screen width < 1280px
+    if (isStaticView) {
         return (
-            <section className="py-16 md:py-20 bg-gray-50">
-                <div className="container mx-auto px-6 md:px-12">
+            <section className="py-16 bg-gray-50">
+                <div className="container mx-auto px-4 sm:px-8">
                     <div className="text-center mb-12 relative">
                         <span className="inline-block py-1 px-3 rounded-full bg-teal-50 text-teal-600 text-xs font-bold tracking-widest border border-teal-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif" }}>
                             Our Values
                         </span>
                         <h2 
-                            className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-sm tracking-tight"
+                            className="text-4xl font-bold mb-4 drop-shadow-sm tracking-tight"
                             style={{ fontFamily: "'Playfair Display', serif" }}
                         >
                             <span className="text-slate-900">Our Core </span>
@@ -119,26 +121,25 @@ const AwardsSection = () => {
                         </p>
                     </div>
 
-                    {/* GRID LOGIC FIX:
+                    {/* GRID CONFIGURATION:
                        - Mobile: grid-cols-1 (1 card per row)
-                       - Tablet/Nest Hub: grid-cols-2 (2 cards per row) 
-                       This ensures 4 cards fit perfectly in a 2x2 grid on a 1024px screen.
+                       - Tablet/Small Laptop: grid-cols-2 (2 cards per row)
                     */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {awardCards.map((card) => (
                             <div key={card.id} className="w-full group">
                                 <div 
-                                    className="relative w-full h-full p-6 bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                                    className="relative w-full p-6 bg-white rounded-2xl border border-gray-100 shadow-md flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
                                     style={{ borderLeft: `4px solid ${card.color}` }}
                                 >
-                                    <div className="flex items-center gap-4 mb-4">
+                                    <div className="flex items-center gap-4 mb-3">
                                         <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: card.color }}>
-                                            {card.icon && <card.icon size={24} className="text-white" strokeWidth={2} />}
+                                            {card.icon && <card.icon size={22} className="text-white" strokeWidth={2} />}
                                         </div>
-                                        <p className="text-xl md:text-2xl font-bold text-slate-800" style={{ fontFamily: "'Outfit', sans-serif" }}>{card.text}</p>
+                                        <p className="text-xl font-bold text-slate-800" style={{ fontFamily: "'Outfit', sans-serif" }}>{card.text}</p>
                                     </div>
-                                    <p className="text-sm md:text-base text-slate-600 mb-4 leading-relaxed font-sans">{card.explanation}</p>
-                                    <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 font-sans mt-auto">{card.source}</p>
+                                    <p className="text-sm text-slate-600 mb-4 leading-relaxed font-sans">{card.explanation}</p>
+                                    <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 font-sans">{card.source}</p>
                                 </div>
                             </div>
                         ))}
@@ -148,7 +149,8 @@ const AwardsSection = () => {
         );
     }
     
-  // --- DESKTOP VIEW (> 1100px) (Animated Spread) ---
+  // --- DESKTOP VIEW (Animated) ---
+  // This renders ONLY for screens >= 1280px
   return (
     <section 
       ref={sectionRef}
@@ -181,6 +183,7 @@ const AwardsSection = () => {
           {awardCards.map((card) => (
             <div 
               key={card.id} 
+              // Desktop Size
               className={`absolute top-1/2 left-1/2 w-80 h-80 group`}
               style={{ 
                 transform: ` 
@@ -195,9 +198,8 @@ const AwardsSection = () => {
                 zIndex: Math.round(scrollProgress * 10) + card.id,
               }}
             >
-                {/* Glassmorphism Card */}
                 <div 
-                    className="relative w-full h-full p-6 bg-white/70 backdrop-blur-md rounded-2xl border border-white/40 flex flex-col justify-between cursor-pointer transition-all duration-300 group-hover:shadow-2xl group-hover:border-white/60 group-hover:bg-white/90"
+                    className="relative w-full h-full p-6 bg-white/60 backdrop-blur-md rounded-2xl border border-white/40 flex flex-col justify-between cursor-pointer transition-all duration-300 group-hover:shadow-2xl group-hover:border-white/60 group-hover:bg-white/80"
                     style={{ boxShadow: `0 0 20px ${card.color}20, inset 0 0 0 1px ${card.color}00` }}
                 >
                     <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: `0 0 25px ${card.color}80, inset 0 0 0 1px ${card.color}80` }}></div>
