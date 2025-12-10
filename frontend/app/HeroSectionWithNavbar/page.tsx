@@ -1,22 +1,14 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { 
   Mail, 
   ArrowRight, 
-  Send, 
   Menu, 
-  X, ChevronRight,
-  Phone,
-  MapPin, 
-  Instagram, 
-  Linkedin,
-  Twitter,
-  // New icons for the background effect
-  Code, Smartphone, Database, Cloud, Cpu, Globe, Layers, Wifi, Monitor,
-  Server, GitBranch, Rocket // Added more icons for the background
+  X, 
+  User 
 } from 'lucide-react';
 import logo from '../../public/Star Digital Website Images/logo.png';
 
@@ -34,35 +26,28 @@ interface HeroProps {
 
 const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  // Controls the Side Form
   const [isQuotePanelOpen, setIsQuotePanelOpen] = useState(false);
   
-  // State for the hover form
+  // Form State
   const [hoverFormData, setHoverFormData] = useState({ name: '', email: '', phone: '' });
   const [hoverFormStatus, setHoverFormStatus] = useState({ message: '', error: false, submitting: false });
 
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => { // Updated to handle both mobile menu and quote panel
-    if (isMobileMenuOpen || isQuotePanelOpen) {
+  useEffect(() => {
+    // Prevent scrolling when mobile menu is open
+    if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
-  }, [isMobileMenuOpen, isQuotePanelOpen]);
-
-  // Callback to handle seamless video looping (Kept for compatibility, though video is removed in this design)
-  const onVideoTimeUpdate = useCallback(() => {
-    if (videoRef.current && videoRef.current.currentTime > videoRef.current.duration - 0.5) {
-      videoRef.current.currentTime = 0;
-    }
-  }, []);
+  }, [isMobileMenuOpen]);
 
   const handleHoverFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setHoverFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // --- UPDATED FORM SUBMISSION LOGIC ---
   const handleHoverFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setHoverFormStatus({ message: 'Sending...', error: false, submitting: true });
@@ -77,7 +62,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
           name: hoverFormData.name, 
           email: hoverFormData.email,
           phone: hoverFormData.phone, 
-          message: "Quick Quote Request from Top Navbar" 
+          message: "Quick Quote Request from Side Navbar" 
         }),
       });
 
@@ -101,72 +86,66 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
   };
 
   return (
-    // UPDATED: Changed background to white
     <section className={`relative min-h-[750px] md:min-h-screen overflow-hidden flex flex-col bg-white`}>
       
       {/* Styles for Animations & Fonts */}
       <style dangerouslySetInnerHTML={{__html: `
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
         
-        /* Floating Animation for Background Icons */
+        .writing-vertical {
+          writing-mode: vertical-rl;
+          text-orientation: mixed;
+          transform: rotate(180deg);
+        }
+
+        /* Floating Animation */
         @keyframes float {
           0% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
-          50% { transform: translateY(-20px) rotate(5deg); opacity: 0.2; }
+          50% { transform: translateY(-20px) rotate(5deg); opacity: 0.3; }
           100% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
         }
         .animate-float {
           animation: float 6s ease-in-out infinite;
         }
-        .delay-100 { animation-delay: 1s; }
-        .delay-200 { animation-delay: 2s; }
-        .delay-300 { animation-delay: 3s; }
+        .delay-100 { animation-delay: 0.5s; }
+        .delay-200 { animation-delay: 1s; }
+        .delay-300 { animation-delay: 1.5s; }
+        .delay-400 { animation-delay: 2s; }
+        .delay-500 { animation-delay: 2.5s; }
       `}} />
 
-      {/* --- BACKGROUND DECORATION (New "Pennine" Style) --- */}
+      {/* --- BACKGROUND DECORATION --- */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Soft glowing orbs */}
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px]"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[100px]"></div>
-        
-        {/* Floating Tech Icons */}
-        {/* Using <img> tags with public URLs to ensure icons are visible. */}
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React Icon" className="absolute top-[15%] left-[5%] opacity-10 animate-float w-12 h-12" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js Icon" className="absolute top-[20%] right-[10%] opacity-10 animate-float delay-100 w-10 h-10" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python Icon" className="absolute bottom-[20%] left-[10%] opacity-10 animate-float delay-200 w-14 h-14" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS Icon" className="absolute top-[40%] left-[20%] opacity-5 animate-float delay-300 w-8 h-8" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker Icon" className="absolute bottom-[30%] right-[20%] opacity-10 animate-float w-12 h-12" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma Icon" className="absolute top-[10%] left-[40%] opacity-5 animate-float delay-200 w-8 h-8" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" alt="Swift Icon" className="absolute top-[60%] right-[5%] opacity-5 animate-float delay-100 w-16 h-16" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin Icon" className="absolute bottom-[10%] left-[40%] opacity-5 animate-float w-10 h-10" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="Google Cloud Icon" className="absolute top-[30%] right-[30%] opacity-5 animate-float delay-300 w-8 h-8" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes Icon" className="absolute bottom-[15%] right-[45%] opacity-5 animate-float delay-100 w-12 h-12" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git Icon" className="absolute top-[55%] left-[15%] opacity-10 animate-float delay-200 w-10 h-10" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter Icon" className="absolute top-[75%] right-[25%] opacity-5 animate-float w-8 h-8" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript Icon" className="absolute top-[80%] left-[50%] opacity-5 animate-float delay-100 w-9 h-9" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript Icon" className="absolute top-[5%] right-[25%] opacity-10 animate-float delay-300 w-11 h-11" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular Icon" className="absolute bottom-[5%] left-[25%] opacity-5 animate-float w-[52px] h-[52px]" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="Vue.js Icon" className="absolute top-[70%] left-[30%] opacity-10 animate-float delay-200 w-10 h-10" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 Icon" className="absolute bottom-[40%] right-[5%] opacity-5 animate-float delay-100 w-10 h-10" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3 Icon" className="absolute bottom-[50%] left-[5%] opacity-5 animate-float delay-300 w-10 h-10" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" alt="Sass Icon" className="absolute top-[85%] right-[15%] opacity-10 animate-float w-11 h-11" />
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" alt="GraphQL Icon" className="absolute top-[50%] right-[40%] opacity-5 animate-float delay-200 w-12 h-12" />
+
+        {/* Floating Icons */}
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" className="absolute top-[15%] left-[5%] animate-float w-12 h-12" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" className="absolute bottom-[20%] left-[10%] animate-float delay-200 w-14 h-14" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS" className="absolute top-[80%] left-[50%] animate-float delay-100 w-9 h-9" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original-wordmark.svg" alt="NextJS" className="absolute top-[20%] right-[10%] animate-float delay-300 w-16 h-16 invert" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" className="absolute top-[45%] left-[3%] animate-float delay-100 w-10 h-10" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="NodeJS" className="absolute bottom-[25%] right-[15%] animate-float delay-200 w-14 h-14" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" alt="AR/VR" className="absolute top-[12%] right-[25%] animate-float w-10 h-10" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" className="absolute top-[60%] right-[5%] animate-float delay-300 w-10 h-10" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular" className="absolute top-[75%] left-[15%] animate-float delay-400 w-12 h-12" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" alt="VueJS" className="absolute top-[50%] right-[20%] animate-float delay-500 w-11 h-11" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" className="absolute bottom-[10%] left-[40%] animate-float w-12 h-12" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" className="absolute top-[10%] left-[30%] animate-float delay-200 w-9 h-9" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg" alt="Swift" className="absolute bottom-[15%] right-[5%] animate-float delay-400 w-12 h-12" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin" className="absolute top-[35%] left-[20%] animate-float delay-500 w-10 h-10" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" className="absolute top-[70%] right-[25%] animate-float delay-100 w-16 h-16" />
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original-wordmark.svg" alt="Express" className="absolute bottom-[40%] left-[5%] animate-float delay-300 w-20 h-20 invert" />
       </div>
 
-      {/* --- NAVBAR (Kept Exactly Same Structure, just updated text color for visibility) --- */}
-      <nav className="relative z-50 w-full py-6 md:py-8">
+      {/* --- NAVBAR --- */}
+      <nav className="relative z-40 w-full py-6 md:py-8">
         <div className="container mx-auto px-6 lg:px-8 xl:px-20 flex items-center justify-between">
-          {/* Logo */}
           <Link href="/" className="z-10">
-            <Image 
-              src={logo} 
-              alt="Star Publicity Logo" 
-              width={150} 
-              height={35} 
-              className="" // Removed filter to show original logo colors
-            />
+            <Image src={logo} alt="Logo" width={150} height={35} />
           </Link>
 
-          {/* Navigation Links */}
+          {/* Desktop Nav */}
           <div className="hidden lg:flex items-center space-x-8">
             {navLinks.map((link, index) => (
               <Link key={index} href={link.href} className="text-slate-800 font-medium hover:text-[#3590ba] transition-colors duration-200 uppercase text-base tracking-wider">
@@ -175,14 +154,12 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
             ))}
           </div>
 
-          {/* CTA Button (YOUR EXACT DESIGN) */}
+          {/* CTA Button */}
           <div className="hidden lg:block">
             <button 
               onClick={() => setIsQuotePanelOpen(true)}
-              className="group relative inline-flex items-center justify-center px-7 py-3 rounded-md text-sm tracking-wider font-extrabold text-white overflow-hidden bg-gray-800 shadow-lg shadow-[#3590ba]/40 transition-all duration-300 ease-out transform hover:scale-[1.05] hover:bg-gray-700"
+              className="group relative inline-flex items-center justify-center px-7 py-3 rounded-md text-sm tracking-wider font-extrabold text-white overflow-hidden bg-gray-800 shadow-lg shadow-[#3590ba]/40 transition-all duration-300 ease-out transform hover:scale-[1.05]"
             >
-              <span className="absolute top-0 left-0 w-full h-[3px] bg-[#3590ba] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-20"></span>
-              <span className="absolute bottom-0 right-0 w-full h-[3px] bg-cyan-400 transform translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out delay-100 z-20"></span>
               <span className="relative flex items-center z-10">
                 <Mail className="w-4 h-4 mr-2" />
                 Get a Free Quote
@@ -190,142 +167,141 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
             </button>
           </div>
 
-          {/* Mobile Menu Button (Updated color to white) */}
+          {/* Mobile Menu Toggle */}
           <div className="lg:hidden z-50">
-            <button 
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 text-slate-800 focus:outline-none transition-transform duration-300 hover:scale-110"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? <div className="p-2 bg-white rounded-full shadow-md text-gray-800"><X size={24} /></div> : <Menu size={28} />}
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-slate-800 focus:outline-none">
+              {isMobileMenuOpen ? <div className="p-2 bg-white rounded-full shadow-md"><X size={24} /></div> : <Menu size={28} />}
             </button>
           </div>
-        </div>
-
-        {/* Mobile Menu Panel (Unchanged Structure) */}
-        <div className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity duration-300 lg:hidden ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setIsMobileMenuOpen(false)}></div>
-
-        <div className={`fixed top-0 right-0 w-[85%] sm:w-[400px] h-full bg-white shadow-2xl z-40 transform transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) lg:hidden flex flex-col ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-            <div className="h-1.5 w-full bg-gradient-to-r from-[#256482] to-cyan-400"></div>
-            <div className="flex-1 flex flex-col p-8 overflow-y-auto">
-                <div className="mb-10 mt-4">
-                      <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 font-sans" style={{ fontFamily: "'Outfit', sans-serif" }}>Menu</p>
-                      <h2 className="text-3xl font-bold text-slate-800 italic" style={{ fontFamily: "'Playfair Display', serif" }}>Navigate</h2>
-                </div>
-                <div className="space-y-6">
-                    {navLinks.map((link, index) => (
-                    <Link key={index} href={link.href} onClick={() => setIsMobileMenuOpen(false)} className={`group flex items-center justify-between text-2xl font-medium text-slate-700 hover:text-[#256482] transition-all duration-300 border-b border-gray-100 pb-4 ${isMobileMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ fontFamily: "'Playfair Display', serif", transitionDelay: `${index * 100}ms` }}>
-                        <span>{link.name}</span>
-                        <ArrowRight className="w-5 h-5 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#256482]" />
-                    </Link>
-                    ))}
-                </div>
-                <div className="mt-auto pt-10">
-                    <div className="bg-slate-900 rounded-2xl p-6 text-white relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-[#3590ba] rounded-full blur-[50px] opacity-20 group-hover:opacity-30 transition-opacity"></div>
-                        <h3 className="text-xl font-bold mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>Get in Touch</h3> 
-                        <div className="space-y-3 text-sm text-slate-300" style={{ fontFamily: "'Outfit', sans-serif" }}>
-                            <div className="flex items-center gap-3"><Mail size={16} className="text-[#3590ba]" /><a href="mailto:sales@starpublicity.org" className="hover:text-white">sales@starpublicity.org</a></div>
-                            <div className="flex items-center gap-3"><Phone size={16} className="text-[#3590ba]" /><span>0161-4668602</span></div>
-                            <div className="flex items-center gap-3"><MapPin size={16} className="text-[#3590ba]" /><span>Ludhiana, Punjab</span></div>
-                        </div>
-                        <div className="flex gap-4 mt-6 pt-6 border-t border-slate-700">
-                            <a href="https://www.instagram.com/starpublicityldh/" target="_blank" rel="noopener noreferrer" className="hover:text-[#3590ba] transition-colors"><Instagram size={20} /></a>
-                            <a href="https://x.com/starpublicityld" target="_blank" rel="noopener noreferrer" className="hover:text-[#3590ba] transition-colors"><Twitter size={20} /></a>
-                            <a href="https://www.linkedin.com/company/m-s-star-publicity/" target="_blank" rel="noopener noreferrer" className="hover:text-[#3590ba] transition-colors"><Linkedin size={20} /></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
       </nav>
 
-      {/* --- NEW: Quote Request Side Panel --- */}
-      <div className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] transition-opacity duration-300 lg:hidden ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setIsMobileMenuOpen(false)}></div>
-      <div className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] transition-opacity duration-300 ${isQuotePanelOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setIsQuotePanelOpen(false)}></div>
-
-      <div className={`fixed top-0 right-0 w-[90%] max-w-md h-full bg-white text-slate-800 shadow-2xl z-[70] transform transition-transform duration-500 ease-in-out ${isQuotePanelOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="h-full flex flex-col">
-          <div className="flex items-center justify-between p-6 border-b border-gray-200">
-            <div>
-              <h3 className="font-bold text-2xl text-[#256482]">Quick Quote</h3>
-              <p className="text-slate-500 text-sm">We'll get back to you shortly.</p>
-            </div>
-            <button onClick={() => setIsQuotePanelOpen(false)} className="p-2 rounded-full text-slate-500 hover:bg-gray-100 hover:text-slate-800 transition-all">
-              <X size={24} />
-            </button>
-          </div>
-          <div className="flex-1 p-6 overflow-y-auto">
-            {hoverFormStatus.message ? (
-              <div className={`text-center py-8 h-full flex flex-col items-center justify-center ${hoverFormStatus.error ? 'text-red-500' : 'text-green-500'}`}>
-                <p className="text-xl font-semibold">{hoverFormStatus.message}</p>
-              </div>
-            ) : (
-              <form onSubmit={handleHoverFormSubmit} className="space-y-5">
-                <div>
-                  <label htmlFor="hover-name" className="block text-sm font-medium text-slate-700 mb-1">Name</label>
-                  <input type="text" id="hover-name" name="name" placeholder="Your Name" value={hoverFormData.name} onChange={handleHoverFormChange} required className="w-full text-base bg-gray-50 border border-gray-300 text-slate-900 placeholder:text-slate-400 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#3590ba] focus:border-[#3590ba] transition-colors" />
-                </div>
-                <div>
-                  <label htmlFor="hover-email" className="block text-sm font-medium text-slate-700 mb-1">Email</label>
-                  <input type="email" id="hover-email" name="email" placeholder="Your Email" value={hoverFormData.email} onChange={handleHoverFormChange} required className="w-full text-base bg-gray-50 border border-gray-300 text-slate-900 placeholder:text-slate-400 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#3590ba] focus:border-[#3590ba] transition-colors" />
-                </div>
-                <div>
-                  <label htmlFor="hover-phone" className="block text-sm font-medium text-slate-700 mb-1">Phone Number</label>
-                  <input type="tel" id="hover-phone" name="phone" placeholder="Phone Number" value={hoverFormData.phone} onChange={handleHoverFormChange} className="w-full text-base bg-gray-50 border border-gray-300 text-slate-900 placeholder:text-slate-400 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-[#3590ba] focus:border-[#3590ba] transition-colors" />
-                </div>
-                <button type="submit" disabled={hoverFormStatus.submitting} className="w-full group inline-flex items-center justify-center py-3 px-4 rounded-md bg-[#3590ba] text-white font-bold text-base transition-all duration-300 ease-out hover:bg-[#256482] hover:scale-[1.02] disabled:bg-gray-400 disabled:cursor-not-allowed">
-                  {hoverFormStatus.submitting ? 'SENDING...' : "REQUEST QUOTE"}
-                  <ChevronRight className="w-5 h-5 ml-1 transition-transform duration-300 group-hover:translate-x-1" />
-                </button>
-              </form>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* --- UPDATED HERO CONTENT (Matches Pennine Image) --- */}
+      {/* --- HERO CONTENT --- */}
       <div className="relative z-20 flex-grow flex items-center justify-center py-20">
-        <div className="container mx-auto px-6 lg:px-8 xl:px-20 text-center">
-          
-          {/* Top Tagline */}
+        <div className="container mx-auto px-6 text-center">
           <p className="text-slate-700 text-sm md:text-base font-bold tracking-wide uppercase mb-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
             Your Trusted and Experienced End-to-End Partner in
           </p>
-
-          {/* Main Headline */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight mb-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-100">
             <span className="text-[#3590ba]">Web and Mobile App</span> Development
           </h1>
-
-          {/* Sub Headline */}
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-slate-800 mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
             That Powers <span className="text-[#3590ba]">Digital Transformation</span>
           </h2>
-
-          {/* Description Paragraph */}
-          <p className="text-base md:text-lg text-slate-600 max-w-3xl mx-auto mb-12 leading-relaxed font-light animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-300">
-            We deliver <span className="font-medium text-[#3590ba]">software solutions</span> powered by the <span className="font-medium text-[#3590ba]">latest technologies</span> to achieve your Business Goals. Your idea, our code - Our <span className="font-medium text-[#3590ba]">Digital revolution.</span>
-          </p>
-
-          {/* Center CTA Button (Outline Pill Style) */}
           <div className="flex justify-center animate-in fade-in zoom-in duration-1000 delay-500">
-            <Link 
-              href="#contact" 
-              className="relative inline-flex items-center px-10 py-4 overflow-hidden text-lg font-medium text-slate-800 border-2 border-slate-800 rounded-full hover:text-white group hover:bg-slate-800 transition-all duration-300"
-            >
-              <span className="absolute left-0 block w-full h-0 transition-all bg-slate-800 opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
-              <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
-                <ArrowRight className="w-5 h-5 text-white" />
-              </span>
-              <span className="relative text-slate-800 transition-colors duration-300 group-hover:text-white group-hover:pr-6">
-                Talk to our experts
+            <Link href="#contact" className="relative inline-flex items-center px-10 py-4 overflow-hidden text-lg font-medium text-slate-800 border-2 border-slate-800 rounded-full hover:text-white group hover:bg-slate-800 transition-all duration-300">
+              <span className="relative flex items-center">
+                 Talk to our experts <ArrowRight className="w-5 h-5 ml-2" />
               </span>
             </Link>
           </div>
-
         </div>
       </div>
+
+      {/* ======================================================== */}
+      {/* === SLIDING SIDE FORM (Form hides completely) === */}
+      {/* ======================================================== */}
+      
+      {/* 1. Backdrop (Only visible when form is open) */}
+      <div 
+        className={`fixed inset-0 bg-black/30 backdrop-blur-sm z-[60] transition-opacity duration-300 ${isQuotePanelOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} 
+        onClick={() => setIsQuotePanelOpen(false)}
+      ></div>
+
+      {/* 2. Container (Fixed Right) */}
+      <div className="fixed top-[15%] right-0 z-[70] flex items-start shadow-none">
+        
+        {/* === WHITE FORM SECTION (Expandable Width) === */}
+        <div 
+            className="bg-white shadow-[-5px_0_15px_rgba(0,0,0,0.1)] overflow-hidden transition-all duration-500 ease-in-out"
+            style={{ 
+                width: isQuotePanelOpen ? '350px' : '0px', 
+                opacity: isQuotePanelOpen ? 1 : 0 
+            }}
+        >
+            {/* Inner container with fixed width to prevent content squashing */}
+            <div className="w-[350px] p-8 flex flex-col justify-center min-h-[400px]">
+                
+                <div className="mb-8 flex justify-between items-start">
+                    <h3 className="text-xl font-bold text-slate-900 leading-tight">
+                        Get a Free Quote <br />
+                        <span className="border-b-4 border-[#3590ba] pb-1">With Our Experts</span>
+                    </h3>
+                    <button onClick={() => setIsQuotePanelOpen(false)} className="text-gray-400 hover:text-gray-600">
+                        <X size={20} />
+                    </button>
+                </div>
+
+                {/* STATUS MESSAGES */}
+                {hoverFormStatus.message ? (
+                   <div className={`text-center py-8 flex flex-col items-center justify-center ${hoverFormStatus.error ? 'text-red-500' : 'text-green-500'}`}>
+                     <p className="text-lg font-semibold">{hoverFormStatus.message}</p>
+                   </div>
+                ) : (
+                    /* ORIGINAL FIELDS */
+                    <form onSubmit={handleHoverFormSubmit} className="space-y-6">
+                        <input 
+                            type="text" name="name" placeholder="Name" value={hoverFormData.name} onChange={handleHoverFormChange} required 
+                            className="w-full py-2 border-b border-gray-300 focus:border-[#3590ba] outline-none text-slate-700 placeholder:text-gray-400 text-base bg-transparent" 
+                        />
+                        <input 
+                            type="tel" name="phone" placeholder="Mobile No" value={hoverFormData.phone} onChange={handleHoverFormChange} 
+                            className="w-full py-2 border-b border-gray-300 focus:border-[#3590ba] outline-none text-slate-700 placeholder:text-gray-400 text-base bg-transparent" 
+                        />
+                        <input 
+                            type="email" name="email" placeholder="Em@il Id" value={hoverFormData.email} onChange={handleHoverFormChange} required 
+                            className="w-full py-2 border-b border-gray-300 focus:border-[#3590ba] outline-none text-slate-700 placeholder:text-gray-400 text-base bg-transparent" 
+                        />
+
+                        <div className="flex justify-center pt-6">
+                            <button 
+                                type="submit" 
+                                disabled={hoverFormStatus.submitting}
+                                className="w-14 h-14 bg-[#005e8d] hover:bg-[#004c73] rounded-full flex items-center justify-center text-white shadow-lg transform transition-transform hover:scale-110 disabled:bg-gray-400"
+                            >
+                                {hoverFormStatus.submitting ? (
+                                    <span className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></span>
+                                ) : (
+                                    <ArrowRight size={24} />
+                                )}
+                            </button>
+                        </div>
+                    </form>
+                )}
+            </div>
+        </div>
+
+        {/* === UPDATED COLOR TAB TRIGGER (Always Visible) === */}
+        <div 
+            onClick={() => setIsQuotePanelOpen(!isQuotePanelOpen)}
+            className="w-[60px] bg-[#256482] cursor-pointer flex flex-col items-center py-4 rounded-l-md shadow-[-2px_0_5px_rgba(0,0,0,0.1)] relative z-50 hover:bg-[#1e5068] transition-colors"
+            style={{ minHeight: '350px' }} 
+        >
+            {/* Updated Border Color */}
+            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mb-6 shadow-md border-2 border-[#256482]">
+                <User size={24} className="text-slate-700" />
+            </div>
+            <div className="flex-grow flex items-center justify-center">
+                 <span className="text-white font-bold tracking-widest text-lg uppercase whitespace-nowrap writing-vertical">
+                    Talk To Experts
+                 </span>
+            </div>
+        </div>
+
+      </div>
+
+      {/* --- MOBILE MENU --- */}
+      <div className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity duration-300 lg:hidden ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setIsMobileMenuOpen(false)}></div>
+      <div className={`fixed top-0 right-0 w-[85%] sm:w-[400px] h-full bg-white shadow-2xl z-50 transform transition-transform duration-500 lg:hidden flex flex-col ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <div className="h-1.5 w-full bg-gradient-to-r from-[#256482] to-cyan-400"></div>
+          <div className="p-8">
+             <h2 className="text-2xl font-bold mb-6">Menu</h2>
+             {navLinks.map((link, i) => (
+               <Link key={i} href={link.href} className="block text-xl py-3 border-b border-gray-100" onClick={() => setIsMobileMenuOpen(false)}>{link.name}</Link>
+             ))}
+          </div>
+      </div>
+
     </section>
   );
 };
