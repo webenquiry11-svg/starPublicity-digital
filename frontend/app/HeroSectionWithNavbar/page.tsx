@@ -8,6 +8,12 @@ import {
   ArrowRight, 
   Menu, 
   X, 
+  // Icons for Mobile Menu
+  Layers,
+  Info,
+  Award,
+  Phone,
+  ChevronRight
 } from 'lucide-react';
 import logo from '../../public/Star Digital Website Images/logo.png';
 
@@ -141,6 +147,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
       <nav className="relative z-40 w-full py-6 md:py-8">
         <div className="container mx-auto px-6 lg:px-8 xl:px-20 flex items-center justify-between">
           <Link href="/" className="z-10">
+            {/* RESTORED ORIGINAL SIZE */}
             <Image src={logo} alt="Logo" width={150} height={35} />
           </Link>
 
@@ -157,7 +164,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
           <div className="hidden lg:block">
             <button 
               onClick={() => setIsQuotePanelOpen(true)}
-              className="group relative inline-flex items-center justify-center px-7 py-3 rounded-md text-sm tracking-wider font-extrabold text-white overflow-hidden bg-gray-800 shadow-lg shadow-[#3590ba]/40 transition-all duration-300 ease-out transform hover:scale-[1.05]"
+              className="group relative inline-flex items-center justify-center px-7 py-3 rounded-md text-sm tracking-wider font-extrabold text-white overflow-hidden bg-gray-800 shadow-lg shadow-[#2a7394]/40 transition-all duration-300 ease-out transform hover:scale-[1.05]"
             >
               <span className="relative flex items-center z-10">
                 <Mail className="w-4 h-4 mr-2" />
@@ -169,7 +176,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
           {/* Mobile Menu Toggle */}
           <div className="lg:hidden z-50">
             <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-slate-800 focus:outline-none">
-              {isMobileMenuOpen ? <div className="p-2 bg-white rounded-full shadow-md"><X size={24} /></div> : <Menu size={28} />}
+              {isMobileMenuOpen ? <span className="sr-only">Close Menu</span> : <Menu size={28} />}
             </button>
           </div>
         </div>
@@ -179,16 +186,16 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
       <div className="relative z-20 flex-grow flex items-center justify-center py-20">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight mb-6 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-100">
-            Drive Growth Through <span className="text-[#3590ba]">Innovative Digital Strategies</span>
+            Drive Growth Through <span className="text-[#2a7394]">Innovative Digital Strategies</span>
           </h1>
           <p className="text-xl md:text-2xl text-slate-700 mb-8 max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
             We help ambitious brands scale their digital presence and dominate their markets.
           </p>
           <div className="flex justify-center animate-in fade-in zoom-in duration-1000 delay-500">
-            <Link href="#contact" className="relative inline-flex items-center px-10 py-4 overflow-hidden text-lg font-medium text-slate-800 border-2 border-slate-800 rounded-full group transition-all duration-300 hover:border-[#3590ba] hover:shadow-[0_0_30px_-5px_rgba(53,144,186,0.4)] hover:-translate-y-1">
-              <span className="absolute inset-0 w-full h-full bg-[#3590ba] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+            <Link href="#contact" className="relative inline-flex items-center px-10 py-4 overflow-hidden text-lg font-medium text-slate-800 border-2 border-slate-800 rounded-full group transition-all duration-300 hover:border-[#2a7394] hover:shadow-[0_0_30px_-5px_rgba(42,115,148,0.4)] hover:-translate-y-1">
+              <span className="absolute inset-0 w-full h-full bg-[#2a7394] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
               <span className="relative flex items-center group-hover:text-white transition-colors duration-300">
-                 Start Your Project <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                  Start Your Project <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
               </span>
             </Link>
           </div>
@@ -196,65 +203,60 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
       </div>
 
       {/* ======================================================== */}
-      {/* === SLIDING SIDE FORM (Form hides completely) === */}
+      {/* === SLIDING SIDE FORM (Desktop & Tablet) === */}
       {/* ======================================================== */}
       
-      {/* 1. Backdrop (Only visible when form is open) */}
+      {/* 1. Backdrop */}
       <div 
         className={`fixed inset-0 bg-black/30 backdrop-blur-sm z-[60] transition-opacity duration-300 ${isQuotePanelOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} 
         onClick={() => setIsQuotePanelOpen(false)}
       ></div>
 
-      {/* 2. Container (Fixed Right) */}
+      {/* 2. Container */}
       <div className="fixed top-[15%] right-0 z-[70] flex items-start shadow-none">
         
-        {/* === WHITE FORM SECTION (Expandable Width) === */}
+        {/* === WHITE FORM SECTION === */}
         <div 
-            className="bg-white shadow-[-5px_0_15px_rgba(0,0,0,0.1)] overflow-hidden transition-all duration-500 ease-in-out"
+            className="bg-white shadow-[-5px_0_15px_rgba(0,0,0,0.1)] overflow-hidden transition-all duration-500 ease-in-out rounded-tl-[40px] rounded-bl-[40px]"
             style={{ 
                 width: isQuotePanelOpen ? '350px' : '0px', 
                 opacity: isQuotePanelOpen ? 1 : 0 
             }}
         >
-            {/* Inner container with fixed width to prevent content squashing */}
             <div className="w-[350px] p-8 flex flex-col justify-center min-h-[400px]">
-                
                 <div className="mb-8 flex justify-between items-start">
                     <h3 className="text-xl font-bold text-slate-900 leading-tight">
                         Get a Free Quote <br />
-                        <span className="border-b-4 border-[#3590ba] pb-1">With Our Experts</span>
+                        <span className="border-b-4 border-[#2a7394] pb-1">With Our Experts</span>
                     </h3>
                     <button onClick={() => setIsQuotePanelOpen(false)} className="text-gray-400 hover:text-gray-600">
                         <X size={20} />
                     </button>
                 </div>
 
-                {/* STATUS MESSAGES */}
                 {hoverFormStatus.message ? (
-                   <div className={`text-center py-8 flex flex-col items-center justify-center ${hoverFormStatus.error ? 'text-red-500' : 'text-green-500'}`}>
-                     <p className="text-lg font-semibold">{hoverFormStatus.message}</p>
-                   </div>
+                    <div className={`text-center py-8 flex flex-col items-center justify-center ${hoverFormStatus.error ? 'text-red-500' : 'text-green-500'}`}>
+                      <p className="text-lg font-semibold">{hoverFormStatus.message}</p>
+                    </div>
                 ) : (
-                    /* ORIGINAL FIELDS */
                     <form onSubmit={handleHoverFormSubmit} className="space-y-6">
                         <input 
                             type="text" name="name" placeholder="Name" value={hoverFormData.name} onChange={handleHoverFormChange} required 
-                            className="w-full py-2 border-b border-gray-300 focus:border-[#3590ba] outline-none text-slate-700 placeholder:text-gray-400 text-base bg-transparent" 
+                            className="w-full py-2 border-b border-gray-300 focus:border-[#2a7394] outline-none text-slate-700 placeholder:text-gray-400 text-base bg-transparent" 
                         />
                         <input 
                             type="tel" name="phone" placeholder="Mobile No" value={hoverFormData.phone} onChange={handleHoverFormChange} 
-                            className="w-full py-2 border-b border-gray-300 focus:border-[#3590ba] outline-none text-slate-700 placeholder:text-gray-400 text-base bg-transparent" 
+                            className="w-full py-2 border-b border-gray-300 focus:border-[#2a7394] outline-none text-slate-700 placeholder:text-gray-400 text-base bg-transparent" 
                         />
                         <input 
                             type="email" name="email" placeholder="Em@il Id" value={hoverFormData.email} onChange={handleHoverFormChange} required 
-                            className="w-full py-2 border-b border-gray-300 focus:border-[#3590ba] outline-none text-slate-700 placeholder:text-gray-400 text-base bg-transparent" 
+                            className="w-full py-2 border-b border-gray-300 focus:border-[#2a7394] outline-none text-slate-700 placeholder:text-gray-400 text-base bg-transparent" 
                         />
-
                         <div className="flex justify-center pt-6">
                             <button 
                                 type="submit" 
                                 disabled={hoverFormStatus.submitting}
-                                className="w-14 h-14 bg-[#005e8d] hover:bg-[#004c73] rounded-full flex items-center justify-center text-white shadow-lg transform transition-transform hover:scale-110 disabled:bg-gray-400"
+                                className="w-14 h-14 bg-[#2a7394] hover:bg-[#225d7a] rounded-full flex items-center justify-center text-white shadow-lg transform transition-transform hover:scale-110 disabled:bg-gray-400"
                             >
                                 {hoverFormStatus.submitting ? (
                                     <span className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></span>
@@ -267,18 +269,101 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
                 )}
             </div>
         </div>
-
       </div>
 
-      {/* --- MOBILE MENU --- */}
-      <div className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity duration-300 lg:hidden ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} onClick={() => setIsMobileMenuOpen(false)}></div>
-      <div className={`fixed top-0 right-0 w-[85%] sm:w-[400px] h-full bg-white shadow-2xl z-50 transform transition-transform duration-500 lg:hidden flex flex-col ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-          <div className="h-1.5 w-full bg-gradient-to-r from-[#256482] to-cyan-400"></div>
-          <div className="p-8">
-             <h2 className="text-2xl font-bold mb-6">Menu</h2>
-             {navLinks.map((link, i) => (
-               <Link key={i} href={link.href} className="block text-xl py-3 border-b border-gray-100" onClick={() => setIsMobileMenuOpen(false)}>{link.name}</Link>
-             ))}
+      {/* ======================================================== */}
+      {/* === ATTRACTIVE MOBILE MENU (Refined Design) === */}
+      {/* ======================================================== */}
+      
+      {/* Backdrop with stronger blur for focus */}
+      <div 
+        className={`fixed inset-0 bg-slate-900/60 backdrop-blur-md z-40 transition-all duration-500 lg:hidden ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`} 
+        onClick={() => setIsMobileMenuOpen(false)}
+      ></div>
+      
+      {/* Sidebar Panel */}
+      <div 
+        className={`fixed top-0 right-0 w-[90%] sm:w-[400px] h-full bg-white shadow-2xl z-50 transform transition-transform duration-500 cubic-bezier(0.25, 0.8, 0.25, 1) lg:hidden flex flex-col rounded-l-[30px] border-l border-white/50 overflow-hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        style={{ fontFamily: "'Outfit', sans-serif" }}
+      >
+          {/* Decorative Background Blob */}
+          <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#2a7394]/10 rounded-full blur-3xl pointer-events-none"></div>
+
+          {/* Menu Header */}
+          <div className="relative flex items-center justify-between p-8 border-b border-dashed border-gray-200">
+             {/* Using Logo for branding */}
+             <div className="w-32 opacity-90 grayscale-[20%]">
+               <Image src={logo} alt="Menu Logo" width={130} height={30} className="object-contain" />
+             </div>
+             <button 
+               onClick={() => setIsMobileMenuOpen(false)} 
+               className="p-2 rounded-full bg-slate-50 text-slate-500 hover:bg-[#2a7394] hover:text-white transition-all duration-300 shadow-sm"
+             >
+               <X size={24} />
+             </button>
+          </div>
+
+          {/* Menu Links Area */}
+          <div className="flex-1 overflow-y-auto px-6 py-6 scrollbar-hide">
+             <div className="flex flex-col space-y-4">
+               {navLinks.map((link, i) => {
+                 // Define icons for each link index
+                 const icons = [Layers, Info, Award, Phone];
+                 const Icon = icons[i] || ArrowRight;
+                 
+                 return (
+                    <div 
+                      key={i} 
+                      className={`animate-in fade-in slide-in-from-right-12 duration-700 ease-out fill-mode-backwards`} 
+                      style={{ animationDelay: `${100 + i * 75}ms` }}
+                    >
+                      <Link 
+                        href={link.href} 
+                        className="group relative flex items-center justify-between p-4 rounded-xl border border-gray-100 bg-gray-50/50 hover:bg-white hover:border-[#2a7394]/20 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 transform hover:-translate-y-1"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <div className="flex items-center space-x-4">
+                            <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-slate-400 group-hover:text-[#2a7394] group-hover:scale-110 transition-all duration-300">
+                              <Icon size={20} strokeWidth={2} />
+                            </div>
+                            <span className="font-bold text-lg text-slate-700 group-hover:text-slate-900">{link.name}</span>
+                        </div>
+                        <ChevronRight size={18} className="text-slate-300 group-hover:text-[#2a7394] transform group-hover:translate-x-1 transition-all" />
+                      </Link>
+                    </div>
+                 )
+               })}
+             </div>
+          </div>
+
+          {/* Menu Footer / CTA */}
+          <div className="relative p-6 mt-auto bg-slate-50 border-t border-slate-100">
+             {/* Quick Contacts Mini-Section */}
+             <div className="flex justify-around mb-6 text-center">
+                <a href="mailto:contact@example.com" className="flex flex-col items-center group">
+                  <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-400 group-hover:text-[#2a7394] group-hover:shadow-md transition-all mb-2">
+                    <Mail size={18} />
+                  </div>
+                  <span className="text-xs font-medium text-slate-500 group-hover:text-[#2a7394]">Email</span>
+                </a>
+                <a href="tel:+1234567890" className="flex flex-col items-center group">
+                  <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-slate-400 group-hover:text-[#2a7394] group-hover:shadow-md transition-all mb-2">
+                    <Phone size={18} />
+                  </div>
+                  <span className="text-xs font-medium text-slate-500 group-hover:text-[#2a7394]">Call</span>
+                </a>
+             </div>
+
+             <button 
+                onClick={() => {
+                   setIsMobileMenuOpen(false);
+                   setIsQuotePanelOpen(true);
+                }}
+                className="w-full py-4 rounded-xl bg-slate-900 text-white font-bold text-lg shadow-lg shadow-slate-900/20 flex items-center justify-center space-x-2 active:scale-95 transition-all hover:bg-[#2a7394] hover:shadow-[#2a7394]/30 hover:-translate-y-1"
+             >
+                <span>Get a Free Quote</span>
+                <ArrowRight size={20} />
+             </button>
           </div>
       </div>
 

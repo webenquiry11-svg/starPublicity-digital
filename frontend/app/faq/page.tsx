@@ -17,7 +17,7 @@ const awardCards = [
     text: "Authenticity",
     explanation: "Clear communication and open collaboration ensure you understand what suits your brand best.",
     source: "Our Commitment",
-    color: "#6b21a8", // Dark Purple
+    color: "#2a7394",
     rotation: -5, 
   },
   {
@@ -27,7 +27,7 @@ const awardCards = [
     text: "Leadership",
     explanation: "Innovative strategies create trends, inspire action, and help your brand stay ahead of the competition.",
     source: "Our Strategy",
-    color: "#1e40af", // Deep Blue
+    color: "#2a7394",
     rotation: 5, 
   },
   {
@@ -47,7 +47,7 @@ const awardCards = [
     text: "Accountability",
     explanation: "We consistently uphold our commitments, providing measurable and reliable results every single time.",
     source: "Our Guarantee",
-    color: "#ca8a04", // Golden Yellow
+    color: "#2a7394",
     rotation: 6, 
   },
 ];
@@ -105,17 +105,17 @@ const AwardsSection = () => {
             <section className="py-16 bg-gray-50">
                 <div className="container mx-auto px-4 sm:px-8">
                     <div className="text-center mb-12 relative">
-                        <span className="inline-block py-1 px-3 rounded-full bg-teal-50 text-teal-600 text-xs font-bold tracking-widest border border-teal-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                        <span className="inline-block py-1 px-3 rounded-full bg-blue-50 text-xs font-bold tracking-widest border border-blue-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif", color: '#2a7394' }}>
                             Our Values
                         </span>
                         <h2 
                             className="text-4xl font-bold mb-4 drop-shadow-sm tracking-tight"
                             style={{ fontFamily: "'Playfair Display', serif" }}
                         >
-                            <span className="text-slate-900">Our Core </span>
-                            <span className="text-teal-600">Commitment</span>
+                            <span className="text-slate-900">Our Core </span>                
+                            <span style={{ color: '#2a7394' }}>Commitment</span>
                         </h2>
-                        <div className="w-20 h-1.5 mx-auto rounded-full bg-gradient-to-r from-teal-500 to-teal-700 opacity-80 mb-4"></div>
+                        <div className="w-24 h-1.5 mx-auto rounded-full bg-gradient-to-r from-[#2a7394] to-blue-500 opacity-80 mb-4"></div>
                         <p className="text-base text-slate-500 max-w-xl mx-auto font-sans">
                             Excellence in Every Partnership
                         </p>
@@ -130,10 +130,10 @@ const AwardsSection = () => {
                             <div key={card.id} className="w-full group">
                                 <div 
                                     className="relative w-full p-6 bg-white rounded-2xl border border-gray-100 shadow-md flex flex-col justify-between transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-                                    style={{ borderLeft: `4px solid ${card.color}` }}
+                                    style={{ borderLeft: `4px solid #2a7394` }}
                                 >
                                     <div className="flex items-center gap-4 mb-3">
-                                        <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: card.color }}>
+                                        <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: '#2a7394' }}>
                                             {card.icon && <card.icon size={22} className="text-white" strokeWidth={2} />}
                                         </div>
                                         <p className="text-xl font-bold text-slate-800" style={{ fontFamily: "'Outfit', sans-serif" }}>{card.text}</p>
@@ -200,12 +200,12 @@ const AwardsSection = () => {
             >
                 <div 
                     className="relative w-full h-full p-6 bg-white/60 backdrop-blur-md rounded-2xl border border-white/40 flex flex-col justify-between cursor-pointer transition-all duration-300 group-hover:shadow-2xl group-hover:border-white/60 group-hover:bg-white/80"
-                    style={{ boxShadow: `0 0 20px ${card.color}20, inset 0 0 0 1px ${card.color}00` }}
+                    style={{ boxShadow: `0 0 20px #2a739420, inset 0 0 0 1px #2a739400` }}
                 >
-                    <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: `0 0 25px ${card.color}80, inset 0 0 0 1px ${card.color}80` }}></div>
+                    <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: `0 0 25px #2a739480, inset 0 0 0 1px #2a739480` }}></div>
 
                     <div className="relative z-10">
-                        <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ backgroundColor: card.color }}>
+                        <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ backgroundColor: '#2a7394' }}>
                             {card.icon && <card.icon size={28} className="text-white" strokeWidth={2} />}
                         </div>
                     </div>
@@ -300,9 +300,9 @@ const StoryByNumbersSection = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-4 justify-center">
           {stats.map((stat, index) => (
             <div key={index} className="flex flex-col items-center md:items-center lg:items-start p-4 hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300 rounded-xl group border-b md:border-b-0 border-gray-100 lg:border-r last:border-0 last:border-b-0">
-              <div className="flex items-start text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-slate-800 leading-none group-hover:text-blue-700 transition-colors duration-300" style={{ fontFamily: "'Outfit', sans-serif" }}>
+              <div className="flex items-start text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-slate-800 leading-none group-hover:text-[#2a7394] transition-colors duration-300" style={{ fontFamily: "'Outfit', sans-serif" }}>
                 <AnimatedNumber target={parseInt(stat.number)} />
-                <span className="font-bold text-xl md:text-2xl ml-1 mt-1 md:mt-2 flex-shrink-0 group-hover:text-blue-400" style={{ color: '#2a7394' }}>
+                <span className="font-bold text-xl md:text-2xl ml-1 mt-1 md:mt-2 flex-shrink-0 group-hover:text-[#2a7394]" style={{ color: '#2a7394' }}>
                   +
                 </span>
               </div>

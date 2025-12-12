@@ -7,8 +7,9 @@ import AboutSection from "./about/page";
 import { ContactSection, Footer } from "./contact/page";
 import AwardsSection from "./faq/page";
 import QuoteModal from "./QuoteModal";
- 
+import { Outfit } from "next/font/google";
 
+const outfit = Outfit({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"] });
 
 export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,7 +20,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className="relative">
+    <main className={`relative ${outfit.className}`}>
       <HeroSectionWithNavbar onQuoteClick={() => setIsModalOpen(true)} />
       <div id="services">
         <ServicesSection />

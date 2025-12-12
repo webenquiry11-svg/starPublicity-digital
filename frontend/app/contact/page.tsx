@@ -14,6 +14,7 @@ import {
     ArrowUp
 } from 'lucide-react';
 import logo from '../../public/Star Digital Website Images/logo.png';
+import { Outfit } from 'next/font/google';
 
 // --- ICONS for Social Media (Lucide React) ---
 import {
@@ -23,6 +24,8 @@ import {
     Linkedin,
     Link as LinkIcon, // Using a generic link icon as a fallback for Pinterest
 } from 'lucide-react';
+
+const outfit = Outfit({ subsets: ["latin"], weight: ["400", "500", "700", "800"] });
 
 
 // Data for the 'Services' links shown in the footer
@@ -91,14 +94,14 @@ export const ContactSection: React.FC = () => {
     return (
         <section 
             // NOTE: Background must be the same color as the wave fill color for a seamless look
-            className={`py-12 md:py-16 bg-gradient-to-br from-[#2a7394] to-[#225d7a] relative overflow-hidden`}
+            className={`py-12 md:py-16 bg-gradient-to-br from-[#2a7394] to-[#225d7a] relative overflow-hidden ${outfit.className}`}
         >
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center text-white max-w-6xl mx-auto">
                     
                     {/* Left Side: Headline and Tagline */}
                     <div className="lg:col-span-7 text-center lg:text-left mb-8 lg:mb-0">
-                        <p className="text-xl md:text-2xl font-medium text-gray-300 mb-4 font-sans">
+                        <p className="text-xl md:text-2xl font-medium text-gray-300 mb-4">
                             Got an idea? Connect with our team and let’s make something extraordinary together.
                         </p>
                         <h2 className="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tight font-grotesk text-transparent bg-clip-text bg-gradient-to-b from-cyan-300 to-white">
@@ -113,15 +116,15 @@ export const ContactSection: React.FC = () => {
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div>
                                 <label htmlFor="cta-name" className="sr-only">Name</label>
-                                <input type="text" id="cta-name" name="name" placeholder="Your Name" value={formData.name} onChange={handleInputChange} required className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors font-sans" />
+                                <input type="text" id="cta-name" name="name" placeholder="Your Name" value={formData.name} onChange={handleInputChange} required className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors" />
                             </div>
                             <div>
                                 <label htmlFor="cta-email" className="sr-only">Email</label>
-                                <input type="email" id="cta-email" name="email" placeholder="Your Email" value={formData.email} onChange={handleInputChange} required className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors font-sans" />
+                                <input type="email" id="cta-email" name="email" placeholder="Your Email" value={formData.email} onChange={handleInputChange} required className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors" />
                             </div>
                             <div>
                                 <label htmlFor="cta-message" className="sr-only">Message</label>
-                                <textarea id="cta-message" name="message" placeholder="Your Message" value={formData.message} onChange={handleInputChange} required rows={2} className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors resize-none font-sans"></textarea>
+                                <textarea id="cta-message" name="message" placeholder="Your Message" value={formData.message} onChange={handleInputChange} required rows={2} className="w-full bg-transparent border-b border-white/30 text-white placeholder:text-white/70 py-2 focus:outline-none focus:border-white transition-colors resize-none"></textarea>
                             </div>
                             <button type="submit" disabled={status.submitting} className={`w-full group inline-flex items-center justify-center py-3 px-6 rounded-full bg-white text-[#2a7394] font-bold text-lg transition-all duration-300 ease-out hover:bg-white/90 hover:scale-105 disabled:bg-gray-300 disabled:cursor-not-allowed`}>
                                 {status.submitting ? 'SENDING...' : "LET'S TALK"}
@@ -146,7 +149,7 @@ export const Footer: React.FC = () => {
     
     // Base background is slate-50
     return (
-        <footer className="bg-slate-50 text-gray-900 pt-16 pb-8 relative overflow-hidden font-sans">
+        <footer className={`bg-slate-50 text-gray-900 pt-16 pb-8 relative overflow-hidden ${outfit.className}`}>
             
             {/* --- 1. NEW ANIMATED MULTI-LAYER WAVE DIVIDER --- */}
             <div className="absolute top-0 left-0 w-full z-0 transform -translate-y-px -scale-x-100 -scale-y-100">
@@ -211,7 +214,7 @@ export const Footer: React.FC = () => {
                             height={42}
                             className="mb-4" // Removed invert and brightness for light theme
                         />
-                        <p className="text-gray-500 text-sm leading-relaxed max-w-sm font-sans">
+                        <p className="text-gray-500 text-sm leading-relaxed max-w-sm">
                             We make success happen with bold brands, slick digital vibes, and print
                             that speaks your language!
                         </p>
@@ -219,10 +222,10 @@ export const Footer: React.FC = () => {
 
                     {/* Column 2 (lg:col-span-2): Chat With Us (Phone/Email) */}
                     <div className="lg:col-span-2">
-                        <h4 className="text-sm font-semibold mb-4 tracking-wider text-gray-500 font-grotesk">CHAT WITH US</h4>
+                        <h4 className="text-sm font-semibold mb-4 tracking-wider text-gray-500">CHAT WITH US</h4>
                         <div className="space-y-2 text-sm">
-                            <p className="text-gray-900 font-semibold font-sans">0161-4668602</p>
-                            <a href="mailto:sales@starpublicity.org" className="text-gray-600 hover:text-gray-900 transition-colors font-sans">
+                            <p className="text-gray-900 font-semibold">0161-4668602</p>
+                            <a href="mailto:sales@starpublicity.org" className="text-gray-600 hover:text-gray-900 transition-colors">
                                 sales@starpublicity.org
                             </a>
                         </div>
@@ -230,15 +233,15 @@ export const Footer: React.FC = () => {
 
                     {/* Column 3 (lg:col-span-3): Find Us (Address) */}
                     <div className="lg:col-span-3">
-                        <h4 className="text-sm font-semibold mb-4 tracking-wider text-gray-500 font-grotesk">FIND US</h4>
-                        <p className="text-gray-600 text-sm font-sans md:text-center lg:text-left">
+                        <h4 className="text-sm font-semibold mb-4 tracking-wider text-gray-500">FIND US</h4>
+                        <p className="text-gray-600 text-sm md:text-center lg:text-left">
                             Ludhiana, Punjab, 141001
                         </p>
                     </div>
 
                     {/* Column 4 (lg:col-span-3): Follow Us (Socials) */}
                     <div className="lg:col-span-3">
-                        <h4 className="text-sm font-semibold mb-4 tracking-wider text-gray-500 font-grotesk">FOLLOW US ON</h4>
+                        <h4 className="text-sm font-semibold mb-4 tracking-wider text-gray-500">FOLLOW US ON</h4>
                         <div className="flex space-x-2">
                             {socialLinks.map((social, index) => (
                                 <a 
@@ -260,7 +263,7 @@ export const Footer: React.FC = () => {
                 <div className="flex flex-col lg:flex-row lg:justify-between items-center pt-4">
                     
                     {/* Service Links - Center on smaller screens */}
-                    <div className="flex flex-wrap justify-center lg:justify-start space-x-4 text-sm font-medium text-gray-600 font-sans">
+                    <div className="flex flex-wrap justify-center lg:justify-start space-x-4 text-sm font-medium text-gray-600">
                         {serviceLinks.map((link, index) => (
                             <span key={index} className="py-1">
                                 {link.name}
@@ -269,7 +272,7 @@ export const Footer: React.FC = () => {
                     </div>
 
                     {/* Copyright and Scroll to Top (moved to the right side visually) */}
-                    <div className="flex items-center gap-4 text-slate-500 text-xs mt-4 lg:mt-0 font-sans">
+                    <div className="flex items-center gap-4 text-slate-500 text-xs mt-4 lg:mt-0">
                         <p>Copyright © {new Date().getFullYear()} Star Publicity.</p>
                         <Link href="/privacy" className="hover:text-gray-900 transition-colors">Privacy Policy</Link>
                     </div>

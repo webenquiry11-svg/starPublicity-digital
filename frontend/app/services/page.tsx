@@ -12,7 +12,7 @@ import {
 import Image from 'next/image';
 import { DM_Sans } from "next/font/google";
 
-// Placeholder image (Replace with your specific path)
+// --- RESTORED ORIGINAL IMAGE IMPORT ---
 import featureImage from "./_images/service.png"; 
 
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "700"] });
@@ -58,37 +58,40 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <section className={`py-20 bg-gray-50/30 ${dmSans.className}`}>
-      <div className="container mx-auto px-4 lg:px-12">
+    <section className={`py-16 sm:py-20 bg-gray-50/30 ${dmSans.className} overflow-hidden`}>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         
         {/* --- MAIN FLEX CONTAINER --- 
-            This ensures the Left Column (Heading + Grid) and Right Column (Image) 
-            are side-by-side and equal height on large screens.
+            On Mobile/Tablet: Stacked Column
+            On XL Desktop: Row (Left Content + Right Image) side-by-side
         */}
-        <div className="flex flex-col xl:flex-row gap-8 items-stretch">
+        <div className="flex flex-col xl:flex-row gap-8 xl:gap-12 items-stretch">
           
           {/* --- LEFT COLUMN: Heading + Cards --- */}
           <div className="w-full xl:w-2/3 flex flex-col justify-between">
             
-            {/* 1. HEADING (Now inside the left column) */}
-            <div className="mb-12 max-w-4xl overflow-hidden">
-              <h2 className="text-3xl md:text-5xl font-bold leading-tight text-slate-900 animate-in fade-in slide-in-from-right-12 duration-700">
+            {/* 1. HEADING */}
+            <div className="mb-8 sm:mb-12 max-w-3xl">
+              <span className="block text-sm font-bold tracking-widest text-[#2a7394] uppercase mb-2">
+                What We Do
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-slate-900">
                 Our Core <span className="text-[#2a7394]">Digital Services</span> That Grow Brands
               </h2>
             </div>
 
             {/* 2. CARDS GRID */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 h-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 h-full">
               {services.map((service, index) => {
-                // Logic: 1st & 3rd columns are Colored. Middle is White.
+                // Alternating logic: 1st & 3rd columns in a 3-col grid get colored
                 const isColored = index % 3 !== 1;
 
                 return (
                   <div 
                     key={service.id}
                     className={`
-                      group relative flex flex-col items-center text-center p-8 rounded-lg cursor-pointer overflow-hidden
-                      border transition-all duration-300 h-full justify-center
+                      group relative flex flex-col items-center text-center p-6 sm:p-8 rounded-2xl cursor-pointer overflow-hidden
+                      border transition-all duration-300 h-full justify-start
                       
                       /* --- BASE COLORS --- */
                       ${isColored 
@@ -96,7 +99,7 @@ export default function ServicesSection() {
                         : "bg-white border-gray-100 shadow-sm"
                       }
                       
-                      hover:-translate-y-2 hover:shadow-2xl
+                      hover:-translate-y-2 hover:shadow-xl
                     `}
                   >
                     {/* --- THE "WATER" FILL ANIMATION --- */}
@@ -108,15 +111,15 @@ export default function ServicesSection() {
                                 : "bg-[#3590ba]"
                             }
                         `}
-                    ></span>
+                    />
 
                     {/* --- CONTENT --- */}
-                    <div className="relative z-10 flex flex-col items-center w-full">
+                    <div className="relative z-10 flex flex-col items-center w-full h-full">
                         
                         {/* Icon Wrapper */}
-                        <div className="mb-6 transform transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
+                        <div className="mb-6 mt-2 transform transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
                           <service.icon 
-                            size={42} 
+                            size={40} 
                             strokeWidth={1.5}
                             className={`
                               transition-colors duration-500
@@ -157,10 +160,11 @@ export default function ServicesSection() {
           </div>
 
           {/* --- RIGHT COLUMN: Image --- 
-              Because this is a flex item, 'h-full' will make it stretch 
-              to match the height of the Left Column (Heading + Grid).
+              On Mobile: Min-Height ensures visibility.
+              On Desktop: 'items-stretch' on parent makes this full height.
           */}
-          <div className="w-full xl:w-1/3 relative min-h-[450px] xl:min-h-auto rounded-2xl overflow-hidden shadow-2xl group">
+          <div className="hidden md:block w-full xl:w-1/3 relative min-h-[450px] xl:min-h-auto rounded-3xl overflow-hidden shadow-2xl group">
+             {/* RESTORED NEXT/IMAGE COMPONENT */}
              <div className="relative w-full h-full transform transition-transform duration-700 group-hover:scale-105">
                 <Image
                   src={featureImage} 
@@ -172,7 +176,6 @@ export default function ServicesSection() {
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/40 to-transparent pointer-events-none"></div>
              </div>
           </div>
-
         </div>
       </div>
     </section>
