@@ -226,7 +226,7 @@ export const Footer: React.FC = () => {
                         <div className="space-y-2 text-sm">
                             <p className="text-gray-900 font-semibold">0161-4668602</p>
                             <a href="mailto:sales@starpublicity.org" className="text-gray-600 hover:text-gray-900 transition-colors">
-                                sales@starpublicity.org
+                                support@starpublicity.org
                             </a>
                         </div>
                     </div>
