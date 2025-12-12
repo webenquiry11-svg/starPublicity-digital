@@ -8,7 +8,6 @@ import {
   ArrowRight, 
   Menu, 
   X, 
-  User 
 } from 'lucide-react';
 import logo from '../../public/Star Digital Website Images/logo.png';
 
@@ -265,23 +264,6 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
                         </div>
                     </form>
                 )}
-            </div>
-        </div>
-
-        {/* === UPDATED COLOR TAB TRIGGER (Always Visible) === */}
-        <div 
-            onClick={() => setIsQuotePanelOpen(!isQuotePanelOpen)}
-            className="w-[60px] bg-[#256482] cursor-pointer flex flex-col items-center py-4 rounded-l-md shadow-[-2px_0_5px_rgba(0,0,0,0.1)] relative z-50 hover:bg-[#1e5068] transition-colors"
-            style={{ minHeight: '350px' }} 
-        >
-            {/* Updated Border Color */}
-            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center mb-6 shadow-md border-2 border-[#256482]">
-                <User size={24} className="text-slate-700" />
-            </div>
-            <div className="flex-grow flex items-center justify-center">
-                 <span className="text-white font-bold tracking-widest text-lg uppercase whitespace-nowrap writing-vertical">
-                    Talk To Experts
-                 </span>
             </div>
         </div>
 
