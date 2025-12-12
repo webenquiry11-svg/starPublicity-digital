@@ -13,7 +13,7 @@ import Image from 'next/image';
 import { DM_Sans } from "next/font/google";
 
 // Placeholder image (Replace with your specific path)
-import featureImage from "./_images/digital.svg"; 
+import featureImage from "./_images/service.png"; 
 
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
