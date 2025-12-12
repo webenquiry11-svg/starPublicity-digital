@@ -2,12 +2,11 @@
 
 import React from 'react';
 import { 
-  ShieldCheck, 
-  Globe, 
   Megaphone, 
-  Lock, 
-  Coins, 
-  RefreshCcw 
+  Palette,
+  Code,
+  Glasses,
+  Gamepad2
 } from 'lucide-react';
 import Image from 'next/image';
 import { DM_Sans } from "next/font/google";
@@ -20,39 +19,33 @@ const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "700"] });
 const services = [
   {
     id: 1,
-    title: "Earn a Spot",
-    description: "Earn a power-packed spot among bigger brands",
-    icon: ShieldCheck,
-  },
-  {
-    id: 2,
-    title: "Broader Reach",
-    description: "Reach out to more audiences the world across",
-    icon: Globe,
-  },
-  {
-    id: 3,
-    title: "Create a Buzz",
-    description: "Stir greater interests in your intended customers",
+    title: "Digital Marketing",
+    description: "Data-driven strategies to grow your online presence and drive measurable results.",
     icon: Megaphone,
   },
   {
+    id: 2,
+    title: "Graphic Designing",
+    description: "Stunning visuals that tell your brand story and captivate audiences.",
+    icon: Palette,
+  },
+  {
+    id: 3,
+    title: "Web Development",
+    description: "Fast, secure, scalable websites built to drive conversions and growth.",
+    icon: Code,
+  },
+  {
     id: 4,
-    title: "Safety Ensured",
-    description: "We shall protect the confidentiality of your data",
-    icon: Lock,
+    title: "AR/VR Development",
+    description: "Immersive experiences that engage customers and transform brand interactions.",
+    icon: Glasses,
   },
   {
     id: 5,
-    title: "Cost-Efficient",
-    description: "Get quality services at a cost advantageous to you",
-    icon: Coins,
-  },
-  {
-    id: 6,
-    title: "Brand Transformation",
-    description: "Transform your business into a coveted brand",
-    icon: RefreshCcw,
+    title: "Game Development",
+    description: "Engaging games that entertain users and achieve your business objectives.",
+    icon: Gamepad2,
   },
 ];
 
@@ -73,9 +66,7 @@ export default function ServicesSection() {
             {/* 1. HEADING (Now inside the left column) */}
             <div className="mb-12 max-w-4xl">
               <h2 className="text-3xl md:text-5xl font-bold leading-tight text-slate-900">
-                Evolving <span className="text-[#2a7394]">Digital Marketing Services</span>
-                <br />
-                to Drive Better Revenues and ROI
+                What We <span className="text-[#2a7394]">Deliver</span>
               </h2>
             </div>
 

@@ -179,19 +179,16 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
       {/* --- HERO CONTENT --- */}
       <div className="relative z-20 flex-grow flex items-center justify-center py-20">
         <div className="container mx-auto px-6 text-center">
-          <p className="text-slate-700 text-sm md:text-base font-bold tracking-wide uppercase mb-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            Your Trusted and Experienced End-to-End Partner in
-          </p>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight mb-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-100">
-            <span className="text-[#3590ba]">Web and Mobile App</span> Development
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight mb-6 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-100">
+            Drive Growth Through <span className="text-[#3590ba]">Innovative Digital Strategies</span>
           </h1>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-slate-800 mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
-            That Powers <span className="text-[#3590ba]">Digital Transformation</span>
-          </h2>
+          <p className="text-xl md:text-2xl text-slate-700 mb-8 max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+            We help ambitious brands scale their digital presence and dominate their markets.
+          </p>
           <div className="flex justify-center animate-in fade-in zoom-in duration-1000 delay-500">
             <Link href="#contact" className="relative inline-flex items-center px-10 py-4 overflow-hidden text-lg font-medium text-slate-800 border-2 border-slate-800 rounded-full hover:text-white group hover:bg-slate-800 transition-all duration-300">
               <span className="relative flex items-center">
-                 Talk to our experts <ArrowRight className="w-5 h-5 ml-2" />
+                 Start Your Project <ArrowRight className="w-5 h-5 ml-2" />
               </span>
             </Link>
           </div>
