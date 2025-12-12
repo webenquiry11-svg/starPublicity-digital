@@ -185,9 +185,10 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
             We help ambitious brands scale their digital presence and dominate their markets.
           </p>
           <div className="flex justify-center animate-in fade-in zoom-in duration-1000 delay-500">
-            <Link href="#contact" className="relative inline-flex items-center px-10 py-4 overflow-hidden text-lg font-medium text-slate-800 border-2 border-slate-800 rounded-full hover:text-white group hover:bg-slate-800 transition-all duration-300">
-              <span className="relative flex items-center">
-                 Start Your Project <ArrowRight className="w-5 h-5 ml-2" />
+            <Link href="#contact" className="relative inline-flex items-center px-10 py-4 overflow-hidden text-lg font-medium text-slate-800 border-2 border-slate-800 rounded-full group transition-all duration-300 hover:border-[#3590ba] hover:shadow-[0_0_30px_-5px_rgba(53,144,186,0.4)] hover:-translate-y-1">
+              <span className="absolute inset-0 w-full h-full bg-[#3590ba] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out"></span>
+              <span className="relative flex items-center group-hover:text-white transition-colors duration-300">
+                 Start Your Project <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
               </span>
             </Link>
           </div>

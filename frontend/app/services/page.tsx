@@ -3,10 +3,11 @@
 import React from 'react';
 import { 
   Megaphone, 
-  Palette,
-  Code,
+  Search,
   Glasses,
-  Gamepad2
+  Code,
+  Camera,
+  PenTool
 } from 'lucide-react';
 import Image from 'next/image';
 import { DM_Sans } from "next/font/google";
@@ -20,32 +21,38 @@ const services = [
   {
     id: 1,
     title: "Digital Marketing",
-    description: "Data-driven strategies to grow your online presence and drive measurable results.",
+    description: "Data-driven campaigns that amplify your brand and turn clicks into customers.",
     icon: Megaphone,
   },
   {
     id: 2,
-    title: "Graphic Designing",
-    description: "Stunning visuals that tell your brand story and captivate audiences.",
-    icon: Palette,
+    title: "SEO Optimization",
+    description: "Smart optimization that boosts your search rankings and organic visibility.",
+    icon: Search,
   },
   {
     id: 3,
-    title: "Web Development",
-    description: "Fast, secure, scalable websites built to drive conversions and growth.",
-    icon: Code,
-  },
-  {
-    id: 4,
-    title: "AR/VR Development",
-    description: "Immersive experiences that engage customers and transform brand interactions.",
+    title: "Immersive Technology",
+    description: "AR, VR, and XR experiences that pull audiences into your brand story.",
     icon: Glasses,
   },
   {
+    id: 4,
+    title: "Website Development",
+    description: "High-performing, modern websites built to convert and scale with you.",
+    icon: Code,
+  },
+  {
     id: 5,
-    title: "Game Development",
-    description: "Engaging games that entertain users and achieve your business objectives.",
-    icon: Gamepad2,
+    title: "Product Ad Shoot",
+    description: "Scroll-stopping product visuals that showcase every detail and drive sales.",
+    icon: Camera,
+  },
+  {
+    id: 6,
+    title: "Logo Designing",
+    description: "Distinctive logos that capture your brand’s personality in a single mark.",
+    icon: PenTool,
   },
 ];
 
@@ -66,7 +73,7 @@ export default function ServicesSection() {
             {/* 1. HEADING (Now inside the left column) */}
             <div className="mb-12 max-w-4xl">
               <h2 className="text-3xl md:text-5xl font-bold leading-tight text-slate-900">
-                What We <span className="text-[#2a7394]">Deliver</span>
+                Our Core <span className="text-[#2a7394]">Digital Services</span> That Grow Brands
               </h2>
             </div>
 
