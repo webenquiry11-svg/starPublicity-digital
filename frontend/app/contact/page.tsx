@@ -39,11 +39,11 @@ const serviceLinks = [
 
 // Data for the 'Follow us on' section (example URLs)
 const socialLinks = [
-    { icon: Facebook, href: 'https://www.facebook.com/starpublicity', label: 'Facebook' },
-    { icon: Instagram, href: 'https://www.instagram.com/starpublicityldh/', label: 'Instagram' },
-    { icon: Twitter, href: 'https://x.com/starpublicityld', label: 'Twitter' },
-    { icon: LinkIcon, href: 'https://in.pinterest.com/starpublicityldh/', label: 'Pinterest' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/company/m-s-star-publicity/', label: 'LinkedIn' },
+    { icon: Facebook, href: '', label: 'Facebook' },
+    { icon: Instagram, href: '', label: 'Instagram' },
+    { icon: Twitter, href: '', label: 'Twitter' },
+    { icon: LinkIcon, href: '', label: 'Pinterest' },
+    { icon: Linkedin, href: '', label: 'LinkedIn' },
 ];
 
 // --- Custom Colors ---
@@ -244,16 +244,13 @@ export const Footer: React.FC = () => {
                         <h4 className="text-sm font-semibold mb-4 tracking-wider text-gray-500">FOLLOW US ON</h4>
                         <div className="flex space-x-2">
                             {socialLinks.map((social, index) => (
-                                <a 
+                                <div 
                                     key={index} 
-                                    href={social.href} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
                                     className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center 
-                                              text-gray-500 hover:text-gray-900 hover:border-gray-900 transition-colors duration-200"
+                                              text-gray-500 cursor-default"
                                 >
                                     <social.icon className="w-4 h-4" />
-                                </a>
+                                </div>
                             ))}
                         </div>
                     </div>
