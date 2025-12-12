@@ -71,8 +71,8 @@ export default function ServicesSection() {
           <div className="w-full xl:w-2/3 flex flex-col justify-between">
             
             {/* 1. HEADING (Now inside the left column) */}
-            <div className="mb-12 max-w-4xl">
-              <h2 className="text-3xl md:text-5xl font-bold leading-tight text-slate-900">
+            <div className="mb-12 max-w-4xl overflow-hidden">
+              <h2 className="text-3xl md:text-5xl font-bold leading-tight text-slate-900 animate-in fade-in slide-in-from-right-12 duration-700">
                 Our Core <span className="text-[#2a7394]">Digital Services</span> That Grow Brands
               </h2>
             </div>
