@@ -4,56 +4,41 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
-    Mail,
-    Layers,
-    MessageSquare,
-    LifeBuoy,
-    MapPin,
-    Phone,
-    ChevronRight,
-    ArrowUp
+    Mail, 
+    MapPin, 
+    Phone, 
+    Facebook, 
+    Instagram, 
+    Linkedin, 
+    Twitter,
+    Link as LinkIcon
 } from 'lucide-react';
 import logo from '../../public/Star Digital Website Images/logo.png';
 import { Outfit } from 'next/font/google';
 
-// --- ICONS for Social Media (Lucide React) ---
-import {
-    Facebook,
-    Instagram,
-    Twitter,
-    Linkedin,
-    Link as LinkIcon, // Using a generic link icon as a fallback for Pinterest
-} from 'lucide-react';
-
 const outfit = Outfit({ subsets: ["latin"], weight: ["400", "500", "700", "800"] });
 
-
-// Data for the 'Services' links shown in the footer
-const serviceLinks = [
-    { name: 'Digital Marketing', href: '/services/digital' },
-    { name: 'Website Design', href: '/services/webdesign' },
-    { name: 'Branding', href: '/services/branding' },
-    { name: 'Immersive Technology', href: '/services/social' },
-    { name: 'SEO', href: '/services/seo' },
-];
-
-// Data for the 'Follow us on' section (example URLs)
+// Social Media Links
 const socialLinks = [
-    { icon: Facebook, href: '', label: 'Facebook' },
-    { icon: Instagram, href: '', label: 'Instagram' },
-    { icon: Twitter, href: '', label: 'Twitter' },
-    { icon: LinkIcon, href: '', label: 'Pinterest' },
-    { icon: Linkedin, href: '', label: 'LinkedIn' },
+    { icon: Facebook, href: "#" },
+    { icon: Instagram, href: "#" },
+    { icon: Linkedin, href: "#" },
+    { icon: Twitter, href: "#" },
+    { icon: LinkIcon, href: "#" }
 ];
 
-// --- Custom Colors ---
-const COLOR_BLUE_DARK = '#2a7394';
-const COLOR_SLATE_LIGHT = '#f8fafc'; // Matches bg-slate-50
+// Service Links for Footer
+const serviceLinks = [
+    { name: "Digital Marketing", href: "#" },
+    { name: "SEO Optimization", href: "#" },
+    { name: "Web Development", href: "#" },
+    { name: "App Development", href: "#" },
+    { name: "Graphic Design", href: "#" },
+];
 
-// --- 1. Top CTA Section (Mimics 'LET\'S CHAT') ---
-export const ContactSection: React.FC = () => {
+export const ContactSection = () => {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-    const [status, setStatus] = useState({ message: '', error: false, submitting: false });
+    const [status, setStatus] = useState({ submitting: false, message: '', error: false });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -62,57 +47,46 @@ export const ContactSection: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setStatus({ message: 'Sending...', error: false, submitting: true });
+        setStatus({ submitting: true, message: '', error: false });
 
         try {
-            // --- UPDATED LOGIC START ---
-            // define the Base URL: Use the env variable, fallback to localhost for safety
             const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:5000';
-
-            // Send request to the EXTERNAL backend (Express), not the internal Next.js API
             const response = await fetch(`${baseUrl}/api/contact`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
-            // --- UPDATED LOGIC END ---
 
             const result = await response.json();
 
-            if (!response.ok) {
-                throw new Error(result.message || 'Something went wrong.');
-            }
+            if (!response.ok) throw new Error(result.message || 'Something went wrong');
 
-            setStatus({ message: result.message || 'Enquiry submitted successfully!', error: false, submitting: false });
-            setFormData({ name: '', email: '', message: '' }); // Clear form
-
-        } catch (error: any) {
-            setStatus({ message: error.message || 'Failed to connect to server.', error: true, submitting: false });
+            setStatus({ submitting: false, message: 'Message sent successfully!', error: false });
+            setFormData({ name: '', email: '', message: '' });
+        } catch (error) {
+            setStatus({ submitting: false, message: 'Failed to send message.', error: true });
         }
     };
 
     return (
-        <section 
-            // NOTE: Background must be the same color as the wave fill color for a seamless look
-            className={`py-12 md:py-16 bg-gradient-to-br from-[#2a7394] to-[#225d7a] relative overflow-hidden ${outfit.className}`}
-        >
+        <section className={`py-10 md:py-12 bg-gradient-to-br from-[#2a7394] to-[#225d7a] relative overflow-hidden ${outfit.className}`}>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center text-white max-w-6xl mx-auto">
-                    
-                    {/* Left Side: Headline and Tagline */}
                     <div className="lg:col-span-7 text-center lg:text-left mb-8 lg:mb-0">
                         <p className="text-xl md:text-2xl font-medium text-gray-300 mb-4">
                             Got an idea? Connect with our team and let’s make something extraordinary together.
                         </p>
-                        <h2 className="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tight font-grotesk text-transparent bg-clip-text bg-gradient-to-b from-cyan-300 to-white">
-                            LET’S CONNECT
+                        <h2 className="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-cyan-300 to-white">
+                            LET'S WORK <br /> TOGETHER
                         </h2>
                     </div>
-                    
-                    {/* Right Side: Form */}
-                    <div
-                        className="w-full lg:col-span-5 bg-white/10 lg:bg-transparent p-8 lg:p-0 rounded-2xl lg:rounded-none border border-white/20 lg:border-none shadow-lg lg:shadow-none backdrop-blur-sm lg:backdrop-blur-none"
-                    >
+
+                    <div className="lg:col-span-5 bg-white/10 backdrop-blur-sm p-8 rounded-3xl border border-white/20 shadow-2xl">
+                        {status.message && (
+                            <div className={`mb-4 text-center font-bold ${status.error ? 'text-red-300' : 'text-green-300'}`}>
+                                {status.message}
+                            </div>
+                        )}
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div>
                                 <label htmlFor="cta-name" className="sr-only">Name</label>
@@ -128,10 +102,8 @@ export const ContactSection: React.FC = () => {
                             </div>
                             <button type="submit" disabled={status.submitting} className={`w-full group inline-flex items-center justify-center py-3 px-6 rounded-full bg-white text-[#2a7394] font-bold text-lg transition-all duration-300 ease-out hover:bg-white/90 hover:scale-105 disabled:bg-gray-300 disabled:cursor-not-allowed`}>
                                 {status.submitting ? 'SENDING...' : "LET'S TALK"}
-                                <ChevronRight className="w-6 h-6 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                             </button>
                         </form>
-                        {status.message && <p className={`text-center mt-4 ${status.error ? 'text-red-400' : 'text-green-300'}`}>{status.message}</p>}
                     </div>
                 </div>
             </div>
@@ -139,80 +111,26 @@ export const ContactSection: React.FC = () => {
     );
 };
 
-
-// --- 2. Footer Section (Mimics THINKSTER Footer) ---
-export const Footer: React.FC = () => {
-
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-    
-    // Base background is slate-50
+export const Footer = () => {
     return (
-        <footer className={`bg-slate-50 text-gray-900 pt-16 pb-8 relative overflow-hidden ${outfit.className}`}>
-            
-            {/* --- 1. NEW ANIMATED MULTI-LAYER WAVE DIVIDER --- */}
-            <div className="absolute top-0 left-0 w-full z-0 transform -translate-y-px -scale-x-100 -scale-y-100">
-                <style jsx>{`
-                    .waves {
-                        position: relative;
-                        width: 100%;
-                        height: 15vh;
-                        min-height: 100px;
-                        max-height: 150px;
-                    }
-                    .parallax > use {
-                        animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
-                    }
-                    .parallax > use:nth-child(1) {
-                        animation-delay: -2s;
-                        animation-duration: 7s;
-                    }
-                    .parallax > use:nth-child(2) {
-                        animation-delay: -3s;
-                        animation-duration: 10s;
-                    }
-                    .parallax > use:nth-child(3) {
-                        animation-delay: -4s;
-                        animation-duration: 13s;
-                    }
-                    @keyframes move-forever {
-                        0% { transform: translate3d(-90px,0,0); }
-                        100% { transform: translate3d(85px,0,0); }
-                    }
-                `}</style>
-                <svg className="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">
-                    <defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" /></defs>
-                    {/* The fill color is changed to a semi-transparent grey to match the footer style */}
-                    <g className="parallax">
-                        <use href="#gentle-wave" x="48" y="0" fill="rgba(203, 213, 225, 0.7)" />
-                        <use href="#gentle-wave" x="48" y="3" fill="rgba(203, 213, 225, 0.5)" />
-                        <use href="#gentle-wave" x="48" y="5" fill="rgba(203, 213, 225, 0.3)" />
-                    </g>
+        <footer className={`bg-slate-50 text-gray-900 pt-10 pb-8 relative overflow-hidden ${outfit.className}`}>
+             {/* --- 1. NEW ANIMATED MULTI-LAYER WAVE DIVIDER --- */}
+             <div className="absolute top-0 left-0 w-full z-0 transform -translate-y-px -scale-x-100 -scale-y-100">
+                <svg className="w-full h-12 md:h-24" viewBox="0 0 1440 320" preserveAspectRatio="none">
+                    <path fill="#2a7394" fillOpacity="0.1" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                    <path fill="#2a7394" fillOpacity="0.2" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,208C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
                 </svg>
             </div>
-            {/* End of Wave Divider */}
 
-            {/* New Subtle Geometric Background (Existing decorative elements) */}
-            <div className="absolute inset-0 pointer-events-none opacity-40" style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23dbeafe' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}></div>
-            <div className="absolute -bottom-24 -right-16 w-96 h-96 bg-teal-200/50 rounded-full filter blur-3xl opacity-50"></div>
-            <div className="absolute -top-24 -left-16 w-96 h-96 bg-yellow-100/50 rounded-full filter blur-3xl opacity-50"></div>
-            
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                
-                {/* --- Top Row: Logo, Contact Info, Find Us, Follow Us --- */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-10 border-b border-slate-200">
-
-                    {/* Column 1 (lg:col-span-4): Logo and Description */}
-                    <div className="lg:col-span-4 flex flex-col items-start">
-                        <Image 
+            <div className="container mx-auto px-6 lg:px-20 relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-b border-gray-200 pb-12">
+                    <div className="lg:col-span-4">
+                        <Image
                             src={logo}
                             alt="Star Publicity Logo"
                             width={180}
                             height={42}
-                            className="mb-4" // Removed invert and brightness for light theme
+                            className="mb-4"
                         />
                         <p className="text-gray-500 text-sm leading-relaxed max-w-sm">
                             We make success happen with bold brands, slick digital vibes, and print
@@ -220,18 +138,16 @@ export const Footer: React.FC = () => {
                         </p>
                     </div>
 
-                    {/* Column 2 (lg:col-span-2): Chat With Us (Phone/Email) */}
                     <div className="lg:col-span-2">
                         <h4 className="text-sm font-semibold mb-4 tracking-wider text-gray-500">CHAT WITH US</h4>
                         <div className="space-y-2 text-sm">
                             <p className="text-gray-900 font-semibold">0161-4668602</p>
                             <a href="mailto:sales@starpublicity.org" className="text-gray-600 hover:text-gray-900 transition-colors">
-                                support@starpublicity.org
+                                sales@starpublicity.org
                             </a>
                         </div>
                     </div>
 
-                    {/* Column 3 (lg:col-span-3): Find Us (Address) */}
                     <div className="lg:col-span-3">
                         <h4 className="text-sm font-semibold mb-4 tracking-wider text-gray-500">FIND US</h4>
                         <p className="text-gray-600 text-sm md:text-center lg:text-left">
@@ -239,7 +155,6 @@ export const Footer: React.FC = () => {
                         </p>
                     </div>
 
-                    {/* Column 4 (lg:col-span-3): Follow Us (Socials) */}
                     <div className="lg:col-span-3">
                         <h4 className="text-sm font-semibold mb-4 tracking-wider text-gray-500">FOLLOW US ON</h4>
                         <div className="flex space-x-2">
@@ -256,19 +171,15 @@ export const Footer: React.FC = () => {
                     </div>
                 </div>
 
-                {/* --- Bottom Row: Service Links & Copyright --- */}
                 <div className="flex flex-col lg:flex-row lg:justify-between items-center pt-4">
-                    
-                    {/* Service Links - Center on smaller screens */}
                     <div className="flex flex-wrap justify-center lg:justify-start space-x-4 text-sm font-medium text-gray-600">
                         {serviceLinks.map((link, index) => (
                             <span key={index} className="py-1">
                                 {link.name}
                             </span>
-                        ))} 
+                        ))}
                     </div>
 
-                    {/* Copyright and Scroll to Top (moved to the right side visually) */}
                     <div className="flex items-center gap-4 text-slate-500 text-xs mt-4 lg:mt-0">
                         <p>Copyright © {new Date().getFullYear()} Star Publicity.</p>
                         <Link href="/privacy" className="hover:text-gray-900 transition-colors">Privacy Policy</Link>
@@ -278,12 +189,3 @@ export const Footer: React.FC = () => {
         </footer>
     );
 };
-
-export default function ContactPage() {
-    return (
-        <>
-            <ContactSection />
-            <Footer />
-        </>
-    );
-}

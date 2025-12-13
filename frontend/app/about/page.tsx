@@ -126,8 +126,8 @@ const AboutSection: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={containerVariants}
-          // Reduced py for tablet/Nest Hub screens to prevent excessive scrolling
-          className="pt-16 md:pt-24 lg:pt-32 pb-12 md:pb-20 bg-white relative"
+          // Standardized padding to reduce excessive vertical space and improve consistency
+          className="py-10 md:py-16 bg-white relative"
         >
           {/* Adjusted horizontal padding: px-6 for mobile, px-10 for tablet, px-16 for desktop */}
           <div className="container mx-auto px-6 md:px-10 lg:px-16 xl:px-24">
@@ -234,7 +234,7 @@ const AboutSection: React.FC = () => {
         {/* === 2. TIMELINE SECTION === */}
         <section
           ref={timelineRef}
-          className="py-16 md:py-24 bg-[#2a7394] rounded-tl-[2.5rem] rounded-tr-[2.5rem] md:rounded-tl-[3.5rem] md:rounded-tr-[3.5rem] relative overflow-hidden"
+          className="py-10 md:py-16 bg-[#2a7394] rounded-tl-[2.5rem] rounded-tr-[2.5rem] md:rounded-tl-[3.5rem] md:rounded-tr-[3.5rem] relative overflow-hidden"
         >
           {/* Subtle pattern overlay */}
           <div
@@ -353,7 +353,7 @@ const AboutSection: React.FC = () => {
           backgroundSize: `30px 30px`,
         }}
       >
-        <section className="py-16 md:py-24 relative overflow-hidden">
+        <section className="py-10 md:py-16 relative overflow-hidden">
           {/* Animated Blobs - Reduced size for tablet performance */}
           <motion.div
             animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
@@ -432,7 +432,7 @@ const AboutSection: React.FC = () => {
         </div>
 
         {/* === 4. STATS SECTION === */}
-        <section className="py-16 md:py-24">
+        <section className="py-10 md:py-16">
           <div className="container mx-auto px-6 md:px-10 lg:px-16 xl:px-24">
             <div className="grid grid-cols-1 md:grid-cols-2 items-start gap-10 md:gap-12 lg:gap-16">
               {/* Left Side: Headline and CTA */}

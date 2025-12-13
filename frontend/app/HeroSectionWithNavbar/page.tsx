@@ -91,7 +91,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
   };
 
   return (
-    <section className={`relative min-h-[750px] md:min-h-screen overflow-hidden flex flex-col bg-white`}>
+    <section className={`relative min-h-[90vh] md:min-h-screen overflow-hidden flex flex-col bg-white`}>
       
       {/* Styles for Animations & Fonts */}
       <style dangerouslySetInnerHTML={{__html: `
@@ -124,7 +124,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px]"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[100px]"></div>
 
-        {/* Floating Icons */}
+        {/* --- DEVELOPMENT ICONS --- */}
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" className="absolute top-[15%] left-[5%] animate-float w-12 h-12" />
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" className="absolute bottom-[20%] left-[10%] animate-float delay-200 w-14 h-14" />
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS" className="absolute top-[80%] left-[50%] animate-float delay-100 w-9 h-9" />
@@ -141,6 +141,24 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin" className="absolute top-[35%] left-[20%] animate-float delay-500 w-10 h-10" />
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS" className="absolute top-[70%] right-[25%] animate-float delay-100 w-16 h-16" />
         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original-wordmark.svg" alt="Express" className="absolute bottom-[40%] left-[5%] animate-float delay-300 w-20 h-20 invert" />
+
+        {/* --- NEW SEO & DIGITAL MARKETING ICONS --- */}
+        
+        {/* Google (SEO/Search) */}
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google SEO" className="absolute top-[28%] left-[35%] animate-float delay-100 w-10 h-10 opacity-40" />
+        
+        {/* Facebook (Social Media Marketing) */}
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" alt="Facebook Marketing" className="absolute bottom-[35%] right-[8%] animate-float delay-400 w-11 h-11 opacity-40" />
+        
+        {/* LinkedIn (B2B Marketing) */}
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" className="absolute top-[8%] right-[40%] animate-float delay-200 w-9 h-9 opacity-40" />
+        
+        {/* WordPress (Content/SEO) */}
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" alt="WordPress" className="absolute bottom-[5%] left-[25%] animate-float delay-500 w-12 h-12 invert opacity-30" />
+        
+        {/* Chrome (Web Tools) */}
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chrome/chrome-original.svg" alt="Chrome Tools" className="absolute top-[55%] left-[10%] animate-float delay-300 w-10 h-10 opacity-40" />
+
       </div>
 
       {/* --- NAVBAR --- */}
@@ -183,7 +201,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
       </nav>
 
       {/* --- HERO CONTENT --- */}
-      <div className="relative z-20 flex-grow flex items-center justify-center py-20">
+      <div className="relative z-20 flex-grow flex items-center justify-center py-12">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight mb-6 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-100">
             Drive Growth Through <span className="text-[#2a7394]">Innovative Digital Strategies</span>

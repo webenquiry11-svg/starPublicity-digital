@@ -58,7 +58,7 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <section className={`py-16 sm:py-20 bg-gray-50/30 ${dmSans.className} overflow-hidden`}>
+    <section className={`py-10 sm:py-14 bg-gray-50/30 ${dmSans.className} overflow-hidden`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         
         {/* --- MAIN FLEX CONTAINER --- 
@@ -83,8 +83,11 @@ export default function ServicesSection() {
             {/* 2. CARDS GRID */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 h-full">
               {services.map((service, index) => {
-                // Alternating logic: 1st & 3rd columns in a 3-col grid get colored
-                const isColored = index % 3 !== 1;
+                
+                // UPDATED LOGIC:
+                // Strict Alternating Pattern: Even = Colored, Odd = White
+                // Mobile Result: Color, White, Color, White...
+                const isColored = index % 2 === 0;
 
                 return (
                   <div 

@@ -102,7 +102,7 @@ const AwardsSection = () => {
     // This renders for any screen width < 1280px
     if (isStaticView) {
         return (
-            <section className="py-16 bg-gray-50">
+            <section className="py-10 bg-gray-50">
                 <div className="container mx-auto px-4 sm:px-8">
                     <div className="text-center mb-12 relative">
                         <span className="inline-block py-1 px-3 rounded-full bg-blue-50 text-xs font-bold tracking-widest border border-blue-100 uppercase mb-4 shadow-sm" style={{ fontFamily: "'Outfit', sans-serif", color: '#2a7394' }}>
@@ -154,7 +154,7 @@ const AwardsSection = () => {
   return (
     <section 
       ref={sectionRef}
-      className="py-24 relative overflow-hidden bg-gray-50 min-h-[700px]" 
+      className="py-16 relative overflow-hidden bg-gray-50 min-h-[700px]" 
     >
       <div className="container mx-auto px-8">
         
@@ -271,7 +271,7 @@ const StoryByNumbersSection = () => {
 
   return (
     <section
-      className="py-16 md:py-24 bg-gray-50/50"
+      className="py-10 md:py-16 bg-gray-50/50"
       style={{
         backgroundImage:
           "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40' width='40' height='40'%3E%3Ccircle cx='20' cy='20' r='1' fill='rgba(0, 0, 0, 0.03)'/%3E%3C/svg%3E\")",
