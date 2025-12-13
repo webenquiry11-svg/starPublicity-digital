@@ -95,7 +95,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
       
       {/* Styles for Animations & Fonts */}
       <style dangerouslySetInnerHTML={{__html: `
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
         
         .writing-vertical {
           writing-mode: vertical-rl;

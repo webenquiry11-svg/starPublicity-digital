@@ -10,12 +10,15 @@ import {
   PenTool
 } from 'lucide-react';
 import Image from 'next/image';
-import { DM_Sans } from "next/font/google";
+import { Outfit } from "next/font/google";
 
-// --- RESTORED ORIGINAL IMAGE IMPORT ---
 import featureImage from "./_images/service.png"; 
 
-const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "700"] });
+const outfit = Outfit({ 
+  subsets: ["latin"], 
+  weight: ["300", "400", "500", "600", "700", "800"],
+  display: 'swap'
+});
 
 const services = [
   {
@@ -58,19 +61,15 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <section className={`py-10 sm:py-14 bg-gray-50/30 ${dmSans.className} overflow-hidden`}>
+    <section className={`py-16 sm:py-20 bg-gray-50/30 ${outfit.className} overflow-hidden`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
         
-        {/* --- MAIN FLEX CONTAINER --- 
-            On Mobile/Tablet: Stacked Column
-            On XL Desktop: Row (Left Content + Right Image) side-by-side
-        */}
         <div className="flex flex-col xl:flex-row gap-8 xl:gap-12 items-stretch">
           
           {/* --- LEFT COLUMN: Heading + Cards --- */}
           <div className="w-full xl:w-2/3 flex flex-col justify-between">
             
-            {/* 1. HEADING */}
+            {/* HEADING */}
             <div className="mb-8 sm:mb-12 max-w-3xl">
               <span className="block text-sm font-bold tracking-widest text-[#2a7394] uppercase mb-2">
                 What We Do
@@ -80,14 +79,15 @@ export default function ServicesSection() {
               </h2>
             </div>
 
-            {/* 2. CARDS GRID */}
+            {/* CARDS GRID */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 h-full">
               {services.map((service, index) => {
+                // LOGIC:
+                // Mobile/Tablet: Strict alternating (Even = Colored, Odd = White)
+                const isMobileColored = index % 2 === 0;
                 
-                // UPDATED LOGIC:
-                // Strict Alternating Pattern: Even = Colored, Odd = White
-                // Mobile Result: Color, White, Color, White...
-                const isColored = index % 2 === 0;
+                // Desktop (3 cols): 1st & 3rd colored, 2nd white
+                const isDesktopColored = index % 3 !== 1;
 
                 return (
                   <div 
@@ -95,24 +95,32 @@ export default function ServicesSection() {
                     className={`
                       group relative flex flex-col items-center text-center p-6 sm:p-8 rounded-2xl cursor-pointer overflow-hidden
                       border transition-all duration-300 h-full justify-start
+                      hover:-translate-y-2 hover:shadow-xl
                       
-                      /* --- BASE COLORS --- */
-                      ${isColored 
+                      /* --- BACKGROUND COLOR LOGIC --- */
+                      /* Mobile Base: Alternating */
+                      ${isMobileColored 
                         ? "bg-[#3590ba] border-[#3590ba]" 
                         : "bg-white border-gray-100 shadow-sm"
                       }
-                      
-                      hover:-translate-y-2 hover:shadow-xl
+
+                      /* Desktop Override (lg): Custom 3-col logic */
+                      ${isDesktopColored
+                        ? "lg:bg-[#3590ba] lg:border-[#3590ba] lg:shadow-none"
+                        : "lg:bg-white lg:border-gray-100 lg:shadow-sm"
+                      }
                     `}
                   >
                     {/* --- THE "WATER" FILL ANIMATION --- */}
                     <span 
                         className={`
                             absolute bottom-0 left-0 w-full h-0 transition-all duration-500 ease-in-out group-hover:h-full
-                            ${isColored 
-                                ? "bg-white" 
-                                : "bg-[#3590ba]"
-                            }
+                            
+                            /* Mobile Base */
+                            ${isMobileColored ? "bg-white" : "bg-[#3590ba]"}
+
+                            /* Desktop Override */
+                            ${isDesktopColored ? "lg:bg-white" : "lg:bg-[#3590ba]"}
                         `}
                     />
 
@@ -126,9 +134,17 @@ export default function ServicesSection() {
                             strokeWidth={1.5}
                             className={`
                               transition-colors duration-500
-                              ${isColored 
-                                 ? "text-white group-hover:text-[#f97316]" 
-                                 : "text-[#f97316] group-hover:text-white"
+                              
+                              /* Mobile Base */
+                              ${isMobileColored 
+                                ? "text-white group-hover:text-[#f97316]" 
+                                : "text-[#f97316] group-hover:text-white"
+                              }
+
+                              /* Desktop Override */
+                              ${isDesktopColored 
+                                ? "lg:text-white lg:group-hover:text-[#f97316]" 
+                                : "lg:text-[#f97316] lg:group-hover:text-white"
                               }
                             `} 
                           />
@@ -137,9 +153,17 @@ export default function ServicesSection() {
                         {/* Title */}
                         <h3 className={`
                           text-lg font-bold mb-3 transition-colors duration-500
-                          ${isColored 
+
+                          /* Mobile Base */
+                          ${isMobileColored 
                             ? "text-white group-hover:text-slate-900" 
                             : "text-slate-900 group-hover:text-white"
+                          }
+
+                          /* Desktop Override */
+                          ${isDesktopColored 
+                            ? "lg:text-white lg:group-hover:text-slate-900" 
+                            : "lg:text-slate-900 lg:group-hover:text-white"
                           }
                         `}>
                           {service.title}
@@ -148,9 +172,17 @@ export default function ServicesSection() {
                         {/* Description */}
                         <p className={`
                           text-sm leading-relaxed transition-colors duration-500
-                          ${isColored 
+
+                          /* Mobile Base */
+                          ${isMobileColored 
                             ? "text-blue-50 group-hover:text-slate-600" 
                             : "text-slate-600 group-hover:text-blue-50"
+                          }
+
+                          /* Desktop Override */
+                          ${isDesktopColored 
+                            ? "lg:text-blue-50 lg:group-hover:text-slate-600" 
+                            : "lg:text-slate-600 lg:group-hover:text-blue-50"
                           }
                         `}>
                           {service.description}
@@ -162,12 +194,8 @@ export default function ServicesSection() {
             </div>
           </div>
 
-          {/* --- RIGHT COLUMN: Image --- 
-              On Mobile: Min-Height ensures visibility.
-              On Desktop: 'items-stretch' on parent makes this full height.
-          */}
+          {/* --- RIGHT COLUMN: Image --- */}
           <div className="hidden md:block w-full xl:w-1/3 relative min-h-[450px] xl:min-h-auto rounded-3xl overflow-hidden shadow-2xl group">
-             {/* RESTORED NEXT/IMAGE COMPONENT */}
              <div className="relative w-full h-full transform transition-transform duration-700 group-hover:scale-105">
                 <Image
                   src={featureImage} 

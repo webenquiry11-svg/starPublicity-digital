@@ -110,7 +110,7 @@ const AwardsSection = () => {
                         </span>
                         <h2 
                             className="text-4xl font-bold mb-4 drop-shadow-sm tracking-tight"
-                            style={{ fontFamily: "'Playfair Display', serif" }}
+                            style={{ fontFamily: "'Outfit', sans-serif" }}
                         >
                             <span className="text-slate-900">Our Core </span>                
                             <span style={{ color: '#2a7394' }}>Commitment</span>
@@ -166,7 +166,7 @@ const AwardsSection = () => {
 
             <h2 
                 className="text-6xl font-bold mb-6 drop-shadow-sm tracking-tight"
-                style={{ fontFamily: "'Playfair Display', serif" }}
+                style={{ fontFamily: "'Outfit', sans-serif" }}
             >
                 <span className="text-slate-900">Our Core </span>                
                 <span style={{ color: '#2a7394' }}>Commitment</span>
@@ -287,7 +287,7 @@ const StoryByNumbersSection = () => {
 
             <h2 
                 className="text-3xl sm:text-5xl md:text-6xl font-bold mb-4 md:mb-6 drop-shadow-sm tracking-tight"
-                style={{ fontFamily: "'Playfair Display', serif" }}
+                style={{ fontFamily: "'Outfit', sans-serif" }}
             >
               <span className="text-slate-900">Numbers That </span>              
               <span style={{ color: '#2a7394' }}>Define Us</span>
@@ -320,7 +320,7 @@ export default function FaqPage() {
     <>
       {/* Import fonts from Google Fonts */}
       <style dangerouslySetInnerHTML={{__html: `
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap');
       `}} />
       
       <AwardsSection />

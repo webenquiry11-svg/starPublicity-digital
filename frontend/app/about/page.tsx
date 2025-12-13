@@ -116,7 +116,7 @@ const AboutSection: React.FC = () => {
     <>
       {/* Import New Fonts: Fraunces (Headings) & DM Sans (Body) */}
       <style dangerouslySetInnerHTML={{__html: `
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
       `}} />
 
       {/* === 1. HERO & MISSION SECTION === */}
@@ -147,7 +147,7 @@ const AboutSection: React.FC = () => {
                 <motion.h1
                   variants={itemVariants}
                   className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1] mb-6 text-[#2a7394] tracking-tight"
-                  style={{ fontFamily: "'Playfair Display', serif" }}
+                  style={{ fontFamily: "'Outfit', sans-serif" }}
                 >
                   Redefining Results, <br className="hidden lg:block" /> Building Your Success.
                 </motion.h1>
@@ -165,7 +165,7 @@ const AboutSection: React.FC = () => {
                 <motion.p
                   variants={itemVariants}
                   className="text-xl sm:text-2xl md:text-3xl font-semibold text-[#2a7394] italic mt-4 md:mt-8"
-                  style={{ fontFamily: "'Playfair Display', serif" }}
+                  style={{ fontFamily: "'Outfit', sans-serif" }}
                 >
                   "Where creativity sparks your story"
                 </motion.p>
@@ -213,7 +213,7 @@ const AboutSection: React.FC = () => {
                 >
                   <h3
                     className="text-xl md:text-2xl font-bold mb-3 text-slate-800 group-hover:text-[#2a7394] transition-colors"
-                    style={{ fontFamily: "'Playfair Display', serif" }}
+                    style={{ fontFamily: "'Outfit', sans-serif" }}
                   >
                     {card.title}
                   </h3>
@@ -248,23 +248,31 @@ const AboutSection: React.FC = () => {
 
           <div className="container mx-auto px-6 md:px-10 lg:px-16 xl:px-24 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-              {/* Left Column: Headline and CTA */}
+              
+              {/* --- LEFT COLUMN: MODIFIED FONT SIZES HERE --- */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                // Adjusted sticky position and font sizes for tablet height
                 className="w-full lg:w-4/5 text-center lg:text-left lg:mt-12 lg:sticky top-24"
               >
                 <h2
-                  className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] mb-6 md:mb-8 text-white tracking-tight"
-                  style={{ fontFamily: "'Playfair Display', serif" }}
+                  /* UPDATED SIZES:
+                     lg:text-7xl (Laptop)
+                     xl:text-8xl (Desktop)
+                  */
+                  className="text-4xl sm:text-5xl md:text-5xl lg:text-7xl xl:text-8xl font-bold leading-[1.05] mb-6 md:mb-8 text-white tracking-tight"
+                  style={{ fontFamily: "'Outfit', sans-serif" }}
                 >
                   Lead Growth With Precision And Expertise.
                 </h2>
                 <p
-                  className="text-base sm:text-lg md:text-xl text-blue-50/90 leading-relaxed mb-8 md:mb-10 font-normal"
+                  /* UPDATED SIZES:
+                     lg:text-2xl (Laptop)
+                     xl:text-3xl (Desktop)
+                  */
+                  className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-blue-50/90 leading-relaxed mb-8 md:mb-10 font-normal"
                   style={{ fontFamily: "'Outfit', sans-serif" }}
                 >
                   Our rapid-response team leverages high-end tech and strategic
@@ -309,7 +317,7 @@ const AboutSection: React.FC = () => {
 
                         <h3
                           className="text-xl md:text-2xl font-bold mb-3 text-white group-hover:text-[#2a7394] transition-colors"
-                          style={{ fontFamily: "'Playfair Display', serif" }}
+                          style={{ fontFamily: "'Outfit', sans-serif" }}
                         >
                           {step.title}
                         </h3>
@@ -366,8 +374,7 @@ const AboutSection: React.FC = () => {
             className="absolute bottom-0 right-0 w-64 h-64 md:w-96 md:h-96 bg-cyan-200/40 rounded-full blur-[60px] md:blur-[80px] -z-0"
           ></motion.div>
 
-          {/* Floating Images - Hidden on smaller screens (Mobile, Tablet, Nest Hub, Small Laptops). 
-             Visible only on very large screens (2xl+) to prevent blocking text. */}
+          {/* Floating Images */}
           <motion.div
             initial={{ opacity: 0, x: -50, rotate: -3 }}
             whileInView={{ opacity: 1, x: 0, rotate: -3 }}
@@ -410,7 +417,7 @@ const AboutSection: React.FC = () => {
             >
               <h2
                 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#2a7394] leading-[1.1] mb-6 tracking-tight"
-                style={{ fontFamily: "'Playfair Display', serif" }}
+                style={{ fontFamily: "'Outfit', sans-serif" }}
               >
                 Get to know why brands trust{" "}
                 <span className="text-[#2a7394]">Star Publicity.</span>
@@ -445,7 +452,7 @@ const AboutSection: React.FC = () => {
               >
                 <h2
                   className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-bold text-[#2a7394] leading-none mb-6 md:mb-8"
-                  style={{ fontFamily: "'Playfair Display', serif" }}
+                  style={{ fontFamily: "'Outfit', sans-serif" }}
                 >
                   Where Ambitious Brands Achieve More.
                 </h2>
@@ -473,7 +480,7 @@ const AboutSection: React.FC = () => {
                   >
                     <h3
                       className={`text-2xl md:text-3xl lg:text-4xl font-bold ${stat.color} mb-3 md:mb-4 group-hover:text-[#2a7394] transition-colors`}
-                      style={{ fontFamily: "'Playfair Display', serif" }}
+                      style={{ fontFamily: "'Outfit', sans-serif" }}
                     >
                       {stat.title}
                     </h3>
