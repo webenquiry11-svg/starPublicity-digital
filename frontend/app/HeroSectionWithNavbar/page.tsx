@@ -36,7 +36,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
   const [isQuotePanelOpen, setIsQuotePanelOpen] = useState(false);
   
   // Form State
-  const [hoverFormData, setHoverFormData] = useState({ name: '', email: '', phone: '' });
+  const [hoverFormData, setHoverFormData] = useState({ name: '', email: '', phone: '', message: '' });
   const [hoverFormStatus, setHoverFormStatus] = useState({ message: '', error: false, submitting: false });
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
     }
   }, [isMobileMenuOpen]);
 
-  const handleHoverFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleHoverFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setHoverFormData(prev => ({ ...prev, [name]: value }));
   };
@@ -67,7 +67,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
           name: hoverFormData.name, 
           email: hoverFormData.email,
           phone: hoverFormData.phone, 
-          message: "Quick Quote Request from Side Navbar" 
+          message: hoverFormData.message 
         }),
       });
 
@@ -78,7 +78,7 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
       }
 
       setHoverFormStatus({ message: 'Request sent successfully!', error: false, submitting: false });
-      setHoverFormData({ name: '', email: '', phone: '' }); 
+      setHoverFormData({ name: '', email: '', phone: '', message: '' }); 
       
       setTimeout(() => {
         setIsQuotePanelOpen(false);
@@ -251,6 +251,11 @@ const HeroSectionWithNavbar: React.FC<HeroProps> = ({ onQuoteClick }) => {
                         <input 
                             type="email" name="email" placeholder="Em@il Id" value={hoverFormData.email} onChange={handleHoverFormChange} required 
                             className="w-full py-2 border-b border-gray-300 focus:border-[#2a7394] outline-none text-slate-700 placeholder:text-gray-400 text-base bg-transparent" 
+                        />
+                        <textarea 
+                            name="message" placeholder="Message" value={hoverFormData.message} onChange={handleHoverFormChange} required 
+                            rows={2}
+                            className="w-full py-2 border-b border-gray-300 focus:border-[#2a7394] outline-none text-slate-700 placeholder:text-gray-400 text-base bg-transparent resize-none" 
                         />
                         <div className="flex justify-center pt-6">
                             <button 
