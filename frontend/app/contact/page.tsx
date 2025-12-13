@@ -189,3 +189,12 @@ export const Footer = () => {
         </footer>
     );
 };
+
+export default function ContactPage() {
+    return (
+        <>
+            <ContactSection />
+            <Footer />
+        </>
+    );
+}
